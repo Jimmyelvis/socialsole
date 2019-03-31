@@ -35,7 +35,7 @@ export class releases extends Component {
                   <div className="authorInfo col-md-7">
                     <h3>Leon Haywood</h3>
                     <h4>
-                      Freelance Writer for SocialSole
+                      Freelance Writer for SocialSole <br/>
                       <span className="authorEmail">@leonhaywood</span>
                     </h4>
 

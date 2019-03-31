@@ -30,11 +30,14 @@ class UserPosts extends Component {
     }
 
     return (
-      <React.Fragment>
+      <div className="container">
         <h3>Your Posts</h3>
 
-        <div className="row">{postContent}</div>
-      </React.Fragment>
+        <div className="row">
+          {postContent}
+        </div>
+        
+      </div>
     );
   }
 }

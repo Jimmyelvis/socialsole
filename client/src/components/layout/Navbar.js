@@ -1,3 +1,8 @@
+/*
+  Nav bar for the every page but the homepage to give the nav 
+  background a blue gradient look
+*/
+
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -6,12 +11,19 @@ import { logoutUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
 
 class Navbar extends Component {
+
   onLogoutClick(e) {
     e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
   }
 
+
+  /*
+    Opens the slide out side navigation
+    Also takes into account the size of the window pos 
+    and adjusts the width of the side menu accordingly 
+  */
   openSlideMenu(e) {
     e.preventDefault();
 
@@ -28,6 +40,9 @@ class Navbar extends Component {
 
   }
 
+  /*
+    Closes the slide out side navigation
+  */
   closeSlideMenu(e) {
     e.preventDefault();
     console.log("clicked");
@@ -35,6 +50,12 @@ class Navbar extends Component {
   }
 
   render() {
+
+  /*
+    Use destructuring to pull out the isAuthenticated, user props 
+    from the auth state. Depending on whether isAuthenticated is
+    true or false nav items will change accordingly
+  */
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
@@ -103,21 +124,21 @@ class Navbar extends Component {
     return (
       <div className="navig">
 
-
         <span className="open-slide">
-          <div className="row">
-            <div className="icon col-md-6">
-              <a href="#" onClick={this.openSlideMenu}>
-                <img className="hambuger-icon" src="/assets/img/hamburger-icon.png" alt=""/>
-              </a>
-            </div>
-
-            <div className="logo col-md-6">
-                <img src="/assets/img/logo-white-sneaker.png" alt=""/>
-            </div>
-          </div>
+          <a href="#" onClick={this.openSlideMenu}>
+            <img
+              className="hambuger-icon"
+              src="/assets/img/hamburger-icon.png"
+              alt=""
+            />
+          </a>
         </span>
 
+
+       { /*
+          If isAuthenticated === true, the authLinks items will display
+          else the guestlinks items will be displayed
+        */}
         <ul className="authGuestlinks">
           {isAuthenticated ? authLinks : guestLinks}
         </ul>

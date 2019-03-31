@@ -1,3 +1,7 @@
+/*
+  A reuseable input group component that can be used across the application
+*/
+
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';

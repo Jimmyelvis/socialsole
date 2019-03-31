@@ -42,7 +42,7 @@ class SneakerItem extends Component {
   
 
     return (
-      <div className="card card-body ">
+      <div className="card card-body col-md-6">
         <div className="row">
           <div className="cardHeaderImage col-md-12">
             {sneaker.headerimage === "" ? (

@@ -34,16 +34,15 @@ export class PostItem extends Component {
     const { profile } = this.props.profile;
     const { post, auth, showActions } = this.props;
 
-    let limit = 25;
 
     return (
-      <div className="card card-body">
+      <div className="card card-body col-md-6">
         <div className="row">
           <div className="cardHeaderImage col-md-12 ">
             {post.headerimage === "" ? (
-              "  "
+              <img src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1554071502/badge.jpg"  alt="..." />
             ) : (
-              <img src={post.headerimage} className="card-img-top" alt="..." />
+              <img src={post.headerimage}  alt="..." />
             )}
           </div>
 

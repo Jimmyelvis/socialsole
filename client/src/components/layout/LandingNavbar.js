@@ -1,3 +1,7 @@
+/*
+  Nav bar for the Homepage to give the nav background a transparent look 
+*/
+
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -7,62 +11,67 @@ import { clearCurrentProfile } from "../../actions/profileActions";
 
 class Navbar extends Component {
 
+
   onLogoutClick(e) {
     e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
   }
 
+
+  /*
+    Opens the slide out side navigation
+    Also takes into account the size of the window pos 
+    and adjusts the width of the side menu accordingly 
+  */
   openSlideMenu(e) {
     e.preventDefault();
 
-    let w = window.innerWidth;  
+    let w = window.innerWidth;
 
     if (w >= 990) {
-       document.getElementById("side-menu").style.width = "33%";
-      
-    }else if ( w >= 768){
-        document.getElementById("side-menu").style.width = "50%";
-    }else{
+      document.getElementById("side-menu").style.width = "33%";
+    } else if (w >= 768) {
+      document.getElementById("side-menu").style.width = "50%";
+    } else {
       document.getElementById("side-menu").style.width = "100%";
     }
-
   }
 
-
-  closeSlideMenu(e){
+  /*
+    Closes the slide out side navigation
+  */
+  closeSlideMenu(e) {
     e.preventDefault();
     console.log("clicked");
-    document.getElementById('side-menu').style.width = '0';
+    document.getElementById("side-menu").style.width = "0";
   }
 
   render() {
+
+   /*
+    Use destructuring to pull out the isAuthenticated, user props 
+    from the auth state. Depending on whether isAuthenticated is
+    true or false nav items will change accordingly
+  */
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
       <React.Fragment>
         <li className="nav-item home">
-          <Link to="/">
-            HOME
-          </Link>
+          <Link to="/">HOME</Link>
         </li>
         <li className="nav-item">
-          <Link to="/allposts">
-            User Posts
-          </Link>
+          <Link to="/allposts">User Posts</Link>
         </li>
         <li className="nav-item">
           <Link to="/profiles">User Profiles</Link>
         </li>
         <li className="nav-item">
-          <Link to="/allsneakers">
-            User Sneakers
-          </Link>
+          <Link to="/allsneakers">User Sneakers</Link>
         </li>
         <li className="nav-item">
-          <Link to="/dashboard">
-            Dashboard
-          </Link>
+          <Link to="/dashboard">Dashboard</Link>
         </li>
         <li className="nav-item">
           <a
@@ -79,9 +88,7 @@ class Navbar extends Component {
     const guestLinks = (
       <React.Fragment>
         <li className="nav-item home">
-          <Link to="/">
-            HOME
-          </Link>
+          <Link to="/">HOME</Link>
         </li>
         <li className="nav-item">
           <Link to="/allposts">User Posts</Link>
@@ -89,42 +96,37 @@ class Navbar extends Component {
         <li className="nav-item">
           <Link to="/allsneakers">User Sneakers</Link>
         </li>
-         <li className="nav-item">
+        <li className="nav-item">
           <Link to="/profiles">User Profiles</Link>
         </li>
         <li className="nav-item">
-          <Link to="/register">
-            Sign Up
-          </Link>
+          <Link to="/register">Sign Up</Link>
         </li>
         <li className="nav-item">
-          <Link to="/login">
-            Login
-          </Link>
-
+          <Link to="/login">Login</Link>
         </li>
       </React.Fragment>
     );
 
     return (
+
       <div className="LandingNavig">
 
-
         <span className="open-slide">
-          <div className="row">
-            <div className="icon col-md-6">
-              <a href="#" onClick={this.openSlideMenu}>
-                <img className="hambuger-icon" src="/assets/img/hamburger-icon.png" alt=""/>
-              </a>
-            </div>
-
-            <div className="logo col-md-6">
-                <img src="/assets/img/logo-white-sneaker.png" alt=""/>
-            </div>
-          </div>
+          <a href="#" onClick={this.openSlideMenu}>
+            <img
+              className="hambuger-icon"
+              src="/assets/img/hamburger-icon.png"
+              alt=""
+            />
+          </a>
         </span>
 
 
+        
+        {/* If isAuthenticated === true, the authLinks items will display
+        else the guestlinks items will be displayed */}
+        
         <ul className="authGuestlinks">
           {isAuthenticated ? authLinks : guestLinks}
         </ul>
@@ -136,6 +138,8 @@ class Navbar extends Component {
 
           {isAuthenticated ? authLinks : guestLinks}
         </div>
+
+
       </div>
     );
   }

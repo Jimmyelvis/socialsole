@@ -35,7 +35,7 @@ export class news extends Component {
                   <div className="authorInfo col-md-7">
                     <h3>Dale Dylan</h3>
                     <h4>
-                      Freelance Writer for SocialSole
+                      Freelance Writer for SocialSole <br />
                       <span className="authorEmail">@daledylan</span>
                     </h4>
 

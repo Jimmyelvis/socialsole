@@ -16,20 +16,9 @@ class Login extends Component {
       errors: {}
     };
 
-    // this.onChange = this.onChange.bind(this);
-    // this.onSubmit = this.onSubmit.bind(this);
+ 
   }
 
-  // onSubmit(e) {
-  //   e.preventDefault();
-
-  //   const user = {
-  //     email: this.state.email,
-  //     password: this.state.password
-  //   };
-
-  //   console.log(user);
-  // }
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
@@ -58,9 +47,6 @@ class Login extends Component {
     this.props.loginUser(userData);
   };
 
-  // onChange(e) {
-  //   this.setState({ [e.target.name]: e.target.value });
-  // }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });

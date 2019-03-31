@@ -20,8 +20,6 @@ class Register extends Component {
       errors: {}
     };
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -36,11 +34,11 @@ class Register extends Component {
     }
   }
 
-  onChange(e) {
+  onChange =  e => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
 
     const newUser = {
@@ -54,13 +52,20 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.history);
   }
 
+  /*
+    Cloudinary widget for user uploads
+  */
+
   avatarUploadWidget = e => {
     e.preventDefault();
 
+    /* Sets a init variable, that will receive upload link address
+      which is then passed on to this.state.avatar
+    */
     let avatar;
 
-    const cloudname = "dwgjvssdt";
-    const uploadpresent = "ndilj3e8";
+    const cloudname = "your cloud name";  // your cloud name goes here
+    const uploadpresent= "your upload present"; // your cloud upload present goes here
 
     window.cloudinary.openUploadWidget(
       {
@@ -68,12 +73,6 @@ class Register extends Component {
         uploadPreset: uploadpresent,
         sources: [
           "local",
-          "url",
-          "camera",
-          "facebook",
-          "dropbox",
-          "instagram",
-          "image_search"
         ],
         googleApiKey: "<image_search_google_api_key>",
         showAdvancedOptions: true,
@@ -118,7 +117,7 @@ class Register extends Component {
   };
 
   render() {
-    // const errors = this.state.errors;
+
     const { errors } = this.state;
 
     return (
