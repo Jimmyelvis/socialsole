@@ -3643,7 +3643,7 @@ p {
   border: 0px solid rgba(0, 0, 0, 0.125);
   border-radius: 0;
   max-width: 30%;
-  margin: 0 1%;
+  margin: 0 1% 30px 1%;
   padding: 0;
   box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.28);
 }
@@ -4159,6 +4159,8 @@ p {
 
 .yourSneakers .postAuthor {
   margin-top: 30px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .yourSneakers .postAuthor img {
@@ -4171,7 +4173,7 @@ p {
 }
 
 .yourSneakers .postAuthor h6 {
-  padding-top: 10px;
+  font-size: 95%;
 }
 
 .yourSneakers .postText {
@@ -4246,6 +4248,17 @@ p {
   .yourSneakers .btn {
     font-size: 0.7rem;
     padding: 0.275rem 0.55rem;
+  }
+
+  .yourSneakers .postAuthor {
+    margin-top: 30px;
+    display: block;
+  }
+
+  .yourSneakers .postAuthor h6 {
+    font-size: 82%;
+    width: 100%;
+    text-align: center;
   }
 
 }
