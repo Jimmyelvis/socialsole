@@ -57,8 +57,8 @@ export class YourPosts extends Component {
 
     let headerimage;
 
-    const cloudname = "your cloud name";
-    const uploadpresent= "your upload present";
+    const cloudname = "dwgjvssdt";
+    const uploadpresent = "ndilj3e8";
 
     window.cloudinary.openUploadWidget(
       {

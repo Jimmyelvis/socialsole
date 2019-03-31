@@ -66,8 +66,8 @@ class CreateProfile extends Component {
 
     let avatar;
 
-    const cloudname = "your cloud name";
-    const uploadpresent= "your upload present";
+    const cloudname = "dwgjvssdt";
+    const uploadpresent = "ndilj3e8";
 
     window.cloudinary.openUploadWidget(
       {
