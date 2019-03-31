@@ -1,0 +1,57 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { deleteComment } from "../../../actions/sneakerActions";
+
+class CommentItem extends Component {
+  onDeleteClick(sneakerId, commentId) {
+    this.props.deleteComment(sneakerId, commentId);
+  }
+
+  render() {
+    const { comment, sneakerId, auth } = this.props;
+
+    return (
+      <div className="commentBody card card-body mb-3">
+        <div className="row">
+          <div className="col-md-3 col-sm-3 col-3">
+            <div className="avatarHolder">
+              <img src={comment.avatar} alt="" />
+            </div>
+            <br />
+            <p className="commentName">{comment.name}</p>
+          </div>
+          <div className="commentText col-md-9 col-sm-9 col-9">
+            <p>{comment.text}</p>
+
+            {comment.user === auth.user.id ? (
+              <button
+                onClick={this.onDeleteClick.bind(this, sneakerId, comment._id)}
+                type="button"
+                className="btn btn-comment-delete btn-danger mr-1"
+              >
+                <i className="fas fa-times" />
+              </button>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+CommentItem.propTypes = {
+  deleteComment: PropTypes.func.isRequired,
+  comment: PropTypes.object.isRequired,
+  sneakerId: PropTypes.string.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { deleteComment }
+)(CommentItem);
