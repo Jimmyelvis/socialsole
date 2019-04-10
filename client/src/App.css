@@ -2785,6 +2785,7 @@ p {
 
 .commentBody.card.card-body.mb-3 {
   padding: 25px;
+  margin-top: 20px;
 }
 
 .commentBody img {
@@ -4256,6 +4257,7 @@ p {
   object-fit: cover;
 }
 
+
 .newsItem .heading .authorInfo {
   text-align: center;
   padding-top: 25px;
@@ -4300,6 +4302,17 @@ p {
       padding-bottom: 50%;
   }
 
+
+
+}
+
+@media(max-width:1200px){
+
+  .newsItem .heading .avatarImg {
+    width: 60%;
+    height: 100%;
+  }
+
 }
 
 
@@ -4322,6 +4335,7 @@ p {
       color: #1dade5;
       font-size: 80%;
   }
+
 
 }
 

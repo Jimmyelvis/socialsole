@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CommentItem from './CommentItem';
+import _ from 'lodash';
 
 class CommentFeed extends Component {
   render() {
@@ -9,6 +10,7 @@ class CommentFeed extends Component {
     return comments.map(comment => (
       <CommentItem key={comment._id} comment={comment} postId={postId} />
     ));
+
   }
 }
 
