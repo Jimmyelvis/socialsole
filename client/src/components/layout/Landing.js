@@ -30,6 +30,14 @@ class Landing extends Component {
       <React.Fragment>
         <div className="landing">
           <LandingNavbar />
+
+          <h1>SOCIAL SOLE</h1>
+          <p>
+            Welcome to Social Sole. A exciting site where you can read about the
+            latest news concerning, sneakers. And post about and share your
+            sneaker collection.
+          </p>
+
           <ul className="socialLinks">
             <li>
               <a href="#">
@@ -75,9 +83,7 @@ class Landing extends Component {
                 <img src="/assets/img/pg3.jpg" class="card-img" alt="..." />
               </Link>
               <div className="card-img-overlay">
-                <h5>
-                  Nike Unveils The PG3 With NASA Collaboration
-                </h5>
+                <h5>Nike Unveils The PG3 With NASA Collaboration</h5>
                 <p class="card-text">
                   PG kicks off his next signature line with an out-of-this-world
                   design.
@@ -90,9 +96,7 @@ class Landing extends Component {
                 <img src="/assets/img/tinker.jpg" class="card-img" alt="..." />
               </Link>
               <div className="card-img-overlay">
-                <h5>
-                  Tinker Hatfield’s 30 Greatest Footwear Designs
-                </h5>
+                <h5>Tinker Hatfield’s 30 Greatest Footwear Designs</h5>
                 <p class="card-text">What are your thoughts?</p>
               </div>
             </div>
