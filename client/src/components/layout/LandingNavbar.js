@@ -10,46 +10,16 @@ import { logoutUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
 
 class Navbar extends Component {
-
-
   onLogoutClick(e) {
     e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
   }
 
-
-  /*
-    Opens the slide out side navigation
-    Also takes into account the size of the window pos 
-    and adjusts the width of the side menu accordingly 
-  */
-  openSlideMenu(e) {
-    e.preventDefault();
-
-    let w = window.innerWidth;
-
-    if (w >= 990) {
-      document.getElementById("side-menu").style.width = "33%";
-    } else if (w >= 768) {
-      document.getElementById("side-menu").style.width = "50%";
-    } else {
-      document.getElementById("side-menu").style.width = "100%";
-    }
-  }
-
-  /*
-    Closes the slide out side navigation
-  */
-  closeSlideMenu(e) {
-    e.preventDefault();
-    console.log("clicked");
-    document.getElementById("side-menu").style.width = "0";
-  }
+ 
 
   render() {
-
-   /*
+    /*
     Use destructuring to pull out the isAuthenticated, user props 
     from the auth state. Depending on whether isAuthenticated is
     true or false nav items will change accordingly
@@ -109,37 +79,38 @@ class Navbar extends Component {
     );
 
     return (
-
       <div className="LandingNavig">
 
-        <span className="open-slide">
-          <a href="#" onClick={this.openSlideMenu}>
-            <img
-              className="hambuger-icon"
-              src="/assets/img/hamburger-icon.png"
-              alt=""
-            />
-          </a>
-        </span>
+        <div className="menu-wrap">
 
+          <input type="checkbox" class="toggler" />
 
-        
+          <div class="hamburger">
+            <div> </div>
+          </div>
+
+          <div className="menu">
+
+            <div>
+              <div>
+                <ul>
+                {isAuthenticated ? authLinks : guestLinks}
+                </ul>
+              </div>
+            </div>
+
+          </div>
+          
+        </div>
+
         {/* If isAuthenticated === true, the authLinks items will display
         else the guestlinks items will be displayed */}
-        
+
         <ul className="authGuestlinks">
           {isAuthenticated ? authLinks : guestLinks}
         </ul>
 
-        <div id="side-menu" class="side-nav">
-          <a href="#" className="btn-close" onClick={this.closeSlideMenu}>
-            &times;
-          </a>
-
-          {isAuthenticated ? authLinks : guestLinks}
-        </div>
-
-
+       
       </div>
     );
   }

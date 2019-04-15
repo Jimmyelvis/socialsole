@@ -11,47 +11,14 @@ import { logoutUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
 
 class Navbar extends Component {
-
   onLogoutClick(e) {
     e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
   }
 
-
-  /*
-    Opens the slide out side navigation
-    Also takes into account the size of the window pos 
-    and adjusts the width of the side menu accordingly 
-  */
-  openSlideMenu(e) {
-    e.preventDefault();
-
-    let w = window.innerWidth;  
-
-    if (w >= 990) {
-       document.getElementById("side-menu").style.width = "33%";
-      
-    }else if ( w >= 768){
-        document.getElementById("side-menu").style.width = "50%";
-    }else{
-      document.getElementById("side-menu").style.width = "100%";
-    }
-
-  }
-
-  /*
-    Closes the slide out side navigation
-  */
-  closeSlideMenu(e) {
-    e.preventDefault();
-    console.log("clicked");
-    document.getElementById("side-menu").style.width = "0";
-  }
-
   render() {
-
-  /*
+    /*
     Use destructuring to pull out the isAuthenticated, user props 
     from the auth state. Depending on whether isAuthenticated is
     true or false nav items will change accordingly
@@ -61,9 +28,7 @@ class Navbar extends Component {
     const authLinks = (
       <React.Fragment>
         <li className="nav-item home">
-          <Link to="/">
-            HOME
-          </Link>
+          <Link to="/">HOME</Link>
         </li>
         <li className="nav-item">
           <Link to="/allposts">User Posts</Link>
@@ -83,13 +48,13 @@ class Navbar extends Component {
             onClick={this.onLogoutClick.bind(this)}
             className="nav-link"
           >
-            <img
+            {/* <img
               className="rounded-circle"
               src={user.avatar}
               alt={user.name}
               style={{ width: "25px", marginRight: "5px" }}
               title="You must have a Gravatar connected to your email to display an image"
-            />
+            /> */}
             Logout
           </a>
         </li>
@@ -99,9 +64,7 @@ class Navbar extends Component {
     const guestLinks = (
       <React.Fragment>
         <li className="nav-item home">
-          <Link to="/">
-            HOME
-          </Link>
+          <Link to="/">HOME</Link>
         </li>
         <li className="nav-item">
           <Link to="/allposts">User Posts</Link>
@@ -123,19 +86,23 @@ class Navbar extends Component {
 
     return (
       <div className="navig">
+        <div className="menu-wrap">
+          <input type="checkbox" class="toggler" />
 
-        <span className="open-slide">
-          <a href="#" onClick={this.openSlideMenu}>
-            <img
-              className="hambuger-icon"
-              src="/assets/img/hamburger-icon.png"
-              alt=""
-            />
-          </a>
-        </span>
+          <div class="hamburger">
+            <div> </div>
+          </div>
 
+          <div className="menu">
+            <div>
+              <div>
+                <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
+              </div>
+            </div>
+          </div>
+        </div>
 
-       { /*
+        {/*
           If isAuthenticated === true, the authLinks items will display
           else the guestlinks items will be displayed
         */}
@@ -143,13 +110,7 @@ class Navbar extends Component {
           {isAuthenticated ? authLinks : guestLinks}
         </ul>
 
-        <div id="side-menu" class="side-nav">
-          <a href="#" className="btn-close" onClick={this.closeSlideMenu}>
-            &times;
-          </a>
-
-          {isAuthenticated ? authLinks : guestLinks}
-        </div>
+       
       </div>
     );
   }
