@@ -11,6 +11,11 @@ class Posts extends Component {
     this.props.getPosts();
   }
 
+  
+  
+
+ 
+
   render() {
     const { posts, loading } = this.props.post;
     let postContent;
@@ -32,7 +37,10 @@ class Posts extends Component {
               <p>All the posts by our users</p>
             </div>
           </div>
-          <div className="row">{postContent}</div>
+
+       
+
+          <div className="posts">{postContent}</div>
         </div>
       </div>
     );
