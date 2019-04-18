@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import PostItem from "./PostItem";
+import ProfileItem from "./ProfileItem";
 
-class PostFeed extends Component {
+
+export class ProfileFeed extends Component {
   constructor(props) {
     super(props);
 
@@ -17,12 +17,11 @@ class PostFeed extends Component {
   };
 
   render() {
-    const { posts } = this.props;
+    const { profiles } = this.props;
 
-    let filteredPosts = posts.filter(post => {
+    let profileItems = profiles.filter(profile => {
       return (
-        post.headline.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-        -1
+        profile.user.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
       );
     });
 
@@ -32,7 +31,7 @@ class PostFeed extends Component {
           <div className="filteredSearch col-md-6">
             <input
               type="text"
-              placeholder="Filter By Headline"
+              placeholder="Filter By Name"
               value={this.state.search}
               onChange={this.updateSearch}
               className="form-control"
@@ -43,17 +42,13 @@ class PostFeed extends Component {
         <br />
 
         <div className="row">
-          {filteredPosts.map(post => {
-            return <PostItem key={post._id} post={post} />;
-          })}
+          {profileItems.map(profile => (
+              <ProfileItem key={profile._id} profile={profile} />
+          ))}
         </div>
       </React.Fragment>
     );
   }
 }
 
-PostFeed.propTypes = {
-  posts: PropTypes.array.isRequired
-};
-
-export default PostFeed;
+export default ProfileFeed;

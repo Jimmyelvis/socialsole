@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
-import ProfileItem from "./ProfileItem";
+import ProfileFeed from "./ProfileFeed";
 import { getProfiles } from "../../actions/profileActions";
 import Navbar from "../../components/layout/Navbar";
 
@@ -11,20 +11,17 @@ class Profiles extends Component {
     this.props.getProfiles();
   }
 
+  
   render() {
+
     const { profiles, loading } = this.props.profile;
     let profileItems;
+
 
     if (profiles === null || loading) {
       profileItems = <Spinner />;
     } else {
-      if (profiles.length > 0) {
-        profileItems = profiles.map(profile => (
-          <ProfileItem key={profile._id} profile={profile} />
-        ));
-      } else {
-        profileItems = <h4>No profiles found...</h4>;
-      }
+      profileItems = <ProfileFeed profiles={profiles} />
     }
 
     return (
@@ -32,15 +29,16 @@ class Profiles extends Component {
         <Navbar />
 
         <div className="container">
+
           <div className="row">
-            <div className="col-md-12">
               <div className="heading">
                 <h1>Profiles</h1>
                 <p>Browse and connect with sneaker lovers</p>
               </div>
+          </div>
 
+          <div className="theprofiles">
               {profileItems}
-            </div>
           </div>
         </div>
       </div>

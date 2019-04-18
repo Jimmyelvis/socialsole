@@ -138,8 +138,43 @@ p {
 
 .heading {
   text-align: center;
-  padding-bottom: 50px;
   margin: 0 auto;
+}
+
+/*
+///////////////////////////////   FILTER SEARCH BAR STYLES ////////////////////////
+*/
+
+.filteredSearch {
+  margin: 15px auto;
+}
+
+.filteredSearch .form-control {
+  display: block;
+  width: 100%;
+  padding: 0.575rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #8a9cb7;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(226, 229, 236, 0.5);
+  border-radius: 0;
+  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.35s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-box-shadow: inset 0px 0px 3px 2px rgba(42, 44, 45, 0.07);
+  box-shadow: inset 0px 0px 3px 2px rgba(42, 44, 45, 0.07);
+}
+
+.filteredSearch .form-control:focus {
+  color: #8a9cb7;
+  background-color: #fff;
+  border-color: #239bda;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
 /*

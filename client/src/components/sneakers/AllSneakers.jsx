@@ -32,7 +32,7 @@ export class AllSneakers extends Component {
               <p>All the sneakers posted by our users</p>
             </div>
           </div>
-          <div className="row">
+          <div className="sneakers">
                 {sneakerContent}             
           </div>
         </div>
