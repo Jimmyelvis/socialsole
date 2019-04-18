@@ -63,8 +63,8 @@ export class YourSneakers extends Component {
 
     let mainimage;
 
-    const cloudname = "dwgjvssdt";
-    const uploadpresent = "ndilj3e8";
+    const cloudname = "your cloud name";
+     const uploadpresent = "your upload present";
 
     window.cloudinary.openUploadWidget(
       {
@@ -127,8 +127,8 @@ export class YourSneakers extends Component {
 
     let subimage_1;
 
-    const cloudname = "dwgjvssdt";
-    const uploadpresent = "ndilj3e8";
+    const cloudname = "your cloud name";
+     const uploadpresent = "your upload present";
 
     window.cloudinary.openUploadWidget(
       {
@@ -191,8 +191,8 @@ export class YourSneakers extends Component {
 
     let subimage_1;
 
-    const cloudname = "dwgjvssdt";
-    const uploadpresent = "ndilj3e8";
+    const cloudname = "your cloud name";
+     const uploadpresent = "your upload present";
 
     window.cloudinary.openUploadWidget(
       {
@@ -255,8 +255,8 @@ export class YourSneakers extends Component {
 
     let subimage_2;
 
-    const cloudname = "dwgjvssdt";
-    const uploadpresent = "ndilj3e8";
+    const cloudname = "your cloud name";
+     const uploadpresent = "your upload present";
 
     window.cloudinary.openUploadWidget(
       {
@@ -319,8 +319,8 @@ export class YourSneakers extends Component {
 
     let subimage_3;
 
-    const cloudname = "dwgjvssdt";
-    const uploadpresent = "ndilj3e8";
+    const cloudname = "your cloud name";
+     const uploadpresent = "your upload present";
 
     window.cloudinary.openUploadWidget(
       {
@@ -383,8 +383,8 @@ export class YourSneakers extends Component {
 
     let subimage_4;
 
-    const cloudname = "dwgjvssdt";
-    const uploadpresent = "ndilj3e8";
+    const cloudname = "your cloud name";
+     const uploadpresent = "your upload present";
 
     window.cloudinary.openUploadWidget(
       {

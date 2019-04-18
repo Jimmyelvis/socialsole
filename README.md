@@ -21,3 +21,9 @@ To get started clone or download the repository. Run npm install to install the 
 * Express
 * MongoDB
 * Cloudinary
+
+## Updates
+  v-1.2
+* Addded filtered search functionality for posts, profiles, and sneakers
+
+![Markdown Logo](https://res.cloudinary.com/dwgjvssdt/image/upload/v1555621520/filter.gif)
