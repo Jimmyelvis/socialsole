@@ -66,12 +66,6 @@ export class YourPosts extends Component {
         uploadPreset: uploadpresent,
         sources: [
           "local",
-          "url",
-          "camera",
-          "facebook",
-          "dropbox",
-          "instagram",
-          "image_search"
         ],
         googleApiKey: "<image_search_google_api_key>",
         showAdvancedOptions: true,
