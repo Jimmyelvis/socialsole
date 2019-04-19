@@ -64,8 +64,8 @@ class Register extends Component {
     */
     let avatar;
 
-    const cloudname = "your cloud name";  // your cloud name goes here
-     const uploadpresent = "your upload present"; // your cloud upload present goes here
+    const cloudname = "dwgjvssdt";  // your cloud name goes here
+     const uploadpresent = "ndilj3e8"; // your cloud upload present goes here
 
     window.cloudinary.openUploadWidget(
       {
