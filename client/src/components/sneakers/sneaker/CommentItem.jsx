@@ -12,16 +12,16 @@ class CommentItem extends Component {
     const { comment, sneakerId, auth } = this.props;
 
     return (
-      <div className="commentBody card card-body mb-3">
+      <div className="commentBody mb-3">
         <div className="row">
-          <div className="col-md-3 col-sm-3 col-3">
+          <div className="commentAvatar col-md-2">
             <div className="avatarHolder">
               <img src={comment.avatar} alt="" />
             </div>
             <br />
             <p className="commentName">{comment.name}</p>
           </div>
-          <div className="commentText col-md-9 col-sm-9 col-9">
+          <div className="commentText col-md-10">
             <p>{comment.text}</p>
 
             {comment.user === auth.user.id ? (

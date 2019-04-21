@@ -107,8 +107,8 @@ p {
 
 .contentBody {
   background-color: rgba(255, 255, 255, 1);
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.28);
-  box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.28);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.15);
+  box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.15);
   padding: 35px 0;
   width: 60%;
   margin: 150px auto;
@@ -140,6 +140,10 @@ p {
   text-align: center;
   margin: 0 auto;
 }
+
+
+
+
 
 /*
 ///////////////////////////////   FILTER SEARCH BAR STYLES ////////////////////////
@@ -904,6 +908,189 @@ p {
 
 .btn-concord:active {
   outline: none;
+}
+
+/*
+/////////////////// ////////// COMMENT STYLES //////////////////////
+*/
+
+.commentForm {
+  padding: 20px;
+  width: 85%;
+  margin: 15px auto;
+}
+
+.commentForm .btn-sole{
+  float: right;
+  margin-top: 20px;
+}
+
+.commentsArea {
+  position: relative;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0px solid rgba(255, 255, 255, 0);
+  border-radius: 0;
+  max-width: 90%;
+  margin: 40px auto;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.28);
+  box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.28);
+  min-height: 260px;
+}
+
+.commentBody {
+  width: 85%;
+  margin: 50px auto;
+  /* border-bottom: 1px solid rgba(227, 227, 229, 0.6); */
+
+}
+
+.commentBody:after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 95%;
+  padding-top: 25px;
+  border-bottom: 2px solid rgba(233, 234, 240, 0.3);
+}
+
+.commentBody:last-child:after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 95%;
+  padding-top: 25px;
+  border-bottom: 2px solid rgba(233, 234, 240, 0);
+}
+
+.commentBody .avatarHolder {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  padding-bottom: 100%;
+  margin: 0 auto;
+  margin-bottom: -15px;
+}
+
+.commentAvatar .avatarHolder img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.btn-comment-delete {
+  float: right;
+  position: absolute;
+  bottom: 0;
+  right: 2%;
+}
+
+.commentName {
+  text-align: center;
+  color: #1dade5;
+  font-weight: bold;
+}
+
+
+@media(max-width:990px){
+
+  .btn-comment-delete {
+    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 2%;
+    font-size: 0.7rem;
+    padding: 0.275rem 0.55rem;
+  }
+
+  .commentForm .btn-sole {
+    float: right;
+    margin-top: 20px;
+    font-size: 0.8rem;
+  }
+
+}
+
+@media(max-width:767px){
+
+  .commentAvatar {
+    width: 20%;
+  }
+
+  .commentBody .avatarHolder {
+    width: 95%;
+    padding-bottom: 95%;
+  }
+
+  .commentBody .commentText {
+    position: relative;
+    padding-top: 0px;
+    width: 80%;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .commentForm {
+    padding: 20px;
+    width: 100%;
+    margin: 15px auto;
+  }
+
+  .commentBody {
+    width: 90%;
+    margin: 50px auto;
+  }
+
+}
+
+@media(max-width:550px){
+
+  .commentAvatar {
+    width: 100%;
+  }
+
+  .commentBody {
+    width: 95%;
+    margin: 50px auto;
+  }
+
+
+  .commentBody .avatarHolder {
+    width: 25%;
+    padding-bottom: 25%;
+  }
+
+  .commentBody .commentText {
+    position: relative;
+    padding-top: 0px;
+    padding: 35px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .post-form {
+    margin-top: 50px;
+    margin: 50px auto 100px auto;
+  }
+
+
+}
+
+@media(max-width:450px){
+
+  .commentsArea {
+    max-width: 100%;
+  }
+
 }
 
 /*
@@ -2993,10 +3180,6 @@ p {
   width: 75%;
 }
 
-.postSingle .post-form {
-  margin-top: 50px;
-}
-
 .postSingle .row {
   margin-right: 0;
   margin-left: 0;
@@ -3004,56 +3187,6 @@ p {
 
 .bg-info {
   background-color: #1aa9e3 !important;
-}
-
-.commentForm {
-  padding: 20px;
-}
-
-.commentBody.card.card-body.mb-3 {
-  padding: 25px;
-  margin-top: 20px;
-}
-
-.commentBody img {
-  border-radius: 50%;
-  height: 110px;
-  width: 90%;
-  object-fit: cover;
-  margin: 0 auto;
-  display: block;
-}
-
-.btn-comment-delete {
-  float: right;
-  margin-top: 25px;
-}
-
-.commentName {
-  text-align: center;
-  color: #1dade5;
-  font-weight: bold;
-}
-
-.commentAvatar .avatarHolder {
-  width: 70%;
-  text-align: center;
-  position: relative;
-  padding-bottom: 70%;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: auto;
-  display: block;
-}
-
-.commentAvatar .avatarHolder img{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  -o-object-fit: cover;
-  object-fit: cover;
 }
 
 
@@ -3086,12 +3219,6 @@ p {
     padding: 0;
   }
 
-  .commentAvatar .avatarHolder {
-    width: 95%;
-    padding-bottom: 95%;
-  }
-  
-
 }
 
 @media(max-width:767px){
@@ -3099,15 +3226,6 @@ p {
   .postSingle .postHeadline h3 {
     padding: 0 5%;
     padding-top: 15px;
-  }
-
-  .commentAvatar {
-    width: 25%;
-  }
-
-  .commentText {
-    width: 75%;
-    padding-top: 20px;
   }
 
   .postSingle .btn-comment-delete {
@@ -3127,37 +3245,6 @@ p {
   }
 }
 
-@media(max-width:550px){
-
-  .commentAvatar {
-    width: 100%;
-  }
-
-  .commentAvatar .avatarHolder {
-    width: 30%;
-    padding-bottom: 30%;
-  }
-
-  .commentName {
-    text-align: center;
-    color: #1dade5;
-    font-weight: bold;
-    margin-top: -16px;
-    font-size: 125%;
-  }
-
-  .commentText {
-    width: 100%;
-    padding-top: 20px;
-    height: auto;
-    padding-bottom: 10%;
-  }
-
-  .postSingle .btn-comment-delete {
-    bottom: -15px;
-  }
-
-}
 
 @media(max-width:450px){
 
@@ -3259,8 +3346,8 @@ p {
 .sneakerSingle .sneakerMainImage {
   padding: 0;
   border-radius: 0;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.28);
-  box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.28);
+  /* -webkit-box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.28);
+  box-shadow: 0px 0px 5px 0px rgba(76, 99, 110, 0.28); */
   height: 600px;
   overflow: hidden;
   -ms-flex: 0 0 95%;
@@ -3359,14 +3446,12 @@ p {
   font-weight: 600;
 }
 
-.commentBody .avatarHolder {
-  width: 50%;
-  text-align: center;
-  position: relative;
-  padding-bottom: 50%;
-  margin: 0 auto;
-  margin-bottom: -15px;
+.sneakerSingle .commentsArea{
+
+  max-width: 100%;
+
 }
+
 
 
 @media(max-width:1200px){
@@ -3382,15 +3467,6 @@ p {
   .sneakerSingle .avatarHolder {
     width: 70%;
     padding-bottom: 70%;
-  }
-
-  .commentBody .avatarHolder {
-    width: 50%;
-    text-align: center;
-    position: relative;
-    padding-bottom: 50%;
-    margin: 0 auto;
-    margin-bottom: -15px;
   }
 
 }
@@ -3412,17 +3488,8 @@ p {
   }
 
   .sneakerSingle .avatarHolder {
-    width: 70%;
-    padding-bottom: 70%;
-  }
-
-  .commentBody .avatarHolder {
-    width: 50%;
-    text-align: center;
-    position: relative;
-    padding-bottom: 50%;
-    margin: 0 auto;
-    margin-bottom: -15px;
+    width: 90%;
+    padding-bottom: 90%;
   }
 
 }
@@ -3447,11 +3514,6 @@ p {
     width: 100%;
   }
 
-  .sneakerSingle .avatarHolder {
-    width: 100%;
-    padding-bottom: 100%;
-  }
-
   .sneakerSingle .sneakerBody h4 {
     font-size: 115%;
   }
@@ -3461,34 +3523,14 @@ p {
     font-size: 100%;
   }
 
-  .commentBody .commentText {
-    position: relative;
-  }
-
-  .commentText .btn-comment-delete {
-    float: right;
-    margin-top: 25px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-
-  .commentBody .avatarHolder {
-    width: 50%;
-    text-align: center;
-    position: relative;
-    padding-bottom: 50%;
-    margin: 0 auto;
-    margin-bottom: -15px;
-  }
-
+ 
 }
 
 @media(max-width:600px){
 
-  .sneakerSingle .container {
+  /* .sneakerSingle .container {
     max-width: 90%;
-  }
+  } */
 
   .sneakerSingle .sneakerDesc h3 {
     font-size: 120%;
@@ -3498,28 +3540,13 @@ p {
     height: 300px;
   }
 
-  .commentName {
-    font-size: 80%;
-    margin-top: -14px;
-  }
+}
 
-  .commentText .btn-comment-delete {
-    float: right;
-    margin-top: 25px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    font-size: 80%;
-    padding: 0.175rem 0.55rem;
-  }
+@media(max-width:550px){
 
-  .commentBody .avatarHolder {
-    width: 70%;
-    text-align: center;
-    position: relative;
-    padding-bottom: 70%;
-    margin: 0 auto;
-    margin-bottom: 0px;
+  .sneakerSingle .avatarHolder {
+    width: 35%;
+    padding-bottom: 35%;
   }
 
 }
@@ -3532,11 +3559,6 @@ p {
 
   .sneakerSingle .sneakerDesc h3 {
     font-size: 105%;
-  }
-
-  .commentText .btn-comment-delete {
-    font-size: 70%;
-    padding: 0.075rem 0.35rem;
   }
 
   .sneakerSingle .avatarHolder {
@@ -3565,28 +3587,6 @@ p {
     font-size: 70%;
   }
 
-  .commentBody .col-md-3.col-sm-3.col-3 {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-
-  .sneakerSingle .commentBody .commentText {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-
-  .commentBody .avatarHolder {
-    width: 25%;
-    text-align: center;
-    position: relative;
-    padding-bottom: 25%;
-    margin: 0 auto;
-    margin-bottom: 0px;
-  }
-
-  .commentName {
-    font-size: 100%;
-  }
 
 }
 
@@ -4613,23 +4613,24 @@ p {
 
 
 .newsItem .article {
-  width: 70%;
+  width: 60%;
   margin: 160px auto 50px auto;
   padding: 0;
+  padding-bottom: 3%;
 }
 
 .newsItem .articleImg {
-  height: 400px;
+  height: 370px;
   margin-bottom: 30px;
   position: relative;
 }
 
 .newsItem .articleImg h3 {
   position: absolute;
-  top: 170px;
+  top: 155px;
   left: 50%;
   color: #fff;
-  font-size: 250%;
+  font-size: 240%;
   text-align: center;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);

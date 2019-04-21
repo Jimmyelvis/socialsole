@@ -38,8 +38,12 @@ class Post extends Component {
         postContent = (
           <div>
             <PostItem post={post} showActions={false}/>
-            <CommentForm postId={post._id} />
-            <CommentFeed postId={post._id} comments={post.comments} />
+            <div className="commentsArea">
+
+              <CommentForm postId={post._id} />
+              <CommentFeed postId={post._id} comments={post.comments} />
+            
+            </div>
           </div>
         );
     }

@@ -38,8 +38,13 @@ export class Sneaker extends Component {
         sneakerContent = (
           <div>
             <SneakerItem sneaker={sneaker} showActions={false}/>
-            <CommentForm sneakerId={sneaker._id} />
-            <CommentFeed sneakerId={sneaker._id} comments={sneaker.comments} />
+            <div className="commentsArea">
+
+              <CommentForm sneakerId={sneaker._id} />
+              <CommentFeed sneakerId={sneaker._id} comments={sneaker.comments} />
+              
+            </div>
+
           </div>
         );
     }

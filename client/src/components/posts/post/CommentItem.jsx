@@ -12,7 +12,7 @@ class CommentItem extends Component {
     const { comment, postId, auth } = this.props;
 
     return (
-      <div className="commentBody card card-body mb-3">
+      <div className="commentBody mb-3">
         <div className="row">
           <div className="commentAvatar col-md-2">
               <div className="avatarHolder">
