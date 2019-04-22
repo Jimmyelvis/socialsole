@@ -33,9 +33,7 @@ class UserPosts extends Component {
       <div className="container">
         <h3>Your Posts</h3>
 
-        <div className="row">
           {postContent}
-        </div>
         
       </div>
     );

@@ -227,7 +227,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }),
 
   const { errors, isValid } = validatePostInput(req.body)
 
-  //check vaidation
+  //check validation
       if(!isValid){
           //if any errors send 404
           return res.status(400).json(errors)

@@ -40,9 +40,7 @@ export class UserSneakers extends Component {
 
       <h3>Your Sneakers</h3>
 
-        <div className="row">
            {sneakerContent}
-        </div>
       </div>
     );
   }

@@ -196,7 +196,7 @@ export class YourPosts extends Component {
             </div>
           </div>
 
-          <div className="row">
+          <div className="posts">
             {postContent}
           </div>
         </div>
