@@ -17,7 +17,7 @@ export class news extends Component {
               <div className="newsHeader card card-body">
                 <img
                   className="card-img"
-                  src="http://www.flightkickz.cn/images/11s%20concord%202018_11.jpg"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569539275/11s_20concord_202018_11.jpg"
                   alt=""
                 />
               </div>
@@ -27,7 +27,7 @@ export class news extends Component {
                   <div className="avatar">
                     <div className="avatarImg">
                       <img
-                        src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                        src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569781600/pexels-photo-1222271.jpg"
                         alt=""
                       />
                     </div>
@@ -64,7 +64,7 @@ export class news extends Component {
             <div className="article contentBody">
               <div className="articleImg">
                 <img
-                  src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2018%2F12%2Fnikes-2018-air-jordan-11-concord-apparently-largest-sneaker-release-in-history-000.jpg?fit=max&cbr=1&q=90&w=750&h=500"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569781655/https_3A_2F_2Fhypebeast.com_2Fimage_2F2018_2F12_2Fnikes-2018-air-jordan-11-concord-apparently-largest-sneaker-release-in-history-000.jpg"
                   alt=""
                 />
                 <div className="overlay"></div>
@@ -106,6 +106,8 @@ export class news extends Component {
               </div>
             </div>
           </div>
+
+          
         </div>
       </div>
     );

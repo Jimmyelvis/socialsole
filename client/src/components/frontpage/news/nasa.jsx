@@ -16,7 +16,7 @@ export class news extends Component {
               <div className="newsHeader card card-body">
                 <img
                   className="card-img"
-                  src="https://cdn.shopify.com/s/files/1/0214/7974/products/Nike_PG_3_GS_Nasa_Sneaker_politics_1.jpg?v=1549056689"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569539314/Nike_PG_3_GS_Nasa_Sneaker_politics_1.jpg"
                   alt=""
                 />
               </div>
@@ -26,7 +26,7 @@ export class news extends Component {
                   <div className="avatar">
                     <div className="avatarImg">
                       <img
-                        src="https://images.pexels.com/photos/1037915/pexels-photo-1037915.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                        src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569781767/pexels-photo-1037915.jpg"
                         alt=""
                       />
                     </div>
@@ -63,7 +63,7 @@ export class news extends Component {
             <div className="article contentBody">
               <div className="articleImg">
                 <img
-                  src="https://bigcountypreps.com/wp-content/uploads/2019/01/nike-pg3-nasa-1.jpg"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569781801/nike-pg3-nasa-1.jpg"
                   alt=""
                 />
                 <div className="overlay" />

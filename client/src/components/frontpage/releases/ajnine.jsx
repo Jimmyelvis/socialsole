@@ -16,7 +16,7 @@ export class releases extends Component {
               <div className="newsHeader card card-body">
                 <img
                   className="card-img"
-                  src="https://cdn5.kicksonfire.com/wp-content/uploads/2019/02/Air-Jordan-9-UNC-1.jpg?x65229"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783272/jo302370-145.jpg"
                   alt=""
                 />
               </div>
@@ -26,7 +26,7 @@ export class releases extends Component {
                   <div className="avatar">
                     <div className="avatarImg">
                       <img
-                        src="https://images.pexels.com/photos/428333/pexels-photo-428333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                        src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783369/pexels-photo-428333.jpg"
                         alt=""
                       />
                     </div>
@@ -63,7 +63,7 @@ export class releases extends Component {
             <div className="article contentBody">
               <div className="articleImg">
                 <img
-                  src="https://i.ytimg.com/vi/pqYQwHrdVN0/maxresdefault.jpg"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783290/maxresdefault_1.jpg"
                   alt=""
                 />
                 <div className="overlay" />
@@ -102,10 +102,10 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="http://kicksdeals.com/wp-content/uploads/2019/02/jordan-9-retro-UNC-2-700x400.jpg"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783315/Air-Jordan-9-UNC-Pearl-Blue-3-1.png"
                         >
                           <img
-                            src="http://kicksdeals.com/wp-content/uploads/2019/02/jordan-9-retro-UNC-2-700x400.jpg"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783315/Air-Jordan-9-UNC-Pearl-Blue-3-1.png"
                             alt=""
                           />
                         </a>
@@ -113,10 +113,10 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://cdn5.kicksonfire.com/wp-content/uploads/2019/02/Air-Jordan-9-UNC-Pearl-Blue-3-1.png?x65229"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783308/Air-Jordan-9-UNC-White-University-Blue-Midnight-Navy.jpg"
                         >
                           <img
-                            src="https://cdn5.kicksonfire.com/wp-content/uploads/2019/02/Air-Jordan-9-UNC-Pearl-Blue-3-1.png?x65229"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783308/Air-Jordan-9-UNC-White-University-Blue-Midnight-Navy.jpg"
                             alt=""
                           />
                         </a>
@@ -124,10 +124,10 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://2.kixify.com/sites/default/files/imagecache/product_full/product/2019/02/09/p_25615561_139872431_1276286.png"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783284/DzFn_k-X4AEwZG0.jpg"
                         >
                           <img
-                            src="https://2.kixify.com/sites/default/files/imagecache/product_full/product/2019/02/09/p_25615561_139872431_1276286.png"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783284/DzFn_k-X4AEwZG0.jpg"
                             alt=""
                           />
                         </a>
@@ -135,18 +135,18 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://sneakernews.com/wp-content/uploads/2019/01/air-jordan-9-unc-big-kids-302359-145-2.jpg"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783303/Air-Jordan-9-UNC-Pearl-Blue.png"
                         >
-                          <img src="https://sneakernews.com/wp-content/uploads/2019/01/air-jordan-9-unc-big-kids-302359-145-2.jpg" />
+                          <img src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783303/Air-Jordan-9-UNC-Pearl-Blue.png" />
                         </a>
                       </li>
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://i2.wp.com/www.nicekicks.com/files/2019/02/air-jordan-9-midnight-navy-1.jpg?fit=1200%2C640&ssl=1"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783296/CBJordanRetro9UnivBlue-2-1_1024x1024.jpg"
                         >
                           <img
-                            src="https://i2.wp.com/www.nicekicks.com/files/2019/02/air-jordan-9-midnight-navy-1.jpg?fit=1200%2C640&ssl=1"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783296/CBJordanRetro9UnivBlue-2-1_1024x1024.jpg"
                             alt=""
                           />
                         </a>
@@ -154,9 +154,9 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://ssl.ulximg.com/public/userfiles/2019/02/Air-Jordan-9-UNC-2.jpg"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783272/jo302370-145.jpg"
                         >
-                          <img src="https://ssl.ulximg.com/public/userfiles/2019/02/Air-Jordan-9-UNC-2.jpg" />
+                          <img src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783272/jo302370-145.jpg" />
                         </a>
                       </li>
                     </ul>

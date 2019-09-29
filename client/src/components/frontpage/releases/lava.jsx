@@ -16,7 +16,7 @@ export class releases extends Component {
               <div className="newsHeader card card-body">
                 <img
                   className="card-img"
-                  src="https://blog.dtlr.com/wp-content/uploads/2019/02/JORDAN-4-CITRON-4.jpg"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783574/JORDAN-4-CITRON-4.jpg"
                   alt=""
                 />
               </div>
@@ -26,7 +26,7 @@ export class releases extends Component {
                   <div className="avatar">
                     <div className="avatarImg">
                       <img
-                        src="https://images.pexels.com/photos/814052/pexels-photo-814052.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                        src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783600/pexels-photo-814052.jpg"
                         alt=""
                       />
                     </div>
@@ -63,7 +63,7 @@ export class releases extends Component {
             <div className="article contentBody">
               <div className="articleImg">
                 <img
-                  src="https://cdn.thesolesupplier.co.uk/2019/02/nike-air-jordan-iv-retro-weiss-schwarz-308497-116-mood-1.jpg"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569783628/nike-air-jordan-iv-retro-weiss-schwarz-308497-116-mood-1.jpg"
                   alt=""
                 />
                 <div className="overlay" />
@@ -102,10 +102,10 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://cdn.shopify.com/s/files/1/0214/7974/products/Sneaker_Politics_Air_Jordan_4_Hot_Lava_01-2.jpg?v=1550876574"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784080/m_5cb0153d26219f7bdc9904f6.jpg"
                         >
                           <img
-                            src="https://cdn.shopify.com/s/files/1/0214/7974/products/Sneaker_Politics_Air_Jordan_4_Hot_Lava_01-2.jpg?v=1550876574"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784080/m_5cb0153d26219f7bdc9904f6.jpg"
                             alt=""
                           />
                         </a>
@@ -113,10 +113,10 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://cdn.thesolesupplier.co.uk/2019/02/Untitled-4.jpg"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784060/D0SH_AoW0AANhx7.jpg"
                         >
                           <img
-                            src="https://cdn.thesolesupplier.co.uk/2019/02/Untitled-4.jpg"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784060/D0SH_AoW0AANhx7.jpg"
                             alt=""
                           />
                         </a>
@@ -124,10 +124,10 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://sneakernews.com/wp-content/uploads/2018/12/air-jordan-4-hot-lava-308497-116-1.jpg"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784070/nike-air-jordan-4-hot-lava-3.jpg"
                         >
                           <img
-                            src="https://sneakernews.com/wp-content/uploads/2018/12/air-jordan-4-hot-lava-308497-116-1.jpg"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784070/nike-air-jordan-4-hot-lava-3.jpg"
                             alt=""
                           />
                         </a>
@@ -135,18 +135,18 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://i2.wp.com/www.cnsmnt.com/wp-content/uploads/2018/12/Air-Jordan-4-Hot-Lava-308497-116-Release-Date-3-768x539.jpg?fit=768%2C539&ssl=1"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784150/2019-Air-Jordan-4-Hot-Lava-White-Black-Light-Crimson-Pale-Citron-To-Buy.jpg"
                         >
-                          <img src="https://i2.wp.com/www.cnsmnt.com/wp-content/uploads/2018/12/Air-Jordan-4-Hot-Lava-308497-116-Release-Date-3-768x539.jpg?fit=768%2C539&ssl=1" />
+                          <img src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784150/2019-Air-Jordan-4-Hot-Lava-White-Black-Light-Crimson-Pale-Citron-To-Buy.jpg" />
                         </a>
                       </li>
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://i0.wp.com/cdn5.kicksonfire.com/wp-content/uploads/2018/12/Air-Jordan-4-Pale-Citron-3-1-565x372.jpg?resize=525%2C346&ssl=1"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784130/Air-Jordan-4-Hot-Lava-308497-116-Release-Date-2.jpg"
                         >
                           <img
-                            src="https://i0.wp.com/cdn5.kicksonfire.com/wp-content/uploads/2018/12/Air-Jordan-4-Pale-Citron-3-1-565x372.jpg?resize=525%2C346&ssl=1"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784130/Air-Jordan-4-Hot-Lava-308497-116-Release-Date-2.jpg"
                             alt=""
                           />
                         </a>
@@ -154,9 +154,9 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://sneakerbardetroit.com/wp-content/uploads/2018/12/Air-Jordan-4-Hot-Lava-308497-116-Release-Date-4.jpg"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784090/2019-Air-Jordan-4-Hot-Lava-308497-116-New-Sale.jpg"
                         >
-                          <img src="https://sneakerbardetroit.com/wp-content/uploads/2018/12/Air-Jordan-4-Hot-Lava-308497-116-Release-Date-4.jpg" />
+                          <img src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569784090/2019-Air-Jordan-4-Hot-Lava-308497-116-New-Sale.jpg" />
                         </a>
                       </li>
                     </ul>

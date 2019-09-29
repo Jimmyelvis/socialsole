@@ -4,6 +4,7 @@ import errorReducer from './errorReducer';
 import profileReducer from './profileReducer';
 import postReducer from './postReducer';
 import sneakerReducer from './sneakerReducer';
+import articleReducer from './articleReducer';      
 
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
   errors: errorReducer,
   profile: profileReducer,
   post: postReducer,
-  sneaker: sneakerReducer
+  sneaker: sneakerReducer,
+  article: articleReducer
 });

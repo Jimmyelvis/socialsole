@@ -16,7 +16,7 @@ export class news extends Component {
               <div className="newsHeader card card-body">
                 <img
                   className="card-img"
-                  src="https://sneakers-magazine.com/wp-content/uploads/2013/06/Tinker9preview.jpg"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569539340/Tinker9preview.jpg"
                   alt=""
                 />
               </div>
@@ -26,7 +26,7 @@ export class news extends Component {
                   <div className="avatar">
                     <div className="avatarImg">
                       <img
-                        src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                        src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569781895/pexels-photo-614810.jpg"
                         alt=""
                       />
                     </div>
@@ -63,7 +63,7 @@ export class news extends Component {
             <div className="article contentBody">
               <div className="articleImg">
                 <img
-                  src="https://sneakerfreaker-cdn.s3-accelerate.amazonaws.com/image/tinker-hatfield.jpg?mtime=20180430172116"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569781949/tinker-hatfield.jpg"
                   alt=""
                 />
                 <div className="overlay" />

@@ -16,7 +16,7 @@ export class releases extends Component {
               <div className="newsHeader card card-body">
                 <img
                   className="card-img"
-                  src="https://cdn5.kicksonfire.com/wp-content/uploads/2019/02/Air-Jordan-12-Chinese-New-Year-2019.jpg?x65229"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782124/Air-Jordan-12-CNY-Chinese-New-Year-2019-CI2977-006-Release-Date-Price.jpg"
                   alt=""
                 />
               </div>
@@ -26,7 +26,7 @@ export class releases extends Component {
                   <div className="avatar">
                     <div className="avatarImg">
                       <img
-                        src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                        src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782214/pexels-photo-846741.jpg"
                         alt=""
                       />
                     </div>
@@ -63,7 +63,7 @@ export class releases extends Component {
             <div className="article contentBody">
               <div className="articleImg">
                 <img
-                  src="https://cdn5.kicksonfire.com/wp-content/uploads/2018/12/AIR-JORDAN-12-4-1.jpg?x65229"
+                  src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569539447/Air-Jordan-12-Chinese-New-Year-2019-1.jpg"
                   alt=""
                 />
                 <div className="overlay" />
@@ -104,10 +104,10 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://cdn5.kicksonfire.com/wp-content/uploads/2018/12/Air-Jordan-12-Chinese-New-Year-2019-1.png?x65229"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782374/Air-Jordan-12-CNY-Chinese-New-Year-2019-CI2977-006-Release-Date-Price-2.jpg"
                         >
                           <img
-                            src="https://cdn5.kicksonfire.com/wp-content/uploads/2018/12/Air-Jordan-12-Chinese-New-Year-2019-1.png?x65229"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782374/Air-Jordan-12-CNY-Chinese-New-Year-2019-CI2977-006-Release-Date-Price-2.jpg"
                             alt=""
                           />
                         </a>
@@ -115,10 +115,10 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://sneakerbardetroit.com/wp-content/uploads/2019/01/Air-Jordan-12-CNY-Chinese-New-Year-Release-Date-Price.jpg"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782368/Air-Jordan-12-CNY-Chinese-New-Year-2019-CI2977-006-Release-Date-Price-3.jpg"
                         >
                           <img
-                            src="https://sneakerbardetroit.com/wp-content/uploads/2019/01/Air-Jordan-12-CNY-Chinese-New-Year-Release-Date-Price.jpg"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782368/Air-Jordan-12-CNY-Chinese-New-Year-2019-CI2977-006-Release-Date-Price-3.jpg"
                             alt=""
                           />
                         </a>
@@ -126,10 +126,10 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://sneakerbardetroit.com/wp-content/uploads/2019/01/Air-Jordan-12-CNY-Chinese-New-Year-Release-Date-Price.jpg"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782362/Air-Jordan-12-CNY-Chinese-New-Year-2019-CI2977-006-Release-Date-Price-5.jpg"
                         >
                           <img
-                            src="https://sneakerbardetroit.com/wp-content/uploads/2019/01/Air-Jordan-12-CNY-Chinese-New-Year-Release-Date-Price.jpg"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782362/Air-Jordan-12-CNY-Chinese-New-Year-2019-CI2977-006-Release-Date-Price-5.jpg"
                             alt=""
                           />
                         </a>
@@ -137,18 +137,18 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="http://www.fitmysole.com/wp-content/uploads/2019/01/2019-Air-Jordan-12-Chinese-New-Year-CI2977-006-On-Feet-1.jpg"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782350/Air-Jordan-12-CNY-Chinese-New-Year-2019-Release-Date-2.jpg"
                         >
-                          <img src="http://www.fitmysole.com/wp-content/uploads/2019/01/2019-Air-Jordan-12-Chinese-New-Year-CI2977-006-On-Feet-1.jpg" />
+                          <img src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782350/Air-Jordan-12-CNY-Chinese-New-Year-2019-Release-Date-2.jpg" />
                         </a>
                       </li>
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://blog.finishline.com/wp-content/uploads/2019/01/CNY.png"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782326/Air-Jordan-12-CNY-Chinese-New-Year-Release-Date-Price-2.jpg"
                         >
                           <img
-                            src="https://blog.finishline.com/wp-content/uploads/2019/01/CNY.png"
+                            src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782326/Air-Jordan-12-CNY-Chinese-New-Year-Release-Date-Price-2.jpg"
                             alt=""
                           />
                         </a>
@@ -156,9 +156,9 @@ export class releases extends Component {
                       <li>
                         <a
                           data-fancybox="gallery"
-                          href="https://cdn5.kicksonfire.com/wp-content/uploads/2019/02/Air-Jordan-12-Chinese-New-Year-2019.jpg?x65229"
+                          href="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782308/Air-Jordan-12-CNY-Chinese-New-Year-Release-Date-Price-5.jpg"
                         >
-                          <img src="https://cdn5.kicksonfire.com/wp-content/uploads/2019/02/Air-Jordan-12-Chinese-New-Year-2019.jpg?x65229" />
+                          <img src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569782308/Air-Jordan-12-CNY-Chinese-New-Year-Release-Date-Price-5.jpg" />
                         </a>
                       </li>
                     </ul>

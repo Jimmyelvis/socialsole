@@ -21,6 +21,7 @@ import CreateProfile from './components/profiles/create-profile/CreateProfile';
 import EditProfile from './components/profiles/edit-profile/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profiles/profile/Profile';
+import Article from './components/articles/article/Article';
 import Posts from './components/posts/AllPosts';
 import Post from './components/posts/post/Post';
 import YourPosts from './components/posts/YourPosts';
@@ -71,6 +72,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:handle" component={Profile} />
+              <Route exact path="/article/:address" component={Article} />
               <Route exact path="/post/:id" component={Post} />
               <Route exact path="/sneaker/:id" component={Sneaker} />
               <Route exact path="/allsneakers" component={Sneakers} />

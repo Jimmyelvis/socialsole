@@ -1,5 +1,8 @@
 {
   "cSpell.words": [
     "Cloudinary"
-  ]
+  ],
+  "workbench.colorCustomizations": {
+    "tab.unfocusedActiveBorder": "#fff0"
+  }
 }

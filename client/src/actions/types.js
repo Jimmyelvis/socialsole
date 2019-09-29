@@ -17,6 +17,8 @@ export const ADD_SNEAKER = 'ADD_SNEAKER';
 export const DELETE_SNEAKER = 'DELETE_SNEAKER';
 export const SNEAKER_LOADING = 'SNEAKER_LOADING';
 export const LIKE_SNEAKER = 'LIKE_SNEAKER';
+export const ARTICLE_LOADING = 'ARTICLE_LOADING';
+export const GET_ARTICLE = 'GET_ARTICLE';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 
