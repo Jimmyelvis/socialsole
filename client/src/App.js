@@ -21,6 +21,8 @@ import CreateProfile from './components/profiles/create-profile/CreateProfile';
 import EditProfile from './components/profiles/edit-profile/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profiles/profile/Profile';
+import Article from './components/articles/article/Article';
+import CreateArticle from './components/articles/article/CreateArticle';
 import Posts from './components/posts/AllPosts';
 import Post from './components/posts/post/Post';
 import YourPosts from './components/posts/YourPosts';
@@ -81,6 +83,10 @@ class App extends Component {
               <Route exact path="/release/cny" component={NewReleaseCNY} />
               <Route exact path="/release/ajnine" component={NewReleaseAJNine} />
               <Route exact path="/release/lava" component={NewReleaseAJLava} />
+              <Route exact path="/article/:address" component={Article} />
+              <Route exact path="/createarticle" component={CreateArticle} />
+
+
 
 
               <Switch>

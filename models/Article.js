@@ -7,11 +7,11 @@ const ArticleSchema = new Schema({
 
   author: {
     type: String,
-    required: true  
+    // required: true  
   },
   text: {
     type: String,
-    required: true
+    // required: true
   },
   headline: {
     type: String

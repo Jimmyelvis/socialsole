@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tinymce/tinymce-react": "^3.3.2",
     "axios": "^0.18.0",
     "classnames": "^2.2.5",
     "cloudinary": "^1.13.2",
     "cloudinary-react": "^1.1.0",
+    "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.22.0",
@@ -17,6 +19,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
+    "react-trumbowyg": "^1.1.0",
     "react-truncate": "^2.4.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"

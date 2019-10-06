@@ -67,34 +67,49 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
+    // const { errors, isValid } = validatePostInput(req.body);
 
-    // Check Validation
-    if (!isValid) {
-      // If any errors, send 400 with errors object
-      return res.status(400).json(errors);
-    }
+    // // Check Validation
+    // if (!isValid) {
+    //   // If any errors, send 400 with errors object
+    //   return res.status(400).json(errors);
+    // }
 
-      Article.findOne({address: req.body.address}).then(article => {
-        if(article){
-          errors.address = 'This address already exists for anothor article';
-          return res.status(400).json({errors})
-        }else{
-          const newArticle = new Article({
-            text: req.body.text,
-            headline: req.body.headline,
-            fullheaderimage: req.body.fullheaderimage,
-            articleheaderimage: req.body.articleheaderimage,
-            address: req.body.address,
-            author: req.body.author,
-            email: req.body.email,
-            avatar: req.body.avatar,
-          });
+      // Article.findOne({address: req.body.address}).then(article => {
+      //   if(article){
+      //     errors.address = 'This address already exists for anothor article';
+      //     return res.status(400).json({errors})
+      //   }else{
+      //     const newArticle = new Article({
+      //       text: req.body.text,
+      //       headline: req.body.headline,
+      //       fullheaderimage: req.body.fullheaderimage,
+      //       articleheaderimage: req.body.articleheaderimage,
+      //       address: req.body.address,
+      //       // author: req.body.author,
+      //       email: req.body.email,
+      //       user: req.user.id,
+      //       avatar: req.user.avatar,
+      //     });
       
-          newArticle.save().then(article => res.json(article));
+      //     newArticle.save().then(article => res.json(article));
     
-        }
-      })
+      //   }
+      // })
+
+      const newArticle = new Article({
+        text: req.body.text,
+        headline: req.body.headline,
+        fullheaderimage: req.body.fullheaderimage,
+        articleheaderimage: req.body.articleheaderimage,
+        address: req.body.address,
+        // author: req.body.author,
+        email: req.body.email,
+        user: req.user.id,
+        avatar: req.user.avatar,
+      });
+  
+      newArticle.save().then(article => res.json(article));
   }
 );
 
