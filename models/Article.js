@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const ArticleSchema = new Schema({
-
   author: {
     type: String,
     // required: true  
@@ -29,6 +28,18 @@ const ArticleSchema = new Schema({
     type: String
   },
   email: {
+    type: String
+  },
+  youtube: {
+    type: String
+  },
+  facebook: {
+    type: String
+  },
+  twitter: {
+    type: String
+  },
+  instagram: {
     type: String
   },
   likes: [

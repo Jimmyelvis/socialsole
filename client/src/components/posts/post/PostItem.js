@@ -51,7 +51,7 @@ export class PostItem extends Component {
             <h3>
               <span className="headlineTitle">{post.headline}</span>
               <span className="commentsCount">
-                {post.comments.length} Comments
+                {post.comments.length} The Comments
               </span>
             </h3>
           </div>

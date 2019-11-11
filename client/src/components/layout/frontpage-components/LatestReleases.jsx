@@ -31,7 +31,7 @@ export class LatestReleases extends Component {
                   </p>
                 </div>
 
-                <Link to="/release/cny" className="btn btn-upcomingPanel">
+                <Link to="article/grape" className="btn btn-upcomingPanel">
                   Read More
                 </Link>
               </div>

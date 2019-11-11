@@ -103,10 +103,15 @@ router.post(
         fullheaderimage: req.body.fullheaderimage,
         articleheaderimage: req.body.articleheaderimage,
         address: req.body.address,
-        // author: req.body.author,
+        author: req.body.author,
         email: req.body.email,
         user: req.user.id,
         avatar: req.user.avatar,
+        youtube: req.body.youtube,
+        facebook: req.body.facebook,
+        twitter: req.body.twitter,
+        instagram: req.body.instagram
+
       });
   
       newArticle.save().then(article => res.json(article));
