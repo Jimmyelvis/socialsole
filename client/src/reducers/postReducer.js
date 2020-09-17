@@ -45,20 +45,26 @@ export default function (state = initialState, action) {
         ...state,
         posts: state.posts.filter(post => post._id !== action.payload)
       };
+    // case LIKE_POST:
+    //   return {
+    //     ...state,
+    //     posts: state.posts.map(post => {
+    //       if (post._id === action.payload._id) {
+    //         return {
+    //           ...post,
+    //           ...action.payload
+    //         };
+    //       } else {
+    //         return post;
+    //       }
+    //     })
+    //   };
     case LIKE_POST:
       return {
         ...state,
-        posts: state.posts.map(post => {
-          if (post._id === action.payload._id) {
-            return {
-              ...post,
-              ...action.payload
-            };
-          } else {
-            return post;
-          }
-        })
-      };
+        post: action.payload,
+        loading: false
+    }
     default:
       return state;
   }

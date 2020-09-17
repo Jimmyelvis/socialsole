@@ -1,0 +1,36 @@
+.secheading {
+  text-align: center;
+  margin: 5rem auto;
+
+  .heading-2{
+
+    @include respond (bp-tiny) {
+      font-size: 3.2rem;
+    }
+    
+    &::before, &::after {
+      border-top: 4px solid $ltpowderblue;
+      content: "";
+      display: inline-block;
+      height: 0.1em;
+      position: relative;
+      vertical-align: middle;
+      width: 22%;
+      margin: 0 4rem;
+
+      @include respond (bp-medium) {
+        margin: 0 4%;
+        width: 10%;
+      }
+
+
+      @include respond (bp-smallest) {
+        width: 0;
+      }
+
+      
+    }
+  }
+  
+
+}

@@ -1,14 +1,17 @@
-![Markdown Logo](https://res.cloudinary.com/dwgjvssdt/image/upload/v1554061969/screenshot.jpg)
+![Markdown Logo](/githubphotos/landing-heading.jpg)
 
 <!-- Tables -->
 |      |         |
 | -------- | -------------- |
-| ![Markdown Logo](https://res.cloudinary.com/dwgjvssdt/image/upload/v1554061968/ewrrewr.jpg)| ![Markdown Logo](https://res.cloudinary.com/dwgjvssdt/image/upload/v1554061968/screenshot-2.jpg)|
+| ![Markdown Logo](/githubphotos/featured-articles.jpg)| ![Markdown Logo](/githubphotos/latest-news.jpg)|
+| ![Markdown Logo](/githubphotos/mostliked.jpg)| ![Markdown Logo](/githubphotos/sneaker-detail-yeezy.jpg)|
+| [![](/githubphotos/login.jpg)](https://www.youtube.com/watch?v=Yop42FM6XA8)| ![Markdown Logo](/githubphotos/articles.jpg)|
+
 
 
 # SocialSole
 
-This is a very simple fictional social media site, built with the MERN stack based around the love of sneakers. It has a mock news section with articles, about this topic. And users can register post,and share their sneaker collection. 
+This is a very simple fictional social media site, built with the MERN stack based around the love of sneakers. It has a mock news section with articles, about this topic. And users can register post, and share their sneaker collection, in the community section of this site. 
 
 
 ## Getting Started

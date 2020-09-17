@@ -18,54 +18,8 @@ const validateLoginInput = require('../../validation/login');
 // Load user model
 const User = require('../../models/User')
 
-// Set The Storage Engine
-const storage = multer.diskStorage({
-  // destination: './public/uploads/',
-  filename: function(req, file, cb){
-    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  }
-});
-
-
-// Init Upload
-const upload = multer({
-  storage: storage,
-  limits:{
-    fileSize: 100000000
-  },
-  fileFilter: function(req, file, cb){
-    checkFileType(file, cb);
-  }
-});
-
-
-
-// Check File Type
-function checkFileType(file, cb){
-
-  // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
-
-   // Check ext
-   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-
-   // Check mime
-  const mimetype = filetypes.test(file.mimetype);
-
-  if(mimetype && extname){
-    return cb(null,true);
-  } else {
-    cb('Error: Images Only!');
-  }
-
-}
-
-const cloudinary = require('cloudinary');
-cloudinary.config({ 
-  cloud_name: 'dwgjvssdt', 
-  api_key: '934974923534473', 
-  api_secret: '8e_BIcnVqeaqw_llNYe_uKHIkiw'
-});
+// Load Profile Model
+const Profile = require("../../models/Profile");
 
 
 
@@ -79,7 +33,7 @@ router.get('/test', (req, res) => res.json({msg:"users works"}))
 // @route GET api/users/register
 // @desc Rgister route
 // @acces public
-router.post('/register', upload.single('image'), (req, res) => {
+router.post('/register', (req, res) => {
 
 
   const { errors, isValid } = validateRegisterInput(req.body);
@@ -121,6 +75,8 @@ router.post('/register', upload.single('image'), (req, res) => {
 // @route   GET api/users/login
 // @desc    Login User / Returning JWT Token
 // @access  Public
+
+
 router.post('/login', (req, res) => {
 
   const { errors, isValid } = validateLoginInput(req.body);
@@ -149,7 +105,7 @@ router.post('/login', (req, res) => {
         //User Matched
 
         // Create JWT Payload
-        const payload = { id: user.id, name: user.name, avatar: user.avatar }; 
+        const payload = { id: user.id, name: user.name, avatar: user.avatar, role: user.role }; 
 
         //Sign Token
         jwt.sign(
@@ -173,7 +129,12 @@ router.post('/login', (req, res) => {
   });
 
 
-});
+ });
+
+
+
+
+
 
 // @route   GET api/users/current
 // @desc    Return current user

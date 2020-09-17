@@ -14,7 +14,7 @@ import {
 
 
 // Add Sneaker
-export const addSneaker = sneakerData => dispatch => {
+export const addSneaker = (sneakerData,history) => dispatch => {
   dispatch(clearErrors());
 
   axios    
@@ -23,7 +23,9 @@ export const addSneaker = sneakerData => dispatch => {
     dispatch({
       type: ADD_SNEAKER,
       payload: res.data
-    })
+    },
+      history.push(`/sneaker/${res.data._id}`)
+    )
   )
   .catch(err =>
     dispatch({
@@ -52,7 +54,74 @@ export const getSneakers = (load = true) => (dispatch) => {
 		);
 };
 
+// Get Top Sneakers By Most Likes
+export const getLikedSneakers = (load = true) => (dispatch) => {
+	if (load) dispatch(setSneakerLoading);
+	axios
+		.get('/api/sneakers/mostliked')
+		.then((res) =>
+			dispatch({
+				type: GET_SNEAKERS,
+				payload: res.data
+			})
+		)
+		.catch((err) =>
+			dispatch({
+				type: GET_SNEAKERS,
+				payload: null
+			})
+		);
+};
 
+/*
+  Get sneakers that are related to currently loaded sneaker
+  the parameter that this takes is a csv list of tags
+  and on the backend it will search for sneakers that has
+  any of the matching tags
+*/
+export const getRelatedSneakers = (tags) => dispatch => {
+  // dispatch(setPostLoading());
+  axios    
+  .get(`/api/sneakers/tags/${tags}`)
+  .then(res =>
+    dispatch({
+      type: GET_SNEAKERS,
+      payload: res.data
+    })
+  )
+  .catch(err =>
+    dispatch({
+      type: GET_SNEAKERS,
+      payload: null
+    })
+  );
+}
+
+// Edit a sneaker
+export const editSneaker = (id, sneakerData, history) => dispatch => {
+  dispatch(setSneakerLoading());
+  axios    
+  .post(`/api/sneakers/${id}`, sneakerData)
+  .then(res =>
+    dispatch({
+      type: ADD_SNEAKER,
+      payload: res.data
+    },
+    history.push(`/sneaker/${id}`)
+    )
+  )
+  .catch(err =>
+    dispatch({
+      type: GET_SNEAKER,
+      payload: null
+    })
+  );
+}
+
+
+/*
+  Gets a list of sneakers that's been posted by a specific user
+*/
 export const getSneakersByUser = (id) => dispatch => {
 
   axios
@@ -72,28 +141,8 @@ export const getSneakersByUser = (id) => dispatch => {
 
 }
 
-// Get Sneakers
-
-// export const getSneakers = () => dispatch => {
-//   dispatch(setSneakerLoading());
-//   axios    
-//   .get('/api/sneakers')
-//   .then(res =>
-//     dispatch({
-//       type: GET_SNEAKERS,
-//       payload: res.data
-//     })
-//   )
-//   .catch(err =>
-//     dispatch({
-//       type: GET_SNEAKERS,
-//       payload: null
-//     })
-//   );
-// }
 
 // Get Sneakers
-
 export const getSneaker = (id) => dispatch => {
   dispatch(setSneakerLoading());
   axios    
@@ -102,7 +151,9 @@ export const getSneaker = (id) => dispatch => {
     dispatch({
       type: GET_SNEAKER,
       payload: res.data
-    })
+      },
+      console.log(res.data)
+    )
   )
   .catch(err =>
     dispatch({
@@ -179,7 +230,9 @@ export const addComment = (sneakerId, commentData) => dispatch => {
     dispatch({
       type: GET_SNEAKER,
       payload: res.data
-    })
+    },
+    console.log(res.data)
+    )
   )
   .catch(err =>
     dispatch({

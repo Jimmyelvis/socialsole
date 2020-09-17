@@ -1,0 +1,81 @@
+
+/*
+//////////////////////////////      LOGIN PAGE            /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+*/
+
+.login {
+  padding: 75px;
+  width: 50%;
+}
+
+.login h1 {
+  text-align: center;
+  font-size: 300%;
+}
+
+.login p {
+  text-align: center;
+  font-size: 120%;
+  margin-top: 20px;
+}
+
+.login .form-control,
+.register .form-control-lg {
+  margin-top: 30px;
+}
+
+@media(max-width:1400px){
+
+  .login {
+    padding: 5%;
+    width: 60%;
+  }
+
+}
+
+
+@media(max-width:990px){
+
+  .login {
+    padding: 5%;
+    width: 70%;
+  }
+
+  .login h1 {
+    text-align: center;
+    font-size: 250%;
+  }
+
+  .login p {
+    text-align: center;
+    font-size: 100%;
+    margin-top: 20px;
+  }
+
+}
+
+@media(max-width:550px){
+
+  .login {
+    padding: 5%;
+    width: 80%;
+  }
+
+  .login h1 {
+    text-align: center;
+    font-size: 230%;
+  }
+
+  .login p {
+    text-align: center;
+    font-size: 90%;
+    margin-top: 10px;
+  }
+
+  .login .form-control-lg{
+    font-size: 0.95rem;
+  }
+
+}

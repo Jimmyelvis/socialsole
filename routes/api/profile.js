@@ -25,54 +25,6 @@ router.get("/test", (req, res) => res.json({
 
 
 
-// Set The Storage Engine
-const storage = multer.diskStorage({
-  // destination: './public/uploads/profile',
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  }
-});
-
-
-// Init Upload
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 100000000
-  },
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  }
-});
-
-// Check File Type
-function checkFileType(file, cb) {
-
-  // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
-
-  // Check ext
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-
-  // Check mime
-  const mimetype = filetypes.test(file.mimetype);
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  } else {
-    cb('Error: Images Only!');
-  }
-
-}
-
-const cloudinary = require('cloudinary');
-cloudinary.config({
-  cloud_name: 'dwgjvssdt',
-  api_key: '934974923534473',
-  api_secret: '8e_BIcnVqeaqw_llNYe_uKHIkiw'
-});
-
-
 // @route   GET api/profile
 // @desc    Get current users profile
 // @access  Private
@@ -121,8 +73,25 @@ router.get('/all', (req, res) => {
       profile: 'There are no profiles'
     }));
 
-
 });
+
+// @route   GET api/profile/newestmembers/
+// @desc    Get the four new members who created a profile
+// @access  Public
+
+router.get("/newestmembers", (req, res) => {
+
+  Profile.find()
+  .populate('user', ['name', 'avatar'])
+  .sort({ date: -1 })
+  .then(profiles => profiles.slice(0,4))
+  .then(profiles => res.json(profiles))
+  .catch(err => res.status(404).json({
+    profile: 'There are no profiles'
+  }));
+
+ 
+})
 
 
 // @route   GET api/profile/handle/:handle
@@ -178,97 +147,9 @@ router.get('/user/:user_id', (req, res) => {
 // @desc    Create or edit user profile
 // @access  Private
 
-// router.post(
-//   "/",
-//   passport.authenticate("jwt", {
-//     session: false
-//   }),
-//   upload.single('profilebackground'),
-//   (req, res) => {
-
-//     const {
-//       errors,
-//       isValid
-//     } = validateProfileInput(req.body);
-
-//     // Check Validation
-//     if (!isValid) {
-//       // Return any errors with 400 status
-//       return res.status(400).json(errors);
-//     }
-
-//     // console.log(req.file.filename);
-
-//     cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
-
-//       console.log(req.file.path);
-      
-
-//       if(err) {
-//         req.flash('error', err.message);
-//       }
-
-//       // add cloudinary url for the image 
-//       req.file.path = result.secure_url;
-
-
-//           // Get fields
-//           const profileFields = {};
-//           profileFields.user = req.user.id;
-//           if (req.body.handle) profileFields.handle = req.body.handle;
-//           if (req.body.location) profileFields.location = req.body.location;
-//           if (req.body.bio) profileFields.bio = req.body.bio;
-//           if (req.body.favsneaker) profileFields.favsneaker = req.body.favsneaker;
-//           if (req.file.path) profileFields.profilephoto = req.file.path;
-
-
-//           // Social
-//           profileFields.social = {};
-//           if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
-//           if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
-//           if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
-//           if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
-
-//           Profile.findOne({
-//             user: req.user.id
-//           }).then(profile => {
-//             if (profile) {
-//               // Update
-//               Profile.findOneAndUpdate({
-//                 user: req.user.id
-//               }, {
-//                 $set: profileFields
-//               }, {
-//                 new: true
-//               }).then(profile => res.json(profile));
-//             } else {
-//               // Create
-
-//               // Check if handle exists
-//               Profile.findOne({
-//                 handle: profileFields.handle
-//               }).then(profile => {
-//                 if (profile) {
-//                   errors.handle = "That handle already exists";
-//                   res.status(400).json(errors);
-//                 }
-
-//                 // Save Profile
-//                 new Profile(profileFields).save().then(profile => res.json(profile));
-//               });
-//             }
-//           });
-
-//     });
-//   }
-// );
-
-
-///////TEST VERSION W/O UPLOAD///////////////////////////////
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
-  upload.single('profilebackground'),
   (req, res) => {
 
     const { errors, isValid } = validateProfileInput(req.body);
@@ -279,8 +160,6 @@ router.post(
         return res.status(400).json(errors);
       }
 
-      // console.log(req.file.filename);
-      
 
     // Get fields
     const profileFields = {};
@@ -290,6 +169,7 @@ router.post(
     if (req.body.bio) profileFields.bio = req.body.bio;
     if (req.body.favsneaker) profileFields.favsneaker = req.body.favsneaker;
     if (req.body.profilephoto) profileFields.profilephoto = req.body.profilephoto;
+    if (req.body.avatar) profileFields.avatar = req.body.avatar;
 
 
     // Social
@@ -302,39 +182,76 @@ router.post(
 
 
     Profile.findOne({ user: req.user.id }).then(profile => {
+
+      /* 
+        Look for a profile  for the current user in the 
+        req.body { user: req.user.id }. If one is found 
+        update that profile with the req.body info from above
+      */
       if (profile) {
 
         // Update Profile
-
         Profile.findOne(
           { handle: profileFields.handle }
         ).then(profileByHandle => {
           
-          //If handle is a duplicate then send error
+          /* 
+            Using the { handle: profileFields.handle } check to see 
+            if there's a handle in the collection that matches the
+            handle from the req.body. If there is a match THEN check
+            and make sure that the handle.id in the collection,
+            matches the handle.id from the req.body. If there's a
+            match good, if NOT then that mean the user is trying
+            to change their handle to one that's is already taken by
+            someone else, so we must throw an error, and return.
+            
+            If handle is a duplicate then send error
+          */
 						if ( profileByHandle && (profileByHandle.id !== profile.id)) {
 							errors.handle = "That handle already exists.";
 							return res.status(400).json(errors);
             }
             
-            //Update profile
+            /* 
+              Update profile. $set: profileFields, simply sets the 
+              profile fields in the req.body above, to the matching
+              fields in the collection. 
+            */
 						Profile.findOneAndUpdate(
 							{ user: req.user.id },
 							{ $set: profileFields },
 							{ new: true }
 						).then(profile => res.json(profile))
         });
-      } else {
+      } 
+      else {
 
-        // Create Profile
+         /* 
+            If however a profile is NOT found for that particular user 
+            in the req.body THEN that means that we have to create one
+            which is done below
 
-        // Check if handle exists
+            Create Profile
+          */
+
+        /* 
+          Since we're creating NOT updating the profile we need to
+          make sure that an existing handle in the collection doesn't 
+          match the one that's coming in from the req.body aka 
+          no duplicate handles.
+
+          -- Check if handle already exists.
+        */
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = "That handle already exists";
             res.status(400).json(errors);
           }
 
-          // Save Profile
+          /*
+            Create then Save Profile, then send back the profile in 
+            JSON format back to the front end.
+          */
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
@@ -343,148 +260,6 @@ router.post(
 );
 
 
-// @route   POST api/profile/experience
-// @desc    Add experience to profile
-// @access  Private
-router.post(
-
-  '/experience',
-  passport.authenticate('jwt', {
-    session: false
-  }),
-  (req, res) => {
-
-    const {
-      errors,
-      isValid
-    } = validateExperienceInput(req.body);
-
-    // Check Validation
-    if (!isValid) {
-      // Return any errors with 400 status
-      return res.status(400).json(errors);
-    }
-
-    Profile.findOne({
-      user: req.user.id
-    }).then(profile => {
-
-      const newExp = {
-        title: req.body.title,
-        company: req.body.company,
-        location: req.body.location,
-        from: req.body.from,
-        to: req.body.to,
-        current: req.body.current,
-        description: req.body.description
-      };
-
-      // Add to exp array
-      profile.experience.unshift(newExp);
-
-      profile.save().then(profile => res.json(profile));
-
-    })
-  }
-)
-
-
-// @route   POST api/profile/education
-// @desc    Add education to profile
-// @access  Private
-router.post(
-  '/education',
-  passport.authenticate('jwt', {
-    session: false
-  }),
-  (req, res) => {
-    const {
-      errors,
-      isValid
-    } = validateEducationInput(req.body);
-
-    // Check Validation
-    if (!isValid) {
-      // Return any errors with 400 status
-      return res.status(400).json(errors);
-    }
-
-    Profile.findOne({
-      user: req.user.id
-    }).then(profile => {
-      const newEdu = {
-        school: req.body.school,
-        degree: req.body.degree,
-        fieldofstudy: req.body.fieldofstudy,
-        from: req.body.from,
-        to: req.body.to,
-        current: req.body.current,
-        description: req.body.description
-      };
-
-      // Add to exp array
-      profile.education.unshift(newEdu);
-
-      profile.save().then(profile => res.json(profile));
-    });
-  }
-);
-
-// @route   DELETE api/profile/experience/:exp_id
-// @desc    Delete experience from profile
-// @access  Private
-router.delete(
-  '/experience/:exp_id',
-  passport.authenticate('jwt', {
-    session: false
-  }),
-  (req, res) => {
-    Profile.findOne({
-        user: req.user.id
-      })
-      .then(profile => {
-        // Get remove index
-        const removeIndex = profile.experience
-          .map(item => item.id)
-          .indexOf(req.params.exp_id);
-
-        // Splice out of array
-        profile.experience.splice(removeIndex, 1);
-
-        // Save
-        profile.save().then(profile => res.json(profile));
-      })
-      .catch(err => res.status(404).json(err));
-  }
-);
-
-// @route   DELETE api/profile/education/:edu_id
-// @desc    Delete education from profile
-// @access  Private
-router.delete(
-  '/education/:edu_id',
-  passport.authenticate('jwt', {
-    session: false
-  }),
-  (req, res) => {
-    Profile.findOne({
-        user: req.user.id
-      })
-      .then(profile => {
-        // Get remove index
-        const removeIndex = profile.education
-          .map(item => item.id)
-          .indexOf(req.params.edu_id);
-
-        // Splice out of array
-        profile.education.splice(removeIndex, 1);
-
-        // Save
-        profile.save().then(profile => res.json(profile));
-      })
-      .catch(err => res.status(404).json(err));
-  }
-);
 
 // / @route   DELETE api/profile
 // @desc    Delete user and profile

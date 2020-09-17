@@ -8,6 +8,10 @@ const SneakerSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
+  profile: {
+    type: Schema.Types.ObjectId,
+    ref: 'profile'
+  },
   model: {
     type: String
   },
@@ -35,6 +39,10 @@ const SneakerSchema = new Schema({
   subimage_4:{
     type: String
   },
+  tags: {
+    type: [String],
+    required: true
+  },
   likes: [
     {
       user: {
@@ -43,7 +51,7 @@ const SneakerSchema = new Schema({
       },
       avatar: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'profile'
       },
       name: {
         type: Schema.Types.ObjectId,
@@ -65,6 +73,9 @@ const SneakerSchema = new Schema({
         type: String
       },
       avatar: {
+        type: String
+      },
+      handle:{
         type: String
       },
       date: {

@@ -1,0 +1,71 @@
+.newestprofiles {
+
+  .profiles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .card-ver-overlay-notrans{
+      flex: 0 0 49%;
+      margin-bottom: 3rem;
+      padding-top: 28%;
+      height: 50rem;
+
+      @include respond(bp-largest) {
+        height: 45rem;
+        padding-top: 22rem;
+      }
+
+      @include respond(bp-large) {
+        height: 40rem;
+        padding-top: 19rem;
+      }
+
+      @include respond(bp-medium) {
+        height: 50rem;
+        padding-top: 29rem;
+        flex: 0 0 57rem;
+        margin: 2rem auto;
+      }
+
+      @include respond(bp-small) {
+        height: 43rem;
+        padding-top: 23rem;
+        flex: 0 0 48rem;
+      }
+
+      @include respond(bp-smallest) {
+        height: 37rem;
+        padding-top: 16rem;
+        flex: 0 0 39rem;
+      }
+
+      @include respond(bp-tiny) {
+        height: 35rem;
+        padding-top: 13rem;
+        flex: 0 0 36rem;
+      }
+
+      .card-content {
+
+        .heading-3 {
+          font-size: 4rem;
+          color: $ltpowderblue;
+          margin-bottom: 1rem;
+        }
+
+        .heading-4 {
+          font-size: 2.7rem;
+          margin-bottom: 1rem;
+          color: $ltpowderblue;
+        }
+        
+        .favsneaker {
+          color: $white;
+          font-family: $font-primary;
+          font-size: 2.3rem;
+        }
+      }
+    }
+  }
+}

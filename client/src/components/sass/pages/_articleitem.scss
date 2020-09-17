@@ -1,0 +1,121 @@
+.articleitem {
+  // margin-bottom: 30rem;
+
+  .fullimageheader {
+
+    @include respond(bp-medium) {
+      height: 45rem;
+    }
+
+    @include respond(bp-small) {
+      height: 40rem;
+    }
+
+    img {
+      object-fit: cover;
+      object-position: center;
+      height: 100%;
+    }
+  }
+
+  .container {
+    margin: -20rem auto;
+    padding: 6rem 4rem;
+    position: relative;
+
+    @include respond(bp-smallest) {
+      padding: 6rem 2rem;
+    }
+  }
+
+  .authorheader {
+    height: 31rem;
+  }
+
+  .articleedit {
+    position: absolute;
+    bottom: 2rem;
+    right: 4%;
+
+    .editbtn {
+      width: 6.1rem;
+      display: flex;
+      box-shadow: 3px 3px 2px 0px rgba(63,140,223,0.13);
+      border-radius: 50%;
+      padding: 1.4rem;
+    }
+  }
+
+  .articledetails {
+    margin-top: 8rem;
+
+    .articleImg {
+      height: 37rem;
+      position: relative;
+      display: flex;
+
+      @include respond(bp-medium) {
+        height: 30rem;
+      }
+
+      @include respond(bp-small) {
+        height: 27rem;
+      }
+
+      .heading-3 {
+        position: relative;
+        z-index: 20;
+        margin: auto;
+        color: #fff;
+        font-size: 5rem;
+        text-align: center;
+
+        @include respond(bp-medium) {
+          font-size: 4.5rem;
+        }
+
+        @include respond(bp-small) {
+          font-size: 3.8rem;
+        }
+
+        @include respond(bp-smallest) {
+          font-size: 3.4rem;
+        }
+      }
+
+     .overlay {
+        position: absolute;
+        background-color: rgba(36, 36, 94, 0.51);
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        z-index: 10;
+      }
+      
+      img {
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        z-index: 5;
+      }
+    }
+      
+  }
+
+  .articleText {
+    padding: 6rem 12rem;
+
+    @include respond(bp-large) {
+      padding: 6rem 9rem;
+    }
+
+    @include respond(bp-small) {
+      padding: 6rem 5rem;
+    }
+
+    @include respond(bp-tiny) {
+      padding: 6rem 4rem;
+    }
+  }
+
+}

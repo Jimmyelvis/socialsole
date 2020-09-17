@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import Navbar from "../../layout/Navbar";
 
 export class news extends Component {
@@ -60,7 +59,7 @@ export class news extends Component {
           </div>
 
           <div className="row">
-            <div className="article contentBody">
+            <div className="article contentbody">
               <div className="articleImg">
                 <img
                   src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569781801/nike-pg3-nasa-1.jpg"

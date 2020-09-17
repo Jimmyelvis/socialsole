@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
 import Navbar from '../../components/layout/Navbar';
+import { setAlert } from '../../actions/alert';
 
 
 class Register extends Component {
@@ -41,15 +42,26 @@ class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const newUser = {
-      name: this.state.name,
-      email: this.state.email,
-      avatar: this.state.avatar,
-      password: this.state.password,
-      password2: this.state.password2
-    };
+    if (this.state.password !== this.state.password2) {
+      console.log('====================================');
+      console.log('nope');
+      console.log('====================================');
+      this.props.setAlert('Passwords do not match', 'danger');
+    } else {
+      console.log('====================================');
+      console.log('yeah man');
+      console.log('====================================');
+    }
 
-    this.props.registerUser(newUser, this.props.history);
+    // const newUser = {
+    //   name: this.state.name,
+    //   email: this.state.email,
+    //   avatar: this.state.avatar,
+    //   password: this.state.password,
+    //   password2: this.state.password2
+    // };
+
+    // this.props.registerUser(newUser, this.props.history);
   }
 
   /*
@@ -121,7 +133,7 @@ class Register extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="register contentBody">
+      <div className="register contentbody">
       <Navbar />
 
         <div className="container">
@@ -182,7 +194,7 @@ class Register extends Component {
                     </div>
 
                     <div className="avatarHeaderPreview col-md-8">
-                    <img src={this.state.avatar} />
+                    <img src={this.state.avatar} alt=""/>
 
                     </div>
                   </div>
@@ -211,5 +223,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
+  { registerUser, setAlert }
 )(withRouter(Register));

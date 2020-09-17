@@ -1,0 +1,303 @@
+
+/*
+/////////////////////////////// LANDINGPAGE NAVBAR ////////////////////////
+*/
+
+.top-nav-collapse {
+  background-color: rgba(0, 128, 217, 0.85);
+}
+
+.LandingNavig {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  opacity: 1;
+  z-index: 2000;
+  width: 100%;
+  transition: background 0.5s ease-in-out;
+
+  
+  .open-slide {
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 5%;
+    display: flex;
+    height: 60px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+
+  .hambuger-icon {
+    width: 50%;
+  }
+
+  .authGuestlinks {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+    align-items: center;
+    height: 100%;
+
+    @include respond (bp-medium) {
+      display: none;
+    }
+
+    li {
+      list-style: none;
+      padding: 0 1rem;
+      color: #fff;
+      cursor: pointer;
+      font-size: 2.2rem;
+      font-weight: bold;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      font-family: $font-display;
+
+      a {
+        color: #fff;
+        transition: all 300ms linear;
+        display: block;
+        font-size: 2.2rem;
+        font-weight: bold;
+        letter-spacing: 1.7px;
+        text-transform: uppercase;
+
+        &:hover {
+          color: #82b1e3;
+          text-decoration: none;
+        }
+      }
+    }
+
+  }
+
+  .side-nav {
+    background: rgba(6, 94, 187, 1);
+    background: -moz-linear-gradient(
+      top,
+      rgba(6, 94, 187, 1) 0%,
+      rgba(45, 173, 227, 1) 100%
+    );
+    background: -webkit-gradient(
+      left top,
+      left bottom,
+      color-stop(0%, rgba(6, 94, 187, 1)),
+      color-stop(100%, rgba(45, 173, 227, 1))
+    );
+    background: -webkit-linear-gradient(
+      top,
+      rgba(6, 94, 187, 1) 0%,
+      rgba(45, 173, 227, 1) 100%
+    );
+    background: -o-linear-gradient(
+      top,
+      rgba(6, 94, 187, 1) 0%,
+      rgba(45, 173, 227, 1) 100%
+    );
+    background: -ms-linear-gradient(
+      top,
+      rgba(6, 94, 187, 1) 0%,
+      rgba(45, 173, 227, 1) 100%
+    );
+    background: linear-gradient(
+      to bottom,
+      rgba(6, 94, 187, 1) 0%,
+      rgba(45, 173, 227, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#065ebb', endColorstr='#2dade3', GradientType=0);
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 1s;
+
+    a {
+      padding: 10px 10px 10px 30px;
+      text-decoration: none;
+      font-size: 22px;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+
+      &:hover {
+        color: rgb(54, 136, 224);
+        background-color: #1e9aea;
+      }
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 0;
+      right: 22px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    li {
+      list-style: none;
+    }
+
+  }
+
+
+
+}
+
+
+
+
+
+/*
+/////////////////////////////// NAVBAR ////////////////////////
+*/
+
+.navig {
+  background: linear-gradient(to bottom, #AADDFF 0%, #329ee6 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  opacity: 1;
+  z-index: 2000;
+  width: 100%;
+  transition: background 0.5s ease-in-out;
+
+  .open-slide {
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 5%;
+    display: flex;
+    height: 60px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+
+  .hambuger-icon {
+    width: 50%;
+  }
+
+  .authGuestlinks {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+    align-items: center;
+    height: 100%;
+
+    @include respond (bp-large) {
+      display: none;
+    }
+
+    li {
+      list-style: none;
+      padding: 0 1rem;
+      color: #fff;
+      cursor: pointer;
+      font-size: 2.2rem;
+      font-weight: bold;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      font-family: $font-display;
+
+
+      a {
+        color: #fff;
+        transition: all 300ms linear;
+        display: block;
+        font-size: 2.2rem;
+        font-weight: bold;
+        letter-spacing: 1.7px;
+        text-transform: uppercase;
+
+        &:hover {
+          color: #82b1e3;
+          text-decoration: none;
+        }
+      }
+    }
+
+  }
+
+  .side-nav {
+    background: rgba(6, 94, 187, 1);
+    background: -moz-linear-gradient(
+      top,
+      rgba(6, 94, 187, 1) 0%,
+      rgba(45, 173, 227, 1) 100%
+    );
+    background: -webkit-gradient(
+      left top,
+      left bottom,
+      color-stop(0%, rgba(6, 94, 187, 1)),
+      color-stop(100%, rgba(45, 173, 227, 1))
+    );
+    background: -webkit-linear-gradient(
+      top,
+      rgba(6, 94, 187, 1) 0%,
+      rgba(45, 173, 227, 1) 100%
+    );
+    background: -o-linear-gradient(
+      top,
+      rgba(6, 94, 187, 1) 0%,
+      rgba(45, 173, 227, 1) 100%
+    );
+    background: -ms-linear-gradient(
+      top,
+      rgba(6, 94, 187, 1) 0%,
+      rgba(45, 173, 227, 1) 100%
+    );
+    background: linear-gradient(
+      to bottom,
+      rgba(6, 94, 187, 1) 0%,
+      rgba(45, 173, 227, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#065ebb', endColorstr='#2dade3', GradientType=0);
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 1s;
+
+    a {
+      padding: 10px 10px 10px 30px;
+      text-decoration: none;
+      font-size: 22px;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+
+      &:hover {
+        color: rgb(54, 136, 224);
+        background-color: #1e9aea;
+      }
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 0;
+      right: 22px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    li {
+      list-style: none;
+    }
+
+  }
+
+
+}
+

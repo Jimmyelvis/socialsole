@@ -59,7 +59,7 @@ export class news extends Component {
           </div>
 
           <div className="row">
-            <div className="article contentBody">
+            <div className="article contentbody">
               <div className="articleImg">
                 <img
                   src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2018%2F12%2Fnikes-2018-air-jordan-11-concord-apparently-largest-sneaker-release-in-history-000.jpg?fit=max&cbr=1&q=90&w=750&h=500"

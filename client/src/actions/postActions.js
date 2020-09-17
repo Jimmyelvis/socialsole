@@ -14,7 +14,7 @@ import {
 
 
 // Add Post
-export const addPost = postData => dispatch => {
+export const addPost = (postData, history) => dispatch => {
   dispatch(clearErrors());
 
   axios    
@@ -24,7 +24,7 @@ export const addPost = postData => dispatch => {
       type: ADD_POST,
       payload: res.data
     },
-    console.log(res.data)
+    history.push(`/post/${res.data._id}`)
   )
   )
   .catch(err =>
@@ -54,28 +54,33 @@ export const getPosts = (load = true) => (dispatch) => {
 		);
 };
 
+/*
+  Get posts that are related to currently loaded post
+  the parameter that this takes is a csv list of tags
+  and on the backend it will search for posts that has
+  any of the matching tags
+*/
+
+export const getRelatedPosts = (tags) => dispatch => {
+  // dispatch(setPostLoading());
+  axios    
+  .get(`/api/posts/tags/${tags}`)
+  .then(res =>
+    dispatch({
+      type: GET_POSTS,
+      payload: res.data
+    })
+  )
+  .catch(err =>
+    dispatch({
+      type: GET_POST,
+      payload: null
+    })
+  );
+}
+
+
 // Get Posts
-
-// export const getPosts = () => dispatch => {
-//   dispatch(setPostLoading());
-//   axios    
-//   .get('/api/posts')
-//   .then(res =>
-//     dispatch({
-//       type: GET_POSTS,
-//       payload: res.data
-//     })
-//   )
-//   .catch(err =>
-//     dispatch({
-//       type: GET_POSTS,
-//       payload: null
-//     })
-//   );
-// }
-
-// Get Posts
-
 export const getPost = (id) => dispatch => {
   dispatch(setPostLoading());
   axios    
@@ -94,6 +99,31 @@ export const getPost = (id) => dispatch => {
   );
 }
 
+// Edit Posts
+export const editPost = (id, postData, history) => dispatch => {
+  dispatch(setPostLoading());
+  axios    
+  .post(`/api/posts/${id}`, postData)
+  .then(res =>
+    dispatch({
+      type: ADD_POST,
+      payload: res.data
+    },
+    history.push(`/post/${id}`)
+    )
+  )
+  .catch(err =>
+    dispatch({
+      type: GET_POST,
+      payload: null
+    })
+  );
+}
+
+/*
+  Get a list of posts that has been posted a specific person
+  using the user id 
+*/
 export const getPostsByUser = (id) => dispatch => {
   axios
     .get(`/api/posts/user/${id}`)
@@ -114,7 +144,6 @@ export const getPostsByUser = (id) => dispatch => {
 
 // Delete Post
 export const deletePost = id => dispatch => {
-
   axios    
   .delete(`/api/posts/${id}`)
   .then(res =>
@@ -132,21 +161,8 @@ export const deletePost = id => dispatch => {
 
 }
 
-// Add Like
-// export const addLike = id => dispatch => {
 
-//   axios    
-//   .post(`/api/posts/like/${id}`)
-//   .then(res => dispatch(getPosts()))
-//   .catch(err =>
-//     dispatch({
-//       type: GET_ERRORS,
-//       payload: err.response.data
-//     })
-//   );
-// }
-
-//Add Like Version 2
+// Like Version 
 export const addLike = id => dispatch => {
   axios
     .post(`/api/posts/like/${id}`)
@@ -165,20 +181,8 @@ export const addLike = id => dispatch => {
 };
 
 
-// Remove Like
-// export const removeLike = id => dispatch => {
-//   axios
-//     .post(`/api/posts/unlike/${id}`)
-//     .then(res => dispatch(getPosts()))
-//     .catch(err =>
-//       dispatch({
-//         type: GET_ERRORS,
-//         payload: err.response.data
-//       })
-//     );
-// };
 
-//Remove Like Version 2
+// Remove Like 
 export const removeLike = id => dispatch => {
   axios
     .post(`/api/posts/unlike/${id}`)

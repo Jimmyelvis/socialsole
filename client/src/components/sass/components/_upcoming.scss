@@ -1,0 +1,108 @@
+
+.upcoming {
+  margin-top: 70px;
+}
+
+.upcoming h3 {
+  text-align: center;
+}
+
+.upcoming-panel {
+  width: 85%;
+  display: block;
+  background-color: #fff;
+  margin: 60px auto;
+  height: 380px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 3px 4px rgb(228, 229, 230);
+  -moz-box-shadow: 0 3px 4px rgb(228, 229, 230);
+  box-shadow: 0 3px 4px rgb(228, 229, 230);
+}
+
+.upcoming-panel .img-side {
+  overflow: hidden;
+  padding: 0;
+}
+
+.upcoming-panel .row {
+  height: 100%;
+}
+
+.upcoming-panel img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.upcoming-panel .text-side {
+  padding: 25px 5px;
+}
+
+.upcoming-panel .text-side h4 {
+  text-align: center;
+  font-size: 120%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.upcoming-panel .text-side h5 {
+  text-align: center;
+  font-size: 90%;
+  margin-top: 20px;
+  color: #ff7c3b;
+}
+
+.upcoming-panel .text-side p {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.upcoming-panel .text-side .btn {
+  float: right;
+  position: absolute;
+  bottom: 35px;
+  right: 11%;
+}
+
+.btn-upcomingPanel {
+  color: #fff;
+  font-weight: bold;
+  background: rgba(24, 102, 186, 1);
+  background: -moz-linear-gradient(
+    top,
+    rgba(24, 102, 186, 1) 0%,
+    rgba(73, 155, 234, 1) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    left bottom,
+    color-stop(0%, rgba(24, 102, 186, 1)),
+    color-stop(100%, rgba(73, 155, 234, 1))
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(24, 102, 186, 1) 0%,
+    rgba(73, 155, 234, 1) 100%
+  );
+  background: -o-linear-gradient(
+    top,
+    rgba(24, 102, 186, 1) 0%,
+    rgba(73, 155, 234, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    top,
+    rgba(24, 102, 186, 1) 0%,
+    rgba(73, 155, 234, 1) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(24, 102, 186, 1) 0%,
+    rgba(73, 155, 234, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1866ba', endColorstr='#499bea', GradientType=0);
+  border: 0px solid transparent;
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.66);
+  -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.66);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.66);
+  font-size: 90%;
+}

@@ -1,0 +1,194 @@
+body.modalbg {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.modalbg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    background: rgba(0, 10, 45, 0.9);
+    transition: all 0.5s ease;
+    // z-index: 3000;
+
+    .loginbody {
+      position: relative;
+      min-height: 65rem;
+      width: 114rem;
+      display: flex;
+      align-items: stretch;
+
+      .bgimg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+
+        img {
+          object-fit: cover;
+          height: 100%;
+        }
+      }
+    
+
+      .icon-close{
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        padding: 0.5rem;
+        width: 3rem;
+        cursor: pointer;
+      }
+
+      .left {
+        flex: 0 0 50%;
+      }
+
+      .right {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 3000;
+        background-color: rgba(255,255,255,0.93);
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding-top: 5rem;
+
+        .nav {
+          width: 70%;
+          margin: 5rem auto;
+          justify-content: space-evenly;
+        }
+
+        .form-group {
+          margin-bottom: 1rem;
+          width: 80%;
+          margin: 2rem auto;
+        }
+
+        .btn-submit {
+          float: right;
+          margin-top: 6rem;
+          padding: 0.5rem 2rem;
+        }
+      }
+
+    }
+
+    .registarbody {
+      position: relative;
+      height: auto;
+      width: 120rem;
+      display: flex;
+      align-items: stretch;
+
+      .icon-close{
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        padding: 0.5rem;
+        width: 3rem;
+        cursor: pointer;
+        z-index: 100;
+      }
+
+
+      .bgimg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 40;
+
+        img {
+          object-fit: cover;
+          height: 100%;
+        }
+      }
+
+      .formbg {
+        background-color: rgba(255,255,255,0.93);
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 50;
+        width: 100%;
+      }
+
+      .content {
+        position: relative;
+        z-index: 100;
+        width: 50%;
+        margin: 56px auto;
+
+        .pageheading {
+          text-align: center;
+          margin-bottom: 6rem;
+
+          .heading-2 {
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+          }
+        }
+
+        .form-group {
+          margin-bottom: 2rem;
+        }
+
+        .uploadpreview {
+
+          .heading-4 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 3rem auto;
+          }
+
+          .avatarHeaderPreview {
+            box-shadow: inset 0px 0px 3px 2px rgba(42, 44, 45, 0.07);
+            background-color: #fff;
+            margin-bottom: 1rem;
+            max-width: 28rem;
+            overflow: hidden;
+
+            img {
+              object-fit: cover;
+              height: 100%;
+            }
+          }
+
+          .btn-lightblue {
+            padding: 0.6rem 2rem;
+            font-size: 1.7rem;
+          }
+        }
+
+        .btn-submit {
+          float: right;
+          padding: 0.6rem 1.8rem;
+          font-size: 1.7rem;
+        }
+
+      }
+    
+
+      .icon-close{
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        padding: 0.5rem;
+        width: 3rem;
+        cursor: pointer;
+      }
+    }
+
+    
+}
+

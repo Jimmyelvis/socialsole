@@ -24,6 +24,9 @@ const ProfileSchema = new Schema({
   profilephoto: {
     type: String
   },
+  avatar: {
+    type: String
+  },
   friends: [
     {
       name: {

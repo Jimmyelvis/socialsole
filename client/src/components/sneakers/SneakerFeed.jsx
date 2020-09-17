@@ -15,7 +15,6 @@ class SneakerFeed extends Component {
 
   updateSearch = e => {
     this.setState({ search: e.target.value });
-    console.log(this.state.search);
   };
 
 

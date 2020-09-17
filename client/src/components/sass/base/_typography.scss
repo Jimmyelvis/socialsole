@@ -1,0 +1,47 @@
+
+/* ////////////////////////////////FONT FACES ////////////////////////////// */
+
+
+
+a {
+  font-family: $font-links;
+  // font-weight: 700;
+  font-style: normal;
+  text-decoration: none;
+}
+
+%heading {
+  font-family: $font-display;
+  font-weight: 700;
+  font-style: normal;
+  color: $deepblue;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.heading-1 {
+  @extend %heading;
+  font-size: 4.5rem;
+}
+
+.heading-2 {
+  @extend %heading;
+  font-size: 4rem;
+}
+
+.heading-3 {
+  @extend %heading;
+  font-size: 3rem;
+}
+
+.heading-4 {
+  @extend %heading;
+  font-size: 1.9rem;
+}
+
+.heading-5 {
+  @extend %heading;
+  font-size: 1.6rem;
+}
+
+

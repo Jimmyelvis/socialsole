@@ -1,0 +1,9 @@
+.fullimageheader {
+  height: 60rem;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+    object-position: center;
+  }
+}

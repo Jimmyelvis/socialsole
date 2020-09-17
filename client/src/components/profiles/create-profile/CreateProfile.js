@@ -7,7 +7,10 @@ import TextFieldGroup from "../../common/TextFieldGroup";
 import TextAreaFieldGroup from "../../common/TextAreaFieldGroup";
 import InputGroup from "../../common/InputGroup";
 import { createProfile } from "../../../actions/profileActions";
-import Navbar from "../../../components/layout/Navbar";
+import Navbar from "../../../components/layout/CommNavbar";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { Widgetsetting } from "../../common/Cloudinary";
 
 
 class CreateProfile extends Component {
@@ -20,6 +23,7 @@ class CreateProfile extends Component {
       location: "",
       favsneaker: "",
       profilephoto: "",
+      avatar: "",
       bio: "",
       twitter: "",
       facebook: "",
@@ -28,11 +32,9 @@ class CreateProfile extends Component {
       errors: {}
     };
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const profileData = {
@@ -40,6 +42,7 @@ class CreateProfile extends Component {
       location: this.state.location,
       favsneaker: this.state.favsneaker,
       profilephoto: this.state.profilephoto,
+      avatar: this.state.avatar,
       bio: this.state.bio,
       twitter: this.state.twitter,
       facebook: this.state.facebook,
@@ -57,60 +60,22 @@ class CreateProfile extends Component {
     }
   }
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  fileselectedhandler = e => {
+  handleChange = (value) => {
+    this.setState({ bio: value })
+  }
+
+  profilephotohandler = e => {
     e.preventDefault();
 
-    let avatar;
-
-    const cloudname = "dwgjvssdt";
-     const uploadpresent = "ndilj3e8";
 
     window.cloudinary.openUploadWidget(
-      {
-        cloudName: cloudname,
-        uploadPreset: uploadpresent,
-        sources: [
-          "local"
-        ],
-        googleApiKey: "<image_search_google_api_key>",
-        showAdvancedOptions: true,
-        cropping: true,
-        multiple: false,
-        defaultSource: "local",
-        styles: {
-          palette: {
-            window: "#359DFF",
-            sourceBg: "#FFFFFF",
-            windowBorder: "#9572CC",
-            tabIcon: "#034398",
-            inactiveTabIcon: "#B2BED6",
-            menuIcons: "#034398",
-            link: "#8261B5",
-            action: "#5333FF",
-            inProgress: "#8261B5",
-            complete: "#048A53",
-            error: "#cc3333",
-            textDark: "#034398",
-            textLight: "#ffffff"
-          },
-          fonts: {
-            default: null,
-            "'Poppins', sans-serif": {
-              url: "https://fonts.googleapis.com/css?family=Poppins",
-              active: true
-            }
-          }
-        }
-      },
+      Widgetsetting(),
       (error, result) => {
         if (result && result.event === "success") {
-          avatar = result.info.url;
-          console.log(avatar);
-
           this.setState({
             profilephoto: result.info.url
           });
@@ -118,6 +83,8 @@ class CreateProfile extends Component {
       }
     );
   };
+
+
 
   render() {
     const { errors, displaySocialInputs } = this.state;
@@ -167,16 +134,19 @@ class CreateProfile extends Component {
     }
 
     return (
-      <div className="create-profile contentBody">
+      <React.Fragment>
         <Navbar />
 
-
         <div className="container">
-          <div className="row">
-            <div className="createForm col-md-8 m-auto">
-              <h1>Create Your Profile</h1>
-              <p>Let's get some information to make your profile stand out</p>
+
+            <div className="create-edit-body  contentbody">
+
+              <h2 className="heading-2">Create Your Profile</h2>
+
+              <h4 className="heading-4">Let's get some information to make your profile stand out</h4>
+
               <small className="d-block pb-3">* = required fields</small>
+
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* Profile Handle"
@@ -205,36 +175,36 @@ class CreateProfile extends Component {
                   info="(eg. Air Jordan 12 Taxi)"
                 />
 
-                <TextAreaFieldGroup
+                <ReactQuill
                   placeholder="Short Bio"
                   name="bio"
                   value={this.state.bio}
-                  onChange={this.onChange}
-                  error={errors.bio}
-                  info="Tell us a little about yourself"
+                  onChange={this.handleChange}
+                  error={errors.text}
                 />
 
-                <div className="profileHeader">
-                  <h5>Upload a photo for your profile</h5>
+          
+                <div className="uploadpreview">
+                  <h4 className="heading-4">Upload a photo for your profile</h4>
 
-                  <div className="row">
-                    <div className="upload-btn col-md-4">
-                      <button
-                        id="upload_widget"
-                        className="btn btn-sole"
-                        onClick={this.fileselectedhandler}
-                      >
-                        Upload files
-                      </button>
-                    </div>
-
-                    <div className="profileHeaderPreview col-md-8">
-                      <img src={this.state.profilephoto} />
-                    </div>
+                  <div className="profileHeaderPreview">
+                      <img src={this.state.profilephoto} alt="" />
                   </div>
+
+                  
+                  <div className="upload-btn">
+                    <button
+                      id="upload_widget"
+                      className="btn btn-lightblue"
+                      onClick={this.profilephotohandler}
+                    >
+                      Upload files
+                    </button>
+                  </div>
+                  
                 </div>
 
-                <div className="mb-3">
+                <div className="sociallinks">
                   <button
                     type="button"
                     onClick={() => {
@@ -242,7 +212,7 @@ class CreateProfile extends Component {
                         displaySocialInputs: !prevState.displaySocialInputs
                       }));
                     }}
-                    className="btn btn-sole"
+                    className="btn btn-lightblue btn-sociallinks"
                   >
                     Add Social Network Links
                   </button>
@@ -254,13 +224,14 @@ class CreateProfile extends Component {
                 <input
                   type="submit"
                   value="Submit"
-                  className="btn btn-sole btn-block mt-4"
+                  className="btn btn-lightblue btn-submit"
                 />
               </form>
             </div>
-          </div>
+          
         </div>
-      </div>
+      
+      </React.Fragment>
     );
   }
 }

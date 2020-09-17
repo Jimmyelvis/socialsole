@@ -11,56 +11,6 @@ const Sneaker = require("../../models/Sneaker");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 
-// Set The Storage Engine
-const storage = multer.diskStorage({
-  // destination: './public/uploads/sneakers',
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  }
-});
-
-
-// Init Upload
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 100000000
-  },
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  }
-});
-
-// Check File Type
-function checkFileType(file, cb) {
-
-  // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
-
-  // Check ext
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-
-  // Check mime
-  const mimetype = filetypes.test(file.mimetype);
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  } else {
-    cb('Error: Images Only!');
-  }
-
-}
-
-const cloudinary = require('cloudinary');
-cloudinary.config({
-  cloud_name: 'dwgjvssdt',
-  api_key: '934974923534473',
-  api_secret: '8e_BIcnVqeaqw_llNYe_uKHIkiw'
-});
-
-
-
-
 
 // @route   GET api/sneakers
 // @desc    Get posts
@@ -74,16 +24,72 @@ router.get("/", (req, res) => {
 });
 
 
+// @route   GET api/sneakers
+// @desc    Get Most Popular Sneakers
+// @access  Public
+
+
+
+router.get("/mostliked", (req, res) => {
+
+  Sneaker.aggregate(
+    [
+    { "$project" : {
+      "user" : 1,
+      "profile" : 1,
+      "model" : 1,
+      "colorway" : 1,
+      "year" : 1,
+      "text" : 1,
+      "mainimage" : 1,
+      "subimage_1" : 1,
+      "subimage_2" : 1,
+      "subimage_3" : 1,
+      "subimage_4" : 1,
+      "tags"  : 1,
+      "comments" : 1,
+      "likes" : 1,
+      "date" : 1,
+      "likeslength" : { "$size": "$likes" }
+    }},
+    {"$sort": { "likeslength": -1 }},
+    {"$limit": 5 }
+  ],
+    function(err, results) {
+      if (err) {
+        return err
+      }
+      return res.json(results)
+    });
+  })
+
 // @route   GET api/posts/:id
 // @desc    Get post by id
 // @access  Public
 router.get("/:id", (req, res) => {
   Sneaker.findById(req.params.id)
-  .populate('user', ['name', 'avatar'])
+  .populate(
+    'user', ['name', 'avatar']
+    )
+  .populate(
+    'profile', ['avatar']
+    )
   .then(sneakers => res.json(sneakers))
   .catch(err =>
       res.status(404).json({ nopostsfound: "No sneaker found with that ID" })
     );
+});
+
+// @route   GET api/sneakers/:id/:tags
+// @desc    Get related sneakers by id and tags
+// @access  Public
+router.get("/tags/:tags", (req, res) => {
+
+  array = req.params.tags.split(',')
+  Sneaker.find({tags: {$in : array }} )
+  .then(sneakers => sneakers.slice(0, 3))
+  .then(sneakers => res.json(sneakers))
+  .catch(err => res.status(404).json({ nosneakersfound: "No sneakers found here" }));
 });
 
 
@@ -137,159 +143,8 @@ router.get('/handle/:handle', (req, res) => {
 
 
 
-
-
 // @route   SNEAKER api/sneakers
-// @desc    Create post
-// @access  Private
-
-// router.post(
-//   "/",
-//   passport.authenticate("jwt", {
-//     session: false
-//   }),
-//   upload.fields([{
-//       name: 'mainimage',
-//       maxCount: 1
-//     },
-//     {
-//       name: 'subimage_1',
-//       maxCount: 1
-//     },
-//     {
-//       name: 'subimage_2',
-//       maxCount: 1
-//     },
-//     {
-//       name: 'subimage_3',
-//       maxCount: 1
-//     },
-//     {
-//       name: 'subimage_4',
-//       maxCount: 1
-//     },
-//   ]),
-//   async (req, res) => {
-
-//     /* Receive a request of file paths as array from the above input fields */
-//     let filePaths = new Array();
-
-//     filePaths.push(req.files.mainimage[0].path)
-//     filePaths.push(req.files.subimage_1[0].path)
-//     filePaths.push(req.files.subimage_2[0].path)
-//     filePaths.push(req.files.subimage_3[0].path)
-//     filePaths.push(req.files.subimage_4[0].path)
-
-
-
-
-//     let mutliupload = new Promise(async (resolve, reject) => {
-
-//         // Keep track of the of the filepaths array
-//         let upload_len = filePaths.length;
-
-//         /*
-//         Initialize variables for cloudinary filepaths, these will also be used to add
-//         to the database later
-//         */
-//         let mainimage;
-//         let subimage_1;
-//         let subimage_2;
-//         let subimage_3;
-//         let subimage_4;
-
-
-//         /*
-//       Create a new array to hold all the responses from cloudinary, and with each  iteration through the for loop below compare with the upload_len variable. When they are both equal, we will now 
-//       that we finished trying to process all the uploads.
-//       */
-
-//         upload_res = new Array();
-
-//         for (let i = 0; i <= upload_len + 1; i++) {
-
-//           //each file path being brought in
-//           let filePath = filePaths[i];
-
-
-
-//           await cloudinary.v2.uploader.upload(filePath, (error, result) => {
-
-//             if (upload_res.length === upload_len) {
-//               /* resolve promise after upload is complete */
-//               resolve(
-//                 [mainimage, subimage_1, subimage_2, subimage_3, subimage_4]
-
-//               )
-
-//             } else if (result) {
-
-//               if (i === 0) {
-//                 mainimage = result.url;
-//               } 
-//               else if (i === 1) {
-//                 subimage_1 = result.url;
-//               } 
-//               else if (i === 2) {
-//                 subimage_2 = result.url;
-//               } 
-//               else if (i === 3) {
-//                 subimage_3 = result.url;
-//               } 
-//               else if (i === 4) {
-//                 subimage_4 = result.url;
-//               }
-
-//               /*push path in an array for comparison later*/
-//               upload_res.push(result.path);
-
-//             } else if (error) {
-//               console.log(error)
-//               reject(error)
-//             }
-
-//           });
-
-
-//         }
-
-
-
-//       })
-//       .then((result) => {
-
-//         console.log('==============Results==============');
-//         console.log(result);
-//         console.log('====================================');
-
-//         const newSneaker = new Sneaker({
-//           model: req.body.model,
-//           colorway: req.body.colorway,
-//           year: req.body.year,
-//           text: req.body.text,
-//           mainimage: result[0],
-//           subimage_1: result[1],
-//           subimage_2: result[2],
-//           subimage_3: result[3],
-//           subimage_4: result[4],
-//           user: req.user.id
-
-//         });
-
-//         newSneaker.save().then(sneaker => res.json(sneaker));
-
-//       })
-//       .catch((error) => {
-//         console.log('the error is ' + error);
-
-//       })
-
-//   }
-// );
-
-
-// @route   SNEAKER api/sneakers
-// @desc    Create sneaker version 2
+// @desc    Create sneaker 
 // @access  Private
 
 router.post(
@@ -297,28 +152,14 @@ router.post(
   passport.authenticate("jwt", {
     session: false
   }),
-  upload.fields([{
-      name: 'mainimage',
-      maxCount: 1
-    },
-    {
-      name: 'subimage_1',
-      maxCount: 1
-    },
-    {
-      name: 'subimage_2',
-      maxCount: 1
-    },
-    {
-      name: 'subimage_3',
-      maxCount: 1
-    },
-    {
-      name: 'subimage_4',
-      maxCount: 1
-    },
-  ]),
   (req, res) => {
+
+    var tags;
+
+    if (typeof req.body.tags !== "undefined") {
+      tags = req.body.tags.split(",");
+    }
+    
 
     const newSneaker = new Sneaker({
       model: req.body.model,
@@ -330,14 +171,76 @@ router.post(
       subimage_2: req.body.subimage_2,
       subimage_3: req.body.subimage_3,
       subimage_4: req.body.subimage_4,
-      user: req.user.id
-
+      user: req.user.id,
+      tags: tags
     });
 
     newSneaker.save().then(sneaker => res.json(sneaker));
 
   }
 );
+
+// route UPDATE api/posts/:id
+// get single post by id then update
+// access private
+router.post('/:id', passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+
+
+  // const { errors, isValid } = validatePostInput(req.body)
+
+  //check validation
+      // if(!isValid){
+      //     //if any errors send 404
+      //     return res.status(400).json(errors)
+      // }
+
+
+      const model = req.body.model;
+      const colorway = req.body.colorway;
+      const year = req.body.year;
+      const text = req.body.text;
+      const mainimage = req.body.mainimage;
+      const subimage_1 = req.body.subimage_1;
+      const subimage_2 = req.body.subimage_2;
+      const subimage_3 = req.body.subimage_3;
+      const subimage_4 = req.body.subimage_4;
+
+      var tags
+      
+      if (typeof req.body.tags !== "undefined") {
+        tags = req.body.tags.split(",");
+      }
+
+      
+
+  Sneaker.findByIdAndUpdate({_id: req.params.id},
+    {
+      $set: {
+        model,
+        colorway,
+        year,
+        text,
+        mainimage,
+        subimage_1,
+        subimage_2,
+        subimage_3,
+        subimage_4,
+        tags
+      }
+    },
+    { new: true }
+  )
+  .then(sneaker => {
+      //check sneaker owner
+      if(sneaker.user.toString() !== req.user.id) {
+          return res.status(401).json({ notauthorized: 'User not authorizated'})
+      }
+
+      sneaker.save().then(sneaker => res.json(sneaker))
+  })
+  .catch(err => res.status(404).json({ sneakernotfound: 'No sneaker found'}))
+})
 
 // @route   DELETE api/posts/:id
 // @desc    Delete post
@@ -347,7 +250,8 @@ router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user.id })
+    .then(profile => {
       Sneaker.findById(req.params.id)
         .then(sneaker => {
           if (sneaker.user.toString() !== req.user.id) {
@@ -374,6 +278,7 @@ router.post(
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
       Sneaker.findById(req.params.id)
+        .populate('user', ['name', 'avatar'])
         .then(sneaker => {
           if (
             sneaker.likes.filter(like => like.user.toString() === req.user.id)
@@ -406,6 +311,7 @@ router.post(
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
       Sneaker.findById(req.params.id)
+        .populate('user', ['name', 'avatar'])
         .then(sneaker => {
           if (
             sneaker.likes.filter(like => like.user.toString() === req.user.id)
@@ -444,12 +350,14 @@ router.post(
   
 
     Sneaker.findById(req.params.id)
+      .populate('user', ['name', 'avatar'])
       .then(sneaker => {
         const newComment = {
           text: req.body.text,
           name: req.body.name,
           avatar: req.body.avatar,
-          user: req.user.id
+          user: req.user.id,
+          handle: req.body.handle
         };
 
         // Add to comments array
@@ -471,6 +379,7 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Sneaker.findById(req.params.id)
+      .populate('user', ['name', 'avatar'])
       .then(sneaker => {
         // Check to see if comment exists
 

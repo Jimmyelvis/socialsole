@@ -8,7 +8,7 @@ export class ProfileItem extends Component {
     const { profile } = this.props;
 
     return (
-      <div className="profileCard card card-body mb-3">
+      <div className="contentbody">
 
         <div className="row">
 

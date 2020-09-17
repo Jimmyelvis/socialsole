@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import Navbar from "../../layout/Navbar";
 
 export class news extends Component {
-  static propTypes = {};
 
   render() {
     return (
@@ -60,7 +58,7 @@ export class news extends Component {
           </div>
 
           <div className="row">
-            <div className="article contentBody">
+            <div className="article contentbody">
               <div className="articleImg">
                 <img
                   src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569781949/tinker-hatfield.jpg"

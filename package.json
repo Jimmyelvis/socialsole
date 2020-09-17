@@ -21,6 +21,7 @@
     "express": "^4.16.3",
     "firebase": "^5.8.2",
     "gravatar": "^1.6.0",
+    "icomoon-react": "^2.0.16",
     "jquery": "^3.4.1",
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.23.0",
@@ -30,6 +31,7 @@
     "passport-jwt": "^4.0.0",
     "react-moment": "^0.8.4",
     "react-quill": "^1.3.3",
+    "react-scripts": "3.0.0",
     "react-trumbowyg": "^1.1.0",
     "validator": "^10.7.1"
   },

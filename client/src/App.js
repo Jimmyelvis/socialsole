@@ -10,34 +10,49 @@ import store from './store';
 import ScrollToTop from './ScrollToTop'
 
 import PrivateRoute from './components/common/PrivateRoute';
+import AuthorRoute from './components/common/AuthorRoute';
+
 
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import Landing from './components/layout/Landing';
+import Home from './components/homepage/Home';
+import Community from './components/layout/Community';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/profiles/create-profile/CreateProfile';
 import EditProfile from './components/profiles/edit-profile/EditProfile';
-import Profiles from './components/profiles/Profiles';
+import Profiles from './components/profiles/AllProfiles';
 import Profile from './components/profiles/profile/Profile';
 import Article from './components/articles/article/Article';
+import ArticleEdit from './components/articles/article/ArticleEdit';
 import CreateArticle from './components/articles/article/CreateArticle';
-import Posts from './components/posts/AllPosts';
-import Post from './components/posts/post/Post';
-import YourPosts from './components/posts/YourPosts';
-import YourSneakers from './components/sneakers/YourSneakers';
-import Sneakers from './components/sneakers/AllSneakers';
-import Sneaker from './components/sneakers/sneaker/Sneaker';
+import Posts from './components/posts/all-users-posts/AllPosts';
+import Post from './components/posts/post-single/Post';
+import CreatePost from './components/posts/post-creation/CreatePost';
+import EditPost from './components/posts/post-creation/EditPost';
+import CreateSneaker from './components/sneakers/sneaker-creation/CreateSneaker';
+import EditSneaker from './components/sneakers/sneaker-creation/EditSneaker';
+import Sneakers from './components/sneakers/all-users-sneakers/AllSneakers';
+import Sneaker from './components/sneakers/sneaker-single/Sneaker';
 import NewsItemConcord from './components/frontpage/news/concord';
 import NewsItemNasa from './components/frontpage/news/nasa';
 import NewsItemTinker from './components/frontpage/news/tinker';
-import NewReleaseCNY from './components/frontpage/releases/cnwy';
-import NewReleaseAJNine from './components/frontpage/releases/ajnine';
-import NewReleaseAJLava from './components/frontpage/releases/lava';
+// import NewReleaseCNY from './components/frontpage/releases/cnwy';
+// import NewReleaseAJNine from './components/frontpage/releases/ajnine';
+// import NewReleaseAJLava from './components/frontpage/releases/lava';
+import NewReleaseAJIndigo from './components/homepage/releases/indigo';
+import NewReleaseAJFireDenim from './components/homepage/releases/firedenim';
+import NewReleaseQuestion from './components/homepage/releases/questionmid';
+import AllArticles from './components/articles/Allarticles';
 import NotFound from './components/not-found/NotFound';
+import Alert from './components/layout/Alerts'
 
-import './App.css';
+// import './App.scss';
+
+import './components/sass/App.scss';
+
+
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -55,8 +70,8 @@ if (localStorage.jwtToken) {
     store.dispatch(logoutUser());
     // Clear current Profile
     store.dispatch(clearCurrentProfile());
-    // Redirect to login
-    window.location.href = '/login';
+    // Redirect to home
+    window.location.href = '/';
   }
 }
 
@@ -67,8 +82,9 @@ class App extends Component {
         <Router>
         <ScrollToTop>
           <React.Fragment>
-            <Route exact path="/" component={Landing} />
-            {/* <Navbar /> */}
+              <Alert />
+              <Route exact path="/" component={Home} />
+              <Route exact path="/community" component={Community} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
@@ -80,13 +96,14 @@ class App extends Component {
               <Route exact path="/news/concord" component={NewsItemConcord} />
               <Route exact path="/news/nasa" component={NewsItemNasa} />
               <Route exact path="/news/tinker" component={NewsItemTinker} />
-              <Route exact path="/release/cny" component={NewReleaseCNY} />
-              <Route exact path="/release/ajnine" component={NewReleaseAJNine} />
-              <Route exact path="/release/lava" component={NewReleaseAJLava} />
-              <Route exact path="/article/:address" component={Article} />
-              <Route exact path="/createarticle" component={CreateArticle} />
-
-
+              <Route exact path="/release/indigo" component={NewReleaseAJIndigo} />
+              <Route exact path="/release/firedenim" component={NewReleaseAJFireDenim} />
+              <Route exact path="/release/questionmid" component={NewReleaseQuestion} />
+              <Route exact path="/article/:id" component={Article} />
+              <Route exact path="/articleedit/:id" component={ArticleEdit} />
+              <Route exact path="/editpost/:id" component={EditPost} />
+              <Route exact path="/editsneaker/:id" component={EditSneaker} />
+              <Route exact path="/allarticles/" component={AllArticles} />
 
 
               <Switch>
@@ -109,15 +126,21 @@ class App extends Component {
               <Switch>
                 <PrivateRoute
                   exact
-                  path="/yourposts"
-                  component={YourPosts}
+                  path="/createpost"
+                  component={CreatePost}
                 />
               </Switch>
               <Switch>
                 <PrivateRoute
                   exact
-                  path="/yoursneakers"
-                  component={YourSneakers}
+                  path="/createsneaker"
+                  component={CreateSneaker}
+                />
+              </Switch>
+              <Switch>
+                <AuthorRoute
+                  exact path="/createarticle" 
+                  component={CreateArticle} 
                 />
               </Switch>
               <Route exact path="/not-found" component={NotFound} />

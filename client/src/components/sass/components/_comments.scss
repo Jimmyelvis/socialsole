@@ -1,0 +1,99 @@
+
+/*
+/////////////////// ////////// COMMENT STYLES //////////////////////
+*/
+
+.commentsarea {
+  min-width: 0;
+  margin: 20rem auto 0 auto;
+  min-height: 260px;
+  padding-bottom: 4%;
+
+  .commentsheader {
+    background-color: $skyblue!important;
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    color: white;
+    font-weight: bold;
+  }
+
+  .commentForm {
+    padding: 20px;
+    width: 85%;
+    margin: 15px auto;
+  
+    .form-control {
+      min-height: 13rem;
+    }
+  }
+  
+  .btn-lightblue  {
+    float: right;
+  }
+
+  .commentBody:first-of-type {
+    padding: 5rem 3rem 1rem 3rem;
+  }
+
+  .commentBody {
+    margin: 5rem auto;
+    display: flex;
+    padding: 1rem 3rem;
+
+    @include respond(bp-medium) {
+      flex-direction: column;
+    }
+  
+    .commentAvatar {
+      display: flex;
+      flex: 0 0 25%;
+      flex-direction: column;
+      align-items: center;
+  
+      .avatarHolder {
+        max-width: 10rem;
+        max-height: 10rem;
+        margin: auto;
+        overflow: hidden;
+        border-radius: 50%;
+  
+        img {
+          height: 100%;
+          object-fit: cover;
+          object-position: top;
+        }
+      }
+
+      .commentName {
+        color: $alternateblue;
+        font-weight: bold;
+        font-size: 1.7rem;
+      }
+    }
+  
+    .commentText {
+      flex: 1;
+      position: relative;
+      padding: 2rem;
+
+      .btn-danger {
+        position: absolute;
+        bottom: 2rem;
+        right: 2%;
+      }
+    }
+  }
+
+}
+
+
+.postsneakerdetail {
+  margin: 0rem auto 0 auto;
+}
+
+
+
+
+

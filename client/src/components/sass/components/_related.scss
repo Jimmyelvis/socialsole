@@ -1,0 +1,86 @@
+.related {
+
+  .heading-3 {
+    font-size: 3.6rem;
+    text-align: center;
+    margin: 2rem auto;
+
+    @include respond(bp-medium) {
+      font-size: 4.6rem;
+      margin: 4rem auto;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    a {
+      flex: 0 0 30%;
+
+      @include respond(bp-medium) {
+        flex: 0 0 43rem;
+      }
+
+      @include respond(bp-smallest) {
+        flex: 0 0 35rem;
+      }
+
+      @include respond(bp-tiny) {
+        flex: 0 0 31rem;
+      }
+    }
+
+    a:last-of-type {
+      margin-bottom: 8rem;
+    }
+
+    .card-ver-trad {
+
+      .top {
+        height: 22.5rem;
+
+        @include respond(bp-medium) {
+          height: 30.5rem;
+        }
+
+        @include respond(bp-smallest) {
+          height: 26.5rem;
+        }
+      }
+
+      .bottom {
+        padding: 2rem 3rem 6rem 3rem;
+        height: auto;
+        position: relative;
+
+        @include respond(bp-medium) {
+          padding: 0;
+          padding-bottom: 4rem;
+        }
+
+        .heading-3 {
+
+          @include respond(bp-medium) {
+            font-size: 3rem;
+          }
+
+          @include respond(bp-smallest) {
+            font-size: 2.7rem;
+          }
+        }
+
+        .btn-lightblue {
+          padding: 0.7rem 1.6rem;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+        }
+      }
+    }
+
+    
+  }
+
+}

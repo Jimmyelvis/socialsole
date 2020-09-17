@@ -1,0 +1,45 @@
+.filteredSearch {
+  margin: 2rem auto 6rem auto;
+  width: 50%;
+  height: 5rem;
+
+  @include respond(bp-large) {
+    width: 65%;
+  }
+
+  @include respond(bp-medium) {
+    width: 75%;
+  }
+
+  @include respond(bp-small) {
+    width: 90%;
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0.575rem 1rem;
+    font-size: 1.5rem;
+    color: $skyblue;
+    border: 1px solid rgba(226, 229, 236, 0.5);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.35s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: inset 0px 0px 3px 2px rgba(42, 44, 45, 0.07);
+
+    &::-webkit-input-placeholder {
+      color: $skyblue;
+    }
+  }
+
+  .form-control:focus {
+    color: #8a9cb7;
+    background-color: #fff;
+    border-color: #239bda;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  }
+
+}
+
+

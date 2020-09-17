@@ -1,0 +1,101 @@
+.profiles {
+  margin-top: 7rem;
+
+  .profileItems {
+    display: flex;
+    flex-wrap: wrap;
+
+    .profilecard {
+      flex: 0 0 80%;
+      margin: 0 auto 1rem auto;
+  
+      @include respond(bp-medium) {
+        flex: 0 0 46%;
+        flex-direction: column;
+        height: auto;
+        padding: 4rem 2rem;
+        margin: 0 auto 3rem auto;
+      }
+
+      @include respond (bp-small) {
+        flex: 0 0 44rem;
+      }
+
+      @include respond (bp-small) {
+        flex: 0 0 39rem;
+      }
+
+      @include respond (bp-tiny) {
+        flex: 0 0 35rem;
+      }
+      
+      .imgholder{
+        flex: 0 0 60%;
+        padding-bottom: 60%;
+  
+        @include respond(bp-largest) {
+          flex: 0 0 65%;
+          padding-bottom: 65%;
+        }
+  
+        @include respond(bp-large) {
+          flex: 0 0 70%;
+          padding-bottom: 70%;
+        }
+  
+        @include respond(bp-medium) {
+          flex: 0 0 50%;
+          padding-bottom: 50%;
+        }
+      }
+
+      .left {
+        padding: 2rem 0;
+      }
+  
+      .right {
+
+        @include respond(bp-medium) {
+          padding-bottom: 6rem;
+        }
+  
+        .heading-3 {
+          font-size: 4.8rem;
+          margin-bottom: 0;
+  
+          @include respond(bp-medium) {
+            font-size: 3.9rem;
+            margin-bottom: 2rem;
+          }
+        }
+  
+        .btn-lightblue {
+          position: absolute;
+          bottom: 2rem;
+          right: 2rem;
+          padding: 0.8rem 1.35rem;
+          letter-spacing: 2px;
+
+          @include respond(bp-medium) {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 2.2rem;
+            right: 0;
+            bottom: 0;
+          }
+        }
+  
+        p {
+          font-weight: bold;
+        }
+  
+        .favSneaker {
+          color: $skyblue;
+        }
+      }
+        
+    }
+  
+  }
+
+}

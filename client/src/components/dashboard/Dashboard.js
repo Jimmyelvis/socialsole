@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
 import ProfileActions from "./ProfileActions";
-import Navbar from "../../components/layout/Navbar";
+import CommNavbar from "../layout/CommNavbar";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -25,33 +24,26 @@ class Dashboard extends Component {
     if (profile === null || loading) {
       dashboardContent = <Spinner />;
     } else {
+      
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <React.Fragment>
-            <div className="userAvatar col-md-5">
-              <div className="avatarHolder">
+            <div className="left">
+              <div className="imgholder">
                 <img src={user.avatar} alt="" />
               </div>
             </div>
 
-            <div className="dashInfo col-md-7">
-              <h2>
-                Welcome{" "}
-                <span className="name">
-                  <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
-                </span>
+            <div className="right">
+              <h2 className="heading-2">
+                Welcome  <Link to={`/profile/${profile.handle}`} className="profilename">
+                    {user.name}
+                  </Link>
               </h2>
 
               <ProfileActions />
-
-              <div style={{ marginBottom: "60px" }} />
-              {/* <button
-                onClick={this.onDeleteClick.bind(this)}
-                className="btn btn-danger"
-              >
-                Delete My Account
-              </button> */}
+             
             </div>
           </React.Fragment>
         );
@@ -59,19 +51,19 @@ class Dashboard extends Component {
         // User is logged in but has no profile
         dashboardContent = (
           <React.Fragment>
-            <div className="userAvatar col-md-5">
-              <div className="avatarHolder">
+            <div className="left">
+              <div className="imgholder">
                 <img src={user.avatar} alt="" />
               </div>
             </div>
 
-            <div className="dashInfo col-md-7">
-              <h2>Welcome {user.name}</h2>
+            <div className="right">
+              <h2 className="heading-2">Welcome {user.name}</h2>
 
               <p>You have not yet setup a profile, please add some info</p>
               <Link
                 to="/create-profile"
-                className="btn btn-lg btn-create btn-sole"
+                className="btn btn-lightblue"
               >
                 Create Profile
               </Link>
@@ -82,23 +74,17 @@ class Dashboard extends Component {
     }
 
     return (
-      <div className="dashboard contentBody">
-        <Navbar />
+      <div className="dashboard ">
+        <CommNavbar />
 
         <div className="container">
-          <div className="row">{dashboardContent}</div>
+          <div className="userheader dashboardbody contentbody">{dashboardContent}</div>
         </div>
       </div>
     );
   }
 }
 
-Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
-  deleteAccount: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => ({
   profile: state.profile,

@@ -5,14 +5,14 @@ const ProfileActions = () => {
   return (
     // <!-- Dashboard Actions -->
     <div className="dashboardActions btn-group" role="group">
-      <Link to="/edit-profile" className="btn btn-sole">
+      <Link to="/edit-profile" className="btn btn-lightblue">
          Edit Profile
       </Link>
-      <Link to="/yourposts" className="btn btn-sole">
-        Your Posts
+      <Link to="/createpost" className="btn btn-lightblue">
+        Create Post
       </Link>
-      <Link to="/yoursneakers" className="btn btn-sole">
-        Your Sneakers
+      <Link to="/createsneaker" className="btn btn-lightblue">
+        Create Sneaker
       </Link>
     </div>
   );

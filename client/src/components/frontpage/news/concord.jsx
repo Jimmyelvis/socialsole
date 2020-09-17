@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import Navbar from "../../layout/Navbar";
 
 export class news extends Component {
@@ -22,7 +21,7 @@ export class news extends Component {
                 />
               </div>
 
-              <div className="heading">
+              <div className="contentbody heading">
                 <div className="row">
                   <div className="avatar">
                     <div className="avatarImg">
@@ -61,7 +60,7 @@ export class news extends Component {
           </div>
 
           <div className="row">
-            <div className="article contentBody">
+            <div className="article contentbody">
               <div className="articleImg">
                 <img
                   src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1569781655/https_3A_2F_2Fhypebeast.com_2Fimage_2F2018_2F12_2Fnikes-2018-air-jordan-11-concord-apparently-largest-sneaker-release-in-history-000.jpg"

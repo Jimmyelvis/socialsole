@@ -1,0 +1,45 @@
+.actions {
+  position: absolute;
+  bottom: 8rem;
+  right: 6rem;
+  display: flex;
+  width: 23rem;
+  justify-content: space-between;
+
+  .heading-3 {
+    font-size: 3rem;
+    margin-bottom: 0 !important;
+  }
+
+  .thumbs, .bubbles {
+    width: 2.5rem;
+  }
+
+  .likes, .unlikes {
+    cursor: pointer;
+  }
+
+  .likes {
+    display: flex;
+    flex: 0 0 40%;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .unlikes {
+    display: flex;
+    flex: 0 0 20%;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .commentsnumber {
+    display: flex;
+    justify-content: space-around;
+    flex: 0 0 22%;
+
+    .commenticon {
+      width: 40%;
+    }
+  }
+}

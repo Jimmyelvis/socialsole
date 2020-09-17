@@ -34,11 +34,17 @@ export class PostItem extends Component {
     const { profile } = this.props.profile;
     const { post, auth, showActions } = this.props;
 
+    const tags = post.tags.map((tag, index) => (
+      <div key={index} className="p-3">
+        <i className="fa fa-check" /> {tag}
+      </div>
+    ));
+
 
     return (
-      <div className="card card-body col-md-6">
-        <div className="row">
-          <div className="cardHeaderImage col-md-12 ">
+      <div className="card-ver-trad">
+        
+          <div className="top">
             {post.headerimage === "" ? (
               <img src="https://res.cloudinary.com/dwgjvssdt/image/upload/v1554071502/badge.jpg"  alt="..." />
             ) : (
@@ -54,7 +60,7 @@ export class PostItem extends Component {
               </span>
             </h3>
           </div>
-        </div>
+      
 
         <div className="postAuthor row">
           <h6>By {post.user.name}</h6>
@@ -78,6 +84,17 @@ export class PostItem extends Component {
                 {post.text}
               </Truncate>
             </p>
+
+            <br />
+          
+
+
+            <h3>Tags</h3>
+            <p style={{display: "flex"}}>
+            {tags}
+
+            </p>
+
 
             {showActions ? (
               <span className="profileActions">

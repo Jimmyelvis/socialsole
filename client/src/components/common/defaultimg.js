@@ -1,0 +1,1 @@
+export const defaultimg = 'https://res.cloudinary.com/dwgjvssdt/image/upload/v1554071502/badge.jpg';

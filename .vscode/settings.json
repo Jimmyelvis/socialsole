@@ -4,5 +4,6 @@
   ],
   "workbench.colorCustomizations": {
     "tab.unfocusedActiveBorder": "#fff0"
-  }
+  },
+  "workbench.colorTheme": "Noctis Azureus"
 }

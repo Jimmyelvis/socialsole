@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
-const multer = require('multer');
 const path = require('path');
 const crypto = require('crypto');
 
@@ -14,53 +13,6 @@ const Profile = require("../../models/Profile");
 // Validation
 const validatePostInput = require("../../validation/post");
 
-
-// Set The Storage Engine
-const storage = multer.diskStorage({
-  // destination: './public/uploads/posts',
-  filename: function(req, file, cb){
-    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  }
-});
-
-
-// Init Upload
-const upload = multer({
-  storage: storage,
-  limits:{
-    fileSize: 100000000
-  },
-  fileFilter: function(req, file, cb){
-    checkFileType(file, cb);
-  }
-});
-
-// Check File Type
-function checkFileType(file, cb){
-
-  // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
-
-   // Check ext
-   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-
-   // Check mime
-  const mimetype = filetypes.test(file.mimetype);
-
-  if(mimetype && extname){
-    return cb(null,true);
-  } else {
-    cb('Error: Images Only!');
-  }
-
-}
-
-const cloudinary = require('cloudinary');
-cloudinary.config({
-  cloud_name: 'dwgjvssdt',
-  api_key: '934974923534473',
-  api_secret: '8e_BIcnVqeaqw_llNYe_uKHIkiw'
-});
 
 
 // @route   GET api/posts
@@ -74,6 +26,17 @@ router.get("/", (req, res) => {
     .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
 });
 
+
+// @route   GET api/posts/:id/:tags
+// @desc    Get related posts by id and tags
+// @access  Public
+router.get("/tags/:tags", (req, res) => {
+
+    array = req.params.tags.split(',')
+    Post.find({tags: {$in : array }} )
+    .then(posts => res.json(posts))
+    .catch(err => res.status(404).json({ nopostsfound: "No posts found here" }));
+});
 
 
 // @route   GET api/posts/:id
@@ -113,46 +76,6 @@ router.get('/user/:user_id', (req, res) => {
     }))
 });
 
-// @route   POST api/posts
-// @desc    Create post
-// @access  Private
-
-// router.post(
-//   "/",
-//   passport.authenticate("jwt", { session: false }),
-//   upload.single('headerimage'),
-//   (req, res) => {
-//     const { errors, isValid } = validatePostInput(req.body);
-
-//     // Check Validation
-//     if (!isValid) {
-//       // If any errors, send 400 with errors object
-//       return res.status(400).json(errors);
-//     }
-
-//     cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
-
-//       if(err) {
-//         req.flash('error', err.message);
-//       }
-
-//       // add cloudinary url for the image 
-//       req.file.path = result.secure_url;
-
-//       const newPost = new Post({
-//         text: req.body.text,
-//         headline: req.body.headline,
-//         headerimage: req.file.path,
-//         avatar: req.user.avatar,
-//         user: req.user.id
-//       });
-  
-//       newPost.save().then(post => res.json(post));
-
-//     });
-    
-//   }
-// );
 
 
 // @route   POST api/posts
@@ -161,7 +84,6 @@ router.get('/user/:user_id', (req, res) => {
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
-  upload.single('headerimage'),
   (req, res) => {
     const { errors, isValid } = validatePostInput(req.body);
 
@@ -171,13 +93,22 @@ router.post(
       return res.status(400).json(errors);
     }
 
+    var tags;
+
+    if (typeof req.body.tags !== "undefined") {
+      tags = req.body.tags.split(",");
+    }
+
+    console.log(req.body.tags);
+    
 
       const newPost = new Post({
         text: req.body.text,
         headline: req.body.headline,
         headerimage: req.body.headerimage,
         avatar: req.user.avatar,
-        user: req.user.id
+        user: req.user.id,
+        tags: tags
       });
   
       newPost.save().then(post => res.json(post));
@@ -190,61 +121,38 @@ router.post(
 // route UPDATE api/posts/:id
 // get single post by id then update
 // access private
-// router.post('/:id', passport.authenticate('jwt', { session: false }),
-//   upload.single('headerimage'),
-//   (req, res) => {
-//   const { errors, isValid } = validatePostInput(req.body)
-
-//   //check vaidation
-//       if(!isValid){
-//           //if any errors send 404
-//           return res.status(400).json(errors)
-//       }
-//   Post.findByIdAndUpdate({_id: req.params.id})
-//   .then(post => {
-//       //check post owner
-//       if(post.user.toString() !== req.user.id) {
-//           return res.status(401).json({ notauthorized: 'User not authorizated'})
-//       }
-//       post.text = req.body.text,
-//       post.headline = req.body.headline
-//       post.headerimage = req.body.filename
-
-//       post.save().then(post => res.json(post))
-//   })
-//   .catch(err => res.status(404).json({ postnotfound: 'No post found'}))
-// })
-
-
-// route UPDATE api/posts/:id
-// working version from https://stackoverflow.com/questions/51813006/upload-image-then-update-with-multer-and-express-js
-// get single post by id then update
-// access private
-router.put('/:id', passport.authenticate('jwt', { session: false }),
-  upload.single('headerimage'),
+router.post('/:id', passport.authenticate('jwt', { session: false }),
   (req, res) => {
 
 
-  const { errors, isValid } = validatePostInput(req.body)
+  // const { errors, isValid } = validatePostInput(req.body)
 
   //check validation
-      if(!isValid){
-          //if any errors send 404
-          return res.status(400).json(errors)
+      // if(!isValid){
+      //     //if any errors send 404
+      //     return res.status(400).json(errors)
+      // }
+
+
+      const headline = req.body.headline;
+      const text = req.body.text;
+      const headerimage = req.body.headerimage;
+
+      var tags
+      
+      if (typeof req.body.tags !== "undefined") {
+        tags = req.body.tags.split(",");
       }
 
-      const body = req.body;
-
-      const headline = body.headline;
-      const text = body.text;
-      const headerimage = req.file.filename;
+      
 
   Post.findByIdAndUpdate({_id: req.params.id},
     {
       $set: {
         headline,
         text,
-        headerimage
+        headerimage,
+        tags
       }
     },
     { new: true }
@@ -296,6 +204,7 @@ router.post(
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
+        .populate('user', ['name', 'avatar'])
         .then(post => {
           if (
             post.likes.filter(like => like.user.toString() === req.user.id)
@@ -327,6 +236,7 @@ router.post(
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
+        .populate('user', ['name', 'avatar'])
         .then(post => {
           if (
             post.likes.filter(like => like.user.toString() === req.user.id)
@@ -370,6 +280,7 @@ router.post(
     }
 
     Post.findById(req.params.id)
+      .populate('user', ['name', 'avatar'])
       .then(post => {
         const newComment = {
           text: req.body.text,
@@ -397,6 +308,7 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Post.findById(req.params.id)
+      .populate('user', ['name', 'avatar'])
       .then(post => {
         // Check to see if comment exists
 

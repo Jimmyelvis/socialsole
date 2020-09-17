@@ -43,20 +43,26 @@ export default function (state = initialState, action) {
         ...state,
         sneakers: state.sneakers.filter(sneaker => sneaker._id !== action.payload)
       };
+    // case LIKE_SNEAKER:
+    //   return {
+    //     ...state,
+    //     sneakers: state.sneakers.map(sneaker => {
+    //       if (sneaker._id === action.payload._id) {
+    //         return {
+    //           ...sneaker,
+    //           ...action.payload
+    //         };
+    //       } else {
+    //         return sneaker;
+    //       }
+    //     })
+    //   };
     case LIKE_SNEAKER:
       return {
         ...state,
-        sneakers: state.sneakers.map(sneaker => {
-          if (sneaker._id === action.payload._id) {
-            return {
-              ...sneaker,
-              ...action.payload
-            };
-          } else {
-            return sneaker;
-          }
-        })
-      };
+        sneaker: action.payload,
+        loading: false
+    };
     default:
       return state;
   }

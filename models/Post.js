@@ -14,13 +14,18 @@ const PostSchema = new Schema({
     required: true
   },
   headline: {
-    type: String
+    type: String,
+    required: true
   },
   avatar: {
     type: String
   },
   headerimage: {
     type: String
+  },
+  tags: {
+    type: [String],
+    required: true
   },
   likes: [
     {

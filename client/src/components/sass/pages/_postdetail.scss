@@ -1,0 +1,133 @@
+.postdetail {
+    padding: 6rem 0rem 6% 0rem;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+  .card-ver-trad {
+    flex: 0 0 70%;
+
+    .top {
+      height:58rem;
+    }
+
+    .bottom {
+        padding: 6rem 6rem 13% 6rem;
+        height: auto;
+        min-height: 50rem;
+        position: relative;
+
+      .postedit {
+        position: absolute;
+        right: 4rem;
+
+        .editbtn {
+          width: 6.1rem;
+          display: flex;
+          box-shadow: 3px 3px 2px 0px rgba(63, 140, 223, 0.13);
+          border-radius: 50%;
+          padding: 1.4rem;
+        }
+      }
+
+      .heading-2 {
+        font-size: 3.4rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .authorheader {
+        display: flex;
+        width: 25%;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
+
+        .avatarholder {
+          width: 25%;
+          padding-bottom: 25%;
+          margin: auto;
+          overflow: hidden;
+          border-radius: 50%;
+          position: relative;
+
+          img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+          }
+        }
+      }
+
+      .text {
+        margin: 3rem auto;
+      }
+
+     
+
+      .tags {
+        display: flex;
+        width: 45%;
+        justify-content: space-evenly;
+        position: absolute;
+        bottom: 3rem;
+
+        .tagicon {
+          flex: 0 0 3rem;
+        }
+
+        ul {
+          display: flex;
+          justify-content: space-evenly;
+          flex: 1;
+
+          li {
+            font-weight: bold;
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
+
+  }
+
+  .relatedposts {
+    flex: 0 0 28%;
+    padding: 2rem 2.5rem;
+    min-height: 16rem;
+
+    .heading-3 {
+      font-size: 2.65rem;
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .card-ver-trad {
+      
+      .top {
+        height: 20rem;
+      }
+
+      .bottom {
+        padding: 3rem 2rem 4% 3rem;
+        height: auto;
+        min-height: 14rem;
+
+        .heading-4 {
+          text-align: center;
+        }
+      }
+
+    }
+    
+  }
+
+}
+
+.postcommentsarea {
+  margin: 0 auto 0 auto;
+}

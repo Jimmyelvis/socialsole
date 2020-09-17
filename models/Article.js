@@ -4,6 +4,15 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const ArticleSchema = new Schema({
+  
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'users'
+  },
+  profile: {
+    type: Schema.Types.ObjectId,
+    ref: 'profile'
+  },
   author: {
     type: String,
     // required: true  
@@ -42,6 +51,10 @@ const ArticleSchema = new Schema({
   instagram: {
     type: String
   },
+  tags: {
+    type: [String],
+    required: true
+  },
   likes: [
     {
       user: {
@@ -77,6 +90,12 @@ const ArticleSchema = new Schema({
       date: {
         type: Date,
         default: Date.now
+      },
+      msg: {
+        type: String
+      },
+      handle:{
+        type: String
       }
     }
   ],

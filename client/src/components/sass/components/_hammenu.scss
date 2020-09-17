@@ -1,0 +1,152 @@
+
+/*
+///////////////////////////////   HAMBURGER MENU STYLES ////////////////////////
+*/
+
+.menu-wrap {
+  position: fixed;
+  top: 0.5rem;
+  left: 1rem;
+  z-index: 1;
+}
+
+.menu-wrap .toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+}
+
+.menu-wrap .hamburger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 5rem;
+  height: 5rem;
+  padding: 1rem;
+  // background: rgba(255, 255, 255, 0.24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* Hamburger Line */
+.menu-wrap .hamburger > div {
+  position: relative;
+  flex: none;
+  width: 100%;
+  height: 4px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+/* Hamburger Lines - Top & Bottom */
+.menu-wrap .hamburger > div::before,
+.menu-wrap .hamburger > div::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  height: 4px;
+  background: inherit;
+}
+
+/* Moves Line Down */
+.menu-wrap .hamburger > div::after {
+  top: 10px;
+}
+
+/* Toggler Animation */
+.menu-wrap .toggler:checked + .hamburger > div {
+  transform: rotate(135deg);
+}
+
+
+/* Turns Lines Into X */
+.menu-wrap .toggler:checked + .hamburger > div:before,
+.menu-wrap .toggler:checked + .hamburger > div:after {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+/* Rotate On Hover When Checked */
+.menu-wrap .toggler:checked:hover + .hamburger > div {
+  transform: rotate(225deg);
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(45,147,227,0.9);
+  // transition: all 600ms linear;
+  transition: all 1s 1s linear;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.menu-shown{
+  height: 100%;
+  transition: all 600ms linear;
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileLinkshown {
+  opacity: 1;
+  transition: all 600ms 1s linear;
+
+  li {
+    margin: 4vh 0;
+    transition: all 300ms linear;
+    text-align: center;
+    font-family: $font-display;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  a{
+    color: white;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}
+
+.mobileLinkshide {
+  opacity: 0;
+  transition: all 400ms linear;
+
+  li {
+    margin: 4vh 0;
+    transition: all 300ms linear;
+    text-align: center;
+    font-family: $font-display;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  a{
+    color: white;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}

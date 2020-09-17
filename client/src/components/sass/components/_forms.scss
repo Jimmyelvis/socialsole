@@ -1,0 +1,37 @@
+
+/*
+/////////////////  FORM FIELDS ///////////////////////////////////////
+*/
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #395379;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(226, 229, 236, 0.5);
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: inset 0px 0px 3px 2px rgba(42, 44, 45, 0.07);
+}
+
+.form-control-lg,
+.input-group-lg > .form-control,
+.input-group-lg > .input-group-append > .btn,
+.input-group-lg > .input-group-append > .input-group-text,
+.input-group-lg > .input-group-prepend > .btn,
+.input-group-lg > .input-group-prepend > .input-group-text {
+  padding: 1rem 1.6rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0;
+}
+
+.text-muted {
+  color: #73c0f3d4 !important;
+  font-weight: 600;
+  margin-left: 20px;
+}
