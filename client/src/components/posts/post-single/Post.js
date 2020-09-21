@@ -64,10 +64,16 @@ class Post extends Component {
       postContent = (
         <React.Fragment>
           <PostDetails post={post} showActions={false} />
-          <div className="commentsarea contentbody">
-            <br />
-            <CommentFeed postId={post._id} comments={post.comments} />
-          </div>
+
+              {
+                post.comments.length > 0 ? 
+                <div className="commentsarea contentbody">
+                  <CommentFeed postId={post._id} comments={post.comments} />
+                </div>
+
+                : ""
+              }
+
         </React.Fragment>
       );
     } 
@@ -80,11 +86,14 @@ class Post extends Component {
           <React.Fragment>
             <PostDetails post={post} showActions={false} />
 
-            <div className="container">
-              <div className="commentsarea contentbody">
-                <CommentFeed postId={post._id} comments={post.comments} />
-              </div>
-            </div>
+              {
+                post.comments.length > 0 ? 
+                <div className="commentsarea contentbody">
+                  <CommentFeed postId={post._id} comments={post.comments} />
+                </div>
+
+                : ""
+              }
 
         </React.Fragment>
         )

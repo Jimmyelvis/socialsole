@@ -68,10 +68,16 @@ export class Sneaker extends Component {
           <SneakerDetail sneaker={sneaker} showActions={false}/>
 
           <div className="container">
-            <div className="commentsarea postsneakerdetail contentbody">
-                <br />
-              <CommentFeed sneakerId={sneaker._id} comments={sneaker.comments} />
-            </div>
+
+              {
+                sneaker.comments.length > 0 ? 
+                <div className="commentsarea contentbody">
+                  <CommentFeed sneakerId={sneaker._id} comments={sneaker.comments} />
+                </div>
+
+                : ""
+              }
+           
           </div>
         </div>
       );
@@ -83,11 +89,14 @@ export class Sneaker extends Component {
               <SneakerDetail sneaker={sneaker} showActions={true}/>
 
               <div className="container"> 
-                <div className="commentsarea postsneakerdetail contentbody">
+                {
+                  sneaker.comments.length > 0 ? 
+                  <div className="commentsarea contentbody">
+                    <CommentFeed sneakerId={sneaker._id} comments={sneaker.comments} />
+                  </div>
 
-                  <CommentFeed sneakerId={sneaker._id} comments={sneaker.comments} />
-                  
-                </div>
+                  : ""
+                }
               </div>
 
 

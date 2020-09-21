@@ -74,9 +74,15 @@ export class Article extends Component {
           <ArticleItem article={article} />
 
           <div className="container">
-            <div className="commentsarea contentbody">
+
+            {
+              article.comments.length > 0 ? 
+              <div className="commentsarea contentbody">
                 <CommentFeed articleId={article._id} comments={article.comments} />
-            </div>
+              </div>
+
+              : <div className="marginspace"></div>
+            }
 
           </div>
 
@@ -95,11 +101,15 @@ export class Article extends Component {
 
             <div className="container">
 
-              <div className="commentsarea contentbody">           
-                <CommentFeed articleId={article._id}  comments={article.comments} 
-              />
-              </div>
+              {
+                article.comments.length > 0 ? 
+                <div className="commentsarea contentbody">
+                  <CommentFeed articleId={article._id} comments={article.comments} />
+                </div>
 
+                : <div className="marginspace"></div>
+              }
+              
             </div>
        
   
