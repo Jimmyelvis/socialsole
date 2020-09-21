@@ -4,6 +4,12 @@ import { Link } from "react-router-dom";
 
 export class FeaturedArticles extends Component {
 
+  /*
+    To get these articles to display properly you will need to edit
+    the details below, such as the link address headings and text, and image
+     to match the articles you created.
+  */
+
   render() {
     return (
       <React.Fragment>

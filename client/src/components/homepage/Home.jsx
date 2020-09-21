@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import Navbar from "../layout/Navbar";
 import { FeaturedArticles } from "./frontpage-components/FeaturedArticles";
@@ -28,6 +27,11 @@ class Landing extends Component {
 
         <div className="container container-home">
 
+          {/* After you initially clone this project from github, the links in the <FeaturedArticles />,
+          <Latestnews /> components will not work because they will be referencing articles in MY database
+          What can simply do is create some articles, and which ever ones you want to feature the components, 
+          you can edit the entries in there to match the articles you created. */}
+
           <FeaturedArticles />
           <Latestnews />
           <LatestReleases />
@@ -39,9 +43,6 @@ class Landing extends Component {
   }
 }
 
-Landing.propTypes = {
-  auth: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => ({
   auth: state.auth
