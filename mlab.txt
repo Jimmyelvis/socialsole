@@ -1,5 +1,0 @@
-mongodump -h ds213255.mlab.com:13255 -d socialsole -u jinjoe -p panther69 -o sole
-mongodump -h ds145356.mlab.com:45356 -d socialsole-dev -u jinjoe  -p panther69  -o sole
-
-
-mongorestore -h ds213255.mlab.com:13255 -d socialsole -u jinjoe  -p panther69 sole/socialsole-dev
