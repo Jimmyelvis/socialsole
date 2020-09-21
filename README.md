@@ -36,9 +36,3 @@ After you obtain both you then want to look for the .env-sample file in the clie
 * Express
 * MongoDB
 * Cloudinary
-
-## Updates
-  v-1.2
-* Addded filtered search functionality for posts, profiles, and sneakers
-
-![Markdown Logo](https://res.cloudinary.com/dwgjvssdt/image/upload/v1555621520/filter.gif)
