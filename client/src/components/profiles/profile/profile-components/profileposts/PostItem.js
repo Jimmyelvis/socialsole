@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { deletePost, addLike, removeLike } from "../../../../../actions/postActions";
-import Truncate from "react-truncate";
 
 export class PostItem extends Component {
   onDeleteClick(id) {
@@ -52,9 +51,7 @@ export class PostItem extends Component {
         <div className="row">
           <div className="postText col-md-12">
             <p>
-              <Truncate lines={3} ellipsis={<span>...</span>}>
                 {post.text}
-              </Truncate>
             </p>
 
             {showActions ? (

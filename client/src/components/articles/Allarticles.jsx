@@ -1,26 +1,21 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import Card from "../../components/cards/Card"
+import Card from "../../components/cards/Card";
 import Spinner from "../../components/common/Spinner";
 import Navbar from "../../components/layout/Navbar";
-import { getArticles } from "../../actions/articleActions"
-
+import { getArticles } from "../../actions/articleActions";
 
 /*
   Displays a list of all the articles, each article is
   displayed in a card format, using an instance of a reusable card component
 */
 
+const Allarticles = ({ getArticles, article }) => {
+  const [search, setSearch] = useState("");
 
-export class Allarticles extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      search: ""
-    };
-  }
+  useEffect(() => {
+    getArticles();
+  }, [getArticles]);
 
   /*
     This function is called when an onchange event occurs when the user
@@ -28,79 +23,55 @@ export class Allarticles extends Component {
     which is then used by the (filteredArticles) variable to filter
     through the articles
   */
-  updateSearch = e => {
-    this.setState({ search: e.target.value });
+  const updateSearch = (e) => {
+    setSearch(e.target.value);
   };
 
-  componentDidMount() {
-    this.props.getArticles();
-  }
+  const { articles, loading } = article;
+  let articleContent;
 
-  render() {
+  let filteredArticles = articles.filter((article) => {
+    return article.headline.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+  });
 
-    const { articles, loading } = this.props.article;
-    let articleContent;
-    
-
-    let filteredArticles = articles.filter(article => {
-      return (
-        article.headline.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-        -1 
-      );
-    });
-
-    if (articles === null || loading) {
-
-      /* 
+  if (articles === null || loading) {
+    /* 
         Checks to see if the article state is null, if so then a loading spinner
         is displayed, this helps undefined error on first render
       */
-      articleContent = <Spinner/>
-    } else {
-      articleContent = (
-        <React.Fragment>
-          {filteredArticles.map(article => {
-              return <Card key={article._id} article={article} cardtype={'article'} />;
-          })}
-        </React.Fragment>
-      )
-    }
+    articleContent = <Spinner />;
+  } else {
+    articleContent = (
+      <React.Fragment>
+        {filteredArticles.map((article) => {
+          return <Card key={article._id} article={article} cardtype={"article"} />;
+        })}
+      </React.Fragment>
+    );
+  }
 
-    return (
-      <div className="allarticles">
-        <Navbar />
+  return (
+    <div className="allarticles">
+      <Navbar />
 
-        <div className="container">
-
-          <div className="pageheading">
-            <h2 className="heading-2">Articles</h2>
-            <p>News and opinions on sneakers and sneaker culture</p>
-          </div>
-
-          <div className="filteredSearch">
-            <input
-              type="text"
-              placeholder="Filter By Headline"
-              value={this.state.search}
-              onChange={this.updateSearch}
-              className="form-control"
-            />
-          </div>
-
-          <div className="articleitems">
-              { articleContent }
-          </div>
-
-
+      <div className="container">
+        <div className="pageheading">
+          <h2 className="heading-2">Articles</h2>
+          <p>News and opinions on sneakers and sneaker culture</p>
         </div>
 
-      </div>
-    )
-  }
-}
+        <div className="filteredSearch">
+          <input type="text" placeholder="Filter By Headline" value={search} onChange={updateSearch} className="form-control" />
+        </div>
 
-const mapStateToProps = state => ({
-  article: state.article
+        <div className="articleitems">{articleContent}</div>
+      </div>
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  article: state.article,
 });
 
-export default connect( mapStateToProps, { getArticles })(Allarticles);
+export default connect(mapStateToProps, { getArticles })(Allarticles);

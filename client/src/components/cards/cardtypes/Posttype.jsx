@@ -3,31 +3,18 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { deletePost, addLike, removeLike } from "../../../actions/postActions";
-import Moment from "react-moment";
-import Truncate from "react-truncate";
+import moment from "moment";
 import { defaultimg } from "../../common/defaultimg";
-import Icon from "../../icons/Icon"
+import Icon from "../../icons/Icon";
 
+const PostCard = ({ deletePost, addLike, removeLike, profile: { profile }, auth, post, showActions }) => {
+  
+  return (
+    <div className="card-ver-trad">
+      <Link to={`/post/${post._id}`} >
 
-export class PostItem extends Component {
-  onDeleteClick(id) {
-    this.props.deletePost(id);
-  }
-
-  render() {
-    const { profile } = this.props.profile;
-    const { post, auth, showActions } = this.props;
-   
-
-
-    return (
-      <div className="card-ver-trad">
         <div className="top">
-          {post.headerimage ? (
-            <img src={post.headerimage} alt="..." />
-          ) : (
-            <img src={defaultimg} alt="..." />
-          )}
+          {post.headerimage ? <img src={post.headerimage} alt="..." /> : <img src={defaultimg} alt="..." />}
 
           <div className="postheadline">
             <h2 className="heading-2">{post.headline}</h2>
@@ -43,25 +30,11 @@ export class PostItem extends Component {
             <div className="authorinfo">
               <h4 className="heading-4">{post.user.name}</h4>
 
-              <p>
-                <Moment format="MM/DD/YYYY">{post.date}</Moment>
-              </p>
+              <p>{moment(post.date).fromNow()}</p>
             </div>
           </div>
 
-          {/* <div className="text">
-            <p>
-              <Truncate lines={2} ellipsis={<span>...</span>}>
-                {post.text}
-              </Truncate>
-            </p>
-          </div> */}
-
-          <div
-                    id="theText"
-                    className="text"
-                    dangerouslySetInnerHTML={{ __html: post.text }}
-              ></div>
+          <div id="theText" className="text" dangerouslySetInnerHTML={{ __html: post.text }}></div>
 
           <div className="commentsnumber">
             <div className="commenticon">
@@ -70,77 +43,44 @@ export class PostItem extends Component {
 
             <h3 className="heading-3">{post.comments.length}</h3>
           </div>
-
-          
         </div>
 
         <div className="back-content">
+          {post.user._id === auth.user.id || post.user === auth.user.id ? (
+            <button onClick={() => deletePost(post._id)} type="button" className="btn btn-danger">
+              <i className="fas fa-times" />
+            </button>
+          ) : null}
 
-            {
-              post.user._id === auth.user.id ||
-                  post.user === auth.user.id ? (
-                    <button
-                      onClick={this.onDeleteClick.bind(this, post._id)}
-                      type="button"
-                      className="btn btn-danger"
-                    >
-                      <i className="fas fa-times" />
-                    </button>
-              ) : null
-            }
+          <div className="avatar">
+            <img src={post.user.avatar} alt="" />
+          </div>
 
-            <div className="avatar">
-              <img src={post.user.avatar} alt="" />
-            </div>
+          <div className="postheadline">
+            <h2 className="heading-2">{post.headline}</h2>
+          </div>
 
-            <div className="postheadline">
-              <h2 className="heading-2">{post.headline}</h2>
-            </div>
+          <div id="theText" className="text" dangerouslySetInnerHTML={{ __html: post.text }}></div>
 
-           
-            <div
-                    id="theText"
-                    className="text"
-                    dangerouslySetInnerHTML={{ __html: post.text }}
-              ></div>
+       
+          <div className="overlay"></div>
 
-            <Link to={`/post/${post._id}`} className="btn btn-lightblue">
-                    Read More
-            </Link>
-
-            <div className="overlay"></div>
-
-            <div className="backgroundimg">
-              {post.headerimage ? (
-                <img src={post.headerimage} alt="..." />
-              ) : (
-                <img src={defaultimg} alt="..." />
-              )}
-            </div>
-
+          <div className="backgroundimg">{post.headerimage ? <img src={post.headerimage} alt="..." /> : <img src={defaultimg} alt="..." />}</div>
         </div>
-      </div>
-    );
-  }
-}
 
-PostItem.defaultProps = {
-  showActions: true
+      </Link>
+
+    </div>
+  );
 };
 
+PostCard.defaultProps = {
+  showActions: true,
+};
 
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
 });
 
-export default connect(
-  mapStateToProps,
-  { deletePost, addLike, removeLike }
-)(PostItem);
-
-
-
-
-
+export default connect(mapStateToProps, { deletePost, addLike, removeLike })(PostCard);

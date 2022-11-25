@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-// import PropTypes from "prop-types";
 import TextFieldGroup from "../../common/TextFieldGroup";
 import TextAreaFieldGroup from "../../common/TextAreaFieldGroup";
 import InputGroup from "../../common/InputGroup";
@@ -13,62 +12,55 @@ import "react-quill/dist/quill.snow.css";
 import { Widgetsetting } from "../../common/Cloudinary";
 
 
-class CreateProfile extends Component {
-  constructor(props) {
-    super(props);
+const CreateProfile = ({ createProfile, history, profile: { profile } }) => {
+  
+  const [values, setValues] = useState({
+    handle: "",
+    location: "",
+    favsneaker: "",
+    profilephoto: "",
+    avatar: "",
+    bio: "",
+    twitter: "",
+    facebook: "",
+    youtube: "",
+    instagram: "",
+  });
 
-    this.state = {
-      displaySocialInputs: false,
-      handle: "",
-      location: "",
-      favsneaker: "",
-      profilephoto: "",
-      avatar: "",
-      bio: "",
-      twitter: "",
-      facebook: "",
-      youtube: "",
-      instagram: "",
-      errors: {}
-    };
+  const [displaySocialInputs, setdisplaySocialInputs] = useState(false);
 
-  }
+  const {  handle, location, favsneaker, profilephoto, avatar, bio, twitter, facebook, youtube, instagram } = values;
 
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     const profileData = {
-      handle: this.state.handle,
-      location: this.state.location,
-      favsneaker: this.state.favsneaker,
-      profilephoto: this.state.profilephoto,
-      avatar: this.state.avatar,
-      bio: this.state.bio,
-      twitter: this.state.twitter,
-      facebook: this.state.facebook,
-      linkedin: this.state.linkedin,
-      youtube: this.state.youtube,
-      instagram: this.state.instagram
+      handle: handle,
+      location: location,
+      favsneaker: favsneaker,
+      profilephoto: profilephoto,
+      avatar: avatar,
+      bio: bio,
+      twitter: twitter,
+      facebook: facebook,
+      youtube: youtube,
+      instagram: instagram
     };
 
-    this.props.createProfile(profileData, this.props.history);
+    createProfile(profileData, history);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
+
+
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   }
 
-  onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+ const handleChange = (value) => {
+    setValues({ ...values, bio: value });
   }
 
-  handleChange = (value) => {
-    this.setState({ bio: value })
-  }
-
-  profilephotohandler = e => {
+ const profilephotohandler = e => {
     e.preventDefault();
 
 
@@ -76,18 +68,13 @@ class CreateProfile extends Component {
       Widgetsetting(),
       (error, result) => {
         if (result && result.event === "success") {
-          this.setState({
-            profilephoto: result.info.url
-          });
+
+          setValues({ ...values, profilephoto: result.info.url });
         }
       }
     );
   };
 
-
-
-  render() {
-    const { errors, displaySocialInputs } = this.state;
 
     let socialInputs;
 
@@ -98,39 +85,37 @@ class CreateProfile extends Component {
             placeholder="Twitter Profile URL"
             name="twitter"
             icon="fab fa-twitter"
-            value={this.state.twitter}
-            onChange={this.onChange}
-            error={errors.twitter}
+            value={twitter}
+            onChange={onChange}
           />
 
           <InputGroup
             placeholder="Facebook Page URL"
             name="facebook"
             icon="fab fa-facebook"
-            value={this.state.facebook}
-            onChange={this.onChange}
-            error={errors.facebook}
+            value={facebook}
+            onChange={onChange}
           />
 
           <InputGroup
             placeholder="YouTube Channel URL"
             name="youtube"
             icon="fab fa-youtube"
-            value={this.state.youtube}
-            onChange={this.onChange}
-            error={errors.youtube}
+            value={youtube}
+            onChange={onChange}
           />
 
           <InputGroup
             placeholder="Instagram Page URL"
             name="instagram"
             icon="fab fa-instagram"
-            value={this.state.instagram}
-            onChange={this.onChange}
-            error={errors.instagram}
+            value={instagram}
+            onChange={onChange}
           />
         </div>
       );
+    } else {
+      socialInputs = null;
     }
 
     return (
@@ -147,40 +132,36 @@ class CreateProfile extends Component {
 
               <small className="d-block pb-3">* = required fields</small>
 
-              <form onSubmit={this.onSubmit}>
+              <form onSubmit={onSubmit}>
                 <TextFieldGroup
                   placeholder="* Profile Handle"
                   name="handle"
-                  value={this.state.handle}
-                  onChange={this.onChange}
-                  error={errors.handle}
+                  value={handle}
+                  onChange={onChange}
                   info="A unique handle for your profile URL. Your full name, company name, nickname"
                 />
 
                 <TextFieldGroup
                   placeholder="Location"
                   name="location"
-                  value={this.state.location}
-                  onChange={this.onChange}
-                  error={errors.location}
+                  value={location}
+                  onChange={onChange}
                   info="City or city & state suggested (eg. Boston, MA)"
                 />
 
                 <TextFieldGroup
                   placeholder="Your Favorite Sneaker"
                   name="favsneaker"
-                  value={this.state.favsneaker}
-                  onChange={this.onChange}
-                  error={errors.favsneaker}
+                  value={favsneaker}
+                  onChange={onChange}
                   info="(eg. Air Jordan 12 Taxi)"
                 />
 
                 <ReactQuill
                   placeholder="Short Bio"
                   name="bio"
-                  value={this.state.bio}
-                  onChange={this.handleChange}
-                  error={errors.text}
+                  value={bio}
+                  onChange={handleChange}
                 />
 
           
@@ -188,7 +169,7 @@ class CreateProfile extends Component {
                   <h4 className="heading-4">Upload a photo for your profile</h4>
 
                   <div className="profileHeaderPreview">
-                      <img src={this.state.profilephoto} alt="" />
+                      <img src={profilephoto} alt="" />
                   </div>
 
                   
@@ -196,7 +177,7 @@ class CreateProfile extends Component {
                     <button
                       id="upload_widget"
                       className="btn btn-lightblue"
-                      onClick={this.profilephotohandler}
+                      onClick={profilephotohandler}
                     >
                       Upload files
                     </button>
@@ -208,9 +189,7 @@ class CreateProfile extends Component {
                   <button
                     type="button"
                     onClick={() => {
-                      this.setState(prevState => ({
-                        displaySocialInputs: !prevState.displaySocialInputs
-                      }));
+                      setdisplaySocialInputs((prevState) => !prevState);
                     }}
                     className="btn btn-lightblue btn-sociallinks"
                   >
@@ -233,13 +212,9 @@ class CreateProfile extends Component {
       
       </React.Fragment>
     );
-  }
+  
 }
 
-CreateProfile.propTypes = {
-  // profile: PropTypes.object.isRequired,
-  // errors: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => ({
   profile: state.profile,

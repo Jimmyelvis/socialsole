@@ -12,8 +12,12 @@ import { connect } from 'react-redux';
     const {alerts} = props;
 
     if (alerts !== null && alerts.length > 0) {
-      return alerts.map(alert => (
-        <div key={alert.id} className={'alert alert-' + alert.alertType}>
+      return alerts.map((alert, index) => (
+        <div 
+          key={alert.id} 
+          className={'alert alert-' + alert.alertType}
+          style={{top: `${(index + 1) * 100}px`}}
+        >
           {alert.msg}
         </div>
       ));

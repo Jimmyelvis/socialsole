@@ -9,40 +9,39 @@ import NewestProfiles from "../homepage/frontpage-components/NewestProfiles"
   logged in.
 */
 
-export class Community extends Component {
+export const Community = () => {
   
-  render() {
-    return (
-      <React.Fragment>
-        <CommNavbar />
+  return (
+    <React.Fragment>
+      <CommNavbar />
 
-        <div className="community">
-          <div className="overlay"></div>
-  
-          <div className="content">
-            <h1 className="heading-1">Sneaker Community</h1>
-            <p>
-              The Community is here for all Sneakerheads. If you have not yet
-              registered, then feel free to register so you can join in the
-              discussions, comment on articles, post your sneakers
-            </p>
-          </div>
+      <div className="community">
+        <div className="overlay"></div>
+
+        <div className="content">
+          <h1 className="heading-1">Sneaker Community</h1>
+          <p>
+            The Community is here for all Sneakerheads. If you have not yet
+            registered, then feel free to register so you can join in the
+            discussions, comment on articles, post your sneakers
+          </p>
         </div>
+      </div>
 
-        <div className="container container-home">
+      <div className="container container-home">
 
-          <NewestProfiles />
-          <Mostliked />
+        <NewestProfiles />
+        <Mostliked />
 
-          
+        
 
-        </div>
+      </div>
 
-      </React.Fragment>  
+    </React.Fragment>  
 
 
-    );
-  }
+  );
+ 
 }
 
 export default Community

@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import isEmpty from "../../../validation/is-empty";
 
-export class ProfileItem extends Component {
-  render() {
-    const { profile } = this.props;
+const ProfileItem = ({ profile }) => {
+
 
     return (
       <div className="userheader profilecard contentbody">
@@ -39,7 +38,7 @@ export class ProfileItem extends Component {
 
       </div>
     );
-  }
+  
 }
 
 ProfileItem.propTypes = {

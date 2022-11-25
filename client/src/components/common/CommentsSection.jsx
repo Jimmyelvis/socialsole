@@ -1,7 +1,7 @@
 import React from 'react'
 import TextAreaFieldGroup from './TextAreaFieldGroup'
 
-const CommentsSection = ({errors, onSubmit, text, onChange}) => {
+const CommentsSection = ({onSubmit, text, onChange}) => {
   return (
     <React.Fragment>
       <div className="commentsheader">Make a comment...</div>
@@ -12,7 +12,6 @@ const CommentsSection = ({errors, onSubmit, text, onChange}) => {
             name="text"
             value={text}
             onChange={onChange}
-            error={errors.text}
           />
         </div>
   

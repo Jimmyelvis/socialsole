@@ -2,7 +2,17 @@ const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
 module.exports = function validatePostInput(data) {
-  let errors = {};
+  let errors = [];
+
+  function removeTags(str) {
+    if (str === null || str === "") return false;
+    else str = str.toString();
+
+    // Regular expression to identify HTML tags in
+    // the input string. Replacing the identified
+    // HTML tag with a null string.
+    return str.replace(/(<([^>]+)>)/gi, "");
+  }
 
   data.text = !isEmpty(data.text) ? data.text : '';
   data.author = !isEmpty(data.author) ? data.author : '';
@@ -13,33 +23,28 @@ module.exports = function validatePostInput(data) {
 
 
 
-
   if (!Validator.isLength(data.text, { min: 2})) {
-    errors.text = 'Article must be at least 2 characters';
+    errors.push('Article must be at least 2 characters');
   }
 
   if (Validator.isEmpty(data.text)) {
-    errors.text = 'Article field is required';
+    errors.push('Article field is required');
   }
 
-  // if (!Validator.isEmail(data.email)) {
-  //   errors.email = 'Email is invalid';
-  // }
- 
-  // if (Validator.isEmpty(data.email)) {
-  //   errors.email = 'Email field is required';
-  // }
+  if (data.text === "<p><br></p>") {
+    errors.push('Article field is required');
+  }
 
   if (Validator.isEmpty(data.headline)) {
-    errors.headline = 'Headline field is required';
+    errors.push('Headline field is required');
   }
 
   if (Validator.isEmpty(data.fullheaderimage)) {
-    errors.fullheaderimage = 'A Full Header Image is needed for submission';
+    errors.push('A Full Header Image is needed for submission');
   }
 
   if (Validator.isEmpty(data.articleheaderimage)) {
-    errors.articleheaderimage = 'A Article Header Image is needed for submission';
+    errors.push('A Article Header Image is needed for submission');
   }
 
   return {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setAlert } from "./alert";
 
 import {
   GET_PROFILE,
@@ -49,7 +50,7 @@ export const getProfileByHandle = (handle) => dispatch => {
 };
 
 // Create Profile
-export const createProfile = (profileData, history) => dispatch => {
+export const createProfile = (profileData, history, edit = false) => dispatch => {
   axios
     .post("/api/profile", profileData)
     .then(res =>{
@@ -57,7 +58,12 @@ export const createProfile = (profileData, history) => dispatch => {
         type: CLEAR_ERRORS,
 			  payload: {}
       }) 
-      history.push("/dashboard")
+
+      dispatch(setAlert(edit ? "Profile Updated" : "Profile Created", "success"));
+
+      if (!edit) {
+        history.push("/dashboard");
+      }
       
     })
     .catch(err =>

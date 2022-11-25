@@ -1,69 +1,45 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import TextAreaFieldGroup from '../../common/TextAreaFieldGroup';
 import { addComment } from '../../../actions/articleActions';
 import CommentsSection from '../../common/CommentsSection'
 
 
-export class CommentForm extends Component {
+const CommentForm = ({ articleId, addComment, auth, errors, handle }) => {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-      errors: {},
-      msg: ''
-    };
+  const [text, setText] = useState('');
+  const [msg, setMsg] = useState("");
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors });
-    }
-  }
-
-  onSubmit(e) {
+ const onSubmit = (e) => {
     e.preventDefault();
 
-    const { user } = this.props.auth;
-    const { articleId} = this.props;
-    const { handle } = this.props;
-
+    const { user } = auth;
 
     const newComment = {
-      text: this.state.text,
+      text: text,
       name: user.name,
       avatar: user.avatar,
       handle: handle
     };
 
-    this.props.addComment(articleId, newComment);
-    this.setState({ text: '', errors: {} });
+    addComment(articleId, newComment);
+    setText({ text: ''});
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+  const onChange = (e) => {
+    setText(e.target.value);
   }
 
 
-  render() {
-    
-    const { errors } = this.state;
+  return (
+   <CommentsSection  
+      onSubmit={onSubmit} 
+      text={text}
+      onChange={onChange}
+  />
+  )
 
-
-
-    return (
-     <CommentsSection  
-        errors={this.state.errors} 
-        onSubmit={this.onSubmit} 
-        text={this.state.text}
-        onChange={this.onChange}
-    />
-    )
-  }
 }
 
 const mapStateToProps = state => ({

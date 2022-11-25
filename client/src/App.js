@@ -75,82 +75,83 @@ if (localStorage.jwtToken) {
   }
 }
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-        <ScrollToTop>
-          <React.Fragment>
-              <Alert />
-              <Route exact path="/" component={Home} />
-              <Route exact path="/community" component={Community} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/profiles" component={Profiles} />
-              <Route exact path="/profile/:handle" component={Profile} />
-              <Route exact path="/post/:id" component={Post} />
-              <Route exact path="/sneaker/:id" component={Sneaker} />
-              <Route exact path="/allsneakers" component={Sneakers} />
-              <Route exact path="/allposts" component={Posts} />
-              <Route exact path="/news/concord" component={NewsItemConcord} />
-              <Route exact path="/news/nasa" component={NewsItemNasa} />
-              <Route exact path="/news/tinker" component={NewsItemTinker} />
-              <Route exact path="/release/indigo" component={NewReleaseAJIndigo} />
-              <Route exact path="/release/firedenim" component={NewReleaseAJFireDenim} />
-              <Route exact path="/release/questionmid" component={NewReleaseQuestion} />
-              <Route exact path="/article/:id" component={Article} />
-              <Route exact path="/articleedit/:id" component={ArticleEdit} />
-              <Route exact path="/editpost/:id" component={EditPost} />
-              <Route exact path="/editsneaker/:id" component={EditSneaker} />
-              <Route exact path="/allarticles/" component={AllArticles} />
+const App = () => {
+
+  return (
+    <Provider store={store}>
+      <Router>
+      <ScrollToTop>
+        <React.Fragment>
+            <Alert />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/community" component={Community} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/profiles" component={Profiles} />
+            <Route exact path="/profile/:handle" component={Profile} />
+            <Route exact path="/post/:id" component={Post} />
+            <Route exact path="/sneaker/:id" component={Sneaker} />
+            <Route exact path="/allsneakers" component={Sneakers} />
+            <Route exact path="/allposts" component={Posts} />
+            <Route exact path="/news/concord" component={NewsItemConcord} />
+            <Route exact path="/news/nasa" component={NewsItemNasa} />
+            <Route exact path="/news/tinker" component={NewsItemTinker} />
+            <Route exact path="/release/indigo" component={NewReleaseAJIndigo} />
+            <Route exact path="/release/firedenim" component={NewReleaseAJFireDenim} />
+            <Route exact path="/release/questionmid" component={NewReleaseQuestion} />
+            <Route exact path="/article/:id" component={Article} />
+            <Route exact path="/articleedit/:id" component={ArticleEdit} />
+            <Route exact path="/editpost/:id" component={EditPost} />
+            <Route exact path="/editsneaker/:id" component={EditSneaker} />
+            <Route exact path="/allarticles/" component={AllArticles} />
 
 
-              <Switch>
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path="/create-profile"
-                  component={CreateProfile}
-                />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path="/edit-profile"
-                  component={EditProfile}
-                />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path="/createpost"
-                  component={CreatePost}
-                />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path="/createsneaker"
-                  component={CreateSneaker}
-                />
-              </Switch>
-              <Switch>
-                <AuthorRoute
-                  exact path="/createarticle" 
-                  component={CreateArticle} 
-                />
-              </Switch>
-              <Route exact path="/not-found" component={NotFound} />
-            <Footer />
-            </React.Fragment>
-            </ScrollToTop>
-        </Router>
-      </Provider>
-    );
-  }
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/create-profile"
+                component={CreateProfile}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/edit-profile"
+                component={EditProfile}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/createpost"
+                component={CreatePost}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/createsneaker"
+                component={CreateSneaker}
+              />
+            </Switch>
+            <Switch>
+              <AuthorRoute
+                exact path="/createarticle" 
+                component={CreateArticle} 
+              />
+            </Switch>
+            <Route exact path="/not-found" component={NotFound} />
+          <Footer />
+          </React.Fragment>
+          </ScrollToTop>
+      </Router>
+    </Provider>
+  );
+
+ 
 }
 
 export default App;

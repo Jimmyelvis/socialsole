@@ -1,106 +1,46 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import TextAreaFieldGroup from '../../common/TextAreaFieldGroup';
-import { addComment } from '../../../actions/sneakerActions';
-import { getCurrentProfile } from '../../../actions/profileActions';
-import CommentsSection from '../../common/CommentsSection'
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import TextAreaFieldGroup from "../../common/TextAreaFieldGroup";
+import { addComment } from "../../../actions/sneakerActions";
+import { getCurrentProfile } from "../../../actions/profileActions";
+import CommentsSection from "../../common/CommentsSection";
+import { setAlert } from "../../../actions/alert";
 
+const CommentForm = ({ addComment, handle, auth, profile: { profile }, sneakerId, setAlert }) => {
+  const [text, setText] = useState("");
 
+  useEffect(() => {
+    getCurrentProfile();
+  }, [getCurrentProfile]);
 
-class CommentForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-      errors: {}
-
-    };
-
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
- 
-  componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors });
-    }
-  }
-
-
-  onSubmit(e) {
+  const onSubmit = (e) => {
     e.preventDefault();
 
-    const { user } = this.props.auth;
-    const { sneakerId } = this.props;
-    const { handle } = this.props;
-    
-
+    const { user } = auth;
 
     const newComment = {
-      text: this.state.text,
+      text: text,
       name: user.name,
       avatar: user.avatar,
-      handle: handle
+      handle: handle,
     };
 
-    console.log('============newComment========================');
-    console.log(newComment);
-    console.log('====================================');
+    addComment(sneakerId, newComment);
+    setText("");
+    setAlert("Comment Added", "success");
+  };
 
-    this.props.addComment(sneakerId, newComment);
-    this.setState({ text: '', errors: {} });
-  }
+  const onChange = (e) => {
+    setText(e.target.value);
+  };
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-
-  render() {
-
-    const { errors } = this.state;
-
-
-    return (
-      // <div className="post-form">
-      //     <div className="card-header bg-info text-white"> Make a comment...</div>
-      //       <form className="commentForm" onSubmit={this.onSubmit}>
-      //         <div className="form-group">
-      //           <TextAreaFieldGroup
-      //               placeholder="Reply to post"
-      //               name="text"
-      //               value={this.state.text}
-      //               onChange={this.onChange}
-      //             />
-      //         </div>
-      //         <button type="submit" className="btn btn-sole">
-      //           Submit
-      //         </button>
-      //       </form>
-      // </div>
-
-      <CommentsSection  
-        errors={this.state.errors} 
-        onSubmit={this.onSubmit} 
-        text={this.state.text}
-        onChange={this.onChange}
-    />
-    )
-  }
-}
-
-CommentForm.propTypes = {
-  addPost: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  sneakerId: PropTypes.string.isRequired,
+  return <CommentsSection onSubmit={onSubmit} text={text} onChange={onChange} />;
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.profile
-
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps, { addComment, getCurrentProfile })(CommentForm);
+export default connect(mapStateToProps, { addComment, getCurrentProfile, setAlert })(CommentForm);

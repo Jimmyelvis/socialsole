@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -24,44 +24,35 @@ import Navbar from "../../../components/layout/CommNavbar";
   for posting comments.
 */
 
-export class Sneaker extends Component {
+const Sneaker = ({ getSneaker, getCurrentProfile, sneaker: { sneaker, loading }, match, auth, profile: { profile } }) => {
 
-  state = {
-    currentSneaker: null,
-  };
- 
-  componentDidMount() {
-    this.props.getSneaker(this.props.match.params.id);
+    /**
+   * State for storing the match.params.id of the current sneaker
+   */
+  const [currentSneaker, setCurrentSneaker] = useState(null);
 
-    this.props.getCurrentProfile();
+  useEffect(() => { 
+    getSneaker(match.params.id);
+    getCurrentProfile();
+    setCurrentSneaker(match.params.id);
+  }, []);
 
-
-    this.setState({
-      currentSneaker: this.props.match.params.id
-    })
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.match.params.id !== this.state.currentSneaker) {
-      this.props.getSneaker(this.props.match.params.id);
-
-      this.setState({
-        currentSneaker: this.props.match.params.id,
-      });
+   useEffect(() => {
+    if (currentSneaker !== match.params.id) {
+      getSneaker(match.params.id);
+      setCurrentSneaker(match.params.id);
     }
-  }
+  }, [match.params.id]);
 
 
-  render() {
-
-    const { sneaker, loading } = this.props.sneaker;
-    const { profile } = this.props.profile;
-    const { user } = this.props.auth;
+    const { user } = auth;
     let sneakerContent;
 
     if (sneaker === null || loading || Object.keys(sneaker).length === 0) {
       sneakerContent = <Spinner />;
-    }else if (user === null || Object.keys(user).length === 0) {
+    }
+    
+    else if (user === null || Object.keys(user).length === 0) {
 
       sneakerContent = (
         <div>
@@ -134,13 +125,9 @@ export class Sneaker extends Component {
 
       </React.Fragment>
     );
-  }
+  
 }
 
-Sneaker.propTypes = {
-  getSneaker: PropTypes.func.isRequired,
-  sneaker: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => ({
   sneaker: state.sneaker,

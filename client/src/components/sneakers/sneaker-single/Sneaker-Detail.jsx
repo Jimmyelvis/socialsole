@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import classnames from "classnames";
-import PropTypes from "prop-types";
 import Related from "./RelatedSneakers";
 import { Link } from "react-router-dom";
 import { deleteSneaker, addLike, removeLike } from "../../../actions/sneakerActions";
-import Moment from "react-moment";
 import { getCurrentProfile } from "../../../actions/profileActions";
+import moment from "moment";
 import Icon from "../../icons/Icon"
 
 /*
@@ -19,26 +17,10 @@ import Icon from "../../icons/Icon"
 
 */
 
-class SneakerItem extends Component {
-  componentDidMount() {
-    this.props.getCurrentProfile();
-  }
+const SneakerItem = ({ sneaker, showActions, auth, deleteSneaker, addLike, removeLike }) => {
 
-  onDeleteClick(id) {
-    this.props.deleteSneaker(id);
-  }
 
-  onLikeClick(id) {
-    this.props.addLike(id);
-  }
-
-  onUnlikeClick(id) {
-    this.props.removeLike(id);
-  }
-
-  findUserLike(likes) {
-    const { auth } = this.props;
-
+ const findUserLike = (likes) => {
 
     if (likes.filter((like) => like.user === auth.user.id).length > 0) {
     
@@ -51,10 +33,7 @@ class SneakerItem extends Component {
     
   }
 
-  render() {
-    const { profile } = this.props.profile;
-    const { isAuthenticated, user } = this.props.auth;
-    const { sneaker, auth, showActions } = this.props;
+    const { isAuthenticated, user } = auth;
 
     const tags = sneaker.tags.map((tag, index) => (
       <div key={index} className="p-3">
@@ -68,10 +47,7 @@ class SneakerItem extends Component {
       </Link>
     );
 
-    if (!profile) {
-      return null;
-    }
-
+  
     return (
       <React.Fragment>
         <div className="sneakerdetail">
@@ -114,10 +90,10 @@ class SneakerItem extends Component {
 
                     <div 
                       className="likes"
-                      onClick={this.onLikeClick.bind(this, sneaker._id)}
+                      onClick={() => addLike(sneaker._id)}
                     >
                       {
-                        this.findUserLike(sneaker.likes) ? 
+                        findUserLike(sneaker.likes) ? 
                         (
                             <Icon color="#AADDFF" icon="thumbsup" className="thumbs" />
                         ) : 
@@ -132,7 +108,7 @@ class SneakerItem extends Component {
 
                     <div 
                       className="unlikes"
-                      onClick={this.onUnlikeClick.bind(this, sneaker._id)}
+                      onClick={() => removeLike(sneaker._id)}
                     >
                         <Icon color="#5D789F" icon="thumbsdown" className="thumbs" />
 
@@ -237,7 +213,7 @@ class SneakerItem extends Component {
                 <h4 className="heading-4">Created By</h4>
                 <h3 className="heading-3">{ sneaker.user.name }</h3>
                 <h5 className="heading-5">
-                  Posted <Moment format="MM/DD/YYYY">{sneaker.date}</Moment>
+                  Posted {moment(sneaker.date).fromNow()}
                 </h5>
 
                 <div className="sneakeredit">
@@ -270,21 +246,14 @@ class SneakerItem extends Component {
         
       </React.Fragment>
     );
-  }
+  
 }
 
 SneakerItem.defaultProps = {
   showActions: true,
 };
 
-SneakerItem.propTypes = {
-  deleteSneaker: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired,
-  addLike: PropTypes.func.isRequired,
-  removeLike: PropTypes.func.isRequired,
-  sneaker: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-};
+
 
 const mapStateToProps = (state) => ({
   profile: state.profile,
@@ -295,5 +264,5 @@ export default connect(mapStateToProps, {
   deleteSneaker,
   addLike,
   removeLike,
-  getCurrentProfile,
+  getCurrentProfile
 })(SneakerItem);

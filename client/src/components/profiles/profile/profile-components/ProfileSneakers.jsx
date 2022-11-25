@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-// import PropTypes from 'prop-types'
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import SneakerFeed from "./profilesneakers/SneakerFeed";
 import { getSneakersByUser } from "../../../../actions/sneakerActions";
@@ -7,29 +6,22 @@ import Spinner from "../../../common/Spinner";
 import Card from "../../../cards/Card"
 
 
-export class ProfileSneakers extends Component {
+export const ProfileSneakers = ({ profile: { profile }, sneaker: { sneakers, loading }, getSneakersByUser }) => {
 
-  constructor(props) {
-    super(props);
+  const [search, setSearch] = useState("");
 
-    this.state = {
-      search: ""
-    };
-  }
+  useEffect(() => {
+    if (profile) {
+      getSneakersByUser(profile.user._id);
+    }
+  }, [profile]);
+  
 
-  componentDidMount() {
-    const { profile } = this.props.profile;
-    const profileUserId = profile.user._id;
-    this.props.getSneakersByUser(profileUserId);
-  }
-
-  updateSearch = e => {
-    this.setState({ search: e.target.value });
+   const updateSearch = (e) => {
+    setSearch(e.target.value);
   };
 
-  render() {
-    const { profile } = this.props.profile;
-    const { sneakers, loading } = this.props.sneaker;
+
 
     const firstName = profile.user.name.trim().split(" ")[0];
 
@@ -37,8 +29,8 @@ export class ProfileSneakers extends Component {
 
     let filteredSneakers = sneakers.filter(sneaker => {
       return (
-        sneaker.model.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-        -1 || sneaker.colorway.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
+        sneaker.model.toLowerCase().indexOf(search.toLowerCase()) !==
+        -1 || sneaker.colorway.toLowerCase().indexOf(search.toLowerCase()) !==
         -1
       );
     });
@@ -67,8 +59,8 @@ export class ProfileSneakers extends Component {
             <input
               type="text"
               placeholder="Filter By Headline"
-              value={this.state.search}
-              onChange={this.updateSearch}
+              value={search}
+              onChange={updateSearch}
               className="form-control"
             />
           </div>
@@ -80,7 +72,7 @@ export class ProfileSneakers extends Component {
         </div>
       </div>
     );
-  }
+  
 }
 
 const mapStateToProps = state => ({

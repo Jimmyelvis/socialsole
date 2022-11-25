@@ -11,20 +11,17 @@ import iconSet from "../../icons/selection.json";
 */
 
 
-export class ArticleItem extends Component {
+const ArticleItem  = (
+  { article , auth: { isAuthenticated, user } }
+  ) => {
   
-
-  render() {
-
-    const { article } = this.props
-    const { isAuthenticated, user } = this.props.auth;
-
 
     const editbtn = (
       <Link to={`/articleedit/${article._id}`} className="editbtn">
           <Icon color="#AADDFF" icon="pencil1" />
       </Link>
     )
+
 
     return (
       <React.Fragment>
@@ -37,15 +34,15 @@ export class ArticleItem extends Component {
             <div className="userheader authorheader contentbody">
               <div className="left">
                 <div className="imgholder">
-                  <img src={article.user.avatar} alt="" />
+                  <img src={article.user && article.user.avatar} alt="" />
                 </div>
               </div>
 
               <div className="right">
-                <h3 className="heading-3">{article.user.name}</h3>
+                <h3 className="heading-3">{article.user && article.user.name}</h3>
                 <h4 className="heading-4">
                   Writer for SocialSole <br />
-                  <span className="authorEmail">{article.user.email}</span>
+                  <span className="authorEmail">{article.user && article.user.email}</span>
                 </h4>
 
                 <div className="articleedit">
@@ -82,7 +79,7 @@ export class ArticleItem extends Component {
         </div>
       </React.Fragment>
     );
-  }
+
 }
 
 const mapStateToProps = state => ({

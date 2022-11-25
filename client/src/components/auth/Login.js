@@ -1,113 +1,70 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
-import Navbar from '../../components/layout/Navbar';
+import Navbar from "../../components/layout/Navbar";
 
+const Login = ({ loginUser, auth, history }) => {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
 
-class Login extends Component {
-  constructor() {
-    super();
+  const { email, password } = values;
 
-    this.state = {
-      email: "",
-      password: "",
-      errors: {}
-    };
-
- 
-  }
-
-
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      history.push("/dashboard");
     }
-  }
+  }, []);
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      history.push("/dashboard");
     }
+  }, [auth.isAuthenticated]);
 
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
-  }
-
-  onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     const userData = {
-      email: this.state.email,
-      password: this.state.password
+      email: email,
+      password: password,
     };
 
-    this.props.loginUser(userData);
+    loginUser(userData);
   };
 
-
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  render() {
-    const { errors } = this.state;
+  return (
+    <div className="login contentbody">
+      <Navbar />
 
-    return (
-      <div className="login contentbody">
-       <Navbar />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-8 m-auto">
+            <h1>Log In</h1>
+            <p>Sign in to your SocialSole account</p>
+            <form onSubmit={onSubmit}>
+              <TextFieldGroup placeholder="Email Address" name="email" type="email" value={email} onChange={onChange} />
 
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1>Log In</h1>
-              <p>
-                Sign in to your SocialSole account
-              </p>
-              <form onSubmit={this.onSubmit}>
+              <TextFieldGroup placeholder="Password" name="password" type="password" value={password} onChange={onChange} />
 
-                <TextFieldGroup
-                  placeholder="Email Address"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.onChange}
-                  error={errors.email}
-                />
-
-               <TextFieldGroup
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password}
-                />
-
-                <input type="submit" className="btn btn-sole btn-block mt-4" />
-              </form>
-            </div>
+              <input type="submit" className="btn btn-sole btn-block mt-4" />
+            </form>
           </div>
         </div>
       </div>
-    );
-  }
-}
-
-Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+    </div>
+  );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);

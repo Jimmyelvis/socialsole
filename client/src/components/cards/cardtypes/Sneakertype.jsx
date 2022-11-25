@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React  from "react";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
@@ -7,8 +7,6 @@ import {
   addLike,
   removeLike
 } from "../../../actions/sneakerActions";
-import Moment from "react-moment";
-import Truncate from "react-truncate";
 import Icon from "../../icons/Icon"
 import iconSet from "../../icons/selection.json";
 import { defaultimg } from "../../common/defaultimg";
@@ -16,17 +14,11 @@ import { defaultimg } from "../../common/defaultimg";
 
 
 
-class SneakerItem extends Component {
-  onDeleteClick(id) {
-    this.props.deleteSneaker(id);
-  }
+const SneakerItem = (
+    { profile: { profile }, sneaker, auth, showActions, deleteSneaker }
+  ) => {
 
 
-  render() {
-    const { profile } = this.props.profile;
-    const { sneaker, auth, showActions } = this.props;
-
-  
 
     return (
       <div className="card-ver-overlay ">
@@ -88,7 +80,7 @@ class SneakerItem extends Component {
 
       </div>
     );
-  }
+  
 }
 
 SneakerItem.defaultProps = {

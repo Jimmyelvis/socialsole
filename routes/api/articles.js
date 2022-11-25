@@ -284,7 +284,7 @@ router.post(
     }
 
     Article.findById(req.params.id)
-      .populate('user', ['name', 'avatar'])
+      .populate('user', ['name', 'avatar', 'email'])
       .then(article => {
         const newComment = {
           text: req.body.text,
@@ -299,7 +299,9 @@ router.post(
         article.comments.push(newComment);
 
         // Save
-        article.save().then(article => res.json(article));
+        article.save().then(article => {
+          res.json(article)
+        });
         
       })
       .catch(err => res.status(404).json({ postnotfound: "No article found" }));
@@ -315,7 +317,7 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Article.findById(req.params.id)
-      .populate('user', ['name', 'avatar'])
+      .populate('user', ['name', 'avatar', 'email'])
       .then(article => {
         // Check to see if comment exists
 

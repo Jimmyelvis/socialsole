@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setAlert } from "./alert";
 
 
 import {
@@ -102,13 +103,13 @@ export const editSneaker = (id, sneakerData, history) => dispatch => {
   dispatch(setSneakerLoading());
   axios    
   .post(`/api/sneakers/${id}`, sneakerData)
-  .then(res =>
+  .then(res => {
     dispatch({
       type: ADD_SNEAKER,
       payload: res.data
-    },
-    history.push(`/sneaker/${id}`)
-    )
+    })
+      dispatch(setAlert("Sneaker Info Updated", "success"));
+    } 
   )
   .catch(err =>
     dispatch({

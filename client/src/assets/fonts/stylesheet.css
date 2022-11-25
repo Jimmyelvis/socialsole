@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'DejaVu Sans';
+    src: url('DejaVuSans-Bold.woff2') format('woff2'),
+        url('DejaVuSans-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DejaVu Sans';
+    src: url('DejaVuSans.woff2') format('woff2'),
+        url('DejaVuSans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fjalla One';
+    src: url('FjallaOne-Regular.woff2') format('woff2'),
+        url('FjallaOne-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Clear Sans';
+    src: url('ClearSans-Bold.woff2') format('woff2'),
+        url('ClearSans-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Clear Sans';
+    src: url('ClearSans.woff2') format('woff2'),
+        url('ClearSans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DejaVu Sans Condensed';
+    src: url('DejaVuSansCondensed-Bold.woff2') format('woff2'),
+        url('DejaVuSansCondensed-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+

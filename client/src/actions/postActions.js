@@ -104,13 +104,15 @@ export const editPost = (id, postData, history) => dispatch => {
   dispatch(setPostLoading());
   axios    
   .post(`/api/posts/${id}`, postData)
-  .then(res =>
+  .then(res => {
     dispatch({
       type: ADD_POST,
       payload: res.data
-    },
-    history.push(`/post/${id}`)
-    )
+    })
+
+    dispatch(setAlert("PostUpdated", "success"));
+    
+  }
   )
   .catch(err =>
     dispatch({

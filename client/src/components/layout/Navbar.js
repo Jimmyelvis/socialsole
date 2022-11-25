@@ -3,7 +3,7 @@
   This contains a different set of links than the Community Navbar
 */
 
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser, logoutUser, registerUser } from "../../actions/authActions";
@@ -16,12 +16,11 @@ import { Widgetsetting } from "../common/Cloudinary";
 
 
 
-class Navbar extends Component {
+const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurrentProfile, setAlert }) => {
 
-  constructor(props) {
-    super(props)
+  const [modal, setModal] = useState(false)
   
-    this.state = {
+    const [values, setvalues] = useState({
       checked : false,
       showlogin: false,
       showregister: false,
@@ -31,95 +30,119 @@ class Navbar extends Component {
       avatar: "",
       password: "",
       password2: "",
-      errors: {}
-    }
+  });
 
-  }
-  
+  const {checked , showlogin, showregister, name, email, avatar, password, password2} = values
 
-  onLogoutClick = (e) => {
+ const onLogoutClick = (e) => {
     e.preventDefault();
     // this.props.clearCurrentProfile();
-    this.props.logoutUser();
+    logoutUser();
   }
 
-  changechecked = () => {
-    this.setState(prevState => ({
+
+  /* useState check previous state toggle checked */
+  const changechecked = () => {
+    setvalues(prevState => ({
+      ...values,
       checked: !prevState.checked
     }));
   }
 
-  showLogin = () => {
-    this.setState (
-      {showlogin: true}
-    )
-  }
+  const showLogin = () => {
 
-  showRegister = () => {
-    this.setState (
-      {showregister: true}
-    )
-  }
-
-  closeLogin = () => {
-     this.setState ({
-      showlogin: false
-     })
-  }
-
-  closeRegister = () => {
-    this.setState ({
-     showregister: false
+    setvalues({
+      ...values,
+      showlogin: true
     })
+  }
+
+
+ const showRegister = () => {
+       setvalues({
+      ...values,
+      showregister: true
+    })
+}
+
+const closeLogin = () => {
+     setvalues({
+      ...values,
+      showlogin: false
+    })
+}
+
+const closeRegister = () => {
+
+    setvalues({
+      ...values,
+      showregister: false
+    })
+
  }
 
-  onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+ const onChange = (e) => {
+
+    setvalues({
+      ...values,
+      [e.target.name]: e.target.value 
+    })
   }
 
-  handleChange = (value) => {
-    this.setState({ text: value })
+
+  const handleChange = (value) => {
+
+    setvalues({
+      ...values,
+      text: value
+    })
+
   }
 
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.closeLogin();
-      this.closeRegister();
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      closeLogin();
+      closeRegister();
     }
+   
+  }, [auth.isAuthenticated])
 
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
-  }
 
-  onLoginSubmit = e => {
+  const onLoginSubmit = e => {
     e.preventDefault();
 
     const userData = {
-      email: this.state.email,
-      password: this.state.password
+      email: email,
+      password: password
     };
 
-    this.props.loginUser(userData);
-    this.props.setAlert('Login Successful', 'success');
+     setvalues({
+       ...values,
+       showlogin: false,
+     });
 
+
+    loginUser(userData);
   };
 
-  onRegisterSubmit = e => {
+ const onRegisterSubmit = e => {
     e.preventDefault();
 
     const newUser = {
-      name: this.state.name,
-      email: this.state.email,
-      avatar: this.state.avatar,
-      password: this.state.password,
-      password2: this.state.password2
+      name: name,
+      email: email,
+      avatar: avatar,
+      password: password,
+      password2: password2
     };
 
-    this.props.registerUser(newUser, this.props.history);
-    this.props.setAlert('You have successfully registered, you can log in', 'success');
+    setvalues({ 
+      ...values,
+      showregister: false,
+    })
 
+    registerUser(newUser, history);
   }
 
 
@@ -132,7 +155,7 @@ class Navbar extends Component {
     to the back end with all the other data entered
   */
 
- avatarUploadWidget = e => {
+ const avatarUploadWidget = e => {
   e.preventDefault();
 
 
@@ -141,241 +164,246 @@ class Navbar extends Component {
     (error, result) => {
       if (result && result.event === "success") {
 
-        this.setState({
+        setvalues({
+          ...values,
           avatar: result.info.url
-
-        });
+        })
       }
     }
   );
 };
 
-
  
-  render() {
-    /*
-    Use destructuring to pull out the isAuthenticated, user props 
-    from the auth state. Depending on whether isAuthenticated is
-    true or false nav items will change accordingly
-  */
-    const { isAuthenticated } = this.props.auth;
-    const { errors } = this.state;
+/*
+Use destructuring to pull out the isAuthenticated, user props 
+from the auth state. Depending on whether isAuthenticated is
+true or false nav items will change accordingly
+*/
+const { isAuthenticated } = auth;
 
-    
-    const authLinks = (
-      <React.Fragment>
-        <li className="nav-item home">
-          <Link to="/">HOME</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/allarticles">Articles</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/dashboard">Community</Link>
-        </li>
-        <li className="nav-item">
-          <a
-            // href=""
-            onClick={this.onLogoutClick}
-            className="nav-link"
-          >
-            Logout
-          </a>
-        </li>
-      </React.Fragment>
-    );
 
-    const guestLinks = (
-      <React.Fragment>
-        <li className="nav-item home">
-          <Link to="/">HOME</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/allarticles">Articles</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/community">Community</Link>
-        </li>
-        <li className="nav-item" onClick={this.showRegister}>
-          Sign Up
-        </li>
-        <li className="nav-item"  onClick={this.showLogin}>
-          Login
-        </li>
-      </React.Fragment>
-    );
-
-    return (
-      <div
-        className={
-          this.props.location.pathname == "/" ? "LandingNavig" : "navig"
-        }
+const authLinks = (
+  <React.Fragment>
+    <li className="nav-item home">
+      <Link to="/">HOME</Link>
+    </li>
+    <li className="nav-item">
+      <Link to="/allposts">User Posts</Link>
+    </li>
+    <li className="nav-item">
+      <Link to="/allsneakers">User Sneakers</Link>
+    </li>
+    <li className="nav-item">
+      <Link to="/profiles">User Profiles</Link>
+    </li>
+    <li className="nav-item">
+      <Link to="/dashboard">Dashboard</Link>
+    </li>
+    <li className="nav-item">
+      <a
+        // href=""
+        onClick={onLogoutClick}
+        className="nav-link"
       >
-        <div className="menu-wrap">
-          
-          <input type="checkbox" className="toggler" autocomplete="off" onClick={() =>this.changechecked()}/>
+        Logout
+      </a>
+    </li>
+  </React.Fragment>
+);
 
-          <div className="hamburger">
-            <div> </div>
-          </div>
+const guestLinks = (
+  <React.Fragment>
+    <li className="nav-item home">
+      <Link to="/">HOME</Link>
+    </li>
+    <li className="nav-item">
+      <Link to="/community">Community</Link>
+    </li>
+    <li className="nav-item">
+      <Link to="/allposts">User Posts</Link>
+    </li>
+    <li className="nav-item">
+      <Link to="/allsneakers">User Sneakers</Link>
+    </li>
+    <li className="nav-item">
+      <Link to="/profiles">User Profiles</Link>
+    </li>
+    <li className="nav-item" onClick={showRegister}>
+      Sign Up
+    </li>
+    <li className="nav-item"  onClick={showLogin}>
+      Login
+    </li>
+  </React.Fragment>
+);
 
-          <div className={ this.state.checked === true ? "menu menu-shown" : "menu"}>
-                <ul className={ this.state.checked === true ? "mobileLinkshown" : "mobileLinkshide"}>{isAuthenticated ? authLinks : guestLinks}</ul>
-          </div>
+
+return (
+  <div
+    className={
+      location.pathname == "/" ? "LandingNavig" : "navig"
+    }
+  >
+    <div className="menu-wrap">
+      
+      <input type="checkbox" className="toggler" autocomplete="off" onClick={() => changechecked()}/>
+
+      <div className="hamburger">
+        <div> </div>
+      </div>
+
+      <div className={ checked === true ? "menu menu-shown" : "menu"}>
+            <ul className={ checked === true ? "mobileLinkshown" : "mobileLinkshide"}>{isAuthenticated ? authLinks : guestLinks}</ul>
+      </div>
+    </div>
+
+    {/*
+      If isAuthenticated === true, the authLinks items will display
+      else the guestlinks items will be displayed
+    */}
+    <ul className="authGuestlinks">
+      {isAuthenticated ? authLinks : guestLinks}
+    </ul>
+
+
+    {/*
+      Modal for displaying the Login pop up
+    */}
+
+    <Modal
+      showlogin={showlogin}
+      closemodal={closeLogin}
+      image="/assets/img/pexels-photo-2474507@2x.jpg"
+      modalbody="loginbody"
+    >
+
+      <div className="left">
+      </div>
+
+      <div className="right">
+        <div className="icon-close" onClick={closeLogin}>
+          <Icon color="#87caf7" icon="cross" />
         </div>
 
-        {/*
-          If isAuthenticated === true, the authLinks items will display
-          else the guestlinks items will be displayed
-        */}
-        <ul className="authGuestlinks">
-          {isAuthenticated ? authLinks : guestLinks}
-        </ul>
 
+        <h2 className="heading-2">Welcome</h2>
+        <p>Sign in to your SocialSole account</p>
 
-        {/*
-          Modal for displaying the Login pop up
-        */}
+        <form className="form-group" onSubmit={onLoginSubmit}>
 
-        <Modal
-          showlogin={this.state.showlogin}
-          closemodal={this.closeLogin}
-          image="/assets/img/pexels-photo-2474507@2x.jpg"
-          modalbody="loginbody"
-        >
+            <TextFieldGroup
+                 placeholder="Email Address"
+                 name="email"
+                 type="email"
+                 value={email}
+                 onChange={onChange}
+            />
 
-          <div className="left">
-          </div>
+            <TextFieldGroup
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={password}
+                onChange={onChange}
+            />
 
-          <div className="right">
-            <div className="icon-close" onClick={this.closeLogin}>
-              <Icon color="#87caf7" icon="cross" />
-            </div>
+            <button type="submit" className="btn btn-lightblue btn-submit">
+              Login
+            </button>
 
-
-            <h2 className="heading-2">Welcome</h2>
-            <p>Sign in to your SocialSole account</p>
-
-            <form className="form-group" onSubmit={this.onLoginSubmit}>
-
-                <TextFieldGroup
-                     placeholder="Email Address"
-                     name="email"
-                     type="email"
-                     value={this.state.email}
-                     onChange={this.onChange}
-                     error={errors.email}
-                />
-
-                <TextFieldGroup
-                    placeholder="Password"
-                    name="password"
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.onChange}
-                    error={errors.password}
-                />
-
-                <button type="submit" className="btn btn-lightblue btn-submit">
-                  Login
-                </button>
-
-            </form>
-           
-          </div>
-
-        </Modal>
-
-        <Modal
-          showregister={this.state.showregister}
-          closemodal={this.closeRegister}
-          image="/assets/img/maxredsdefault@2x.jpg"
-          modalbody="registarbody"
-        >
-          <div className="formbg"></div>
-
-          <div className="icon-close" onClick={this.closeRegister}>
-              <Icon color="#87caf7" icon="cross" />
-          </div>
-
-          <div className="content">
-
-            <div className="pageheading">
-              <h2 className="heading-2">Sign Up</h2>
-              <p>Create your SocialSole account</p>
-            </div>
-
-            <form noValidate onSubmit={this.onRegisterSubmit}>
-                <TextFieldGroup
-                  placeholder="Name"
-                  name="name"
-                  value={this.state.name}
-                  onChange={this.onChange}
-                  error={errors.name}
-                />
-
-                <TextFieldGroup
-                  placeholder="Email"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.onChange}
-                  error={errors.email}
-                />
-
-                <TextFieldGroup
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password}
-                />
-
-                <TextFieldGroup
-                  placeholder="Confirm Password"
-                  name="password2"
-                  type="password"
-                  value={this.state.password2}
-                  onChange={this.onChange}
-                  error={errors.password2}
-                />
-
-                <div className="uploadpreview">
-                  <h4 className="heading-4">Upload a photo for your avatar</h4>
-
-                    <div className="avatarHeaderPreview">
-                      {
-                        this.state.avatar ? <img src={this.state.avatar} alt=""/> :
-                        ""
-                      }
-                        
-                    </div>
-                
-                    <div className="upload-btn">
-                      <button
-                        id="upload_widget"
-                        className="btn btn-lightblue"
-                        onClick={this.avatarUploadWidget}
-                      >
-                        Upload files
-                      </button>
-                    </div>
-                  
-                </div>
-
-                <input type="submit" className="btn btn-lightblue btn-submit" />
-              </form>
-
-          </div>
-
-
-        </Modal>
-     
-     
+        </form>
+       
       </div>
-    );
-  }
+
+    </Modal>
+
+    <Modal
+      showregister={showregister}
+      closemodal={closeRegister}
+      image="/assets/img/maxredsdefault@2x.jpg"
+      modalbody="registarbody"
+    >
+      <div className="formbg"></div>
+
+      <div className="icon-close" onClick={closeRegister}>
+          <Icon color="#87caf7" icon="cross" />
+      </div>
+
+      <div className="content">
+
+        <div className="pageheading">
+          <h2 className="heading-2">Sign Up</h2>
+          <p>Create your SocialSole account</p>
+        </div>
+
+        <form noValidate onSubmit={onRegisterSubmit}>
+            <TextFieldGroup
+              placeholder="Name"
+              name="name"
+              value={name}
+              onChange={onChange}
+            />
+
+            <TextFieldGroup
+              placeholder="Email"
+              name="email"
+              type="email"
+              value={email}
+              onChange={onChange}
+            />
+
+            <TextFieldGroup
+              placeholder="Password"
+              name="password"
+              type="password"
+              value={password}
+              onChange={onChange}
+            />
+
+            <TextFieldGroup
+              placeholder="Confirm Password"
+              name="password2"
+              type="password"
+              value={password2}
+              onChange={onChange}
+            />
+
+            <div className="uploadpreview">
+              <h4 className="heading-4">Upload a photo for your avatar</h4>
+
+                <div className="avatarHeaderPreview">
+                  {
+                    avatar ? <img src={avatar} alt=""/> :
+                    ""
+                  }
+                    
+                </div>
+            
+                <div className="upload-btn">
+                  <button
+                    id="upload_widget"
+                    className="btn btn-lightblue"
+                    onClick={avatarUploadWidget}
+                  >
+                    Upload files
+                  </button>
+                </div>
+              
+            </div>
+
+            <input type="submit" className="btn btn-lightblue btn-submit" />
+          </form>
+
+      </div>
+
+
+    </Modal>
+ 
+ 
+  </div>
+);
+
+
 }
 
 

@@ -16,6 +16,8 @@
   z-index: 2000;
   width: 100%;
   transition: background 0.5s ease-in-out;
+  font-family: $font-links;
+
 
   
   .open-slide {
@@ -168,6 +170,8 @@
   z-index: 2000;
   width: 100%;
   transition: background 0.5s ease-in-out;
+  font-family: $font-links;
+
 
   .open-slide {
     background-color: rgba(255, 255, 255, 0.3);

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Card from "../../cards/Card"
 import Spinner from "../../common/Spinner";
@@ -10,18 +10,13 @@ import Navbar from "../../layout/CommNavbar";
   displayed in a card format, using an instance of a reusable card component
 */
 
-class Posts extends Component {
-  constructor(props) {
-    super(props);
+const Posts = ({ post, getPosts }) => {
+  
+  const [search, setSearch] = useState("");
 
-    this.state = {
-      search: ""
-    };
-  }
-
-  componentDidMount() {
-    this.props.getPosts();
-  }
+  useEffect(() => {
+    getPosts();
+  }, [getPosts]);
 
    /*
     This function is called when an onchange event occurs when the user
@@ -30,69 +25,68 @@ class Posts extends Component {
     through the posts
   */
 
-  updateSearch = e => {
-    this.setState({ search: e.target.value });
+  const updateSearch = (e) => {
+    setSearch(e.target.value);
   };
 
-  
-  render() {
 
-    const { posts, loading } = this.props.post;
-    let postContent;
+  const { posts, loading } = post;
+  let postContent;
 
-    let filteredPosts = posts.filter(post => {
-      return (
-        post.headline.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-        -1
-      );
-    });
-
-
-    if (posts === null || loading) {
-
-      /* 
-        Checks to see if the post state is null, if so then a loading spinner
-        is displayed, this helps undefined error on first render
-      */
-      postContent = <Spinner />;
-    } 
-    else {
-
-      postContent = (
-        <React.Fragment>
-          {filteredPosts.map(post => {
-            return <Card key={post._id} post={post} cardtype={'post'} />;
-          })}
-        </React.Fragment>
-      )
-    }
-
+  let filteredPosts = posts.filter(post => {
     return (
-      <div className="communityposts">
-        <Navbar />
-
-        <div className="container">
-          
-          <div className="pageheading">
-              <h2 className="heading-2">Posts From The Community</h2>
-              <p>All the posts from our community</p>
-          </div>
-
-          <div className="filteredSearch">
-            <input
-              type="text"
-              placeholder="Filter By Headline"
-              value={this.state.search}
-              onChange={this.updateSearch}
-              className="form-control"
-            />
-          </div>
-          
-          <div className="posts">{postContent}</div>
-        </div>
-      </div>
+      post.headline.toLowerCase().indexOf(search.toLowerCase()) !==
+      -1
     );
+  });
+
+
+  if (posts === null || loading) {
+
+    /* 
+      Checks to see if the post state is null, if so then a loading spinner
+      is displayed, this helps undefined error on first render
+    */
+    postContent = <Spinner />;
+  } 
+  else {
+
+    postContent = (
+      <React.Fragment>
+        {filteredPosts.map(post => {
+          return <Card key={post._id} post={post} cardtype={'post'} />;
+        })}
+      </React.Fragment>
+    )
   }
+
+  return (
+    <div className="communityposts">
+      <Navbar />
+
+      <div className="container">
+        
+        <div className="pageheading">
+            <h2 className="heading-2">Posts From The Community</h2>
+            <p>All the posts from our community</p>
+        </div>
+
+        <div className="filteredSearch">
+          <input
+            type="text"
+            placeholder="Filter By Headline"
+            value={search}
+            onChange={updateSearch}
+            className="form-control"
+          />
+        </div>
+        
+        <div className="posts">{postContent}</div>
+      </div>
+    </div>
+  );
+  
+
 }
 
 

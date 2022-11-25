@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -24,112 +24,102 @@ import Navbar from "../../../components/layout/CommNavbar";
   for posting comments.
 */
 
-class Post extends Component {
-  state = {
-    currentPost: null,
-  };
+const Post = ({ getPost, getCurrentProfile, post: { post, loading }, auth, profile: { profile }, match }) => {
+  
+  /**
+   * State for storing the match.params.id of the current post
+   */
+  const [currentPost, setCurrentPost] = useState(null);
 
-  componentDidMount() {
-    this.props.getPost(this.props.match.params.id);
+  useEffect(() => {
+    getPost(match.params.id);
+    getCurrentProfile();
+    setCurrentPost(match.params.id);
+  }, []);
 
-    this.props.getCurrentProfile();
-
-
-    this.setState({
-      currentPost: this.props.match.params.id,
-    });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.match.params.id !== this.state.currentPost) {
-      this.props.getPost(this.props.match.params.id);
-
-      this.setState({
-        currentPost: this.props.match.params.id,
-      });
+  useEffect(() => {
+    if (currentPost !== match.params.id) {
+      getPost(match.params.id);
+      setCurrentPost(match.params.id);
     }
-  }
+  }, [match.params.id]);
 
-  render() {
-    const { post, loading } = this.props.post;
-    const { profile } = this.props.profile;
-    const { user } = this.props.auth;
-    let postContent;
 
-    if (post === null || loading || Object.keys(post).length === 0) {
-      postContent = <Spinner />;
-    } 
-    
-    else if (user === null || Object.keys(user).length === 0) {
+  const { user } = auth;
+
+  let postContent;
+
+  if (post === null || loading || Object.keys(post).length === 0) {
+    postContent = <Spinner />;
+  } 
+  
+  else if (user === null || Object.keys(user).length === 0) {
+    postContent = (
+      <React.Fragment>
+        <PostDetails post={post} showActions={false} />
+
+            {
+              post.comments.length > 0 ? 
+              <div className="commentsarea contentbody">
+                <CommentFeed postId={post._id} comments={post.comments} />
+              </div>
+
+              : ""
+            }
+
+      </React.Fragment>
+    );
+  } 
+  
+  else {
+
+    if (profile === null || Object.keys(profile).length === 0) {
+
       postContent = (
         <React.Fragment>
           <PostDetails post={post} showActions={false} />
 
-              {
-                post.comments.length > 0 ? 
-                <div className="commentsarea contentbody">
-                  <CommentFeed postId={post._id} comments={post.comments} />
-                </div>
+            {
+              post.comments.length > 0 ? 
+              <div className="commentsarea contentbody">
+                <CommentFeed postId={post._id} comments={post.comments} />
+              </div>
 
-                : ""
-              }
-
-        </React.Fragment>
-      );
-    } 
-    
-    else {
-
-      if (profile === null || Object.keys(profile).length === 0) {
-
-        postContent = (
-          <React.Fragment>
-            <PostDetails post={post} showActions={false} />
-
-              {
-                post.comments.length > 0 ? 
-                <div className="commentsarea contentbody">
-                  <CommentFeed postId={post._id} comments={post.comments} />
-                </div>
-
-                : ""
-              }
-
-        </React.Fragment>
-        )
-        
-      } else {
-          postContent = (
-            <React.Fragment>
-              <PostDetails post={post} showActions={true} />
-
-                <div className="commentsarea postcommentsarea contentbody">
-                  <CommentForm postId={post._id} />
-                  <CommentFeed postId={post._id} comments={post.comments} />
-                </div>
-
-            </React.Fragment>
-          );
-      }
-    }
-
-    return (
-      <React.Fragment>
-        <Navbar />
-
-        <div className="container">
-           {postContent}
-        </div>
+              : ""
+            }
 
       </React.Fragment>
-    );
+      )
+      
+    } else {
+        postContent = (
+          <React.Fragment>
+            <PostDetails post={post} showActions={true} />
+
+              <div className="commentsarea postcommentsarea contentbody">
+                <CommentForm postId={post._id} />
+                <CommentFeed postId={post._id} comments={post.comments} />
+              </div>
+
+          </React.Fragment>
+        );
+    }
   }
+
+  return (
+    <React.Fragment>
+      <Navbar />
+
+      <div className="container">
+         {postContent}
+      </div>
+
+    </React.Fragment>
+  );
+ 
 }
 
-Post.propTypes = {
-  getPost: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired,
-};
+
 
 const mapStateToProps = (state) => ({
   post: state.post,

@@ -1,136 +1,144 @@
 import axios from "axios";
 
-import {
-  ARTICLE_LOADING,
-  GET_ARTICLE,
-  GET_ARTICLES,
-  ADD_ARTICLE,
-  GET_ERRORS,
-  CLEAR_ERRORS,
-} from "./types";
+import { ARTICLE_LOADING, GET_ARTICLE, GET_ARTICLES, ADD_ARTICLE, GET_ERRORS, CLEAR_ERRORS } from "./types";
 
+import { setAlert } from "./alert";
 
 // Add Post
-export const addArticle = (articleData, history) => dispatch => {
+export const addArticle = (articleData, history) => (dispatch) => {
   dispatch(clearErrors());
-  axios    
-  .post('/api/articles', articleData)
-  .then(res =>{
-      dispatch({
-        type: ADD_ARTICLE,
-        payload: res.data
-      },
-      history.push(`/article/${res.data._id}`)
-    )
-  })
-  .catch(err =>
-    dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
+  axios
+    .post("/api/articles", articleData)
+    .then((res) => {
+      dispatch(
+        {
+          type: ADD_ARTICLE,
+          payload: res.data,
+        },
+        history.push(`/article/${res.data._id}`)
+      );
     })
-  );
-}
+    .catch((err) => {
+
+        const errors = err.response.data;
+
+        if (errors) {
+          errors.forEach((error, index) => {
+            dispatch(setAlert(error, "danger"));
+          });
+        }
+
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
 
 // Get Articles
-export const getArticles = (load = true) => (dispatch) => {
-	if (load) dispatch(setArticleLoading);
-	axios
-		.get('/api/articles')
-		.then((res) =>
-			dispatch({
-				type: GET_ARTICLES,
-				payload: res.data
-			})
-		)
-		.catch((err) =>
-			dispatch({
-				type: GET_ARTICLES,
-				payload: null
-			})
-		);
-};
+export const getArticles =
+  (load = true) =>
+  (dispatch) => {
+    if (load) dispatch(setArticleLoading);
+    axios
+      .get("/api/articles")
+      .then((res) =>
+        dispatch({
+          type: GET_ARTICLES,
+          payload: res.data,
+        })
+      )
+      .catch((err) =>
+        dispatch({
+          type: GET_ARTICLES,
+          payload: null,
+        })
+      );
+  };
 
 // Edit Articles
-export const editArticle = (id, articleData, history) => dispatch => {
+export const editArticle = (id, articleData, history) => (dispatch) => {
   dispatch(setArticleLoading());
-  axios    
-  .post(`/api/articles/${id}`, articleData)
-  .then(res =>
-    dispatch({
-      type: ADD_ARTICLE,
-      payload: res.data
-    },
-    history.push(`/article/${id}`)
-    )
-  )
-  .catch(err =>
-    dispatch({
-      type: GET_ARTICLE,
-      payload: null
-    })
-  );
-}
-
-// Add Comment
-export const addComment = (articleId, commentData) => dispatch => {
-  dispatch(clearErrors());
-
-  axios    
-  .post(`/api/articles/comment/${articleId}`, commentData)
-  .then(res =>
-    dispatch({
-      type: GET_ARTICLE,
-      payload: res.data
-    })
-    
-  )
-  .catch(err =>
-    dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    })
-  );
-
-  
-}
-
-// Delete Comment
-export const deleteComment = (articleId, commentId) => dispatch => {
   axios
-    .delete(`/api/articles/comment/${articleId}/${commentId}`)
-    .then(res =>
+    .post(`/api/articles/${id}`, articleData)
+    .then((res) => {
       dispatch({
-        type: GET_ARTICLE,
-        payload: res.data
-      })
-    )
-    // .catch(err =>
-    //   dispatch({
-    //     type: GET_ERRORS,
-    //     payload: err.response.data
-    //   })
-    // );
+        type: ADD_ARTICLE,
+        payload: res.data,
+      });
+
+      dispatch(setAlert("Article Updated", "success"));
+    })
+    .catch((err) => {
+      const errors = err.response.data;
+
+      if (errors) {
+        errors.forEach((error, index) => {
+          dispatch(setAlert(error, "danger"));
+        });
+      }
+
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+    });
 };
 
-// Get the current article by id
-export const getCurrentArticle = (id) => dispatch => {
-  dispatch(setArticleLoading());
+// Add Comment
+export const addComment = (articleId, commentData) => (dispatch) => {
+  dispatch(clearErrors());
+
   axios
-    .get(`/api/articles/${id}`)
-    .then(res =>
+    .post(`/api/articles/comment/${articleId}`, commentData)
+    .then((res) =>
       dispatch({
         type: GET_ARTICLE,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
-        type: GET_ARTICLE,
-        payload: null
+        type: GET_ERRORS,
+        payload: err.response.data,
       })
     );
 };
 
+// Delete Comment
+export const deleteComment = (articleId, commentId) => (dispatch) => {
+  axios.delete(`/api/articles/comment/${articleId}/${commentId}`).then((res) =>
+    dispatch({
+      type: GET_ARTICLE,
+      payload: res.data,
+    })
+  );
+  // .catch(err =>
+  //   dispatch({
+  //     type: GET_ERRORS,
+  //     payload: err.response.data
+  //   })
+  // );
+};
+
+// Get the current article by id
+export const getCurrentArticle = (id) => (dispatch) => {
+  dispatch(setArticleLoading());
+  axios
+    .get(`/api/articles/${id}`)
+    .then((res) =>
+      dispatch({
+        type: GET_ARTICLE,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ARTICLE,
+        payload: null,
+      })
+    );
+};
 
 /*
   Get articles that are related to currently loaded article
@@ -138,35 +146,34 @@ export const getCurrentArticle = (id) => dispatch => {
   and on the backend it will search for articles that has
   any of the matching tags
 */
-export const getRelatedArticles = (tags) => dispatch => {
+export const getRelatedArticles = (tags) => (dispatch) => {
   // dispatch(setPostLoading());
-  axios    
-  .get(`/api/articles/tags/${tags}`)
-  .then(res =>
-    dispatch({
-      type: GET_ARTICLES,
-      payload: res.data
-    })
-  )
-  .catch(err =>
-    dispatch({
-      type: GET_ARTICLE,
-      payload: null
-    })
-  );
-}
-
+  axios
+    .get(`/api/articles/tags/${tags}`)
+    .then((res) =>
+      dispatch({
+        type: GET_ARTICLES,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ARTICLE,
+        payload: null,
+      })
+    );
+};
 
 // Profile loading
 export const setArticleLoading = () => {
   return {
-    type: ARTICLE_LOADING
+    type: ARTICLE_LOADING,
   };
 };
 
 // Clear errors
 export const clearErrors = () => {
   return {
-    type: CLEAR_ERRORS
+    type: CLEAR_ERRORS,
   };
 };

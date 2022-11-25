@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Spinner from "../../common/Spinner";
@@ -6,12 +6,10 @@ import { addArticle } from "../../../actions/articleActions";
 import { getCurrentProfile } from "../../../actions/profileActions";
 import Navbar from "../../../components/layout/CommNavbar";
 import TextFieldGroup from "../../common/TextFieldGroup";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import isEmpty from '../../../validation/is-empty';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import isEmpty from "../../../validation/is-empty";
 import { Widgetsetting } from "../../common/Cloudinary";
-
-
 
 /*
   Component for displaying and implementing the ability
@@ -20,64 +18,62 @@ import { Widgetsetting } from "../../common/Cloudinary";
   but also checks to see if that user has a role of "author"
 */
 
+const CreateArticle = ({ article: { article, loading }, profile, auth, addArticle, getCurrentProfile, history, errors }) => {
+  const [values, setValues] = useState({
+    fullheaderimage: "",
+    articleheaderimage: "",
+    address: "",
+    headline: "",
+    text: "",
+    _id: "",
+    tags: "",
+  });
 
-export class CreateArticle extends Component {
- 
-  constructor(props) {
-    super(props);
-    this.state = {
-      fullheaderimage: "",
-      articleheaderimage: "",
-      headline: "",
-      text: "",
-      email: "",
-      tags: "",
-      errors: {}
-    };
-
-  }
+  const { fullheaderimage, articleheaderimage, address, headline, text, _id, tags } = values;
 
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors });
-    }
-  }
 
-  onSubmit = (e) => {
-
+  const onSubmit = (e) => {
     e.preventDefault();
 
-
-    const { user } = this.props.auth;
+    const { user } = auth;
 
     const newArticle = {
-      fullheaderimage:this.state.fullheaderimage,
-      articleheaderimage:this.state.articleheaderimage,
-      headline:this.state.headline,
-      text:this.state.text,
-      email:this.state.email,
+      fullheaderimage: fullheaderimage,
+      articleheaderimage: articleheaderimage,
+      headline: headline,
+      text: text,
       author: user.name,
       avatar: user.avatar,
-      tags: this.state.tags
-
+      tags: tags,
     };
 
-    this.props.addArticle(newArticle, this.props.history);
-    this.setState({
+    addArticle(newArticle, history);
+
+    setValues({
+      fullheaderimage: "",
+      articleheaderimage: "",
+      address: "",
+      headline: "",
       text: "",
-      errors: {}
+      _id: "",
+      tags: "",
     });
+  };
 
-  }
+  const onChange = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  handleChange = (value) => {
-    this.setState({ text: value })
-  }
+  const handleChange = (value) => {
+    setValues({
+      ...values,
+      text: value,
+    });
+  };
 
   /*
     These functions (fullArticleHeaderSubmit), and 
@@ -88,175 +84,96 @@ export class CreateArticle extends Component {
     in the state. Once all the fields are complete it is then sent
     to the back end with all the other data entered
   */
-  fullArticleHeaderSubmit = e => {
+  const fullArticleHeaderSubmit = (e) => {
     e.preventDefault();
 
-    window.cloudinary.openUploadWidget(
-      Widgetsetting(),
-      (error, result) => {
-        if (result && result.event === "success") {
-
-          this.setState({
-            fullheaderimage: result.info.url
-          });
-        }
+    window.cloudinary.openUploadWidget(Widgetsetting(), (error, result) => {
+      if (result && result.event === "success") {
+        setValues({
+          ...values,
+          fullheaderimage: result.info.url,
+        });
       }
-    );
+    });
   };
 
-  articleHeaderSubmit = e => {
+  const articleHeaderSubmit = (e) => {
     e.preventDefault();
 
-    window.cloudinary.openUploadWidget(
-      Widgetsetting(),
-      (error, result) => {
-        if (result && result.event === "success") {
-
-          this.setState({
-            articleheaderimage: result.info.url
-          });
-        }
+    window.cloudinary.openUploadWidget(Widgetsetting(), (error, result) => {
+      if (result && result.event === "success") {
+        setValues({
+          ...values,
+          articleheaderimage: result.info.url,
+        });
       }
-    );
+    });
   };
 
-  render() {
+  return (
+    <React.Fragment>
+      <Navbar />
 
-    const { errors, success } = this.state;
-    const { articles, loading } = this.props.article;
-    const { profile } = this.props.profile;
+      <div className="container">
+        <div className="create-edit-body contentbody">
+          <h2 className="heading-2">Create Article</h2>
 
-    return (
-      <React.Fragment>
-        <Navbar />
+          <form onSubmit={onSubmit}>
+            <div className="form-group">
+              <TextFieldGroup placeholder="Headline goes here" name="headline" value={headline} onChange={onChange} error={errors.text} />
 
-        <div className="container">
-          <div className="create-edit-body contentbody">
-            <h2 className="heading-2">Create Article</h2>
+              <TextFieldGroup
+                placeholder="* Tags"
+                name="tags"
+                value={tags}
+                onChange={onChange}
+                // error={errors.skills}
+                info="Please use comma separated values (eg.
+                    Nike, New Balance, Jordans)"
+              />
 
-              <form onSubmit={this.onSubmit}>
+              <div className="uploadpreview">
+                <h4 className="heading-4">Upload A Full Header Image</h4>
 
-                <div className="form-group">
+                <div className="fullArticleHeaderPreview">{isEmpty(fullheaderimage) ? null : <img src={fullheaderimage} />}</div>
 
-                  <TextFieldGroup
-                    placeholder="Headline goes here"
-                    name="headline"
-                    value={this.state.headline}
-                    onChange={this.onChange}
-                    error={errors.text}
-                  />
-
-      
-                  <TextFieldGroup
-                    placeholder="* Tags"
-                    name="tags"
-                    value={this.state.tags}
-                    onChange={this.onChange}
-                    // error={errors.skills}
-                    info="Please use comma separated values (eg.
-                      Nike, New Balance, Jordans)"
-                  />
-
-                  {this.state.errors.address}
-
-
-                  <div className="uploadpreview">
-
-                    <h4 className="heading-4">
-                      Upload A Full Header Image
-                    </h4>
-
-               
-                      <div className="fullArticleHeaderPreview">
-                        {
-                          isEmpty(this.state.fullheaderimage) ? null : (
-                            <img src={this.state.fullheaderimage} />
-                          )
-                        }
-                        
-                      </div>
-
-                      <div className="upload-btn">
-                        <button
-                          id="upload_widget"
-                          className="btn btn-lightblue"
-                          onClick={this.fullArticleHeaderSubmit}
-                        >
-                          Upload Photo
-                        </button>
-                      </div>
-
-
-                      <small className="errorsmsg"> {this.state.errors.fullheaderimage} </small>
-
-                  </div>
-
-                  <div className="uploadpreview">
-                    
-                    <h4 className="heading-4">
-                      Upload A Article Header Image
-                    </h4>
-
-                    <div className="articleHeaderPreview">
-                        {
-                          isEmpty(this.state.articleheaderimage) ? null : (
-                            <img src={this.state.articleheaderimage} />
-                          )
-                        }
-                      </div>
-
-
-                      <div className="upload-btn">
-
-                        <button
-                          id="upload_widget"
-                          className="btn btn-lightblue"
-                          onClick={this.articleHeaderSubmit}
-                        >
-                          Upload Photo
-                        </button>
-
-                      </div>
-
-                     
-                      <small className="errorsmsg"> {this.state.errors.articleheaderimage}</small>
-                    
-                  </div>
-
-                  <ReactQuill
-                    value={this.state.text}
-                    onChange={this.handleChange}
-                  />
-                  
+                <div className="upload-btn">
+                  <button id="upload_widget" className="btn btn-lightblue" onClick={fullArticleHeaderSubmit}>
+                    Upload Photo
+                  </button>
                 </div>
+              </div>
 
-                
+              <div className="uploadpreview">
+                <h4 className="heading-4">Upload A Article Header Image</h4>
 
-                <button type="submit" className="btn btn-lightblue">
-                  Submit
-                </button>
+                <div className="articleHeaderPreview">{isEmpty(articleheaderimage) ? null : <img src={articleheaderimage} />}</div>
 
-                <small>
-                          {this.state.errors.text}
-                  </small>
-              </form>
-            
-          </div>
+                <div className="upload-btn">
+                  <button id="upload_widget" className="btn btn-lightblue" onClick={articleHeaderSubmit}>
+                    Upload Photo
+                  </button>
+                </div>
+              </div>
+
+              <ReactQuill value={text} onChange={handleChange} />
+            </div>
+
+            <button type="submit" className="btn btn-lightblue">
+              Submit
+            </button>
+          </form>
         </div>
-      </React.Fragment>
-    );
-  }
-}
+      </div>
+    </React.Fragment>
+  );
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
   article: state.article,
-  profile: state.profile
+  profile: state.profile,
 });
 
-
-export default connect(
-  mapStateToProps,
-  { addArticle, getCurrentProfile }
-)(withRouter (CreateArticle));
+export default connect(mapStateToProps, { addArticle, getCurrentProfile })(withRouter(CreateArticle));

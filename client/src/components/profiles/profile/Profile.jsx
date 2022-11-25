@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import ProfileHeader from "./profile-components/ProfileHeader";
@@ -21,38 +21,34 @@ import Navbar from "../../../components/layout/CommNavbar";
   <ProfileSneakers /> for displaying sneakers created by the user. 
 */
 
-export class Profile extends Component {
+export const Profile = ({ 
+  profile: { profile, loading }, 
+  auth, getProfileByHandle, 
+  match 
+}) => {
 
-  state = {
+
+  const [values, setValues] = useState({
     about: 'show',
     posts: '',
     sneakers: '',
     friends: ''
-  }
+  });
 
-  
-  componentDidMount() {
+  const { about, posts, sneakers, friends } = values;
 
-    const { profile } = this.props.profile;
-
-    if (this.props.match.params.handle) {
-      this.props.getProfileByHandle(this.props.match.params.handle);
+  useEffect(() => {
+    if(match.params.handle) {
+      getProfileByHandle(match.params.handle);
     }
-  }
+  }, [match.params.handle]);
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.profile.profile === null && this.props.profile.loading) {
-      this.props.history.push("/not-found");
-    }
-  }
-
-  render() {
-    const { profile, loading } = this.props.profile;
-    const { user } = this.props.auth;
+ 
+  const { user } = auth;
 
 
-    let profileContent;
-    let profileHeader;
+  let profileContent;
+  let profileHeader;
 
     if (profile === null || loading) {
       profileContent = <Spinner />;
@@ -61,34 +57,46 @@ export class Profile extends Component {
         profileHeader = (
           <ProfileHeader 
           profile={profile}
-            showAbout={() => this.setState({
-              about: 'show',
-              posts: '',
-              sneakers: '',
-              friends: ''
-            })}
-            showPosts={() => this.setState({
-              about: '',
-              posts: 'show',
-              sneakers: '',
-              friends: ''
-            })} 
-            showSneakers={() => this.setState({
-              about: '',
-              posts: '',
-              sneakers: 'show',
-              friends: ''
-            })}
-            showFriends={() => this.setState({
-              about: '',
-              posts: '',
-              sneakers: '',
-              friends: 'show'
-            })}  
+            showAbout={() =>
+              setValues({
+                ...values,
+                about: 'show',
+                posts: '',
+                sneakers: '',
+                friends: ''
+              })
+            }
+            showPosts={() => 
+              setValues({
+                ...values,
+                about: '',
+                posts: 'show',
+                sneakers: '',
+                friends: ''
+              })
+              } 
+            showSneakers={() =>
+              setValues({
+                ...values,
+                about: '',
+                posts: '',
+                sneakers: 'show',
+                friends: ''
+              })
+            }
+            showFriends={() => 
+              setValues({
+                ...values,
+                about: '',
+                posts: '',
+                sneakers: '',
+                friends: 'show'
+              })
+          }  
         />
         )
 
-        if (this.state.about === 'show') {
+        if (about === 'show') {
           
           profileContent = (
             <React.Fragment>
@@ -104,7 +112,7 @@ export class Profile extends Component {
 
             </React.Fragment>
           )
-        } else if (this.state.posts === 'show'){
+        } else if (posts === 'show'){
           profileContent = (
             <React.Fragment>
 
@@ -119,7 +127,7 @@ export class Profile extends Component {
 
             </React.Fragment>
           )
-        } else if (this.state.sneakers === 'show'){
+        } else if (sneakers === 'show'){
           profileContent = (
             <React.Fragment>
 
@@ -134,7 +142,7 @@ export class Profile extends Component {
 
             </React.Fragment>
           )
-        } else if (this.state.friends === 'show'){
+        } else if (friends === 'show'){
           profileContent = (
             <React.Fragment>
 
@@ -161,7 +169,7 @@ export class Profile extends Component {
         {profileContent}
       </div>
     );
-  }
+  
 }
 
 
