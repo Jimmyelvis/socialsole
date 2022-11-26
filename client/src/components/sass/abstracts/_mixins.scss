@@ -6,6 +6,47 @@
   }
 }
 
+@mixin textOverFlowEllipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin overlay($bg: rgba(0, 0, 0, 0.4)) {
+  .overlay {
+    background-color: $bg;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    // @include respond(bp-medium) {
+    //   background-color: rgba(0, 0, 0, 0.57);
+    // }
+  }
+}
+
+@mixin lineClamp($lines: 3) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin customBorderBtm($rgb:rgb(165 185 212 / 25%), $height, $width: 50%, $padding-top: 6px) {
+
+  &::after {
+    content: "";
+    display: block;
+    width: $width;
+    border-bottom: $height solid $rgb;
+    padding-top: $padding-top;
+  }
+}
+
+
 @mixin absCenter {
   position: absolute;
   top: 50%;
@@ -153,38 +194,17 @@
   .text {
     opacity: 0;
     transition: opacity 0.63s .5s;
-    line-height: 2rem;
-    max-height: calc(2rem * 8);
-    overflow: hidden;
-    padding-right: 0.5rem;
-    margin-bottom: 4rem;
     z-index: 20;
     position: relative;
     color: $white;
     font-size: 1.8rem;
-
-    @include respond(bp-smallest) {
-      max-height: calc(2rem * 4);
-    }
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  .text::before {
-    position: absolute;
-    content: "...";
-  /*   inset-block-end: 0;
-    inset-inline-end: 0; */
-    bottom: 0;
-    right: 0;
-  }
 
-  .text::after {
-    content: "";
-    position: absolute;
-  /*   inset-inline-end: 0; */
-    right: 0;
-    width: 1rem;
-    height: 1rem;
-  }
 
   .btn-lightblue {
     position: relative;

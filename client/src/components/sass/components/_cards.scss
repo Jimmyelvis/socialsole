@@ -145,6 +145,10 @@
       margin-bottom: 3rem;
     }
 
+    p {
+      @include lineClamp(4);
+    }
+
     .back-content-text {
       line-height: 2rem;
       max-height: calc(2rem * 8);
