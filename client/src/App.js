@@ -7,7 +7,7 @@ import { clearCurrentProfile } from './actions/profileActions';
 
 import { Provider } from 'react-redux';
 import store from './store';
-import ScrollToTop from './ScrollToTop'
+import ScrollToTop from './utils/ScrollToTop'
 
 import PrivateRoute from './components/common/PrivateRoute';
 import AuthorRoute from './components/common/AuthorRoute';
@@ -15,7 +15,7 @@ import AuthorRoute from './components/common/AuthorRoute';
 
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import Home from './components/homepage/Home';
+import Home from './pages/Home';
 import Community from './components/layout/Community';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -29,6 +29,7 @@ import ArticleEdit from './components/articles/article/ArticleEdit';
 import CreateArticle from './components/articles/article/CreateArticle';
 import Posts from './components/posts/all-users-posts/AllPosts';
 import Post from './components/posts/post-single/Post';
+import { Allposts, Create_Post, Post_Single, Edit_Post } from "pages/Posts";
 import CreatePost from './components/posts/post-creation/CreatePost';
 import EditPost from './components/posts/post-creation/EditPost';
 import CreateSneaker from './components/sneakers/sneaker-creation/CreateSneaker';
@@ -48,9 +49,8 @@ import AllArticles from './components/articles/Allarticles';
 import NotFound from './components/not-found/NotFound';
 import Alert from './components/layout/Alerts'
 
-// import './App.scss';
 
-import './components/sass/App.scss';
+import './Styles/sass/App.scss';
 
 
 
@@ -80,19 +80,20 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-      <ScrollToTop>
-        <React.Fragment>
+        <ScrollToTop>
+          <React.Fragment>
             <Alert />
+            <Navbar />
             <Route exact path="/" component={Home} />
             <Route exact path="/community" component={Community} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profiles" component={Profiles} />
             <Route exact path="/profile/:handle" component={Profile} />
-            <Route exact path="/post/:id" component={Post} />
+            <Route exact path="/post/:id" component={Post_Single} />
             <Route exact path="/sneaker/:id" component={Sneaker} />
             <Route exact path="/allsneakers" component={Sneakers} />
-            <Route exact path="/allposts" component={Posts} />
+            <Route exact path="/allposts" component={Allposts} />
             <Route exact path="/news/concord" component={NewsItemConcord} />
             <Route exact path="/news/nasa" component={NewsItemNasa} />
             <Route exact path="/news/tinker" component={NewsItemTinker} />
@@ -105,48 +106,28 @@ const App = () => {
             <Route exact path="/editsneaker/:id" component={EditSneaker} />
             <Route exact path="/allarticles/" component={AllArticles} />
 
-
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
             <Switch>
-              <PrivateRoute
-                exact
-                path="/create-profile"
-                component={CreateProfile}
-              />
+              <PrivateRoute exact path="/create-profile" component={CreateProfile} />
             </Switch>
             <Switch>
-              <PrivateRoute
-                exact
-                path="/edit-profile"
-                component={EditProfile}
-              />
+              <PrivateRoute exact path="/edit-profile" component={EditProfile} />
             </Switch>
             <Switch>
-              <PrivateRoute
-                exact
-                path="/createpost"
-                component={CreatePost}
-              />
+              <PrivateRoute exact path="/createpost" component={Create_Post} />
             </Switch>
             <Switch>
-              <PrivateRoute
-                exact
-                path="/createsneaker"
-                component={CreateSneaker}
-              />
+              <PrivateRoute exact path="/createsneaker" component={CreateSneaker} />
             </Switch>
             <Switch>
-              <AuthorRoute
-                exact path="/createarticle" 
-                component={CreateArticle} 
-              />
+              <AuthorRoute exact path="/createarticle" component={CreateArticle} />
             </Switch>
             <Route exact path="/not-found" component={NotFound} />
-          <Footer />
+            <Footer />
           </React.Fragment>
-          </ScrollToTop>
+        </ScrollToTop>
       </Router>
     </Provider>
   );

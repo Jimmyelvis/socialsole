@@ -1,0 +1,300 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin textOverFlowEllipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin overlay($bg: rgba(0, 0, 0, 0.4)) {
+  .overlay {
+    background-color: $bg;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    // @include respond(bp-medium) {
+    //   background-color: rgba(0, 0, 0, 0.57);
+    // }
+  }
+}
+
+@mixin lineClamp($lines: 3) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin customBorderBtm($rgb:rgb(165 185 212 / 25%), $height, $width: 50%, $padding-top: 6px) {
+
+  &::after {
+    content: "";
+    display: block;
+    width: $width;
+    border-bottom: $height solid $rgb;
+    padding-top: $padding-top;
+  }
+}
+
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin topbtmpadding {
+  padding: 5rem 0;
+}
+
+@mixin topbtmpadding-small {
+  padding: 3rem 0;
+}
+
+@mixin sneakercardstyles {
+  flex: 0 0 calc(50% - 1rem);
+  height: auto;
+  margin-bottom: 1.4rem;
+  padding-top: 27%;
+  padding-bottom: 6%;
+
+  @include respond(bp-small) {
+    flex: 0 0 calc(95% - 1rem);
+    padding-top: 50%;
+    padding-bottom: 10%;
+  }
+
+  .card-content {
+
+    .heading-3 {
+      font-size: 3.7rem;
+    }
+
+    .heading-4 {
+      font-size: 2.8rem;
+    }
+
+    .heading-5 {
+      font-size: 3rem;
+    }
+
+    @include respond(bp-small) {
+      .heading-3 {
+        font-size: 3.7rem;
+      }
+
+      .heading-4 {
+        font-size: 2.8rem;
+      }
+
+      .heading-5 {
+        font-size: 3rem;
+      }
+    }
+
+    @include respond(bp-smallest) {
+      .heading-3 {
+        font-size: 3.3rem;
+      }
+
+      .heading-4 {
+        font-size: 2.5rem;
+      }
+
+      .heading-5 {
+        font-size: 2.8rem;
+      }
+    }
+
+    @include respond(bp-tiny) {
+      .heading-3 {
+        font-size: 3rem;
+      }
+
+      .heading-4 {
+        font-size: 2.3rem;
+      }
+
+      .heading-5 {
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+}
+
+@mixin cardtraditionalbackcontent {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0;
+  transition: opacity 0.63s 1.5s;
+  padding: 5rem 4rem 0 4rem;
+
+  .btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    position: absolute !important;
+    z-index: 1000;
+    top: 1rem;
+    right: 2rem;
+  }
+
+  .avatar {
+    width: 12.7rem;
+    padding-bottom: 12.7rem;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.63s;
+
+
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+    }
+  }
+
+  // .text {
+  //   z-index: 20;
+  //   position: relative;
+  //   color: $white;
+  //   // min-height: 22rem;
+  //   font-size: 1.8rem;
+  //   opacity: 0;
+  //   transition: opacity 0.63s .5s;
+
+  // }
+
+  .text {
+    opacity: 0;
+    transition: opacity 0.63s .5s;
+    z-index: 20;
+    position: relative;
+    color: $white;
+    font-size: 1.8rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+
+
+  .btn-lightblue {
+    position: relative;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.63s 1s;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    // background: linear-gradient(to bottom, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.5) 100%);
+    background: rgba(0, 0, 0, 0.4);
+    transition: opacity 0.63s;
+    opacity: 1;
+    z-index: 10;
+  }
+
+  .backgroundimg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    img {
+      object-fit: cover;
+      height: 100%;
+    }
+  }
+
+}
+
+
+@mixin respond($breakpoint) {
+
+  @if $breakpoint==bp-tiny {
+    @media only screen and (max-width: 27em) {
+      @content
+    }
+
+    ; //400px
+  }
+
+  @if $breakpoint==bp-smallest {
+    @media only screen and (max-width: 31.25em) {
+      @content
+    }
+
+    ; //500px
+  }
+
+  @if $breakpoint==bp-small {
+    @media only screen and (max-width: 37.5em) {
+      @content
+    }
+
+    ; //600px
+  }
+
+  @if $breakpoint==bp-medium {
+    @media only screen and (max-width: 50em) {
+      @content
+    }
+
+    ; //800px
+  }
+
+  @if $breakpoint==bp-large {
+    @media only screen and (max-width: 62.5em) {
+      @content
+    }
+
+    ; //1000px
+  }
+
+  @if $breakpoint==bp-largest {
+    @media only screen and (max-width: 75em) {
+      @content
+    }
+
+    ; //1200px
+  }
+
+  // @if $breakpoint == big-desktop {
+  //     @media only screen and (min-width: 112.5em) { @content };    //1800
+  // }
+
+
+}

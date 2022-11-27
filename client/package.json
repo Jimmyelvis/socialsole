@@ -25,12 +25,12 @@
     "sass": "^1.50.1"
   },
   "scripts": {
-    "start": "set PORT=3008 && react-scripts start",
+    "start": "set PORT=3009 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:70",
+  "proxy": "http://localhost:6000",
   "browserslist": {
     "production": [
       ">0.2%",
