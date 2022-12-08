@@ -6,6 +6,7 @@ import Icon from "components/icons/Icon";
 import { deletePost, addLike, removeLike } from "actions/postActions";
 
 export const PostItem = ({ post, showActions, auth, deletePost, addLike, removeLike }) => {
+
   /* Variables */
   const { isAuthenticated, user } = auth;
 
@@ -24,6 +25,56 @@ export const PostItem = ({ post, showActions, auth, deletePost, addLike, removeL
       <Icon color="#AADDFF" icon="pencil1" />
     </Link>
   );
+
+  /* For loggedin users with a profile */
+  const authUsers = () => {
+
+    return (
+      <React.Fragment>
+        <div className="likes" onClick={() => addLike(post._id)}>
+          {findUserLike(post.likes) ? <Icon color="#AADDFF" icon="thumbsup" className="thumbs" /> : <Icon color="#5D789F" icon="thumbsup" className="thumbs" />}
+
+          <h3 className="heading-3">{post.likes.length}</h3>
+        </div>
+
+        <div className="unlikes" onClick={() => removeLike(post._id)}>
+          <Icon color="#5D789F" icon="thumbsdown" className="thumbs" />
+        </div>
+
+        <div className="commentsnumber">
+          <div className="commenticon">
+            <Icon color="#AADDFF" icon="bubbles2" className="bubbles" />
+          </div>
+
+          <h3 className="heading-3">{post.comments.length}</h3>
+        </div>
+      </React.Fragment>
+    );
+    
+  }
+
+  /* For non loggedin users, or users without a profile */
+  const nonAuthUsers = () => {
+
+    return (
+      <React.Fragment>
+        <div className="likes">
+          <Icon color="#5D789F" icon="thumbsup" className="thumbs" />
+
+          <h3 className="heading-3">{post.likes.length}</h3>
+        </div>
+
+        <div className="commentsnumber">
+          <div className="commenticon">
+            <Icon color="#AADDFF" icon="bubbles2" className="bubbles" />
+          </div>
+
+          <h3 className="heading-3">{post.comments.length}</h3>
+        </div>
+      </React.Fragment>
+    );
+    
+  }
 
   return (
     <React.Fragment>
@@ -53,26 +104,8 @@ export const PostItem = ({ post, showActions, auth, deletePost, addLike, removeL
                 */}
 
               {showActions ? (
-                <React.Fragment>
-                  <div className="likes" onClick={() => addLike(post._id)}>
-                    {findUserLike(post.likes) ? <Icon color="#AADDFF" icon="thumbsup" className="thumbs" /> : <Icon color="#5D789F" icon="thumbsup" className="thumbs" />}
-
-                    <h3 className="heading-3">{post.likes.length}</h3>
-                  </div>
-
-                  <div className="unlikes" onClick={() => removeLike(post._id)}>
-                    <Icon color="#5D789F" icon="thumbsdown" className="thumbs" />
-                  </div>
-
-                  <div className="commentsnumber">
-                    <div className="commenticon">
-                      <Icon color="#AADDFF" icon="bubbles2" className="bubbles" />
-                    </div>
-
-                    <h3 className="heading-3">{post.comments.length}</h3>
-                  </div>
-                </React.Fragment>
-              ) : null}
+                authUsers()
+              ) : nonAuthUsers()}
             </div>
 
             <div className="tags">

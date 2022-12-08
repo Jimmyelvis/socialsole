@@ -1,26 +1,57 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import CommentItem from './CommentItem';
-import _ from 'lodash';
+import React, { useEffect } from 'react';
+import { connect } from "react-redux";
+import { deleteComment } from "actions/postActions";
 
-class CommentFeed extends Component {
+const CommentFeed = ({ comments, postId, auth, deleteComment  }) => {
 
-  
+  /**
+   * Todo refactor this code so multiple pages can use it
+   */
 
-  render() {
+  useEffect(() => {
 
-    const { comments, postId } = this.props;
-   
-    return comments.reverse().map(comment => (
-      <CommentItem key={comment._id} comment={comment} postId={postId} />
-    ));
+    getComments()
+ 
+  }, [comments]);
 
+  const getComments = () => {
+    return comments.map((comment) => {
+      return (
+        <div className="commentBody">
+          <div className="commentAvatar">
+            <div className="avatarHolder">
+              <img src={comment.avatar} alt="" />
+            </div>
+            <br />
+            <p className="commentName">{comment.name}</p>
+          </div>
+          <div className="commentText">
+            <p>{comment.text}</p>
+
+            {comment.user === auth.user.id ? (
+              <button onClick={() => deleteComment(postId, comment._id)} type="button" className="btn btn-comment-delete btn-danger mr-1">
+                <i className="fas fa-times" />
+              </button>
+            ) : null}
+          </div>
+        </div>
+      );
+    })
   }
+
+
+ 
+  return (
+    <div className="commentFeed">
+      {getComments()}
+    </div>
+  );
+
 }
 
-CommentFeed.propTypes = {
-  comments: PropTypes.array.isRequired,
-  postId: PropTypes.string.isRequired
-};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
-export default CommentFeed;
+
+export default connect(mapStateToProps, { deleteComment})(CommentFeed);

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import Spinner from "components/common/Spinner";  
+import Spinner from "components/common/Spinner";
 import { getPost } from "actions/postActions";
 import { getCurrentProfile } from "actions/profileActions";
 import { View } from "./view";
 import CommentForm from "./components/comments/CommentForm";
-import CommentFeed from "./components/comments/CommentFeed";
 import { getParams } from "utils/getParams";
+import CommentItem from "./components/comments/CommentItem";
+import { deleteComment } from "actions/postActions";
 
 /*
   This is for displaying the overall Post detail page. This also
@@ -15,14 +16,9 @@ import { getParams } from "utils/getParams";
   the details of a post such as the headerimage, the title, the author
   details, text body.
 
-  <CommentFeed /> which maps through the comments that are attached to this post and 
-  displays them.
-
-  <CommentForm /> which is responsible for displaying and implementing the form
-  for posting comments.
 */
 
-export const Post = ({ getPost, getCurrentProfile, post: { post, loading }, auth, profile: { profile }, match }) => {
+export const Post = ({ getPost, deleteComment, getCurrentProfile, post: { post, loading }, auth, profile: { profile }, match }) => {
 
   /*Variables */
   const { user } = auth;
@@ -30,51 +26,63 @@ export const Post = ({ getPost, getCurrentProfile, post: { post, loading }, auth
 
   getParams(match.params.id, getPost, getCurrentProfile);
 
+  /* renderCommentList() is a function that maps through the comments array and returns a CommentItem component for each comment. */
+
+  const renderCommentList = () => {
+    const { comments } = post;
+
+    if (comments.length > 0) {
+      return comments.map((comment) => {
+        return (
+        <CommentItem 
+          key={comment._id} 
+          comment={comment} 
+          elementId={post._id} 
+          deleteComment={deleteComment} 
+        />
+      );
+      });
+    }
+  };
+
+  /** Loading State */
   if (post === null || loading || Object.keys(post).length === 0) {
     postContent = <Spinner />;
   } 
   
+  /** If the user is not logged in, then they can only view the post, but not comment on it. */
   else if (user === null || Object.keys(user).length === 0) {
     postContent = (
       <React.Fragment>
         <View post={post} showActions={false} />
 
-        {post.comments.length > 0 ? (
-          <div className="commentsarea contentbody">
-            <CommentFeed postId={post._id} comments={post.comments} />
-          </div>
-        ) : (
-          ""
-        )}
+        {post.comments.length > 0 ? <div className="commentsarea contentbody">{renderCommentList()}</div> : ""}
       </React.Fragment>
     );
   } 
   
   else {
+
+    /** If the user is logged in, but does not have a profile, so they can only view the post but not comment */
     if (profile === null || Object.keys(profile).length === 0) {
       postContent = (
         <React.Fragment>
           <View post={post} showActions={false} />
 
-          {post.comments.length > 0 ? (
-            <div className="commentsarea contentbody">
-              <CommentFeed postId={post._id} comments={post.comments} />
-            </div>
-          ) : (
-            ""
-          )}
+          {post.comments.length > 0 ? <div className="commentsarea contentbody">{renderCommentList()}</div> : ""}
         </React.Fragment>
       );
     } 
     
+    /** If the user is logged in and has a profile, then they can view the post and comment on it. */
     else {
       postContent = (
         <React.Fragment>
-          <View post={post} showActions={true} />
+          <View post={post} showActions={false} />
 
           <div className="commentsarea postcommentsarea contentbody">
             <CommentForm postId={post._id} />
-            <CommentFeed postId={post._id} comments={post.comments} />
+            {renderCommentList()}
           </div>
         </React.Fragment>
       );
@@ -90,4 +98,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export const Post_Single = connect(mapStateToProps, { getPost, getCurrentProfile })(Post);
+export const Post_Single = connect(mapStateToProps, { getPost, getCurrentProfile, deleteComment })(Post);

@@ -1,100 +1,61 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import TextAreaFieldGroup from 'components/common/TextAreaFieldGroup';
-import { addComment } from 'actions/postActions';
-import { getCurrentProfile } from 'actions/profileActions';
-import { setAlert } from 'actions/alert';
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import TextAreaFieldGroup from "components/common/TextAreaFieldGroup";
+import { addComment } from "actions/postActions";
+import { getCurrentProfile } from "actions/profileActions";
+import { setAlert } from "actions/alert";
+import { Button } from "components/Buttons";
 
+const CommentForm = ({ addComment, auth, profile: { profile }, postId, setAlert }) => {
+  const [text, setText] = useState("");
 
+  useEffect(() => {
+    getCurrentProfile();
+  }, [getCurrentProfile]);
 
-
-
-class CommentForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-      errors: {}
-    };
-
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.getCurrentProfile();
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors });
-    }
-  }
-
-
-  onSubmit(e) {
+  const onSubmit = (e) => {
     e.preventDefault();
 
-    const { user } = this.props.auth;
-    const { profile } = this.props.profile;
-    const { postId } = this.props;
-
+    const { user } = auth;
 
     const newComment = {
-      text: this.state.text,
+      text: text,
       name: user.name,
-      avatar: profile.user.avatar
+      avatar: profile.user.avatar,
     };
 
-    this.props.addComment(postId, newComment);
-    this.setState({ text: '', errors: {} });
-    this.props.setAlert('Comment Added', 'danger');
-  }
+    addComment(postId, newComment);
+    setText("");
+    setAlert("Comment Added", "success");
+  };
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+  const onChange = (e) => {
+    setText(e.target.value);
+  };
 
 
-  render() {
+  return (
+    <React.Fragment>
+      <div className="commentsheader">Submit a comment...</div>
+      <form className="commentForm" onSubmit={onSubmit}>
+        <div className="form-group">
+          <TextAreaFieldGroup placeholder="Reply to  post" name="text" value={text} onChange={onChange} />
+        </div>
 
-    const { errors } = this.state;
-
-    return (
-      <React.Fragment>
-          <div className="commentsheader"> 
-            Make a comment...
-          </div>
-            <form className="commentForm" onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <TextAreaFieldGroup
-                    placeholder="Reply to  post"
-                    name="text"
-                    value={this.state.text}
-                    onChange={this.onChange}
-                    error={errors.text}
-                  />
-              </div>
-              <button type="submit" className="btn btn-lightblue">
-                Submit
-              </button>
-            </form>
-      </React.Fragment>
-    )
-  }
-}
-
-CommentForm.propTypes = {
-  auth: PropTypes.object.isRequired,
-  postId: PropTypes.string.isRequired,
-  errors: PropTypes.object.isRequired
+        <Button
+          primary
+        >
+          Submit
+        </Button>
+      </form>
+    </React.Fragment>
+  );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { addComment, getCurrentProfile, setAlert })(CommentForm);
