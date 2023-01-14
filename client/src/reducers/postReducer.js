@@ -11,7 +11,6 @@ const initialState = {
   posts: [],
   post: {},
   loading: false,
-  success: { Post: ''}
 };
 
 

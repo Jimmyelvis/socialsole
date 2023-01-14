@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
-import TextFieldGroup from "../common/TextFieldGroup";
+import TextFieldGroup from "../ui/Forms/TextFieldGroup";
 import Navbar from "../../components/layout/Navbar";
 
 const Login = ({ loginUser, auth, history }) => {

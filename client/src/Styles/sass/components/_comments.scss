@@ -39,9 +39,10 @@
   }
 
   .commentBody {
-    margin: 5rem auto;
-    display: flex;
-    padding: 1rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      margin: 5rem auto;
+      padding: 1rem 3rem;
 
     @include respond(bp-medium) {
       flex-direction: column;
@@ -53,19 +54,7 @@
       flex-direction: column;
       align-items: center;
   
-      .avatarHolder {
-        max-width: 10rem;
-        max-height: 10rem;
-        margin: auto;
-        overflow: hidden;
-        border-radius: 50%;
-  
-        img {
-          height: 100%;
-          object-fit: cover;
-          object-position: top;
-        }
-      }
+      @include createAvatar(10rem);
 
       .commentName {
         color: $alternateblue;
@@ -75,15 +64,20 @@
     }
   
     .commentText {
-      flex: 1;
-      position: relative;
-      padding: 2rem;
+      display: flex;
+      align-items: center;
 
-      .btn-danger {
-        position: absolute;
-        bottom: 2rem;
-        right: 2%;
-      }
+       p {
+         flex-basis: 90%;
+         height: 75%;
+       }
+
+       .btn-delete {
+         fill: $orange;
+         width: 2.5rem;
+         height: 2.5rem;
+         cursor: pointer;
+       }
     }
   }
 

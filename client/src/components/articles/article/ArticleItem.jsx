@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Related from "./RelatedArticles"
+// import Related from "./RelatedArticles"
 import isEmpty from "../../../validation/is-empty";
 import Icon from "../../icons/Icon"
 import iconSet from "../../icons/selection.json";
@@ -68,7 +68,7 @@ const ArticleItem  = (
                   ></div>
 
                 <div className="related">
-                  <Related tags={article.tags} articleId={article}/>
+                  {/* <Related tags={article.tags} articleId={article}/> */}
                 </div>
               
             </div>

@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { setAlert } from "./alert";
+
 
 
 import {
@@ -85,7 +87,7 @@ export const getPost = (id) => dispatch => {
   dispatch(setPostLoading());
   axios    
   .get(`/api/posts/${id}`)
-  .then(res =>
+  .then(res => 
     dispatch({
       type: GET_POST,
       payload: res.data
@@ -110,7 +112,7 @@ export const editPost = (id, postData, history) => dispatch => {
       payload: res.data
     })
 
-    dispatch(setAlert("PostUpdated", "success"));
+    dispatch(setAlert("Post Updated", "success"));
     
   }
   )

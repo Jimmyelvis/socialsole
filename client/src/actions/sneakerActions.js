@@ -153,7 +153,6 @@ export const getSneaker = (id) => dispatch => {
       type: GET_SNEAKER,
       payload: res.data
       },
-      console.log(res.data)
     )
   )
   .catch(err =>

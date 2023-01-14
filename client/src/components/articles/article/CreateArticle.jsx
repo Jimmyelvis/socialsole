@@ -5,7 +5,7 @@ import Spinner from "../../common/Spinner";
 import { addArticle } from "../../../actions/articleActions";
 import { getCurrentProfile } from "../../../actions/profileActions";
 import Navbar from "../../../components/layout/CommNavbar";
-import TextFieldGroup from "../../common/TextFieldGroup";
+import TextFieldGroup from "../../ui/Forms/TextFieldGroup";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import isEmpty from "../../../validation/is-empty";

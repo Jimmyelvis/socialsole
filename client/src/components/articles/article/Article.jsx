@@ -4,7 +4,9 @@ import Navbar from "../../../components/layout/Navbar";
 import { getCurrentArticle } from "../../../actions/articleActions";
 import { getCurrentProfile } from "../../../actions/profileActions";
 import Spinner from "../../common/Spinner";
-import CommentForm from "./CommentForm";
+// import CommentForm from "./CommentForm";
+import CommentForm from "components/features/comments/CommentForm";
+import { addComment, deleteComment } from "../../../actions/articleActions";
 import CommentFeed from "./CommentFeed";
 import ArticleItem from "./ArticleItem";
 // import { useParams } from "react-router-dom";
@@ -123,7 +125,10 @@ const Article = (
 
           <div className="container">
             <div className="commentsarea contentbody">
-              <CommentForm articleId={article._id} handle={profile.handle} />
+              {/* <CommentForm articleId={article._id} handle={profile.handle} /> */}
+
+              <CommentForm elementId={article._id} handle={profile.handle} addComment={deleteComment} />
+
               <CommentFeed articleId={article._id} comments={article.comments} />
             </div>
           </div>
@@ -151,5 +156,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentArticle, getCurrentProfile }
+  { getCurrentArticle, getCurrentProfile, addComment, deleteComment }
 )(Article);

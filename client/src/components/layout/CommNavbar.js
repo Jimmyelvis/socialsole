@@ -8,7 +8,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser, logoutUser, registerUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
-import TextFieldGroup from "../common/TextFieldGroup";
+import TextFieldGroup from "../ui/Forms/TextFieldGroup";
 import Modal from "../common/Modal"
 import Icon from "../icons/Icon"
 import { Widgetsetting } from "../common/Cloudinary";

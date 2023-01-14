@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import Card from "../../../components/cards/Card";
+import Card from "components/ui/cards/Card";
 import Spinner from "components/common/Spinner";
 import { getPosts } from "actions/postActions";
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
-import TextAreaFieldGroup from '../../common/TextAreaFieldGroup';
+import TextAreaFieldGroup from '../../ui/Forms/TextAreaFieldGroup';
 import { addComment } from '../../../actions/articleActions';
 import CommentsSection from '../../common/CommentsSection'
 

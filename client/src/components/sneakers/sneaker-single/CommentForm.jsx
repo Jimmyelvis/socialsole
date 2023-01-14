@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import TextAreaFieldGroup from "../../common/TextAreaFieldGroup";
+import TextAreaFieldGroup from "../../ui/Forms/TextAreaFieldGroup";
 import { addComment } from "../../../actions/sneakerActions";
 import { getCurrentProfile } from "../../../actions/profileActions";
 import CommentsSection from "../../common/CommentsSection";

@@ -70,26 +70,8 @@
      
 
       .tags {
-        display: flex;
         width: 45%;
-        justify-content: space-evenly;
-        position: absolute;
         bottom: 3rem;
-
-        .tagicon {
-          flex: 0 0 3rem;
-        }
-
-        ul {
-          display: flex;
-          justify-content: space-evenly;
-          flex: 1;
-
-          li {
-            font-weight: bold;
-            font-size: 1.4rem;
-          }
-        }
       }
     }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import TextAreaFieldGroup from './TextAreaFieldGroup'
+import TextAreaFieldGroup from '../ui/Forms/TextAreaFieldGroup'
 
 const CommentsSection = ({onSubmit, text, onChange}) => {
   return (

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
-import TextAreaFieldGroup from "../../common/TextAreaFieldGroup";
-import TextFieldGroup from "../../common/TextFieldGroup";
+import TextAreaFieldGroup from "../../ui/Forms/TextAreaFieldGroup";
+import TextFieldGroup from "../../ui/Forms/TextFieldGroup";
 import { editPost, getPost } from "../../../actions/postActions";
 import { getCurrentProfile } from "../../../actions/profileActions";
 import ReactQuill from "react-quill";
@@ -33,6 +33,8 @@ const EditPost = ({ getCurrentProfile, editPost, getPost,match, history, auth, e
   useEffect(() => {
     getPost(match.params.id);
 
+
+
     setValues({
       ...values,
       headerimage: !isEmpty(post.headerimage) ? post.headerimage : "",
@@ -52,9 +54,7 @@ const EditPost = ({ getCurrentProfile, editPost, getPost,match, history, auth, e
     const { user } = auth;
 
     const newPost = {
-      fullheaderimage: fullheaderimage,
-      articleheaderimage: articleheaderimage,
-      address: address,
+      headerimage: headerimage,
       headline: headline,
       text: text,
       _id: _id,

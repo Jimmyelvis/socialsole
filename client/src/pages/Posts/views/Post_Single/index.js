@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import Spinner from "components/common/Spinner";
 import { getPost } from "actions/postActions";
 import { getCurrentProfile } from "actions/profileActions";
-import { View } from "./view";
-import CommentForm from "./components/comments/CommentForm";
+import { View } from "./components/view";
+import CommentForm from "components/features/comments/CommentForm";
 import { getParams } from "utils/getParams";
-import CommentItem from "./components/comments/CommentItem";
-import { deleteComment } from "actions/postActions";
+import CommentItem from "components/features/comments/CommentItem";
+import { deleteComment  } from "actions/postActions";
+import { addComment } from "actions/postActions";
+
 
 /*
   This is for displaying the overall Post detail page. This also
@@ -18,7 +20,7 @@ import { deleteComment } from "actions/postActions";
 
 */
 
-export const Post = ({ getPost, deleteComment, getCurrentProfile, post: { post, loading }, auth, profile: { profile }, match }) => {
+export const Post = ({ getPost, deleteComment, addComment, getCurrentProfile, post: { post, loading }, auth, profile: { profile }, match }) => {
 
   /*Variables */
   const { user } = auth;
@@ -44,6 +46,7 @@ export const Post = ({ getPost, deleteComment, getCurrentProfile, post: { post, 
       });
     }
   };
+
 
   /** Loading State */
   if (post === null || loading || Object.keys(post).length === 0) {
@@ -78,11 +81,12 @@ export const Post = ({ getPost, deleteComment, getCurrentProfile, post: { post, 
     else {
       postContent = (
         <React.Fragment>
-          <View post={post} showActions={false} />
+          <View post={post} showActions={true} />
 
           <div className="commentsarea postcommentsarea contentbody">
-            <CommentForm postId={post._id} />
+            <CommentForm elementId={post._id} addComment={addComment} />
             {renderCommentList()}
+
           </div>
         </React.Fragment>
       );
@@ -98,4 +102,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export const Post_Single = connect(mapStateToProps, { getPost, getCurrentProfile, deleteComment })(Post);
+export const Post_Single = connect(mapStateToProps, { getPost, getCurrentProfile, deleteComment, addComment })(Post);

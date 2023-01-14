@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
-import TextAreaFieldGroup from "../../common/TextAreaFieldGroup";
-import TextFieldGroup from "../../common/TextFieldGroup";
+import TextAreaFieldGroup from "../../ui/Forms/TextAreaFieldGroup";
+import TextFieldGroup from "../../ui/Forms/TextFieldGroup";
 import { editSneaker, getSneaker } from "../../../actions/sneakerActions";
 import { getCurrentProfile } from "../../../actions/profileActions";
 import ReactQuill from "react-quill";

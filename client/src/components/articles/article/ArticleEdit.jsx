@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import Navbar from "../../../components/layout/Navbar";
 import { editArticle, getCurrentArticle } from "../../../actions/articleActions";
 import { getCurrentProfile } from "../../../actions/profileActions";
-import TextFieldGroup from "../../common/TextFieldGroup";
+import TextFieldGroup from "../../ui/Forms/TextFieldGroup";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import isEmpty from "../../../validation/is-empty";

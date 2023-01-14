@@ -34,7 +34,11 @@ router.get("/tags/:tags", (req, res) => {
 
     array = req.params.tags.split(',')
     Post.find({tags: {$in : array }} )
-    .then(posts => res.json(posts))
+    .then(posts => {
+      
+      posts = posts.slice(0, 3)
+      res.json(posts)
+    })
     .catch(err => res.status(404).json({ nopostsfound: "No posts found here" }));
 });
 

@@ -1,4 +1,4 @@
-@import "abstracts/mixins";
+@import "./abstracts/_mixins";
 @import './abstracts/_variables.scss';
 
 
@@ -23,6 +23,7 @@
 @import './components/_pageheading.scss';
 @import './components/_related.scss';
 @import './components/_searchbar.scss';
+@import './components/_tags.scss';
 @import './components/_secheading.scss';
 @import './components/_upcoming.scss';
 @import './components/_userheader.scss';
@@ -47,6 +48,12 @@
 @import './pages/_postdetail.scss';
 @import './pages/_profiledetail.scss';
 @import './pages/_sneakerdetail.scss';
+
+// @tailwind base;
+// @tailwind components;
+
+@tailwind utilities;
+
 
 
 
