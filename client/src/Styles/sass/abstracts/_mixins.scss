@@ -350,3 +350,24 @@
 
 
 }
+
+
+@mixin gridTempColumn {
+  grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(12, [col-start] minmax(min-content, 13rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+
+  @include respond(bp-large) {
+    grid-template-columns: [full-start] minmax(4.5rem, 1fr) [center-start] repeat(12, [col-start] minmax(min-content, 13rem) [col-end]) [center-end] minmax(4.5rem, 1fr) [full-end];
+  }
+
+  @include respond(bp-smallest) {
+    grid-template-columns: [full-start] minmax(3rem, 1fr) [center-start] repeat(12, [col-start] minmax(min-content, 13rem) [col-end]) [center-end] minmax(3rem, 1fr) [full-end];
+  }
+
+  @include respond(bp-tiny) {
+    grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(12, [col-start] minmax(min-content, 13rem) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
+  }
+}
+
+@mixin cardshadowlrgBlur {
+  box-shadow: 0px 0px 18px 14px rgb(0 0 0 / 10%);
+}

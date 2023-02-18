@@ -1,0 +1,46 @@
+.author-header {
+  display: grid;
+  grid-template-columns: 6rem max-content;
+  column-gap: 0.5rem;
+  position: absolute;
+
+  @include createAvatar(4rem);
+
+  .avatar {
+    grid-column: 1 / 2;
+  }
+
+  .author-name {
+    font-size: 1.8rem;
+    color: $midnightblue;
+    margin-bottom: 0.3rem;
+    grid-column: 2 / -1;
+  }
+
+
+}
+
+.author-header--with-date {
+  grid-template-columns: 6rem max-content;
+  grid-template-rows: repeat(2, max-content);
+  column-gap: 0.5rem;
+  position: absolute;
+
+  @include createAvatar(4rem);
+
+  .avatar {
+    grid-row: 1 / -1;
+  }
+
+
+  .author-name {
+    font-size: 1.8rem;
+    color: $midnightblue;
+    margin-bottom: 0.3rem;
+  }
+
+  .post-date {
+    font-size: 1.3rem;
+    color: $ltpowderblue;
+  }
+}

@@ -26,8 +26,6 @@ const CommentForm = ({ addComment, auth, profile: { profile }, elementId, setAle
       avatar: profile.user.avatar,
     };
 
-   
-
     addComment(elementId, newComment);
     setText("");
   };

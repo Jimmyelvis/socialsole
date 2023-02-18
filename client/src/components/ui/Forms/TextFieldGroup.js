@@ -2,9 +2,7 @@
   A reuseable Text field group component that can be used across the application
 */
 
-import React from "react";
-import classnames from "classnames";
-import PropTypes from "prop-types";
+import className from "classnames";
 
 const TextFieldGroup = ({
   name,
@@ -14,41 +12,72 @@ const TextFieldGroup = ({
   error,
   info,
   type,
-  onChange,
-  disabled
+  onChangeFunction,
+  disabled,
+  icon,
+  iconClassname,
+  iconClickFunction,
+  iconPosition,
+  ...rest
 }) => {
-  return (
-    <div className="form-group">
+
+  const formClasses = className(
+    'form-control',
+    {},
+  )
+
+  const iconClasses = className(
+    'inputField-icon',
+    {
+      'inputField-icon-right': iconPosition === 'right',
+    },
+  )
+
+  if (icon) {
+    return (
+    <div className="field-group-with-icon">
+      <img
+        src={icon}
+        alt=""
+        className={iconClasses}
+        onClick={iconClickFunction}
+      />
+
       <input
         type={type}
-        className={classnames("form-control form-control-lg", {
-          "is-invalid": error
-        })}
-        placeholder={placeholder}
-        name={name}
+        className={formClasses}
         value={value}
-        onChange={onChange}
+        onChange={onChangeFunction}
+        placeholder={placeholder}
         disabled={disabled}
       />
-      {info && <small className="form-text text-muted">{info}</small>}
-      {error && <div className="invalid-feedback">{error}</div>}
     </div>
-  );
+    );
+  } 
+  
+  else {
+    return (
+      <div className="field-group">
+        <input
+          type={type}
+          className={formClasses}
+          value={value}
+          onChange={onChangeFunction}
+          placeholder={placeholder}
+          disabled={disabled}
+      />
+      </div>
+    );
+  }
+  
+  
 };
 
-TextFieldGroup.propTypes = {
-  name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.string.isRequired,
-  info: PropTypes.string,
-  error: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.string
-};
+
 
 TextFieldGroup.defaultProps = {
-  type: 'text'
+  type: 'text',
+  iconPosition: 'left'
 };
 
 

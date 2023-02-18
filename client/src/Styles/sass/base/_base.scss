@@ -54,18 +54,10 @@ select {
 }
 
 .container {
-  max-width: 136rem;
-  margin: 0 auto;
-  padding: 4rem 4rem;
-  overflow: hidden;
+  display: grid;
 
-
-  @include respond(bp-smallest) {
-    padding: 4rem 2rem;
-  }
-
+  @include gridTempColumn;
 }
-
 
 
 .register.contentbody {

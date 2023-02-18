@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="34" viewBox="0 0 40 34">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#7bcaff"/>
+      <stop offset="1" stop-color="#2179b5"/>
+    </linearGradient>
+  </defs>
+  <g id="create-list" transform="translate(-289 -130.913)">
+    <g id="Rectangle_1341" data-name="Rectangle 1341" transform="translate(289 130.913)" stroke="rgba(255,255,255,0.7)" stroke-width="1" fill="url(#linear-gradient)">
+      <rect width="40" height="34" stroke="none"/>
+      <rect x="0.5" y="0.5" width="39" height="33" fill="none"/>
+    </g>
+    <path id="Icon_awesome-plus-circle" data-name="Icon awesome-plus-circle" d="M11.584.563A11.021,11.021,0,1,0,22.605,11.584,11.02,11.02,0,0,0,11.584.563Zm6.4,12.266a.535.535,0,0,1-.533.533H13.362V17.45a.535.535,0,0,1-.533.533H10.34a.535.535,0,0,1-.533-.533V13.362H5.718a.535.535,0,0,1-.533-.533V10.34a.535.535,0,0,1,.533-.533H9.806V5.718a.535.535,0,0,1,.533-.533h2.489a.535.535,0,0,1,.533.533V9.806H17.45a.535.535,0,0,1,.533.533Z" transform="translate(297.438 136.351)" fill="#fff"/>
+  </g>
+</svg>

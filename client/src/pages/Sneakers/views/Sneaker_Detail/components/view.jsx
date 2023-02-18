@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import Related from "./RelatedSneakers";
+import Related from "./RelatedSneakers";
 import { Link } from "react-router-dom";
 import { deleteSneaker, addLike, removeLike } from "actions/sneakerActions";
 import { getCurrentProfile } from "actions/profileActions";
@@ -171,9 +171,9 @@ const SneakerItem = ({ sneaker, showActions, auth, deleteSneaker, addLike, remov
             tags.
           */}
 
-          {/* <div className="related contentbody">
+          <div className="related contentbody">
             <Related tags={sneaker.tags} sneakerId={sneaker} />
-          </div> */}
+          </div>
         </div>
       </div>
     </React.Fragment>

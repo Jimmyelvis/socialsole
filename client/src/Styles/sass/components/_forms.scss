@@ -3,6 +3,38 @@
 /////////////////  FORM FIELDS ///////////////////////////////////////
 */
 
+.field-group {
+  margin-bottom: 1.5rem;
+}
+
+.field-group-with-icon {
+   width: 100%;
+   position: relative;
+   margin-bottom: 1.5rem;
+
+  .inputField-icon {
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    fill: #5cb3ff;
+    top: 50%;
+    left: 4%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .inputField-icon-right {
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    fill: #5cb3ff;
+    top: 50%;
+    right: 4%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+}
+
 .form-control {
   display: block;
   width: 100%;
@@ -18,20 +50,48 @@
   box-shadow: inset 0px 0px 3px 2px rgba(42, 44, 45, 0.07);
 }
 
-.form-control-lg,
-.input-group-lg > .form-control,
-.input-group-lg > .input-group-append > .btn,
-.input-group-lg > .input-group-append > .input-group-text,
-.input-group-lg > .input-group-prepend > .btn,
-.input-group-lg > .input-group-prepend > .input-group-text {
-  padding: 1rem 1.6rem;
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+input[type="date"].form-control,
+input[type="time"].form-control,
+input[type="datetime-local"].form-control,
+input[type="month"].form-control {
+  appearance: none;
+}
+
+.form-control-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0;
+}
+
+.form-control-lg {
+  padding: 0.5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0;
 }
 
-.text-muted {
-  color: #73c0f3d4 !important;
-  font-weight: 600;
-  margin-left: 20px;
+select.form-control:focus::-ms-value {
+  color: #495057;
+  background-color: #fff;
 }
+

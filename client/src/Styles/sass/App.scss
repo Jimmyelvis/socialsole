@@ -6,14 +6,20 @@
 @import './base/_typography.scss';
 @import './base/_utilities.scss';
 
+
 @import './components/_actions.scss';
+@import './components/_authorHeader.scss';
 @import './components/_alerts.scss';
+@import "components/_avatar";
 @import './components/_buttons.scss';
 @import './components/_cards.scss';
+@import './components/_cardpicoverlay.scss';
+@import './components/_cardpost.scss';
 @import './components/_comments.scss';
 @import './components/_content.scss';
 @import './components/_contentbody.scss';
 @import './components/_forms.scss';
+@import './components/_friendsCard.scss';
 @import './components/_fullimageheader.scss';
 @import './components/_hammenu.scss';
 @import './components/_header.scss';
