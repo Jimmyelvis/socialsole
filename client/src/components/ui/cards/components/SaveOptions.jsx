@@ -19,17 +19,18 @@ import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 
 
 
-export const SaveOptions = ({ useSavesList  }) => {
+export const SaveOptions = ({ 
+  useSavesList, 
+  menuOpen,
+  setMenuOpen,
+  postOptionsMenuClasses,
+  setpostOptionsMenuClasses,
+  setInnerMenu,
+  innerMenu,
+}) => {
 
 
-  // /* Determine whether the save menu list is open or closed */
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  /* We use the postOptionsMenuClasses state to determine which class to apply to the save menu list */
-  const [postOptionsMenuClasses, setpostOptionsMenuClasses] = useState("default-list-menu default-list-menu-closed");
-
-  /* We use the innerMenu state to determine which menu to display. If the innerMenu state is null, we display the default menu. If the innerMenu state is "create-list", we display the create list menu. */
-  const [innerMenu, setInnerMenu] = useState(null);
+ 
 
   const [userLists, setUserLists] = useState([]);
 

@@ -5,33 +5,43 @@ import { SaveOptions } from "../components/SaveOptions";
 import { useState, useEffect } from "react";
 
 
-
-import { BsFillHeartFill } from "react-icons/bs";
-import { FaThList } from "react-icons/fa";
-import { MdPlaylistAdd } from "react-icons/md";
-import { IoArrowUndoSharp } from "react-icons/io5";
-import { Scrollbars } from "react-custom-scrollbars-2";
-import TextFieldGroup from "components/ui/Forms/TextFieldGroup";
-import Createicon from "assets/img/create-list.svg";
-import { ImCheckmark } from "react-icons/im";
-import { AiTwotoneDelete } from "react-icons/ai";
-
-/**
- * We need to figure out how to pass the openMenu function to the parent component.
- * We may need to use the Context API to pass the function to the parent component.
- * We may also need to use the Redux store to pass the function to the parent component.
- */
-
-
 export const CardPost = ({ author, date, headline, excerpt, likesNumber, commentsNumber, postImage, useSavesList  }) => {
 
-  /* Determine whether the save menu list is open or closed */
+
+  /*
+   TODO: We need to move menuOpen, setMenuOpen, postOptionsMenuClasses, setpostOptionsMenuClasses, setInnerMenu, innerMenu to context or redux store So this state, and actions can be accessed by the SaveOptions component. If successful then we would just need to provide the SaveOptions component with the useSavesList prop. 
+  */
+
+  // /* Determine whether the save menu list is open or closed */
   const [menuOpen, setMenuOpen] = useState(false);
 
+  /* We use the innerMenu state to determine which menu to display. If the innerMenu state is null, we display the default menu. If the innerMenu state is "create-list", we display the create list menu. */
+  const [innerMenu, setInnerMenu] = useState(null);
+
+  const [postOptionsMenuClasses, setpostOptionsMenuClasses] = useState("default-list-menu default-list-menu-closed");
+
+  const openMenu = () => {
+    setMenuOpen(!menuOpen);
+    setpostOptionsMenuClasses("default-list-menu default-list-menu-open");
+    setInnerMenu("default-menu");
+  };
 
   return (
     <div className="card-post">
-      <SaveOptions useSavesList={useSavesList} menuOpen={menuOpen} />
+      <SaveOptions
+        useSavesList={useSavesList}
+
+        /*
+          TODO: Pass the rest below to context api or redux store so they can be accessed by the SaveOptions component.
+        */
+       
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+        postOptionsMenuClasses={postOptionsMenuClasses}
+        setpostOptionsMenuClasses={setpostOptionsMenuClasses}
+        setInnerMenu={setInnerMenu}
+        innerMenu={innerMenu}
+      />
 
       <div className="top">
         <div className="card-header">
