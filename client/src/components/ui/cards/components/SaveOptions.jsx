@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BsFillHeartFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { MdPlaylistAdd } from "react-icons/md";
@@ -9,28 +9,22 @@ import Createicon from "assets/img/create-list.svg";
 import { ImCheckmark } from "react-icons/im";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
-
-
-/**
- * We need to figure out how to pass the openMenu function to the parent component.
- * We may need to use the Context API to pass the function to the parent component.
- * We may also need to use the Redux store to pass the function to the parent component.
- */
+import { useSaveOptions } from "context/saveOptions";
 
 
 
 export const SaveOptions = ({ 
   useSavesList, 
-  menuOpen,
-  setMenuOpen,
-  postOptionsMenuClasses,
-  setpostOptionsMenuClasses,
-  setInnerMenu,
-  innerMenu,
 }) => {
 
 
+  const { menuOpen, setMenuOpen, postOptionsMenuClasses, setpostOptionsMenuClasses, setInnerMenu, innerMenu, activeItem } = useSaveOptions();
+
+  const parentRef = useRef();
+
+;
  
+  
 
   const [userLists, setUserLists] = useState([]);
 
@@ -85,7 +79,6 @@ export const SaveOptions = ({
     setCreatedLists([...createdLists, obj]);
     setUserLists([...userLists, obj]);
     setListName("");
-    console.log("created lists", createdLists);
   };
 
   const backToDefaultMenu = () => {
@@ -93,11 +86,7 @@ export const SaveOptions = ({
     setInnerMenu("default-menu");
   };
 
-  // const openMenu = () => {
-  //   setMenuOpen(!menuOpen);
-  //   setpostOptionsMenuClasses("default-list-menu default-list-menu-open");
-  //   setInnerMenu("default-menu");
-  // };
+
 
   const showDefaultMenu = () => {
     return (
@@ -146,7 +135,6 @@ export const SaveOptions = ({
   };
 
   const getSaveLists = () => {
-    console.log("called getSaveLists");
 
     return (
       <ul className="save-list">
@@ -161,7 +149,6 @@ export const SaveOptions = ({
           <li className="choose">Choose List</li>
 
           {userLists.map((list) => {
-            console.log("called map");
 
             return (
               <li className="save-list-item" key={list.id}>
@@ -195,7 +182,14 @@ export const SaveOptions = ({
       <div className="create-list">
         <h3 className="heading-3">Create a new list to save this post to.</h3>
 
-        <TextFieldGroup placeholder="Enter a name for your list" name="listName" value={listName} onChangeFunction={handleCreateListInput} icon={Createicon} iconClickFunction={addToCreatedLists} />
+        <TextFieldGroup 
+          placeholder="Enter a name for your list" 
+          name="listName" 
+          value={listName} 
+          onChangeFunction={handleCreateListInput} 
+          icon={Createicon} 
+          iconClickFunction={addToCreatedLists} 
+        />
 
         <ul className="save-list">
           <Scrollbars
@@ -228,8 +222,49 @@ export const SaveOptions = ({
     );
   };
 
+  if (parentRef && parentRef.current && parentRef.current.parentElement) {
+    // console.log(parentRef.current.parentElement.id);
+  }
+
+  // console.log("activeItem", activeItem);
+
+  /**
+   * Use this function to determine if the current element
+   * is the one that activeItem is referring to. We do this 
+   * by getting the parent element's id of the current element
+   * and comparing it to the activeItem.
+   * 
+   * If they are the same, then we return the postOptionsMenuClasses
+   * which is the class that shows the menu. If they are not the same,
+   * then we return the class "hidden" which hides the menu.
+   * 
+   * 
+   */
+
+  const tempFunc = () => {
+
+
+    console.log('====================================');
+    console.log("called");
+    console.log('====================================');
+
+    if (parentRef && parentRef.current && parentRef.current.parentElement) {
+
+
+      if (parentRef.current.parentElement.id === activeItem) {
+        return postOptionsMenuClasses
+      } 
+      else {
+        return "hidden";
+      }
+      
+    }
+    
+  }
+
+
   return (
-    <div className={postOptionsMenuClasses}>
+    <div className={tempFunc()} ref={parentRef}>
       <IoEllipsisHorizontalSharp className="icon icon-ellipsis close-menu" onClick={() => closeMenu()} />
 
       {innerMenu !== "default-menu" ? <IoArrowUndoSharp className="icon icon-undo" onClick={() => backToDefaultMenu()} /> : null}

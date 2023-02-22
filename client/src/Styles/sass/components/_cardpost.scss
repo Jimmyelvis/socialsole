@@ -8,14 +8,6 @@
 
   @include cardshadowlrgBlur;
 
-  .icon-ellipsis {
-    position: absolute;
-    right: 3rem;
-    width: 2.4rem;
-    height: 2.4rem;
-    fill: $slateblue;
-    cursor: pointer;
-  }
 
 
   .top {
@@ -53,8 +45,14 @@
       }
 
       .open-menu {
+        position: absolute;
+        width: 2.4rem;
+        height: 2.4rem;
+        fill: $slateblue;
+        cursor: pointer;
         top: 50%;
         transform: translateY(-50%);
+        right: 3rem;
       }
     }
 
@@ -99,240 +97,10 @@
   }
 
 
-
-  .default-list-menu {
-    background: rgb(255 255 255 / 83%);
-    position: absolute;
-    z-index: 500;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(11px) brightness(109%);
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 1s;
-
-    opacity: 0;
-
-    .close-menu {
-      top: 2.1rem;
-    }
-
-    .icon.icon-undo {
-      position: absolute;
-      top: 3rem;
-      left: 2rem;
-      width: 2.4rem;
-      height: 2.4rem;
-      cursor: pointer;
-    }
-
-    .default-list {
-      display: flex;
-      flex-direction: column;
-      padding: 3rem 1rem;
-
-      .default-list-item {
-        margin-bottom: 4rem;
-        display: flex;
-        align-items: center;
-        height: 4.3rem;
-
-        .label {
-          font-size: 1.8rem;
-          color: $alternateblue;
-          font-weight: bold;
-          cursor: pointer;
-          flex: 1 1;
-        }
-
-        .icon {
-          width: 4.2rem;
-          height: 4.2rem;
-          fill: #5cb3ff;
-          cursor: pointer;
-          margin-right: 3rem;
-        }
-      }
-    }
-
-    .create-list {
-      display: flex;
-      flex-direction: column;
-      height: 75%;
-      width: 100%;
-      padding: 2rem 4rem;
-      align-items: center;
-
-      .heading-3 {
-        text-align: center;
-        width: 80%;
-        margin-bottom: 3rem;
-        color: $midnightblue;
-      }
-
-      .field-group-with-icon {
-        width: 75%;
-        position: relative;
-        margin-bottom: 1.5rem;
-        height: 3.9rem;
-
-        .inputField-icon {
-          height: 100%;
-          width: 3.7rem;
-          position: absolute;
-          top: -0;
-          right: -2px;
-          left: unset;
-          transform: none;
-        }
-
-        .form-control {
-          display: block;
-          width: 100%;
-          padding: 0.375rem 0.75rem;
-          font-size: 1rem;
-          line-height: 1.5;
-          color: #395379;
-          background-color: #fff;
-          background-clip: padding-box;
-          border: 1px solid rgba(226, 229, 236, 0.5);
-          border-radius: 0;
-          transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-          box-shadow: inset 0px 0px 3px 2px rgba(42, 44, 45, 0.07);
-          height: 100%;
-        }
-      }
-
-      .save-list {
-        height: 80%;
-        width: 74%;
-        margin-top: 2rem;
-        padding: 1rem 0;
-
-        .save-list-item {
-          display: grid;
-          grid-template-columns: 2fr 1fr;
-          grid-template-rows: max-content;
-          align-items: center;
-
-          .icon-check {
-            grid-column: 2 / -1;
-            grid-row: 1;
-          }
-        }
-      }
-    }
-  }
-
-  .default-list-menu-open {
-    opacity: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .default-list-menu-closed {
-    display: none;
-  }
-
-  .save-list {
-    height: 75%;
-    padding-bottom: 3rem;
-    width: 59%;
-
-    .choose {
-      cursor: none;
-      font-size: 2.2rem;
-      font-weight: bold;
-      margin-bottom: 2rem;
-    }
-
-    .save-list-item {
-      color: $alternateblue;
-      margin-bottom: 1.5rem;
-      font-size: 1.8rem;
-      font-weight: bold;
-      cursor: pointer;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-template-rows: max-content;
-      align-items: center;
-
-      &:hover {
-        .icon-trash {
-          display: block;
-        }
-      }
-    }
-
-    .icon-trash {
-      grid-column: 2 / -1;
-      grid-row: 1;
-      display: none;
-      align-self: baseline;
-    }
-  }
-
-  .track-vertical {
-    width: 19px !important;
-    height: 78%;
-    background: rgb(216 224 237 / 18%);
-    right: 0;
-    border-radius: 8px;
-    box-shadow: inset 0px 0px 5px 0px rgb(153 153 153 / 49%);
-    border: 3px solid rgb(255 255 255 / 31%);
-    top: 50%;
-    transform: translateY(-50%);
-
-    .thumb-vertical {
-      background: linear-gradient(to right, rgb(123 194 255) 0%, rgb(0 81 149) 100%);
-      border-radius: 8px;
-      z-index: 1;
-
-      &::before {
-         position: absolute;
-         content: "";
-         top: 0;
-         right: 0;
-         bottom: 0;
-         left: 0;
-         border-radius: 8px;
-
-
-        background: linear-gradient(to right, rgb(186, 223, 255) 0%, rgb(34, 139, 225) 100%);
-
-        z-index: -1;
-        transition: opacity 0.2s linear;
-        opacity: 0;
-      }
-    }
-
-    .thumb-vertical:hover::before {
-      opacity: 1;
-    }
-
+  .close-menu {
+    right: 3rem;
+    top: 2.1rem;
   }
 
 }
 
-// Keyframes fadeIn display none to display block
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    display: none;
-  }
-
-  100% {
-    opacity: 1;
-    display: flex;
-  }
-}
-
-/* We use this to fade out the save list menu, before 
-  setting the display to none
-*/
-.fade-out {
-  opacity: 0;
-  transition: opacity 1s;
-  display: flex;
-}

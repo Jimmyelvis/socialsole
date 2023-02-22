@@ -3,6 +3,7 @@
   grid-template-columns: 6rem max-content;
   column-gap: 0.5rem;
   position: absolute;
+  align-items: center;
 
   @include createAvatar(4rem);
 
@@ -11,8 +12,8 @@
   }
 
   .author-name {
-    font-size: 1.8rem;
-    color: $midnightblue;
+    font-size: 2rem;
+    color: $white;
     margin-bottom: 0.3rem;
     grid-column: 2 / -1;
   }

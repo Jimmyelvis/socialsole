@@ -26,6 +26,8 @@ import Alert from './components/layout/Alerts'
 
 import { LatestNews, LatestSneakers, Ui_Stuff } from "pages/Test";
 
+import { SaveOptionsProvider } from 'context/saveOptions';
+
 
 import './Styles/sass/App.scss';
 
@@ -55,68 +57,70 @@ if (localStorage.jwtToken) {
 const App = () => {
 
   return (
-    <Provider store={store}>
-      <Router>
-        <ScrollToTop>
-          <React.Fragment>
-            <Alert />
-            <Navbar />
+    <SaveOptionsProvider>
+      <Provider store={store}>
+        <Router>
+          <ScrollToTop>
+            <React.Fragment>
+              <Alert />
+              <Navbar />
 
-            <Route exact path="/" component={HomeContainer} />
+              <Route exact path="/" component={HomeContainer} />
 
-            {/* <Route exact path="/profiles" component={AllProfiles} />
-            <Route exact path="/profile/:handle" component={Profile_Detail} />
-            <Switch>
-              <PrivateRoute exact path="/create-profile" component={Create_Profile} />
-            </Switch>
-            <Switch>
-              <PrivateRoute exact path="/edit-profile" component={Edit_Profile} />
-            </Switch> */}
+              {/* <Route exact path="/profiles" component={AllProfiles} />
+              <Route exact path="/profile/:handle" component={Profile_Detail} />
+              <Switch>
+                <PrivateRoute exact path="/create-profile" component={Create_Profile} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/edit-profile" component={Edit_Profile} />
+              </Switch> */}
 
-            <Route exact path="/allposts" component={Allposts} />
-            <Route exact path="/post/:id" component={Post_Single} />
-            <Route exact path="/editpost/:id" component={Edit_Post} />
+              <Route exact path="/allposts" component={Allposts} />
+              <Route exact path="/post/:id" component={Post_Single} />
+              <Route exact path="/editpost/:id" component={Edit_Post} />
 
-            <Route exact path="/allsneakers" component={AllSneakers} />
-            <Route exact path="/sneaker/:id" component={Sneaker_Detail} />
-            <Route exact path="/editsneaker/:id" component={Edit_Sneaker} />
+              <Route exact path="/allsneakers" component={AllSneakers} />
+              <Route exact path="/sneaker/:id" component={Sneaker_Detail} />
+              <Route exact path="/editsneaker/:id" component={Edit_Sneaker} />
 
-            <Route exact path="/allarticles/" component={All_Articles} />
-            <Route exact path="/article/:id" component={Article_Detail} />
+              <Route exact path="/allarticles/" component={All_Articles} />
+              <Route exact path="/article/:id" component={Article_Detail} />
 
-            <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard_Home} />
-            </Switch>
-            <Route exact path="/articleedit/:id" component={Edit_Article} />
+              <Switch>
+                <PrivateRoute exact path="/dashboard" component={Dashboard_Home} />
+              </Switch>
+              <Route exact path="/articleedit/:id" component={Edit_Article} />
 
-            <Switch>
-              <AuthorRoute exact path="/createarticle" component={Create_Article} />
-            </Switch>
+              <Switch>
+                <AuthorRoute exact path="/createarticle" component={Create_Article} />
+              </Switch>
 
-            <Switch>
-              <PrivateRoute exact path="/createpost" component={Create_Post} />
-            </Switch>
-            <Switch>
-              <PrivateRoute exact path="/addsneaker" component={Add_Sneaker} />
-            </Switch>
-            {/* <Switch>
-              <AuthorRoute exact path="/createarticle" component={CreateArticle} />
-            </Switch> */}
-            <Route exact path="/not-found" component={NotFound} />
+              <Switch>
+                <PrivateRoute exact path="/createpost" component={Create_Post} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/addsneaker" component={Add_Sneaker} />
+              </Switch>
+              {/* <Switch>
+                <AuthorRoute exact path="/createarticle" component={CreateArticle} />
+              </Switch> */}
+              <Route exact path="/not-found" component={NotFound} />
 
-            {/**
-             * Test Routes
-             */}
+              {/**
+               * Test Routes
+               */}
 
-            <Route exact path="/test/uistuff" component={Ui_Stuff} />
-            <Route exact path="/test/latestnews" component={LatestNews} />
-            <Route exact path="/test/latestsneakers" component={LatestSneakers} />
+              <Route exact path="/test/uistuff" component={Ui_Stuff} />
+              <Route exact path="/test/latestnews" component={LatestNews} />
+              <Route exact path="/test/latestsneakers" component={LatestSneakers} />
 
-            <Footer />
-          </React.Fragment>
-        </ScrollToTop>
-      </Router>
-    </Provider>
+              <Footer />
+            </React.Fragment>
+          </ScrollToTop>
+        </Router>
+      </Provider>
+    </SaveOptionsProvider>
   );
 
  
