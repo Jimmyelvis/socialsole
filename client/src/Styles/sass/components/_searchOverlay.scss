@@ -1,0 +1,147 @@
+.search-overlay {
+  display: grid;
+  @include gridTempColumn;
+  grid-column: 1 / -1;
+  height: 100%;
+  position: relative;
+
+
+  form {
+    position: fixed;
+    height: 9rem;
+    width: 99%;
+    top: -2px;
+    z-index: 2000;
+
+
+    .form-control {
+      display: block;
+      width: 100%;
+      font-size: 2.5rem;
+      line-height: 1.5;
+      color: #8990b6;
+      background-color: rgb(150 171 201 / 16%);
+      background-clip: padding-box;
+      border: 1px solid rgb(255 255 255);
+      border-bottom: rgba(255, 255, 255, 0.57) 4px solid;
+      border-radius: 0;
+      transition: border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
+      box-shadow: inset -3px -5px 7px 3px rgba(87, 137, 162, 0.07);
+      height: 100%;
+      padding-left: 18rem;
+
+      @include respond(bp-medium) {
+        padding-left: 13rem;
+      }
+
+      @include respond(bp-tiny) {
+        padding-left: 10rem;
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 3rem;
+      height: 4rem;
+      width: 4rem;
+
+      svg {
+        height: 3rem;
+        width: 3rem;
+        fill: #BAC3E6 !important;
+      }
+    }
+  }
+
+  .searchResults {
+    overflow-y: visible;
+    grid-column: 1 / 15;
+
+    &>.heading-2 {
+      font-size: 4.5rem;
+      margin-top: 14rem;
+      text-align: center;
+      font-weight: bold;
+      color: #1f51d1;
+    }
+
+    .blogs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 10rem auto;
+      width: 60%;
+
+      @include respond(bp-large) {
+        width: 80%;
+      }
+
+      @include respond(bp-medium) {
+        justify-content: center;
+      }
+
+      @include respond(bp-small) {
+        width: 90%;
+      }
+
+      .card-OverlayType {
+        width: calc(50% - 0.1rem);
+        height: 43.3rem;
+        // padding-top: 20rem;
+        margin-bottom: 0.2rem;
+        text-align: left;
+
+        @include respond(bp-medium) {
+          width: calc(80% - 0.1rem);
+          height: 50.3rem;
+          padding-top: 24rem;
+        }
+
+        @include respond(bp-small) {
+          width: 100%;
+          height: 50.3rem;
+          padding-top: 24rem;
+        }
+
+        @include respond(bp-tiny) {
+          width: 100%;
+          height: 44.3rem;
+          padding-top: 19rem;
+        }
+
+
+        .heading-2 {
+          margin-bottom: 1rem;
+          font-size: 2.9rem;
+          color: #fff;
+
+          /**
+              add an overflow hidden here
+            **/
+        }
+
+        .heading-3 {
+          font-size: 2.1rem;
+          font-family: interstate-condensed,
+            sans-serif;
+          font-weight: 700;
+          font-style: normal;
+          margin-bottom: 2rem;
+        }
+
+        .heading-4 {
+          font-size: 1.7rem;
+        }
+      }
+    }
+  }
+
+
+  .close-modal-btn {
+    position: absolute;
+    top: 2.5rem;
+  }
+}

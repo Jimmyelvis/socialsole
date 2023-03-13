@@ -1,0 +1,58 @@
+ .signedMenu {
+   display: flex;
+   align-items: center;
+   gap: 2rem;
+   position: relative;
+
+   .avatar {
+     width: 4rem;
+     height: 4rem;
+   }
+
+   .name {
+     color: $lt-orange;
+     font-size: 1.4rem;
+     font-weight: bold;
+     font-family: $font-primary;
+   }
+
+    .signinOptions {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 80%;
+      transform: translate(5rem, -3rem);
+      z-index: -1;
+      transition: all 0.3s ease 0s, visibility 0s linear 0.3s,
+        z-index 0s linear 0.01s;
+
+      background: rgb(255 255 255);
+      border-radius: 8px;
+      border: 4px solid rgb(92 179 255 / 12%);
+      box-shadow: 4px 3px 4px 0px rgb(209 209 209 / 22%);
+
+      .signinOption {
+        color: $alternateblue !important;
+        line-height: 5rem;
+        font-size: 1.7rem;
+        min-width: unset;
+        text-align: center;
+
+        a {
+          color: $alternateblue !important;
+        }
+      }
+    }
+ }
+
+ .signedMenu:focus .signinOptions,
+ .signedMenu:focus-within .signinOptions,
+ .signedMenu:hover .signinOptions {
+   visibility: visible;
+   opacity: 1;
+   z-index: 1;
+   transform: translate(5rem, -1.4rem);
+   transition-delay: 0s, 0s, 0.3s;
+ }

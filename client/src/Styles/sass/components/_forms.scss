@@ -38,7 +38,7 @@
 .form-control {
   display: block;
   width: 100%;
-  padding: 0.375rem 0.75rem;
+  padding: 0.675rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   color: #395379;
@@ -59,7 +59,7 @@
 }
 
 .form-control::placeholder {
-  color: #6c757d;
+  color: lighten($color: $alternateblue, $amount: 15%);
   opacity: 1;
 }
 

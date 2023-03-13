@@ -16,6 +16,7 @@ export const Button = ({
     {
       'btn-lightblue': primary,
       'border-red-500 bg-red-500 text-white': danger,
+      'btn-rounded': rounded,
     },
     rest.className
   );

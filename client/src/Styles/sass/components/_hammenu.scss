@@ -3,13 +3,19 @@
 ///////////////////////////////   HAMBURGER MENU STYLES ////////////////////////
 */
 
-$hammenu-size: 5rem;
+$hammenu-size: 6rem;
 
 .menu-wrap {
-  position: fixed;
-  top: 0.5rem;
+  position: absolute;
+  top: 25%;
   left: 1rem;
   z-index: 1;
+  // transform: translateY(-25%);
+  display: none;
+
+  @include respond(bp-medium) {
+   display: block;
+  }
 }
 
 .menu-wrap .toggler {
@@ -18,8 +24,8 @@ $hammenu-size: 5rem;
   left: 0;
   z-index: 2;
   cursor: pointer;
-  width: 50px;
-  height: 50px;
+  // width: 50px;
+  // height: 50px;
   opacity: 0;
 }
 

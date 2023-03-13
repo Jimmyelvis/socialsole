@@ -1,0 +1,111 @@
+.login-modal {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1 / -1;
+
+  .loginbody {
+    position: relative;
+    min-height: 55rem;
+    width: 80rem;
+    display: flex;
+    align-items: stretch;
+
+    @include respond(bp-medium) {
+      min-height: 47rem;
+      width: 68rem;
+    }
+
+    @include respond(bp-small) {
+      min-height: 53rem;
+    }
+
+    .bgimg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+
+      img {
+        object-fit: cover;
+        height: 100%;
+      }
+    }
+
+
+    .icon-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      padding: 0.5rem;
+      width: 3rem;
+      cursor: pointer;
+    }
+
+    .left {
+      flex: 0 0 50%;
+
+      @include respond(bp-small) {
+        flex: 0;
+      }
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 3000;
+      background-color: rgba(255, 255, 255, 0.93);
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      padding-top: 5rem;
+
+        @include respond(bp-small) {
+          justify-content: flex-start;
+          padding-top: 8rem;
+        }
+       
+      }
+
+      .heading-2 {
+
+        @include respond(bp-small) {
+          margin-bottom: 1.4rem;
+          font-size: 6rem;
+        }
+      }
+
+      p {
+
+        @include respond(bp-small) {
+          margin-bottom: 5rem;
+          font-size: 2.4rem;
+        }
+      }
+
+      // .nav {
+      //   width: 70%;
+      //   margin: 5rem auto;
+      //   justify-content: space-evenly;
+      // }
+
+      .form-group {
+        margin-bottom: 1rem;
+        width: 80%;
+        margin: 2rem auto;
+
+        @include respond(bp-small) {
+          width: 55%;
+        }
+      }
+
+      .btn-lightblue {
+        margin-left: 100%;
+        transform: translateX(-100%);
+      }
+    }
+
+  }
+

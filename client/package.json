@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "axios": "^0.18.0",
     "classnames": "^2.2.5",
     "cloudinary": "^1.13.2",

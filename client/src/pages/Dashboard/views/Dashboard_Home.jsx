@@ -2,76 +2,53 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "actions/profileActions";
-import Spinner from "components/common/Spinner";
-import ProfileActions from "../components/ProfileActions";
+import { Dashboardtabs } from "../components/Tabs2";
+import { DashboardHeader } from "../components/DashboardHeader";
+import { Panel } from "components/ui/Panel";
+import { faker } from '@faker-js/faker';
+
 
 const Dashboard = ({ getCurrentProfile, deleteAccount, auth, profile: { profile, loading } }) => {
-  useEffect(() => {
-    getCurrentProfile();
-  }, []);
+
+  /* State Variables */
+  const [currentView, setCurrentView] = useState("time line")
+  const { user } = auth;
+
+
 
   const onDeleteClick = (e) => {
     deleteAccount();
   };
 
-  const { user } = auth;
+  const createFollowers = () => {
 
-  let dashboardContent;
-
-  if (profile === null || loading) {
-    dashboardContent = <Spinner />;
-  } else {
-    // Check if logged in user has profile data
-    if (Object.keys(profile).length > 0) {
-      dashboardContent = (
-        <React.Fragment>
-          <div className="left">
-            <div className="imgholder">
-              <img src={user.avatar} alt="" />
-            </div>
-          </div>
-
-          <div className="right">
-            <h2 className="heading-2">
-              Welcome{" "}
-              <Link to={`/profile/${profile.handle}`} className="profilename">
-                {user.name}
-              </Link>
-            </h2>
-
-            <ProfileActions />
-          </div>
-        </React.Fragment>
-      );
-    } else {
-      // User is logged in but has no profile
-      dashboardContent = (
-        <React.Fragment>
-          <div className="left">
-            <div className="imgholder">
-              <img src={user.avatar} alt="" />
-            </div>
-          </div>
-
-          <div className="right">
-            <h2 className="heading-2">Welcome {user.name}</h2>
-
-            <p>You have not yet setup a profile, why not set one up?</p>
-            <Link to="/create-profile" className="btn btn-lightblue">
-              Create Profile
-            </Link>
-          </div>
-        </React.Fragment>
-      );
+    let followers = [];
+    
+    for (let index = 0; index < 30; index++) {
+      followers.push({
+        name: faker.name.firstName(),
+        avatar: faker.image.avatar(),
+        handle: faker.internet.userName(),  
+        email: faker.internet.email(),
+      });
+      
     }
+
+    return followers;
   }
 
+ 
   return (
     <div className="dashboard ">
+      <DashboardHeader
+        profile={profile}
+        loading={loading}
+        user={user}
+        followers={createFollowers()}
+      />
 
-      <div className="container">
-        <div className="userheader dashboardbody contentbody">{dashboardContent}</div>
-      </div>
+      <Dashboardtabs />
+      
     </div>
   );
 };
@@ -81,4 +58,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export const Dashboard_Home =  connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);
+export const Dashboard_Home = connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);

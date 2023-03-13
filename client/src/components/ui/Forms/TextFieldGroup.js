@@ -12,7 +12,7 @@ const TextFieldGroup = ({
   error,
   info,
   type,
-  onChangeFunction,
+  onChange,
   disabled,
   icon,
   iconClassname,
@@ -47,9 +47,10 @@ const TextFieldGroup = ({
         type={type}
         className={formClasses}
         value={value}
-        onChange={onChangeFunction}
+        onChange={onChange}
         placeholder={placeholder}
         disabled={disabled}
+        name={name}
       />
     </div>
     );
@@ -62,9 +63,10 @@ const TextFieldGroup = ({
           type={type}
           className={formClasses}
           value={value}
-          onChange={onChangeFunction}
+          onChange={onChange}
           placeholder={placeholder}
           disabled={disabled}
+          name={name}
       />
       </div>
     );

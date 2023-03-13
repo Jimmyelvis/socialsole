@@ -10,6 +10,12 @@ import { ImCheckmark } from "react-icons/im";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 import { useSaveOptions } from "context/saveOptions";
+import { v4 as uuidv4 } from "uuid";
+
+  /**
+   * Any component that uses the SaveOptions component will need to pass in the useSavesList prop. This prop will be an array of objects that will contain the user's saved lists. In addition a unique id will need to be passed in as the svgId prop. This will be used to identify the parent element of the save menu. We need this to generate unique ids for the svg elements they will be rendered in each parent component that uses the SaveOptions component.
+   * 
+   */
 
 
 
@@ -18,16 +24,18 @@ export const SaveOptions = ({
 }) => {
 
 
+
   const { menuOpen, setMenuOpen, postOptionsMenuClasses, setpostOptionsMenuClasses, setInnerMenu, innerMenu, activeItem } = useSaveOptions();
 
   const parentRef = useRef();
 
-;
- 
-  
+
 
   const [userLists, setUserLists] = useState([]);
 
+  /**  This will be used to generate unique ids for the svg elements they will be rendered in each parent component that uses the SaveOptions component.*/
+  const [svgId, setSvgId] = useState(null) 
+  
   /**
    * Temporary state to hold the created lists. This will be replaced with a database call to get the user's created lists.
    */
@@ -36,6 +44,7 @@ export const SaveOptions = ({
 
   useEffect(() => {
     setUserLists(useSavesList);
+    setSvgId(uuidv4())
   }, []);
 
   /**
@@ -89,39 +98,41 @@ export const SaveOptions = ({
 
 
   const showDefaultMenu = () => {
+
     return (
       <ul className="default-list">
         <li className="default-list-item">
           <svg width="0" height="0">
-            <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id={`blue-gradient-${svgId}`} x1="0%" y1="0%" x2="100%" y2="100%">
               <stop stopColor="#9ED7FF" offset="0%" />
               <stop stopColor="#3592D4" offset="100%" />
             </linearGradient>
           </svg>
 
-          <BsFillHeartFill className="icon icon-heart" style={{ fill: "url(#blue-gradient)" }} />
+          <BsFillHeartFill className="icon icon-heart" style={{ fill: `url(#blue-gradient-${svgId})` }} />
+
           <span className="label">Save to Favorites</span>
         </li>
         <li className="default-list-item" onClick={showSaveListsMenu}>
           <svg width="0" height="0">
-            <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id={`blue-gradient-${svgId}`} x1="0%" y1="0%" x2="100%" y2="100%">
               <stop stopColor="#9ED7FF" offset="0%" />
               <stop stopColor="#3592D4" offset="100%" />
             </linearGradient>
           </svg>
 
-          <FaThList className="icon icon-list" style={{ fill: "url(#blue-gradient)" }} />
+          <FaThList className="icon icon-list" style={{ fill: `url(#blue-gradient-${svgId})` }} />
           <span className="label">Save to List</span>
         </li>
         <li className="default-list-item" onClick={showCreateListMenu}>
           <svg width="0" height="0">
-            <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id={`blue-gradient-${svgId}`} x1="0%" y1="0%" x2="100%" y2="100%">
               <stop stopColor="#9ED7FF" offset="0%" />
               <stop stopColor="#3592D4" offset="100%" />
             </linearGradient>
           </svg>
 
-          <MdPlaylistAdd className="icon icon-playlist" style={{ fill: "url(#blue-gradient)" }} />
+          <MdPlaylistAdd className="icon icon-playlist" style={{ fill: `url(#blue-gradient-${svgId})` }} />
           <span className="label">Add to Playlist</span>
         </li>
       </ul>
@@ -155,13 +166,13 @@ export const SaveOptions = ({
                 {list.name}
 
                 <svg width="0" height="0">
-                  <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient id={`orange-gradient-${svgId}`} x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop stopColor="#ff8c2e" offset="0%" />
                     <stop stopColor="#fa7000" offset="100%" />
                   </linearGradient>
                 </svg>
 
-                <AiTwotoneDelete className="icon icon-trash" onClick={() => deleteSavedList(list.id)} style={{ fill: "url(#blue-gradient)" }} />
+                <AiTwotoneDelete className="icon icon-trash" onClick={() => deleteSavedList(list.id)} style={{ fill: `url(#orange-gradient-${svgId})` }} />
               </li>
             );
           })}
@@ -186,7 +197,7 @@ export const SaveOptions = ({
           placeholder="Enter a name for your list" 
           name="listName" 
           value={listName} 
-          onChangeFunction={handleCreateListInput} 
+          onChange={handleCreateListInput} 
           icon={Createicon} 
           iconClickFunction={addToCreatedLists} 
         />
@@ -206,13 +217,13 @@ export const SaveOptions = ({
                   {list.name}
 
                   <svg width="0" height="0">
-                    <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient id={`green-gradient-${svgId}`} x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop stopColor="#47BEA9" offset="0%" />
                       <stop stopColor="#0A715F" offset="100%" />
                     </linearGradient>
                   </svg>
 
-                  <ImCheckmark className="icon icon-check" style={{ fill: "url(#blue-gradient)" }} />
+                  <ImCheckmark className="icon icon-check" style={{ fill: `url(#green-gradient-${svgId})` }} />
                 </li>
               );
             })}
@@ -238,18 +249,11 @@ export const SaveOptions = ({
    * which is the class that shows the menu. If they are not the same,
    * then we return the class "hidden" which hides the menu.
    * 
-   * 
    */
 
-  const tempFunc = () => {
-
-
-    console.log('====================================');
-    console.log("called");
-    console.log('====================================');
+  const getClickedElement = () => {
 
     if (parentRef && parentRef.current && parentRef.current.parentElement) {
-
 
       if (parentRef.current.parentElement.id === activeItem) {
         return postOptionsMenuClasses
@@ -262,9 +266,11 @@ export const SaveOptions = ({
     
   }
 
+  
+  console.log("uuid", svgId);
 
   return (
-    <div className={tempFunc()} ref={parentRef}>
+    <div className={getClickedElement()} ref={parentRef}>
       <IoEllipsisHorizontalSharp className="icon icon-ellipsis close-menu" onClick={() => closeMenu()} />
 
       {innerMenu !== "default-menu" ? <IoArrowUndoSharp className="icon icon-undo" onClick={() => backToDefaultMenu()} /> : null}

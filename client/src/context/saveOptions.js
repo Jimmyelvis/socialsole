@@ -11,9 +11,7 @@ const SaveOptionsProvider = ({ children }) => {
 
   const [postOptionsMenuClasses, setpostOptionsMenuClasses] = useState("default-list-menu default-list-menu-closed");
 
-  const [activeItem, setActiveItem] = useState(null)
-
-
+  const [activeItem, setActiveItem] = useState(null);
 
   /*
   TODO:consider moving setpostOptionsMenuClasses, and setInnerMenu to the the SaveOptions component. That component will use the menuOpen state to determine whether to diplay the Save options menu. 
@@ -21,10 +19,8 @@ const SaveOptionsProvider = ({ children }) => {
 
   const openMenu = (e) => {
     setMenuOpen(!menuOpen);
-    
-    
-    console.log(e, "e");
-    
+
+
     setActiveItem(e);
     setpostOptionsMenuClasses("default-list-menu default-list-menu-open");
     setInnerMenu("default-menu");
@@ -46,10 +42,10 @@ const SaveOptionsProvider = ({ children }) => {
       {children}
     </SaveOptionsContext.Provider>
   );
-}
+};
 
 export const useSaveOptions = () => {
   return useContext(SaveOptionsContext);
-} 
+};
 
-export { SaveOptionsProvider, SaveOptionsContext}
+export { SaveOptionsProvider, SaveOptionsContext };

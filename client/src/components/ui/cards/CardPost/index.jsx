@@ -5,26 +5,22 @@ import { SaveOptions } from "../components/SaveOptions";
 import { useState, useEffect } from "react";
 import { useSaveOptions } from "context/saveOptions";
 
-
 export const CardPost = ({ author, date, headline, excerpt, likesNumber, commentsNumber, postImage, useSavesList, contentId }) => {
   const { openMenu } = useSaveOptions();
 
- 
+  /**
+   * We need to get most parent element of the card to send to the saveOptions context, via the openMenu function. This will alow us to determine which card the save menu is being opened from.
+   */
 
   return (
     <div className="card-post" id={`${contentId} "parent"`}>
-      <SaveOptions useSavesList={useSavesList} />
+      <SaveOptions useSavesList={useSavesList}  />
 
       <div className="top">
         <div className="card-header">
           <AuthorHeader author={author} date={date} />
 
-          <IoEllipsisHorizontalSharp className="icon icon-ellipsis open-menu" id={contentId} 
-          onClick={(e) => 
-            openMenu(e.currentTarget.parentElement.parentElement.parentElement.id)
-          } 
-          />
-       
+          <IoEllipsisHorizontalSharp className="icon icon-ellipsis open-menu" id={contentId} onClick={(e) => openMenu(e.currentTarget.parentElement.parentElement.parentElement.id)} />
         </div>
 
         <div className="headline">

@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createPortal } from "react-dom";
+
 
 /*
   Alert component for displaying alert after an action 
@@ -10,17 +12,21 @@ import { connect } from 'react-redux';
   const Alert = (props) => {
 
     const {alerts} = props;
+    
+    const showAlerts =  alerts.map((alert, index) => (
+      <div 
+        key={alert.id} 
+        className={'alert alert-' + alert.alertType}
+        style={
+          {top: `${(index + 1) * 5.5}rem`}
+        }
+      >
+        {alert.msg}
+      </div>
+    ));
 
     if (alerts !== null && alerts.length > 0) {
-      return alerts.map((alert, index) => (
-        <div 
-          key={alert.id} 
-          className={'alert alert-' + alert.alertType}
-          style={{top: `${(index + 1) * 100}px`}}
-        >
-          {alert.msg}
-        </div>
-      ));
+      return createPortal(showAlerts, document.querySelector('#alerts'));
     } else {
       return null;
     }

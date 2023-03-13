@@ -22,73 +22,72 @@
     height: 65rem;
   }
 
-  
-  .heading{
+
+  .heading {
     margin: auto;
     position: relative;
     z-index: 5;
-    text-align: center;
 
     .heading-1 {
       color: #fff;
       font-size: 6rem;
       text-shadow: 2px 2px 3px rgba(10, 78, 139, 0.71);
-  
-     
+
+
       @include respond(bp-small) {
         font-size: 4rem;
         line-height: 1.2;
       }
     }
-    
+
     .heading-2 {
       color: #fff;
       font-size: 6rem;
-  
+
       @include respond (bp-medium) {
         font-size: 5rem;
       }
-  
+
       @include respond(bp-small) {
         font-size: 4rem;
         line-height: 1.2;
       }
     }
-  
+
     .heading-3 {
       color: $color-gold;
       font-size: 4rem;
       font-family: $font-primary;
       font-weight: 400;
-  
+
       @include respond(bp-medium) {
         font-size: 3rem;
       }
-  
+
       @include respond(bp-small) {
         font-size: 2.8rem;
       }
-  
+
       @include respond(bp-smallest) {
         font-size: 2.2rem;
       }
-  
+
       @include respond(bp-smallest) {
         font-size: 2rem;
       }
-      
+
     }
-  
+
     .heading-4 {
       color: $color-gold;
       font-size: 3.5rem;
       font-weight: 400;
       font-family: "Clear Sans", sans-serif;
-  
+
       @include respond(bp-medium) {
         font-size: 2.5rem;
       }
-  
+
       @include respond(bp-smallest) {
         font-size: 2rem;
       }
@@ -96,7 +95,6 @@
 
     p {
       color: #fff;
-      text-align: center;
       margin: 2rem auto;
       color: #fff;
       font-size: 125%;
@@ -109,12 +107,12 @@
       @include respond (bp-medium) {
         width: 80%;
       }
-    
+
     }
 
   }
 
- 
+
   .picbg {
     background-repeat: no-repeat;
     position: absolute;
@@ -148,26 +146,34 @@
 }
 
 .header-landing {
-  background-image: url("/assets/img/landingpage-bg-v2.jpg");
+  background-image: url("/assets/img/aj12-french-blue-lrgst.jpg");
   background-size: cover;
   background-position: center;
 
   @include respond (bp-medium) {
-    background-image: url("/assets/img/landing-pg-mobile.jpg");
-  }
-
-  @include respond (bp-small) {
-    background-image: url("/assets/img/landing-pg-mobile-600.jpg");
+    background-image: url("/assets/img/aj12-french-blue-mid.jpg");
   }
 
 
-    
-  .heading{
+  @include overlay(rgb(0 0 0 / 48%));
+
+  @include respond (bp-medium) {
+    @include overlay(rgb(0 0 0 / 68%));
+  }
+
+
+  .heading {
     margin: 0 auto;
     position: relative;
-    z-index: 5;
-    text-align: center;
+    z-index: 50;
+    margin-top: 13rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    @include respond (bp-medium) {
+      margin-top: 11rem;
+    }
     @include respond (bp-small) {
       margin-top: 5rem;
       display: flex;
@@ -175,6 +181,10 @@
     }
 
     .heading-1 {
+      color: #fff;
+      font-size: 9.2rem;
+      text-shadow: 2px 3px 6px rgb(0 0 0 / 54%);
+      margin-bottom: 4rem;
 
       @include respond (bp-small) {
         font-size: 6rem;
@@ -184,10 +194,11 @@
     }
 
     p {
+      margin: 2rem auto;
+      color: #fff;
+      font-size: 2.7rem;
 
-      @include respond (bp-small) {
-        width: 100%;
-      }
+    
     }
   }
 

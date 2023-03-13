@@ -1,1 +1,1 @@
-export { HomeContainer as default } from "./HomeContainer";
+export { Home } from "./views";

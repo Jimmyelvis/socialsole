@@ -1,0 +1,78 @@
+.profileCard {
+  display: grid;
+  grid-template-columns: minmax(6rem, 33%) 1fr;
+  align-items: center;
+  column-gap: 3rem;
+  min-height: 37rem;
+  position: relative;
+  padding: 4rem 6rem;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.4rem 0;
+
+    .avatar {
+      position: relative;
+      z-index: 1000;
+      width: 16.9rem;
+      height: 16.9rem;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .socials {
+      display: flex;
+      gap: 2rem;
+    }
+  }
+
+  .right {
+
+    .name {
+      font-size: 3.6rem;
+      color: $midnightblue;
+      margin-bottom: 1rem;
+    }
+
+    .fav-sneaker {
+      color: $midnightblue;
+      display: flex;
+      gap: 2rem;
+      align-items: baseline;
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .sneaker {
+      font-family: $font-primary;
+      font-weight: bold;
+      font-size: 2rem;
+      color: $alternateblue;
+    }
+
+    .location {
+      color: $lt-orange;
+      font-size: 2.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .bio {
+      @include lineClamp(3);
+      width: 80%;
+    }
+  }
+
+  .btn-lightblue {
+    position: absolute;
+    bottom: 3rem;
+    right: 10rem;
+  }
+
+  .icon {
+    height: 2em;
+    width: 2em;
+    display: block;
+  }
+}

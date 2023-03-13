@@ -13,12 +13,22 @@ import Modal from "../common/Modal"
 import Icon from "../icons/Icon"
 import { setAlert } from '../../actions/alert';
 import { Widgetsetting } from "../common/Cloudinary";
+import { FaSearch } from "react-icons/fa";
 
 
 
 const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurrentProfile, setAlert }) => {
 
   const [modal, setModal] = useState(false)
+
+  // const [listName, setListName] = useState("");
+
+  //   const handleCreateListInput = (e) => {
+
+
+  //     setListName(e.target.value);
+  //   };
+
   
     const [values, setvalues] = useState({
       checked : false,
@@ -82,6 +92,8 @@ const closeRegister = () => {
  }
 
  const onChange = (e) => {
+  console.log('e.target.name', e.target.name);
+  // console.log('e.target.value', e.target.value);
 
     setvalues({
       ...values,
@@ -185,20 +197,23 @@ const { isAuthenticated } = auth;
 const authLinks = (
   <React.Fragment>
     <li className="nav-item home">
-      <Link to="/">HOME</Link>
+      <Link to="/">Home</Link>
     </li>
     <li className="nav-item">
-      <Link to="/allposts">User Posts</Link>
+      <Link to="/allarticles">Articles</Link>
     </li>
     <li className="nav-item">
-      <Link to="/allsneakers">User Sneakers</Link>
-    </li>
-    <li className="nav-item">
-      <Link to="/profiles">User Profiles</Link>
+      Community
     </li>
     <li className="nav-item">
       <Link to="/dashboard">Dashboard</Link>
     </li>
+    <li>
+      <div className="icon icon-search">
+        <FaSearch />
+      </div>
+    </li>
+
     <li className="nav-item">
       <a
         // href=""
@@ -287,7 +302,7 @@ return (
 
 
         <h2 className="heading-2">Welcome</h2>
-        <p>Sign in to your SocialSole account</p>
+        <p>Sign in to your  account</p>
 
         <form className="form-group" onSubmit={onLoginSubmit}>
 

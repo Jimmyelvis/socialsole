@@ -22,12 +22,25 @@ const User = require('../../models/User')
 const Profile = require("../../models/Profile");
 
 
+// @route    GET api/users/auth
+// @desc     Get user by token
+// @access   Private
 
-// @route GET api/users/test
-// @desc tests users route
-// @acces public
-router.get('/test', (req, res) => res.json({msg:"users works"}))
+// router.get('/auth',  passport.authenticate('jwt', { session: false }), async (req, res) => {
+//   try {
+//     const user = await User.findById(req.user.id).select('-password');
+//     res.json(user);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send('Server Error');
+//   }
+// });
 
+router.get('/auth',  passport.authenticate('jwt', { session: false }),(req, res) => {
+  User.findById(req.user.id).select('-password').
+  then(user => res.json(user))
+  .catch(err => res.status(500).json({ msg: 'Server Error' }));
+});
 
 
 // @route GET api/users/register
@@ -36,10 +49,10 @@ router.get('/test', (req, res) => res.json({msg:"users works"}))
 router.post('/register', (req, res) => {
 
 
-  const { errors, isValid } = validateRegisterInput(req.body);
+  const { errors } = validateRegisterInput(req.body);
 
     // Check Validation
-    if (!isValid) {
+    if (errors.length > 0) {
       return res.status(400).json(errors);
     }
 
@@ -62,7 +75,26 @@ router.post('/register', (req, res) => {
       newUser.password = hash;
       newUser
         .save()
-        .then(user => res.json(user))
+        .then(user => {
+
+          const payload = { id: user.id, name: user.name, avatar: user.avatar, role: user.role }; 
+
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 360000 },
+            (err, token) => {
+              if (err) throw err;
+              res.json({ 
+                token: 'Bearer ' + token 
+              });
+              
+            }
+          );
+    
+
+          // res.json(user)
+        })
         .catch(err => console.log(err));
       })
     })
