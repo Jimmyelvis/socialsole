@@ -1,0 +1,12 @@
+.timeline-entries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  grid-column: full-start / full-end;
+  padding: 4rem 0;
+
+  .time-line-card {
+    width: calc(50% - 0.5rem);
+  }
+  
+}

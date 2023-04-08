@@ -1,0 +1,98 @@
+.your-comments {
+  grid-column: full-start / full-end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 3rem 0;
+
+  @include respond(bp-largest) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond(bp-small) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .comments-Card {
+    padding-bottom: 4rem;
+    position: relative;
+
+    @include respond(bp-small) {
+        width: 46rem;
+        margin-bottom: 2rem;
+    }
+
+    @include respond(bp-tiny) {
+        width: 40rem;
+    }
+
+    .header-Img {
+      width: 85%;
+      height: 18.8rem;
+      margin: 3rem auto;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+
+      img {
+        position: absolute;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+
+    }
+
+    .title {
+      margin: 0 auto;
+      width: 60%;
+      margin-bottom: 3rem;
+
+      .headline {
+        color: $midnightblue;
+        @include lineClampAlt(2, 2.6rem);
+        padding-bottom: 0.5rem;
+      }
+
+      .author {
+        .name {
+          color: $alternateblue;
+        }
+
+        .date {
+          color: $lt-orange;
+        }
+      }
+
+    }
+    
+    .text {
+      width: 85%;
+      margin: 3rem auto;
+      @include lineClamp(3);
+    }
+
+    .postedBy {
+      width: 60%;
+      position: absolute;
+      bottom: 3rem;
+      right: 0rem;
+
+      @include respond(bp-largest) {
+          left: 50%;
+          transform: translateX(-50%);
+          text-align: center;
+      }
+
+      .by-you {
+        color: $midnightblue;
+      }
+
+      .ago {
+        color: $alternateblue;
+      }
+    }
+
+  }
+
+}

@@ -10,13 +10,13 @@ export const CardFooter = ({ likesNumber, commentsNumber, dark}) => {
   return (
     <ul className="card-footer">
       <li className="item likes">
-        <FaThumbsUp className={`${dark ? "icon-white" : "icon-blue"} likes-icon`} />
+        <FaThumbsUp className={`icon ${dark ? "icon-white" : "icon-blue"} likes-icon`} />
 
         <span className={`total ${dark ? "total-gold" : "total-midnight-blue"} likes-number`}>{likesNumber}</span>
       </li>
 
       <li className="item comments">
-        <FaComments className={`${dark ? "icon-white" : "icon-blue"} comments-icon`} />
+        <FaComments className={`icon ${dark ? "icon-white" : "icon-blue"} comments-icon`} />
         <span className={`total ${dark ? "total-gold" : "total-midnight-blue"} comments-number `}>{commentsNumber}</span>
       </li>
     </ul>

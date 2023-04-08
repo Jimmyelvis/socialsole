@@ -5,9 +5,11 @@ const ModalContext = React.createContext();
 const ModalProvider = ({ children }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [origin, setOrigin] = useState(null)
 
-   const openModal = () => {
+   const openModal = (compOrigin) => {
      setIsModalOpen(true);
+     setOrigin(compOrigin)
    };
 
    const closeModal = () => {
@@ -22,6 +24,7 @@ const ModalProvider = ({ children }) => {
           setIsModalOpen,
           openModal,  
           closeModal,
+          origin,     
         }}
       >
         {children}

@@ -1,23 +1,451 @@
-
 .dashboard {
   margin-top: 16rem;
-  height: 85.5vh;
+  height: auto;
   display: grid;
   grid-template-rows: 33.9rem 9.6rem;
-  grid-auto-rows: 71.9rem;
+  // grid-auto-rows: 71.9rem;
   row-gap: 6rem;
+  position: relative;
 
   @include gridTempColumn;
+  margin-bottom: 6rem;
 
-  @include respond(bp-small) {
+  @include respond(bp-medium) {
     grid-template-rows: max-content 9.6rem;
 
-    & > * {
+    &>* {
       grid-column: center-start / center-end !important;
     }
-    
+
   }
 
+  // Cards used in this component
+  
+  .time-line-card {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem 4rem 2rem;
+
+    @include respond(bp-small) {
+      width: 100%;
+    }
+
+    .author {
+      height: 4rem;
+      margin-top: 7rem;
+      display: flex;
+      gap: 3.5rem;
+
+      @include respond(bp-medium) {
+        gap: 1.5rem;
+        width: 90%;
+        margin-top: 4rem;
+      }
+
+      .avatar-holder {
+        flex-basis: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .avatar {
+          width: 8rem;
+          height: 8rem;
+
+          @include respond(bp-medium) {
+            width: 6rem;
+            height: 6rem;
+          }
+        }
+      }
+
+      .info {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .title {
+          color: $midnightblue;
+          font-size: 2.6rem;
+          margin-bottom: 1rem;
+
+          @include respond(bp-medium) {
+            @include lineClampAlt(1, 2.2rem);
+            margin-bottom: 0.5rem;
+          }
+
+        }
+
+        .name-date {
+          font-size: 2.4rem;
+          margin-right: 0.5rem;
+
+          @include respond(bp-medium) {
+            font-size: 1.7rem;
+          }
+        }
+
+        .name {
+          color: $alternateblue;
+        }
+
+        .date {
+          color: $lt-orange;
+        }
+      }
+    }
+
+    .card-content {
+      margin-top: 8rem;
+
+      @include respond(bp-medium) {
+        margin-top: 4rem;
+      }
+
+      .card-OverlayType {
+        height: 40.1rem;
+        box-shadow: 0px 0px 18px 14px rgb(0 0 0 / 0%);
+
+        @include respond(bp-medium) {
+          height: 29.1rem;
+        }
+
+        @include respond(bp-small) {
+          height: 36.1rem;
+        }
+
+      }
+
+      .info {
+        padding: 18rem 7rem 0 7rem;
+
+        @include respond(bp-medium) {
+          padding: 10rem 3rem 0 3rem;
+        }
+
+        @include respond(bp-small) {
+          padding: 15rem 3rem 0 3rem;
+        }
+      }
+    }
+
+    .post {
+
+      &>* {
+        width: 90%;
+        margin: 0 auto;
+
+        @include respond(bp-medium) {
+          width: 100%;
+        }
+      }
+
+      .header-image {
+        height: 27.1rem;
+        overflow: hidden;
+        margin-bottom: 3rem;
+        position: relative;
+
+        @include respond(bp-medium) {
+          height: 20.1rem;
+        }
+
+        @include respond(bp-small) {
+          height: 27.1rem;
+        }
+      }
+
+      .text {
+        @include lineClamp(5);
+
+        @include respond(bp-medium) {
+          @include lineClamp(3);
+        }
+      }
+    }
+
+  }
+
+  .saved-items-card{
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    height: 45rem;
+
+    @include respond(bp-small) {
+      width: 100%;
+    }
+
+   & > .author {
+      height: 3.4rem;
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 2.5rem;
+
+      @include respond(bp-medium) {
+        gap: 1.5rem;
+        width: 90%;
+      }
+
+      .avatar-holder {
+        display: flex;
+        align-items: center;
+        padding-left: 3rem;
+
+        .avatar {
+          width: 7rem;
+          height: 7rem;
+
+          @include respond(bp-medium) {
+            width: 6rem;
+            height: 6rem;
+          }
+        }
+      }
+
+      .info {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-basis: 60%;
+
+        .title {
+          color: $midnightblue;
+          font-size: 2.3rem;
+          margin-bottom: 0.5rem;
+
+          @include respond(bp-medium) {
+            @include lineClampAlt(1, 2.2rem);
+            margin-bottom: 0.5rem;
+          }
+
+        }
+
+        .name-date {
+          font-size: 2rem;
+          margin-right: 0.5rem;
+
+          @include respond(bp-medium) {
+            font-size: 1.7rem;
+          }
+        }
+
+        .name {
+          color: $alternateblue;
+        }
+
+        .date {
+          color: $lt-orange;
+        }
+      }
+    }
+
+    .post-content, .sneaker-content {
+      height: 30rem;
+    }
+
+    .post-content {
+      height: 35rem;
+      margin-top: 4.6rem;
+
+      .post {
+
+        .header-image {
+          height: 18rem;
+          overflow: hidden;
+          margin-bottom: 3rem;
+          position: relative;
+        }
+
+        .text {
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      }
+    }
+   
+    .article-content {
+      position: relative;
+      height: 100%;
+      margin-top: 0 !important;
+
+
+      .author {
+        height: 4rem;
+        display: flex;
+        gap: 2.5rem;
+        margin: 0;
+        position: absolute;
+        top: 5rem;
+        left: 3.2rem;
+        z-index: 200;
+  
+        @include respond(bp-medium) {
+          gap: 1.5rem;
+          width: 90%;
+          margin-top: 4rem;
+        }
+  
+        .avatar-holder {
+          display: flex;
+          align-items: center;
+  
+          .avatar {
+            width: 6rem;
+            height: 6rem;
+          }
+        }
+  
+        .info {
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          flex-basis: 60%;
+  
+          .title {
+            color: $white;
+            font-size: 1.9rem;
+            margin-bottom: 1rem;
+  
+            @include respond(bp-medium) {
+              @include lineClampAlt(1, 2.2rem);
+              margin-bottom: 0.5rem;
+            }
+  
+          }
+  
+          .name-date {
+            font-size: 1.9rem;
+            margin-right: 0.5rem;
+  
+            @include respond(bp-medium) {
+              font-size: 1.7rem;
+            }
+          }
+  
+          .name {
+            color: $white;
+          }
+  
+          .date {
+            color: $lt-orange;
+          }
+        }
+      }
+  
+
+      .card-OverlayType {
+        height: 100%;
+        box-shadow: 0px 0px 18px 14px rgb(0 0 0 / 0%);
+        border-radius: 8px;
+        overflow: hidden;
+
+        @include respond(bp-medium) {
+          height: 29.1rem;
+        }
+
+        @include respond(bp-small) {
+          height: 36.1rem;
+        }
+
+      }
+
+      .info {
+        padding: 14rem 7rem 0 7rem;
+
+        @include respond(bp-medium) {
+          padding: 10rem 3rem 0 3rem;
+        }
+
+        @include respond(bp-small) {
+          padding: 15rem 3rem 0 3rem;
+        }
+
+        .headline {
+          font-size: 3rem;
+          color: $white;
+          margin-bottom: 1.5rem;
+        }
+
+        .subheadline {
+          font-size: 2rem;
+        }
+
+        .excerpt {
+          margin-top: 2rem;
+          @include lineClamp(5);
+        }
+      }
+    }
+
+    .sneaker-card {
+      margin-top: 5rem;
+
+      .info {
+        position: relative;
+        z-index: 10;
+        padding: 9rem 7rem 9rem 7rem;
+        height: 100%;
+        width: 100%;
+
+        .model {
+          font-size: 4rem;
+          color: $white;
+        }
+
+        .colorway {
+          font-size: 3.5rem;
+        }
+
+        .year {
+          font-size: 2.5rem;
+        }
+
+      }
+    }
+
+    .post {
+
+      &>* {
+        width: 90%;
+        margin: 0 auto;
+
+        @include respond(bp-medium) {
+          width: 100%;
+        }
+      }
+
+      .header-image {
+        height: 27.1rem;
+        overflow: hidden;
+        margin-bottom: 3rem;
+        position: relative;
+
+        @include respond(bp-medium) {
+          height: 20.1rem;
+        }
+
+        @include respond(bp-small) {
+          height: 27.1rem;
+        }
+      }
+
+      .text {
+        @include lineClamp(5);
+
+        @include respond(bp-medium) {
+          @include lineClamp(3);
+        }
+      }
+    }
+  }
 
   .dashboard-header {
     grid-column: col-start 2 / col-end 11;
@@ -25,91 +453,117 @@
     grid-template-columns: 40% 60%;
     padding: 0 3rem;
 
-      @include respond(bp-small) {
-        grid-template-columns: 1fr;
-        padding: 2rem;
+    @include respond(bp-medium) {
+      grid-template-columns: 1fr;
+      padding: 2rem;
+    }
+
+    @include respond(bp-tiny) {
+      padding-bottom: 6rem;
+    }
+
+    .left {
+      display: flex;
+      height: 100%;
+      place-items: center;
+      place-content: center;
+    
+      @include respond(bp-medium) {
+        padding: 3rem 0;
       }
-     
-    }
-  }
-
-  .left {
-    display: flex;
-    height: 100%;
-    place-items: center;
-    place-content: center;
-
-    @include respond(bp-small) {
-       padding: 3rem 0;
-    }
-
-    .avatar {
-      width: 20rem;
-      height: 20rem;
-      border-radius: 50%;
-      overflow: hidden;
-      margin-right: 5rem;
-      border: 11px solid rgb(236 225 225 / 45%);
-      box-sizing: content-box;
-
-      @include respond(bp-small) {
-        width: 15rem;
-        height: 15rem;
-        margin-right: 0;
+    
+      .avatar {
+        width: 20rem;
+        height: 20rem;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 5rem;
+        border: 11px solid rgb(236 225 225 / 45%);
+        border: 6px solid rgba(236, 225, 225, 0.45);
+        box-sizing: content-box;
+    
+        @include respond(bp-medium) {
+          width: 15rem;
+          height: 15rem;
+          margin-right: 0;
+        }
       }
     }
-  }
-
-  .right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    @include respond(bp-small) {
-      align-items: center;
-    }
-
-    .heading-2 {
-      font-size: 5.8rem;
-      margin-bottom: 3rem;
-
-        @include respond(bp-small) {
+    
+    .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    
+      @include respond(bp-medium) {
+        align-items: center;
+      }
+    
+      .heading-2 {
+        font-size: 5.8rem;
+        margin-bottom: 3rem;
+    
+        @include respond(bp-medium) {
           font-size: 3.8rem;
         }
-       
+    
         a {
           color: $alternateblue;
         }
-    }
-
-    .followers {
-      display: flex;
-      align-items: center;
-      
-      .avatars {
+      }
+    
+      .followers {
         display: flex;
-
-        .follower {
-          margin-right: -2rem;
-  
-          .avatar {
-            width: 6.1rem;
-            height: 6.1rem;
-            box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.3);
-            border: 2px solid rgb(255 255 255 / 41%);
+        align-items: center;
+    
+        @include respond(bp-tiny) {
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+    
+        .avatars {
+          display: flex;
+    
+          @include respond(bp-tiny) {
+            flex-basis: 100%;
+            margin: 2rem auto;
+            display: flex;
+            justify-content: center;
+          }
+    
+          .follower {
+            margin-right: -2rem;
+    
+            @include respond(bp-tiny) {
+              margin-right: 0;
+            }
+    
+            .avatar {
+              width: 6.1rem;
+              height: 6.1rem;
+              box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+              border: 2px solid rgb(255 255 255 / 41%);
+            }
+          }
+        }
+    
+        .heading-3 {
+          font-size: 3rem;
+          margin-left: 5rem;
+          cursor: pointer;
+    
+          @include respond(bp-tiny) {
+            flex-basis: 100%;
+            margin: 0 auto;
+            text-align: center;
           }
         }
       }
-
-      .heading-3 {
-        font-size: 3rem;
-        margin-left: 5rem;
-      }
+    
     }
+    
 
   }
-
-  
 
   .dashboard-tabs {
     grid-column: col-start 2/col-end 11;
@@ -118,17 +572,17 @@
     align-items: center;
     gap: 11rem;
     padding: 0 4rem;
-
+  
     @include respond (bp-large) {
       gap: 8%;
     }
-
+  
     // @include respond(bp-tiny) {
     //   grid-column: center-start / center-end;
     // }
-     
   
-
+  
+  
     .link {
       list-style: none;
       font-size: 3rem;
@@ -136,32 +590,203 @@
       font-weight: bold;
       font-family: $font-display;
       text-align: center;
-
+      cursor: pointer;
+  
       @include respond (bp-smallest) {
         font-size: 2.4rem;
       }
-
+  
       a {
         color: inherit;
         font-size: inherit;
       }
     }
-
+  
+    .active {
+      color: $alternateblue;
+    }
+  
     .extra-menu-icon {
       width: 3rem;
       height: 3rem;
       display: block;
       fill: $midnightblue;
       cursor: pointer;
-
+  
       @include respond(bp-smallest) {
         width: 2.3rem;
         height: 2.3rem;
       }
-       
-      
+  
+  
     }
-
+  
   }
+  
+  .dash-view {
+    grid-column: col-start 2/col-end 11;
+    display: grid;
+    @include gridTempColumn;
+  
+    .saved-content {
+      grid-column: full-start / full-end;
+      display: grid;
+      @include gridTempColumn;
+      // grid-auto-rows: 42rem;
+      column-gap: 2rem;
+  
+      .side-bar {
+        grid-column: full-start/col-end 3;
+        padding: 6rem 2.5rem;
+        min-height: 10rem;
+        height: fit-content;
+
+        .add-list {
+          display: flex;
+          align-items: center;
+          margin-bottom: 3rem;
+          gap: 2rem;
+          cursor: pointer;
+
+          .add-icon {
+            width: 4rem;
+            height: 4rem;
+          }
+
+          .list-creation {
+            display: flex;
+            gap: 0.5rem;
+
+            .heading-3 {
+              font-size: 2.2rem;
+              color: $midnightblue;
+              transition: all 300ms linear;
+    
+              &:hover {
+                color: $alternateblue;
+              }
+            }
+    
+            .field-group {
+              margin-bottom: 0;
+              width: 20rem;
+            }
+
+            .icon-check {
+              width: 2.7rem;
+              height: 2.7rem;
+              display: block;
+            }
+
+            .icon-close {
+              width: 2.7rem;
+              height: 2.7rem;
+              display: block;
+            }
+
+          }
+
+        }
+  
+        .lists {
+          display: flex;
+          flex-direction: column;
+  
+          li {
+            margin-bottom: 2rem;
+            cursor: pointer;
+            font-size: 1.6rem;
+            color: $midnightblue;
+            display: grid;
+            grid-template-columns: 80% 1fr;
+
+            h3 {
+              grid-column: 1 / 2;
+              font-weight: 600;    grid-column: 1 / 2;
+            }
+
+            .icon-trash {
+              width: 2rem;
+              height: 2rem;
+              display: block;
+              grid-column: 3 / -1;
+              display: none;
+            }
+          }
+
+          li:hover {
+            .icon-trash {
+              display: block;
+            }
+          }
+        }
+      }
+  
+      .list-items {
+        grid-column: col-start 4 / -1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        gap: 1rem;
+  
+        .time-line-card {
+          height: 60rem;
+        }
+      }
+    }
+  }
+
+ 
+  
+
+
+  /* add an empty element with position: absolute, height: 0 and bottom: 0 to the grid container */
+.empty-element {
+  position: absolute;
+  height: 0;
+  bottom: 0;
+  }
+
+}
+
+
+.followers-modal {
+  width: 100%;
+  height: auto;
+  margin: 4rem auto;
+  grid-column: col-start 1 / col-end 12;
+  box-shadow: 0px 0px 50px 0px rgb(5 5 5);
+  padding: 0 3rem;
+  display: block;
+  border: 5px solid rgb(204 204 204 / 43%);
+
+  &>.followers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    padding: 0 3rem 3rem 3rem;
+    gap: 1rem;
+
+    .follower {
+      width: 17rem;
+      margin-bottom: 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .heading-3 {
+        font-size: 2.2rem;
+      }
+
+      .avatar {
+        width: 10rem;
+        height: 10rem;
+        margin-bottom: 2rem;
+
+      }
+    }
+  }
+
+}
 
 

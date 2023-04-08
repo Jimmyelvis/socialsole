@@ -84,6 +84,9 @@ const SneakerSchema = new Schema({
       }
     }
   ],
+  featured: {
+    type: Number,
+  },
   date: {
     type: Date,
     default: Date.now

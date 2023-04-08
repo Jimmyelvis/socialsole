@@ -37,6 +37,13 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
   const { checked, showlogin, showregister, name, email, avatar, password, password2 } = values;
   const { isModalOpen, openModal, openOverlay, isOverlayOpen, closeModal } = useModal();
 
+  /*
+    This will be used to determine what component called the modal
+    this will be passed as a prop to the modal component, and the 
+    modal context 
+  */
+  const compOrigin = "navbar";
+
 
 
   /**
@@ -202,7 +209,7 @@ true or false nav items will change accordingly
         <FaSearch
           className="icon icon-search"
           onClick={() => {
-            openModal(), setModalTarget("search_overlay");
+            openModal(compOrigin), setModalTarget("search_overlay");
           }}
         />
       </li>
@@ -228,7 +235,7 @@ true or false nav items will change accordingly
       <li
         className="nav-item"
         onClick={() => {
-          openModal(), setModalTarget("login");
+          openModal(compOrigin), setModalTarget("login");
         }}
       >
         Login
@@ -236,7 +243,7 @@ true or false nav items will change accordingly
       <li
         className="nav-item"
         onClick={() => {
-          openModal(), setModalTarget("register");
+          openModal(compOrigin), setModalTarget("register");
         }}
       >
         Sign Up
@@ -245,7 +252,7 @@ true or false nav items will change accordingly
         <FaSearch
           className="icon icon-search"
           onClick={() => {
-            openModal(), setModalTarget("search_overlay");
+            openModal(compOrigin), setModalTarget("search_overlay");
           }}
         />
       </li>
@@ -273,10 +280,11 @@ true or false nav items will change accordingly
       <ul className="authGuestlinks">{isAuthenticated ? authLinks : guestLinks}</ul>
 
       <Modal
-        id={"nav"}
-        // overlayColor={`
-        // ${modalTarget === "search_overlay" ? "rgba(255, 255, 255, 0.95)" : "rgba(0,0,0,0.7)"}`}
+        selector={"#modal"}
+        overlayColor={`
+        ${modalTarget === "search_overlay" ? "rgba(255, 255, 255, 0.95)" : "rgba(0,0,0,0.7)"}`}
         modalTarget={modalTarget}
+        modalOrigin={compOrigin}
       >
         {checkTarget()}
       </Modal>

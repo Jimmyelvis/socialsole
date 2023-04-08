@@ -14,22 +14,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex: 0 0 40%;
+    gap: 2rem;
+
+    .icon {
+      width: 2.3rem;
+      height: 2.3rem;
+    }
 
     .icon-white {
-      width: 2.9rem;
-      height: 2.9rem;
       fill: $white;
     }
 
     .icon-blue {
-      width: 2.9rem;
-      height: 2.9rem;
       fill: $alternateblue;
     }
 
     .total{
-      font-size: 2.8rem;
+      font-size: 2.4rem;
       font-weight: bold;
       font-family: $font-display;
     }

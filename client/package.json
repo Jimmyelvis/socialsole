@@ -8,6 +8,8 @@
     "classnames": "^2.2.5",
     "cloudinary": "^1.13.2",
     "cloudinary-react": "^1.1.0",
+    "dayjs": "^1.11.7",
+    "html-react-parser": "^3.0.12",
     "icomoon-react": "^3.0.0",
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",

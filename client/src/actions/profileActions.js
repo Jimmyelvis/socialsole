@@ -8,7 +8,14 @@ import {
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
   SET_CURRENT_USER,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  GET_TIMELINE,
+  GET_YOUR_COMMENTS,
+  GET_YOUR_LIKES,
+  GET_LIST_ITEMS,
+  GET_FRIENDS,
+  CREATE_LIST,
+  DELETE_LIST,
 } from "./types";
 
 // Gets the current profile for logged in user
@@ -30,6 +37,25 @@ export const getCurrentProfile = () => dispatch => {
     );
 };
 
+export const getFriends = () => dispatch => {
+
+  axios
+    .post("/api/profile/getfriends")
+    .then(res =>
+      dispatch({
+        type: GET_FRIENDS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_FRIENDS,
+        payload: {}
+      })
+    );
+};
+
+
 // Get profile by handle
 export const getProfileByHandle = (handle) => dispatch => {
   dispatch(setProfileLoading());
@@ -46,6 +72,118 @@ export const getProfileByHandle = (handle) => dispatch => {
         type: GET_PROFILE,
         payload: null
       })
+    );
+};
+
+// Get profile by handle
+export const getTimeline = (timeline) => dispatch => {
+  // dispatch(setProfileLoading());
+  axios
+    .post(`/api/profile/timeline`, timeline )
+    .then(res =>
+      dispatch({
+        type: GET_TIMELINE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
+      })
+    );
+};
+
+export const getYourLikes = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/youliked`)
+    .then(res =>
+      dispatch({
+        type: GET_YOUR_LIKES,
+        payload: res.data
+      })
+    ) 
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,  
+        payload: null
+      })
+    );
+};
+
+export const getListItems = (listId) => dispatch => {
+  // dispatch(setProfileLoading());
+
+  const body = {
+    listId: listId
+  }
+
+  axios
+    .post(`/api/profile/lists/items`, body)
+    .then((res) =>
+      dispatch({
+        type: GET_LIST_ITEMS,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      dispatch({
+        type: GET_PROFILE,
+        payload: null,
+      });
+    });
+};
+
+export const createList = (listData) => dispatch => {
+  axios
+    .post("/api/profile/createlist", listData)
+    .then(res => {
+      dispatch({
+        type: CREATE_LIST,
+        payload: res.data.profile,
+      });
+
+      dispatch(setAlert("List Created", "success"));
+
+    })
+    .catch((err) => {
+
+    console.log('=============err=======================')
+    console.log(err)
+    console.log('====================================')
+    
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data, 
+      })}
+    );
+};
+
+export const deleteList = (listId) => dispatch => {
+
+  axios
+    .delete(`/api/profile/deletelist/${listId}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_LIST,
+        payload: listId,
+      });
+
+      console.log("List Deleted", "success");
+      dispatch(setAlert("List Deleted", "success"));
+
+    })
+    .catch((err) => {
+
+    console.log('=============err=======================')
+    console.log(err)
+    console.log('====================================')
+      
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })}
     );
 };
 
@@ -108,6 +246,26 @@ export const getProfiles = () => dispatch => {
       })
     );
 };
+
+
+export const getYourComments = (userData) => dispatch => {
+  axios
+    .post('/api/profile/yourcomments', userData)
+    .then(res =>
+      dispatch({
+        type: GET_YOUR_COMMENTS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
+      })
+    );
+};
+
+
 
 /*
   Get the (n) of newest members who created a profile 

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19.636" height="14.643" viewBox="0 0 19.636 14.643">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="-0.122" y2="0.881" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#47bea9"/>
+      <stop offset="0.966" stop-color="#167060"/>
+      <stop offset="1" stop-color="#0a715f"/>
+    </linearGradient>
+  </defs>
+  <path id="Icon_awesome-check" data-name="Icon awesome-check" d="M6.669,18.932.288,12.551a.982.982,0,0,1,0-1.388L1.676,9.774a.982.982,0,0,1,1.388,0l4.3,4.3,9.208-9.208a.982.982,0,0,1,1.388,0l1.388,1.388a.982.982,0,0,1,0,1.388L8.058,18.932A.982.982,0,0,1,6.669,18.932Z" transform="translate(0 -4.577)" fill="url(#linear-gradient)"/>
+</svg>

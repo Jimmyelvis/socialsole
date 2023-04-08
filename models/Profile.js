@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const listSchema = require('./schemas/List');
 
 const ProfileSchema = new Schema({
 
@@ -29,14 +30,26 @@ const ProfileSchema = new Schema({
   },
   friends: [
     {
-      name: {
-        type: String
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
       },
-      avatar: {
-        type: String
+      handle: {
+        type: String,
+        required: true,
+        max: 40
+      },
+      dateAdded: {
+        type: Date,
+        default: Date.now
       }
-    }
+    },
+    
   ],
+  friendRequests: [
+
+  ],
+  lists: [listSchema],
   mycollection: [
     {
       brand: {
@@ -67,7 +80,10 @@ const ProfileSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  featured: {
+    type: Number,
+  },
 });
 
 // module.exports = Profile = mongoose.model('profile', ProfileSchema);

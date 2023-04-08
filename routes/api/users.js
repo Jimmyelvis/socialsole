@@ -19,7 +19,7 @@ const validateLoginInput = require('../../validation/login');
 const User = require('../../models/User')
 
 // Load Profile Model
-const Profile = require("../../models/Profile");
+
 
 
 // @route    GET api/users/auth
@@ -163,8 +163,28 @@ router.post('/login', (req, res) => {
 
  });
 
+// @route   GET api/profile/all
+// @desc    Get all profiles
+// @access  Public
+router.get('/all', (req, res) => {
+  const errors = {};
 
 
+  User.find()
+    .sort({ date: 1 })
+    .then(users => {
+      if (!users) {
+        errors.noprofile = 'There are no users';
+        return res.status(404).json(errors);
+      }
+
+      res.json(users);
+    })
+    .catch(err => res.status(404).json({
+      users: 'There are no users'
+    }));
+
+});
 
 
 

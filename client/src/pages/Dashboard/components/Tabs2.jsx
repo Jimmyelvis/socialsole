@@ -4,22 +4,26 @@ import { Link } from "react-router-dom";
 import { ReactComponent as ExtraMenu } from "assets/img/extra-menu-items.svg";
 import { useWindowContext } from "context/windowContext";
 
-export const Dashboardtabs = () => {
+export const Dashboardtabs = ({ setCurrentView }) => {
 
   const { screenSize, setScreenSize } = useWindowContext();
 
   /* State Variables */
   const [menuSet, setmenuSet] = useState("firstSet");
-  const [marker, setMarker] = useState(null)
+  const [marker, setMarker] = useState(3)
 
   const [firstSet, setFirstSet] = useState([])
   const [secondSet, setSecondSet] = useState([])
   const [thirdSet, setThirdSet] = useState([])
+  const [activeLink, setActiveLink] = useState("Timeline")
 
   const originalSet = [
     {
       name: "Timeline",
-      onClick: () => changeView(),
+      onClick: () => {
+        setCurrentView("timeline");
+        setActiveLink("Timeline")
+      },
     },
     {
       name: "Edit Profile",
@@ -35,20 +39,32 @@ export const Dashboardtabs = () => {
     },
     {
       name: "Your Comments",
-      onClick: () => changeView(),
+      onClick: () => {
+        setCurrentView("your-comments");
+        setActiveLink("Your Comments")
+      },
     },
     {
-      name: "Liked Content",
-      onClick: () => changeView(),
+      name: "You Liked",
+      onClick: () => {
+        setCurrentView("you-liked");
+        setActiveLink("You Liked")
+      },
     },
     {
       name: "Saved Content",
-      onClick: () => changeView(),
+      onClick: () => {
+        setCurrentView("saved-content");
+        setActiveLink("Saved Content")
+      },
     },
-    {
-      name: "View Notifications",
-      onClick: () => changeView(),
-    },
+    // {
+    //   name: "View Notifications",
+    //   onClick: () => {
+    //     setCurrentView("view-notifications");
+    //     setActiveLink("View Notifications")
+    //   },
+    // },
 
   ];
 
@@ -76,9 +92,7 @@ export const Dashboardtabs = () => {
 
 
   /* Functions */
-  const changeView = () => {
-    console.log("clicked");
-  };
+
 
   /**
  * When the extra menu icon (ellipsis) is clicked
@@ -107,14 +121,14 @@ export const Dashboardtabs = () => {
     setMenuLinks();
   }, [marker]);
 
-  useEffect(() => {
+  // useEffect(() => {
 
  
-    if (screenSize >  800) {
-      setMarker(3);
-    }
+  //   if (screenSize >  800) {
+  //     setMarker(3);
+  //   }
 
-  }, [screenSize]);
+  // }, [screenSize]);
 
   useEffect(() => {
     renderTabLinks();
@@ -181,7 +195,9 @@ export const Dashboardtabs = () => {
    }
 
 
-  
+  const getActiveLink = (link) => { 
+    return activeLink === link ? "active" : "";
+   }
 
 
   const renderTabLinks = () => {
@@ -193,7 +209,7 @@ export const Dashboardtabs = () => {
   
   
             return (
-              <li className="link" key={index}>
+              <li className={`link ${getActiveLink(item.name)}`} key={index}>
                 <Link to={item.link} key={index}>
                   {item.name}
                 </Link>
@@ -202,7 +218,7 @@ export const Dashboardtabs = () => {
           } else {
   
             return (
-              <li className="link" key={index} onClick={item.onClick}>
+              <li className={`link ${getActiveLink(item.name)}`} key={index} onClick={item.onClick}>
                 {item.name}
                 {item.icon}
               </li>
@@ -217,7 +233,7 @@ export const Dashboardtabs = () => {
   
   
             return (
-              <li className="link" key={index}>
+              <li className={`link ${getActiveLink(item.name)}`} key={index}>
                 <Link to={item.link} key={index}>
                   {item.name}
                 </Link>
@@ -226,7 +242,7 @@ export const Dashboardtabs = () => {
           } else {
   
             return (
-              <li className="link" key={index} onClick={item.onClick}>
+              <li className={`link ${getActiveLink(item.name)}`} key={index} onClick={item.onClick}>
                 {item.name}
                 {item.icon}
               </li>
@@ -241,7 +257,7 @@ export const Dashboardtabs = () => {
   
   
             return (
-              <li className="link" key={index}>
+              <li className={`link ${getActiveLink(item.name)}`} key={index}>
                 <Link to={item.link} key={index}>
                   {item.name}
                 </Link>
@@ -250,7 +266,7 @@ export const Dashboardtabs = () => {
           } else {
   
             return (
-              <li className="link" key={index} onClick={item.onClick}>
+              <li className={`link ${getActiveLink(item.name)}`} key={index} onClick={item.onClick}>
                 {item.name}
                 {item.icon}
               </li>

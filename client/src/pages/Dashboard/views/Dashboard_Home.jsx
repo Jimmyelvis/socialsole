@@ -1,54 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getCurrentProfile, deleteAccount } from "actions/profileActions";
+import { getCurrentProfile, deleteAccount, getFriends } from "actions/profileActions";
 import { Dashboardtabs } from "../components/Tabs2";
 import { DashboardHeader } from "../components/DashboardHeader";
 import { Panel } from "components/ui/Panel";
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
+import { DashboardView } from "../components/DashBoardView";
+import Spinner from "components/common/Spinner";
 
-
-const Dashboard = ({ getCurrentProfile, deleteAccount, auth, profile: { profile, loading } }) => {
-
+const Dashboard = ({ getCurrentProfile, deleteAccount, getFriends, auth, profile: { profile, loading, friends } }) => {
   /* State Variables */
-  const [currentView, setCurrentView] = useState("time line")
+  const [currentView, setCurrentView] = useState("timeline");
   const { user } = auth;
 
+  useEffect(() => {
+    getCurrentProfile();
+  }, []);
 
+  useEffect(() => {
+
+    if (profile) {
+      getFriends();
+    }
+
+  }, [profile]);
 
   const onDeleteClick = (e) => {
     deleteAccount();
   };
 
-  const createFollowers = () => {
 
-    let followers = [];
-    
-    for (let index = 0; index < 30; index++) {
-      followers.push({
-        name: faker.name.firstName(),
-        avatar: faker.image.avatar(),
-        handle: faker.internet.userName(),  
-        email: faker.internet.email(),
-      });
-      
-    }
 
-    return followers;
-  }
-
- 
   return (
     <div className="dashboard ">
-      <DashboardHeader
-        profile={profile}
-        loading={loading}
-        user={user}
-        followers={createFollowers()}
-      />
+      {loading && profile === null ? (
+        <Spinner />
+      ) : (
+        <React.Fragment>
+          <DashboardHeader profile={profile} loading={loading} user={user} friends={friends}  />
 
-      <Dashboardtabs />
-      
+          <Dashboardtabs setCurrentView={(currentView) => setCurrentView(currentView)} />
+          <DashboardView currentView={currentView} profile={profile} loading={loading} user={user} />
+          
+          
+        </React.Fragment>
+      )}
     </div>
   );
 };
@@ -58,4 +55,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export const Dashboard_Home = connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);
+export const Dashboard_Home = connect(mapStateToProps, { getCurrentProfile, deleteAccount, getFriends })(Dashboard);

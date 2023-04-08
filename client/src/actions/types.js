@@ -33,5 +33,12 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
+export const GET_TIMELINE = 'GET_TIMELINE';
+export const GET_YOUR_COMMENTS = 'GET_YOUR_COMMENTS';
+export const GET_YOUR_LIKES = 'GET_YOUR_LIKES';
+export const GET_LIST_ITEMS = 'GET_LIST_ITEMS';
+export const GET_FRIENDS = 'GET_FRIENDS';
+export const CREATE_LIST = 'CREATE_LIST';
+export const DELETE_LIST = 'DELETE_LIST';
 
 

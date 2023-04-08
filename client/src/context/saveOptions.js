@@ -13,10 +13,8 @@ const SaveOptionsProvider = ({ children }) => {
 
   const [activeItem, setActiveItem] = useState(null);
 
-  /*
-  TODO:consider moving setpostOptionsMenuClasses, and setInnerMenu to the the SaveOptions component. That component will use the menuOpen state to determine whether to diplay the Save options menu. 
-  */
 
+  
   const openMenu = (e) => {
     setMenuOpen(!menuOpen);
 

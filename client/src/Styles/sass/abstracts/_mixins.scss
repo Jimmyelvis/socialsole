@@ -67,6 +67,27 @@
   overflow: hidden;
 }
 
+/*
+  lineClampAlt mixin
+  @param $lines: number of lines to show
+  @param $size: font-size, default is 2.4rem
+  @usage: @include lineClampAlt(1, 2.6rem);
+
+  Use this version for when you need to the line-clamp
+  directly on the element you want to clamp, instead of
+  on a parent element.
+*/
+@mixin lineClampAlt($lines: 3, $size: 2.4rem) {
+  font-size: $size;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding-bottom: $size;
+  line-height: $size;
+  text-overflow: ellipsis;
+}
+
 @mixin customBorderBtm($rgb:rgb(165 185 212 / 25%), $height, $width: 50%, $padding-top: 6px) {
 
   &::after {

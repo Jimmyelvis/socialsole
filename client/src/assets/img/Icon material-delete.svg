@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12.59" height="16.187" viewBox="0 0 12.59 16.187">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.351" cy="0.285" r="0.632" gradientTransform="matrix(0.232, 0.973, -1.521, 0.362, 0.703, -0.16)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fca22a"/>
+      <stop offset="1" stop-color="#e58300"/>
+    </radialGradient>
+  </defs>
+  <path id="Icon_material-delete" data-name="Icon material-delete" d="M8.4,18.889a1.8,1.8,0,0,0,1.8,1.8h7.194a1.8,1.8,0,0,0,1.8-1.8V8.1H8.4ZM20.09,5.4H16.942l-.9-.9h-4.5l-.9.9H7.5V7.2H20.09Z" transform="translate(-7.5 -4.5)" fill="url(#radial-gradient)"/>
+</svg>

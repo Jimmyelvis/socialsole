@@ -119,7 +119,7 @@ const App = () => {
                   <Route exact path="/test/latestnews" component={LatestNews} />
                   <Route exact path="/test/latestsneakers" component={LatestSneakers} />
 
-                  <Footer />
+                  {/* <Footer /> */}
                 </React.Fragment>
               </ScrollToTop>
             </Router>

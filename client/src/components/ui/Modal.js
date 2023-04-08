@@ -1,36 +1,16 @@
-import React, { useEffect, useState, memo, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useModal } from "context/modalContext";
 import { createPortal } from "react-dom";
 
-const Modal = ({ children, selector, overlayColor, modalTarget, id}) => {
-
-  const { isModalOpen, closeModal } = useModal();
+const Modal = ({ children, selector, overlayColor, modalTarget, modalOrigin}) => {
+  const { isModalOpen, closeModal, origin } = useModal();
 
   /** A piece of state to determine when we add the .hide css class
    * to the modal. So when we close it, it will fade out gradually
    * instead of instantly
    */
   const [hide, setHide] = useState(false);
-
-  const el = useRef(
-    document.getElementById(id) || document.createElement('div'),
-  )
-
-  const [dynamic] = useState(!el.current.parentElement);
-
-  useEffect(() => {
-    if (dynamic) {
-      el.current.id = id;
-      document.body.appendChild(el.current);
-    }
-    return () => {
-      if (dynamic && el.current.parentElement) {
-        el.current.parentElement.removeChild(el.current);
-      }
-    };
-  }, [id]);
-
 
   Modal.defaultProps = {
     transition: "",
@@ -65,14 +45,14 @@ const Modal = ({ children, selector, overlayColor, modalTarget, id}) => {
   };
 
   const getClassnames = () => {
-    if (isModalOpen === true) {
+    if (isModalOpen === true && origin === modalOrigin) {
       if (isModalOpen && hide === true) {
         return `modal-overlay  show-modal hide-modal`;
       }
 
       return `modal-overlay  show-modal`;
     } else {
-      return `modal-overlay`;
+      return null;
     }
   };
 
@@ -101,7 +81,15 @@ const Modal = ({ children, selector, overlayColor, modalTarget, id}) => {
     </>
   );
 
-  return isModalOpen ? createPortal(modalContent, el.current) : null;
+  /**
+   * We will not only check to see if the modal is open, but also
+   * if the value of the origin prop that is passed in from the modal
+   * context, matches the value of the modalOrigin prop that is passed
+   * in from the component that called the modal. This is to ensure
+   * that the modal is only rendered when the component that called
+   * the modal is the one that is currently open.
+   */
+  return isModalOpen && origin === modalOrigin ? createPortal(modalContent, document.querySelector(selector)) : null;
 };
 
 export default Modal;

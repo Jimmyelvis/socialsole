@@ -10,6 +10,8 @@ const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 const sneakers = require('./routes/api/sneakers');
 const articles = require('./routes/api/articles');
+const search = require('./routes/api/search');
+const features = require('./routes/api/features');
 
 
 
@@ -45,6 +47,8 @@ app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 app.use('/api/sneakers', sneakers);
 app.use('/api/articles', articles);
+app.use('/api/search', search);
+app.use('/api/features', features);
 
 
 // Server static assets if in production

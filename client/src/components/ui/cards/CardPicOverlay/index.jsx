@@ -1,8 +1,16 @@
 import React from "react";
+import classNames from 'classnames';
 
-export const CardPicOverlay = ({ children, imgBg }) => {
+
+export const CardPicOverlay = ({ children, imgBg, className }) => {
+
+  const classes = classNames(
+    'card-OverlayType',
+    className
+  );
+
   return (
-    <div className="card-OverlayType">
+    <div className={classes}>
       <div className="card-info">{children}</div>
 
       <div className="overlay"></div>

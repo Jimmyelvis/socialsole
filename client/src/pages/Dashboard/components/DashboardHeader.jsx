@@ -15,7 +15,7 @@ export const DashboardHeader = ({
   profile,
   loading,
   user,
-  followers,
+  friends,
 }) => {
 
   let dashboardHeader;
@@ -28,14 +28,18 @@ export const DashboardHeader = ({
    */
   const [modalTarget, setModalTarget] = useState(null);
 
+  const compOrigin = "dashboard-header";
+
+
   const getFollowersAvatars = () => {
 
-   let displayedFollowers = followers.slice(0, 5); 
+   let displayedFollowers = friends.slice(0, 5); 
+
 
    return displayedFollowers.map((follower, index) => {
       return (
-        <div className={`follower follower-${index}`} key={follower.email}>
-          <Avatar avatar={follower.avatar} />
+        <div className={`follower follower-${index}`} key={follower._id}>
+          <Avatar avatar={follower.user.avatar} />
         </div>
       )
     })
@@ -43,14 +47,14 @@ export const DashboardHeader = ({
 
   const getMoreFollowers = () => {
 
-    let theRest = followers.slice(5, followers.length);
+    let theRest = friends.slice(5, friends.length);
 
     let andMore = theRest.length > 0 ? theRest.length : null;
 
     let moreFollowers = theRest.map((follower, index) => {
       return (
         <div className={`follower`} key={follower.email}>
-          <Avatar avatar={follower.avatar} />
+          <Avatar avatar={follower.user.avatar} />
 
           <h3 className="heading-3">
             {follower.name}
@@ -67,14 +71,14 @@ export const DashboardHeader = ({
   }
 
   const openFollowersModal = () => {
-    openModal();
+    openModal(compOrigin);
     setModalTarget("followers_overlay");
     console.log("open modal");
    }
 
-  useEffect(() => {
-    console.log(getMoreFollowers().moreFollowers);
-  }, [])
+  // useEffect(() => {
+  //   // console.log(getMoreFollowers().moreFollowers);
+  // }, [])
 
     /**
    * Check what is the target state, then determine
@@ -82,7 +86,7 @@ export const DashboardHeader = ({
    */
     const checkTarget = () => {
       if (modalTarget === "followers_overlay") {
-        return  <FollowersModal followers={followers} />;
+        return  <FollowersModal followers={friends} />;
       } 
 
     };
@@ -119,6 +123,7 @@ export const DashboardHeader = ({
               <h3 className="heading-3" onClick={() => openFollowersModal()}>
                &  {getMoreFollowers().andMore} more followers
               </h3>
+
             </div>
 
           </div>
@@ -155,8 +160,9 @@ export const DashboardHeader = ({
       </Panel>
 
       <Modal
-        id={"dash-header"}
+        selector={"#modal"}
         modalTarget={modalTarget}
+        modalOrigin={compOrigin}
       >
         {checkTarget()}
       </Modal>

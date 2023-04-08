@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="111" height="111" viewBox="0 0 111 111">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.27" cy="0.282" r="0.488" gradientTransform="translate(0.5 1.221) rotate(-132.334)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#bce4ff"/>
+      <stop offset="1" stop-color="#6fbcfe"/>
+    </radialGradient>
+    <filter id="Ellipse_41" x="0" y="0" width="111" height="111" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#5e5c5c" flood-opacity="0.141"/>
+      <feComposite operator="in" in2="blur"/>
+    </filter>
+    <filter id="Ellipse_41-2" x="0" y="0" width="111" height="111" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#ab9c9c" flood-opacity="0.161" result="color"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-2"/>
+      <feComposite operator="in" in="color"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="0.5" y1="-0.956" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#f1f8ff"/>
+      <stop offset="1" stop-color="#cfdfee"/>
+    </linearGradient>
+  </defs>
+  <g id="add_icon" data-name="add icon" transform="translate(423.57 824.57) rotate(180)">
+    <g data-type="innerShadowGroup">
+      <g transform="matrix(-1, 0, 0, -1, 423.57, 824.57)" filter="url(#Ellipse_41)">
+        <g id="Ellipse_41-3" data-name="Ellipse 41" transform="translate(102 99) rotate(180)" stroke="rgba(249,252,255,0.9)" stroke-width="3" fill="url(#radial-gradient)">
+          <circle cx="46.5" cy="46.5" r="46.5" stroke="none"/>
+          <circle cx="46.5" cy="46.5" r="45" fill="none"/>
+        </g>
+      </g>
+      <circle id="Ellipse_41-4" data-name="Ellipse 41" cx="46.5" cy="46.5" r="46.5" transform="translate(321.57 725.57)" fill="url(#radial-gradient)"/>
+      <g transform="matrix(-1, 0, 0, -1, 423.57, 824.57)" filter="url(#Ellipse_41-2)">
+        <circle id="Ellipse_41-5" data-name="Ellipse 41" cx="46.5" cy="46.5" r="46.5" transform="translate(102 99) rotate(180)" fill="#fff"/>
+      </g>
+      <g id="Ellipse_41-6" data-name="Ellipse 41" transform="translate(321.57 725.57)" fill="none" stroke="rgba(249,252,255,0.9)" stroke-width="3">
+        <circle cx="46.5" cy="46.5" r="46.5" stroke="none"/>
+        <circle cx="46.5" cy="46.5" r="45" fill="none"/>
+      </g>
+    </g>
+    <path id="Icon_metro-plus" data-name="Icon metro-plus" d="M47.285,19.237H31.418V3.37a1.442,1.442,0,0,0-1.442-1.442H21.322A1.442,1.442,0,0,0,19.879,3.37V19.237H4.013a1.442,1.442,0,0,0-1.442,1.442v8.654a1.442,1.442,0,0,0,1.442,1.442H19.879V46.642a1.442,1.442,0,0,0,1.442,1.442h8.654a1.442,1.442,0,0,0,1.442-1.442V30.776H47.285a1.442,1.442,0,0,0,1.442-1.442V20.679A1.442,1.442,0,0,0,47.285,19.237Z" transform="translate(342.648 746.839)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

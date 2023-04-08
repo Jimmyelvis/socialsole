@@ -11,10 +11,10 @@ export const FollowersModal = ({
     return followers.map((follower, index) => {
       return (
         <div className="follower" key={follower.email}>
-          <Avatar avatar={follower.avatar} />
+          <Avatar avatar={follower.user.avatar} />
 
           <h3 className="heading-3">
-            {follower.name}
+            {follower.user.name}
           </h3>
         </div>
       )

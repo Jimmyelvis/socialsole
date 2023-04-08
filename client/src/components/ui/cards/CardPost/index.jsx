@@ -4,27 +4,46 @@ import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 import { SaveOptions } from "../components/SaveOptions";
 import { useState, useEffect } from "react";
 import { useSaveOptions } from "context/saveOptions";
+import parse from 'html-react-parser';
+ import { Link } from "react-router-dom";
 
-export const CardPost = ({ author, date, headline, excerpt, likesNumber, commentsNumber, postImage, useSavesList, contentId }) => {
+
+export const CardPost = ({ id, author, date, headline, excerpt, likesNumber, commentsNumber, postImage, useSavesList, contentId }) => {
   const { openMenu } = useSaveOptions();
 
   /**
-   * We need to get most parent element of the card to send to the saveOptions context, via the openMenu function. This will alow us to determine which card the save menu is being opened from.
+   * We need to get most parent element of the card to send to the saveOptions context, via the openMenu function. This will alow us to determine which card the save menu is being opened from. We also need to make sure we get the contentID prop which should be the id of the post.
    */
 
   return (
     <div className="card-post" id={`${contentId} "parent"`}>
-      <SaveOptions useSavesList={useSavesList}  />
+
+      {
+        useSavesList && (
+          <>
+            <SaveOptions useSavesList={useSavesList}  />
+          </>
+        )
+      }
 
       <div className="top">
         <div className="card-header">
           <AuthorHeader author={author} date={date} />
 
-          <IoEllipsisHorizontalSharp className="icon icon-ellipsis open-menu" id={contentId} onClick={(e) => openMenu(e.currentTarget.parentElement.parentElement.parentElement.id)} />
+          {
+            useSavesList && (
+              <IoEllipsisHorizontalSharp className="icon icon-ellipsis open-menu" id={contentId} onClick={(e) => openMenu(e.currentTarget.parentElement.parentElement.parentElement.id)} />
+            )
+          }
+        
         </div>
 
         <div className="headline">
-          <h3 className="heading-3">{headline}</h3>
+          <h3 className="heading-3">
+            <Link to={`/post/${id}`}>
+              {headline}
+            </Link>
+          </h3>
         </div>
 
         <div className="post-image">
@@ -33,7 +52,9 @@ export const CardPost = ({ author, date, headline, excerpt, likesNumber, comment
       </div>
 
       <div className="bottom">
-        <p className="excerpt">{excerpt}</p>
+        <div className="excerpt">
+          {parse(excerpt)}
+        </div>
 
         <CardFooter likesNumber={likesNumber} commentsNumber={commentsNumber} />
       </div>
