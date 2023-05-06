@@ -11,6 +11,14 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 import { useSaveOptions } from "context/saveOptions";
 import { v4 as uuidv4 } from "uuid";
+import { getListItems,
+  getCurrentProfile,
+  createList,
+  deleteList,
+  saveToList
+} from 'actions/profileActions';
+import { connect } from "react-redux";
+
 
   /**
    * Any component that uses the SaveOptions component will need to pass in the useSavesList prop. This prop will be an array of objects that will contain the user's saved lists. In addition a unique id will need to be passed in as the svgId prop. This will be used to identify the parent element of the save menu. We need this to generate unique ids for the svg elements they will be rendered in each parent component that uses the SaveOptions component.
@@ -19,18 +27,28 @@ import { v4 as uuidv4 } from "uuid";
 
 
 
-export const SaveOptions = ({ 
-  useSavesList, 
+export const Save_Options = ({ 
+  useSavesList,
+  type,
+  itemId,
+  profile: { profile, loading, currentList },
+  createList,
+  deleteList,
+  saveToList,
+  parentRef
 }) => {
 
 
 
   const { menuOpen, setMenuOpen, postOptionsMenuClasses, setpostOptionsMenuClasses, setInnerMenu, innerMenu, activeItem } = useSaveOptions();
 
-  const parentRef = useRef();
+  // const parentRef = useRef();
 
 
-
+  /*
+    Holds an array of lists that the user has created, we get this from
+    the Redux profile state
+  */
   const [userLists, setUserLists] = useState([]);
 
   /**  This will be used to generate unique ids for the svg elements they will be rendered in each parent component that uses the SaveOptions component.*/
@@ -43,9 +61,10 @@ export const SaveOptions = ({
   const [listName, setListName] = useState("");
 
   useEffect(() => {
-    setUserLists(useSavesList);
+
+    setUserLists(profile.lists);
     setSvgId(uuidv4())
-  }, []);
+  }, [menuOpen, innerMenu]);
 
   /**
    * To be able to achieve the fade out effect, we need to first apply the fade-out class to the save menu list, which will turn the opacity to 0. Then, after 1 second, we apply the default-list-menu-closed class to the save menu list, which will set the display to none.
@@ -69,8 +88,9 @@ export const SaveOptions = ({
   };
 
   const deleteSavedList = (id) => {
-    let newList = userLists.filter((list) => list.id !== id);
-
+    
+    deleteList(id);
+    let newList = userLists.filter((list) => list._id !== id);
     setUserLists(newList);
   };
 
@@ -80,15 +100,27 @@ export const SaveOptions = ({
    * */
   const addToCreatedLists = () => {
     let obj = {
-      id: Math.floor(Math.random() * 1000),
-      itemsnumber: Math.floor(Math.random() * 1000),
       name: listName,
+      profileId: profile._id,
     };
 
     setCreatedLists([...createdLists, obj]);
-    setUserLists([...userLists, obj]);
+    createList(obj);
     setListName("");
   };
+
+
+  const savePostToList = (listId) => {
+    
+    const newSave ={
+      itemType:type,
+      itemId: itemId,
+      listId: listId
+    }
+
+    saveToList(newSave)
+    console.log("newSave", newSave )
+  }
 
   const backToDefaultMenu = () => {
     setpostOptionsMenuClasses("default-list-menu default-list-menu-open");
@@ -101,7 +133,8 @@ export const SaveOptions = ({
 
     return (
       <ul className="default-list">
-        <li className="default-list-item">
+
+        {/* <li className="default-list-item">
           <svg width="0" height="0">
             <linearGradient id={`blue-gradient-${svgId}`} x1="0%" y1="0%" x2="100%" y2="100%">
               <stop stopColor="#9ED7FF" offset="0%" />
@@ -112,7 +145,8 @@ export const SaveOptions = ({
           <BsFillHeartFill className="icon icon-heart" style={{ fill: `url(#blue-gradient-${svgId})` }} />
 
           <span className="label">Save to Favorites</span>
-        </li>
+        </li> */}
+
         <li className="default-list-item" onClick={showSaveListsMenu}>
           <svg width="0" height="0">
             <linearGradient id={`blue-gradient-${svgId}`} x1="0%" y1="0%" x2="100%" y2="100%">
@@ -133,7 +167,7 @@ export const SaveOptions = ({
           </svg>
 
           <MdPlaylistAdd className="icon icon-playlist" style={{ fill: `url(#blue-gradient-${svgId})` }} />
-          <span className="label">Add to Playlist</span>
+          <span className="label">Create New List</span>
         </li>
       </ul>
     );
@@ -142,6 +176,7 @@ export const SaveOptions = ({
 
   const showSaveListsMenu = () => {
     setInnerMenu("saved-lists");
+
     getSaveLists();
   };
 
@@ -162,8 +197,15 @@ export const SaveOptions = ({
           {userLists.map((list) => {
 
             return (
-              <li className="save-list-item" key={list.id}>
-                {list.name}
+              <li className="save-list-item" key={list._id}>
+                 <span 
+                    className="list-name"
+                    onClick={() => {
+                      savePostToList(list._id);
+                    }}
+                 >
+                    {list.name}
+                  </span> 
 
                 <svg width="0" height="0">
                   <linearGradient id={`orange-gradient-${svgId}`} x1="0%" y1="0%" x2="100%" y2="100%">
@@ -172,7 +214,7 @@ export const SaveOptions = ({
                   </linearGradient>
                 </svg>
 
-                <AiTwotoneDelete className="icon icon-trash" onClick={() => deleteSavedList(list.id)} style={{ fill: `url(#orange-gradient-${svgId})` }} />
+                <AiTwotoneDelete className="icon icon-trash" onClick={() => deleteSavedList(list._id)} style={{ fill: `url(#orange-gradient-${svgId})` }} />
               </li>
             );
           })}
@@ -233,11 +275,7 @@ export const SaveOptions = ({
     );
   };
 
-  if (parentRef && parentRef.current && parentRef.current.parentElement) {
-    // console.log(parentRef.current.parentElement.id);
-  }
 
-  // console.log("activeItem", activeItem);
 
   /**
    * Use this function to determine if the current element
@@ -252,28 +290,38 @@ export const SaveOptions = ({
    */
 
   const getClickedElement = () => {
+    /**
+     * We need another prop passed in to determine whether this is coming from a post, sneaker, or article. Depending on which one we will then have to adjust the parentRef.current.parentElement.id to match the id of the element that is being clicked. So for some we may have to ajust how many parentElements we have to go up to get the id of the element that is being clicked.
+     * 
+     * For example with sneakers we have to go up 2 levels (parentRef.current.parentElement.parentElement), where as with post we only have to go up one level
+     */
 
-    if (parentRef && parentRef.current && parentRef.current.parentElement) {
+   if (parentRef && parentRef.current && parentRef.current.parentElement) {
 
-      if (parentRef.current.parentElement.id === activeItem) {
-        return postOptionsMenuClasses
-      } 
-      else {
+      
+      if (parentRef.current && parentRef.current.id === activeItem) {
+        return postOptionsMenuClasses;
+      } else {
         return "hidden";
       }
-      
+
     }
-    
-  }
 
   
-  console.log("uuid", svgId);
+  }
+
+ 
+
 
   return (
-    <div className={getClickedElement()} ref={parentRef}>
+    <div className={getClickedElement()} >
       <IoEllipsisHorizontalSharp className="icon icon-ellipsis close-menu" onClick={() => closeMenu()} />
 
-      {innerMenu !== "default-menu" ? <IoArrowUndoSharp className="icon icon-undo" onClick={() => backToDefaultMenu()} /> : null}
+      {
+        innerMenu !== "default-menu" ? 
+        <IoArrowUndoSharp className="icon icon-undo" 
+        onClick={() => backToDefaultMenu()} /> : null
+       }
 
       {/** Determine which menu to show */}
 
@@ -281,3 +329,11 @@ export const SaveOptions = ({
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+
+
+
+export const SaveOptions = connect(mapStateToProps, { getListItems, getCurrentProfile, createList, deleteList, saveToList })(Save_Options);

@@ -19,7 +19,7 @@ import { getProfileByHandle } from "actions/profileActions";
   <ProfileSneakers /> for displaying sneakers created by the user. 
 */
 
-const Profile = ({ profile: { profile, loading }, auth, getProfileByHandle, match }) => {
+const Profile = ({ profile: { profile, loading, displayedProfile }, auth, getProfileByHandle, match }) => {
 
    const [values, setValues] = useState({
      about: "show",
@@ -33,9 +33,11 @@ const Profile = ({ profile: { profile, loading }, auth, getProfileByHandle, matc
 
     useEffect(() => {
       if (match.params.handle) {
+
+        console.log("match.params.handle: ", match.params.handle);
         getProfileByHandle(match.params.handle);
       }
-    }, [match.params.handle]);
+    }, [ match.params.handle]);
 
     const { user } = auth;
 
@@ -94,10 +96,10 @@ const Profile = ({ profile: { profile, loading }, auth, getProfileByHandle, matc
               <img src={profile.profilephoto} alt="" />
             </div>
 
-            <div className="container">
+            
               {profileHeader}
-              <ProfileAbout profile={profile} />
-            </div>
+              {/* <ProfileAbout profile={profile} /> */}
+            
           </React.Fragment>
         );
       } else if (posts === "show") {
@@ -107,10 +109,10 @@ const Profile = ({ profile: { profile, loading }, auth, getProfileByHandle, matc
               <img src={profile.profilephoto} alt="" />
             </div>
 
-            <div className="container">
+            
               {profileHeader}
               <ProfilePosts profile={profile} />
-            </div>
+            
           </React.Fragment>
         );
       } else if (sneakers === "show") {
@@ -120,10 +122,10 @@ const Profile = ({ profile: { profile, loading }, auth, getProfileByHandle, matc
               <img src={profile.profilephoto} alt="" />
             </div>
 
-            <div className="container">
+            
               {profileHeader}
               <ProfileSneakers profile={profile} />
-            </div>
+            
           </React.Fragment>
         );
       } else if (friends === "show") {
@@ -133,10 +135,10 @@ const Profile = ({ profile: { profile, loading }, auth, getProfileByHandle, matc
               <img src={profile.profilephoto} alt="" />
             </div>
 
-            <div className="container">
+            
               {profileHeader}
               <ProfileFriends />
-            </div>
+            
           </React.Fragment>
         );
       }

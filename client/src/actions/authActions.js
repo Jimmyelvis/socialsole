@@ -27,6 +27,10 @@ import { setAlert } from "./alert";
 // Load User
 export const loadUser = () => async (dispatch) => {
 
+  console.log('====================================');
+  console.log('loadUser called');
+  console.log('====================================');
+
   if (localStorage.jwtToken) {
     // if there is a jwtToken set axios headers for all requests
     setAuthToken(localStorage.jwtToken);
@@ -101,9 +105,6 @@ export const loginUser = (userData) => (dispatch) => {
     .post("/api/users/login", userData)
     .then((res) => {
 
-      console.log('====================================');
-      console.log('loginUser called');
-      console.log('====================================');
 
       // Save to localStorage
       const { token } = res.data;
@@ -117,9 +118,7 @@ export const loginUser = (userData) => (dispatch) => {
       dispatch(setCurrentUser(decoded));
       dispatch(getCurrentProfile())
 
-      console.log('====================================');
-      console.log('loginUser called again');
-      console.log('====================================');
+  
     })
     .catch((err) =>
       dispatch({

@@ -83,6 +83,142 @@
 
 }
 
+.comment-overlay-container {
+  height: 100%;
+  grid-column: full-start/full-end;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: flex-end;
+
+  .comment-panel {
+    height: 100%;
+    width: 0;
+    border-radius: 0;
+    transition: width 500ms linear;
+    overflow-y: scroll;
+    display: grid;
+    @include gridTempColumn;
+    grid-template-rows: repeat(3, max-content);
+
+    .commentsheader {
+      margin-top: 12rem;
+      grid-column: col-start 2 / col-end 8;
+      margin-bottom: 2rem;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: $midnightblue;
+    }
+
+    .commentForm {
+      grid-column: col-start 2 / col-end 11;
+      display: grid;
+
+      @include respond(bp-tiny) {
+        grid-column: col-start 1/col-end 12;
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .btn-lightblue {
+        padding: 0.7rem 2rem;
+        font-size: 2rem;
+        justify-self: end;
+      }
+    }
+
+    .comment-list {
+      opacity: 0;
+      transition: opacity 500ms linear;
+      padding: 4rem 0;
+      grid-column: col-start 2 / col-end 11;
+
+      @include respond(bp-tiny) {
+        grid-column: col-start 1/col-end 12;
+      }
+
+      .commentBody {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        grid-template-rows: repeat(2, max-content);
+        margin-bottom: 11rem;
+        align-items: center;
+        column-gap: 3rem;
+        position: relative;
+
+        @include respond(bp-small) {
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(3, max-content);
+          justify-items: center;
+        }
+
+        .avatar {
+          width: 8.5rem;
+          height: 8.5rem;
+          grid-column: 1/2;
+          grid-row: 1/-1;
+          align-self: start;
+
+          @include respond(bp-small) {
+            grid-row: 1/2;
+          }
+        }
+
+        .name-date {
+          display: flex;
+          gap: 1rem;
+          font-weight: bold;
+          padding: 1rem 0;
+
+          @include respond(bp-small) {
+            grid-row: 2/3;
+          }
+
+          .commentName {
+            color: $midnightblue;
+          }
+
+          .commentDate {
+            color: $alternateblue;
+          }
+
+        }
+
+        .commentText {
+          grid-column: 2/3;
+          padding: 2rem 0 6.5rem 0;
+
+          @include respond(bp-small) {
+            grid-column: 1/-1;
+            justify-self: self-start;
+            width: 100%;
+          }
+        }
+
+        .btn-delete-comment {
+          position: absolute;
+          bottom: 0;
+          right: 1rem;
+          width: 2.5rem;
+          height: 2.5rem;
+          fill: $orange;
+        }
+      }
+    }
+  }
+
+}
+
+.slideIn {
+  width: 100rem !important;
+  padding: 4rem 4rem;
+}
+
+.fadeIn {
+  opacity: 1 !important;
+}
+
 
 .postsneakerdetail {
   margin: 0rem auto 0 auto;

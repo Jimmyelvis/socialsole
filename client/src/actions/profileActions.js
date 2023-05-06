@@ -2,24 +2,28 @@ import axios from "axios";
 import { setAlert } from "./alert";
 
 import {
-  GET_PROFILE,
-  GET_PROFILES,
-  PROFILE_LOADING,
-  CLEAR_CURRENT_PROFILE,
-  GET_ERRORS,
-  SET_CURRENT_USER,
-  CLEAR_ERRORS,
-  GET_TIMELINE,
-  GET_YOUR_COMMENTS,
-  GET_YOUR_LIKES,
-  GET_LIST_ITEMS,
-  GET_FRIENDS,
-  CREATE_LIST,
-  DELETE_LIST,
-} from "./types";
+    GET_PROFILE,
+    GET_PROFILES,
+    PROFILE_LOADING,
+    CLEAR_CURRENT_PROFILE,
+    GET_ERRORS,
+    SET_CURRENT_USER,
+    CLEAR_ERRORS,
+    GET_TIMELINE,
+    GET_YOUR_COMMENTS,
+    GET_YOUR_LIKES,
+    GET_LIST_ITEMS,
+    GET_FRIENDS,
+    CREATE_LIST,
+    DELETE_LIST,
+    SAVE_TO_LIST
+} from './types';
 
 // Gets the current profile for logged in user
 export const getCurrentProfile = () => dispatch => {
+
+console.log("getCurrentProfile called");
+  
   dispatch(setProfileLoading());
   axios
     .get("/api/profile")
@@ -149,9 +153,6 @@ export const createList = (listData) => dispatch => {
     })
     .catch((err) => {
 
-    console.log('=============err=======================')
-    console.log(err)
-    console.log('====================================')
     
       dispatch({
         type: GET_ERRORS,
@@ -159,6 +160,33 @@ export const createList = (listData) => dispatch => {
       })}
     );
 };
+
+export const saveToList = (listItem) => dispatch => { 
+
+  axios
+    .post("/api/profile/addtolist", listItem)
+    .then(res => {
+      dispatch({
+        type: SAVE_TO_LIST,
+        payload: res.data.profile,
+      });
+
+      dispatch(setAlert(res.data.message, "success"));
+
+    })
+    .catch((err) => {
+
+      console.log('=============err=======================')
+      console.log(err)
+      console.log('====================================')
+        
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data,
+      })} 
+    );
+
+ }
 
 export const deleteList = (listId) => dispatch => {
 

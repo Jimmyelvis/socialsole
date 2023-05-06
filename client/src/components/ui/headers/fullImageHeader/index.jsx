@@ -1,6 +1,10 @@
 import className from "classnames";
 
-export const FullImageHeader = ({ image, ...rest }) => {
+export const FullImageHeader = ({ 
+  image, 
+  children,
+  ...rest
+}) => {
 
   const classees = className(
     "fullimageheader",
@@ -9,6 +13,7 @@ export const FullImageHeader = ({ image, ...rest }) => {
 
   return (
     <div className={classees}>
+      {children}
       <img src={image} alt="" />
     </div>
   );

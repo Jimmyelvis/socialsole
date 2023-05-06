@@ -32,7 +32,7 @@ const Posts = ({ post, getPosts,
                 <h3 className="heading-3"
                   onClick={() => setView("All")}
                 >
-                  All  Posts
+                  All Posts
                 </h3>
               </li>
 

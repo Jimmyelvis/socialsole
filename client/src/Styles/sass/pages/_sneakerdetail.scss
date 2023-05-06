@@ -1,10 +1,22 @@
 .sneakerdetail {
+  display: grid;
+  @include gridTempColumn;
+  padding-bottom: 6rem;
+
+  & > * {
+    grid-column: col-start 3 / col-end 10;
+
+    @include respond(bp-medium) {
+      grid-column: col-start 1/col-end 12;
+    }
+  }
 
   .fullimageheader {
     height: 68rem;
     position: relative;
     display: flex;
-    margin-top: 6rem;
+    margin-top: -3rem;
+    grid-column: full-start / full-end;
 
     @include respond(bp-large) {
       height: 52rem;
@@ -20,16 +32,6 @@
 
     @include respond(bp-tiny) {
       height: 35rem;
-    }
-
-
-    .overlay {
-      top:0;
-      z-index: 10;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      background-color: rgba(36, 36, 94, 0.30);
     }
 
     img {
@@ -118,6 +120,216 @@
     }
   }
 
+  .userheader {
+    margin-top: -19rem;
+    position: relative;
+    z-index: 100;
+    box-shadow: 0px 0px 50px 0px rgb(0 0 0 / 0%);
+    height: 28rem;
+    flex-wrap: wrap;
+
+    @include respond(bp-small) {
+      flex-direction: row;
+      gap: 3rem;
+      padding: 2rem;
+    }
+
+    .left {
+      display: flex;
+      flex: 0 0 33%;
+      justify-content: center;
+      align-items: center;
+
+      @include respond(bp-small) {
+        flex: 0 0 100%;
+        margin-bottom: 5rem;
+      }
+
+      .avatar {
+        width: 15rem;
+        height: 15rem;
+      }
+
+    }
+
+    .middle {
+      flex: 0 0 33%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0 2rem;
+
+      @include respond(bp-small) {
+        flex: 0 0 100%;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .sneaker-model {
+        font-size: 3.3rem;
+      }
+
+      .sneaker-colorway {
+        font-size: 2.9rem;
+        color: $alternateblue
+      }
+
+      .sneaker-year {
+        font-size: 2.3rem;
+        color: $midnightblue;
+      }
+    }
+
+    .right {
+      flex: 0 0 33%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0 2rem;
+
+      @include respond(bp-small) {
+        flex: 0 0 100%;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .created-by {
+        font-size: 3.3rem;
+      }
+
+      .user-name {
+        font-size: 2.9rem;
+        color: $alternateblue;
+        margin: 0;
+      }
+
+      .posted-date {
+        font-size: 2.3rem;
+        color: $midnightblue;
+      }
+    }
+  }
+
+  .pictures {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    gap: 0.3rem;
+    margin-top: 3.5rem;
+
+    @include respond(bp-smallest) {
+      justify-content: space-between;
+    }
+
+
+    .imgholder {
+      flex: 0 0 25%;
+      margin-bottom: 0.4rem;
+      height: auto;
+      overflow: hidden;
+      border-radius: 8px;
+      position: relative;
+
+      @include respond(bp-smallest) {
+        flex: 0 0 49%;
+      }
+
+      a {
+        position: relative;
+        padding-bottom: 87%;
+        width: 100%;
+        display: block;
+
+        img {
+          object-fit: cover;
+          object-position: center;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+      }
+
+    }
+  }
+
+  .sneakerinfo {
+    padding: 5rem 8rem 8rem 8rem;
+    position: relative;
+    margin-top: 3.5rem;
+
+
+    @include respond(bp-small) {
+      padding: 5rem 5rem 8rem 5rem;
+    }
+
+    @include respond(bp-smallest) {
+      padding: 5rem 3.5rem 8rem 3.5rem;
+    }
+
+    .infoicon {
+      width: 8rem;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 50%;
+      padding: 1.4rem;
+      box-shadow: 2px 2px 9px 0px rgba(82,85,95,0.12);
+    }
+
+    .sneakertext {
+      min-height: 20rem;
+      width: 75%;
+      margin: 5rem auto;
+
+      @include respond(bp-large) {
+        width: 90%;
+      }
+    }
+
+
+
+    .actions {
+      bottom: 3.3rem;
+      right: 4rem;
+
+      @include respond(bp-large) {
+        right: 5%;
+      }
+
+      @include respond(bp-small) {
+        bottom: 2.6rem;
+      }
+    }
+  
+    .tags {
+      width: 45%;
+      bottom: 3rem;
+      left: 6rem;
+
+      @include respond(bp-large) {
+        left: 6%;
+      }
+
+      @include respond(bp-medium) {
+         width: 50%;
+
+         ul {
+          gap: 1rem;
+         }
+      }
+
+      @include respond(bp-small) {
+        width: 85%;
+        bottom: 8rem;
+        left: 3rem;
+      }
+    }
+  }
+
   .sneakeredit {
     position: absolute;
     bottom: 2rem;
@@ -132,108 +344,55 @@
     }
   }
 
-  .sneakerinfo {
-    padding: 5rem 8rem 8rem 8rem;
-    position: relative;
-
-    @include respond(bp-small) {
-      padding: 5rem 5rem 8rem 5rem;
-    }
-
-    @include respond(bp-smallest) {
-      padding: 5rem 3.5rem 8rem 3.5rem;
-    }
-
-    .sneakertext {
-      min-height: 20rem;
-    }
-
-
-    .infoicon {
-      width: 8rem;
-      margin: 0 auto;
-      margin-bottom: 6rem;
-      background-color: white;
-      border-radius: 50%;
-      padding: 1.4rem;
-      box-shadow: 2px 2px 9px 0px rgba(82,85,95,0.12);
-    }
-
-    .actions {
-      bottom: 2rem;
-      right: 6rem;
-    }
   
-    .tags {
-      width: 45%;
-      bottom: 3rem;
-    }
-  }
 
-  .pictures {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 0;
-    margin-top: 7rem;
+  
 
-    .imgholder {
-      flex: 0 0 24.8%;
-      margin-bottom: 0.4rem;
-      height: 30rem;
-      overflow: hidden;
-
-      @include respond(bp-large) {
-        height: 23rem;
-      }
-
-      @include respond(bp-medium) {
-        height: 28rem;
-        flex: 0 0 49%;
-        margin-bottom: 0.5rem;
-      }
-
-      @include respond(bp-small) {
-        height: 24rem;
-      }
-
-      @include respond(bp-smallest) {
-        height: 20rem;
-      }
-
-      img {
-        object-fit: cover;
-        height: 100%;
-      }
-    }
-  }
-
-  .userheader {
-    margin-top: 5rem;
-
-    .right {
-      .heading-4 {
-        color: $alternateblue;
-      }
-    }
-  }
 
   
   .related {
-    padding: 2rem 0;
+    padding: 6rem 3.5rem 8rem;
     margin-top: 5rem;
 
-    .card-ver-trad {
-      margin-top: 3rem;
+    & > .heading-3 {
+      margin-bottom: 5rem;
+      position: relative;
+      width: 20rem;
+      color: $alternateblue;
+      font-size: 3rem;
 
-      .top {
-        height: 20.5rem;
+      @include headerBetweenDashes;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+   
+
+      .card-OverlayType {
+        position: relative;
+        height: unset;
+        box-shadow: 0px 0px 18px 14px rgba(0, 0, 0, 0);
+        flex: 1;
+        padding-bottom: 24%;
+
+        .card-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          width: 100%;
+
+          .heading-3, .heading-4 {
+            text-align: center;
+            color: $white;
+          }
+        }
       }
     }
-
-    .bottom {
-      text-align: center;
-    }
+ 
   }
 
 }

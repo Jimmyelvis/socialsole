@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Spinner from "components/common/Spinner";
 import Card from "components/ui/cards/Card";
 import { getProfiles } from "actions/profileActions";
+import { ProfileCard } from "components/ui/cards/ProfileCard";
 
 
 
@@ -49,7 +50,18 @@ const Profiles = ({ getProfiles, profile }) => {
     profileItems = (
       <React.Fragment>
         {filteredProfiles.map((profile) => (
-          <Card key={profile._id} profile={profile} cardtype={"profile"} />
+          // <Card key={profile._id} profile={profile} cardtype={"profile"} />
+          <ProfileCard 
+            key={profile._id} 
+            id={profile._id}
+            name={profile.user.name}
+            avatar={profile.user.avatar}
+            favSneaker={profile.favsneaker}
+            bio={profile.bio}
+            socials={profile.social}
+            location={profile.location}
+            handle={profile.handle}
+          />
         ))}
       </React.Fragment>
     );
@@ -58,7 +70,6 @@ const Profiles = ({ getProfiles, profile }) => {
   return (
     <div className="profiles">
 
-      <div className="container">
         <div className="pageheading">
           <h2 className="heading-2">Profiles</h2>
           <p>Browse and connect with sneaker lovers</p>
@@ -69,7 +80,6 @@ const Profiles = ({ getProfiles, profile }) => {
         </div>
 
         <div className="profileItems">{profileItems}</div>
-      </div>
     </div>
   );
 };

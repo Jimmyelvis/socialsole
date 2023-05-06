@@ -40,5 +40,5 @@ export const GET_LIST_ITEMS = 'GET_LIST_ITEMS';
 export const GET_FRIENDS = 'GET_FRIENDS';
 export const CREATE_LIST = 'CREATE_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
-
+export const SAVE_TO_LIST = 'SAVE_TO_LIST';
 

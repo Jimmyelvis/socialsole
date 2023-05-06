@@ -10,11 +10,13 @@ import {
   GET_FRIENDS,
   CREATE_LIST,
   DELETE_LIST,
+  SAVE_TO_LIST
 } from "../actions/types";
 
 const initialState = {
   profile: null,
   profiles: [],
+  displayedProfile: {},
   loading: false,
   timeline: [],
   yourComments: [],
@@ -42,6 +44,28 @@ export default function(state = initialState, action) {
         profiles: action.payload,
         loading: false
       };
+    // case SAVE_TO_LIST:
+    //   return {
+    //     ...state,
+    //     profile: {
+    //       ...state.profile,
+    //       lists: state.profile.lists.map(list => {
+    //         if (list._id === action.payload.listId) {
+    //           return {
+    //             ...list,
+    //             items: [...list.items, action.payload.item]
+    //           };
+    //         } else {
+    //           return list;
+    //         }
+    //       })
+    //     }
+    //   };
+    case SAVE_TO_LIST:
+      return {
+        ...state,
+        profile: action.payload,
+    };
     case CREATE_LIST:
       return {
         ...state,

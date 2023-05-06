@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser, logoutUser, registerUser } from "actions/authActions";
-import { clearCurrentProfile, getCurrentProfile } from "actions/profileActions";
+import {  getCurrentProfile } from "actions/profileActions";
 import TextFieldGroup from "components/ui/Forms/TextFieldGroup";
 import Icon from "components/icons/Icon";
 import { setAlert } from "actions/alert";
@@ -87,7 +87,6 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
 
   const onLogoutClick = (e) => {
     e.preventDefault();
-    // this.props.clearCurrentProfile();
     logoutUser();
   };
 
@@ -298,4 +297,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { logoutUser, clearCurrentProfile, loginUser, registerUser, setAlert, getCurrentProfile })(withRouter(Navbar));
+export default connect(mapStateToProps, { logoutUser,  loginUser, registerUser, setAlert, getCurrentProfile })(withRouter(Navbar));

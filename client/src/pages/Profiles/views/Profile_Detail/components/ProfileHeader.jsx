@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 import isEmpty from "utils/is-empty";
+import { Panel } from "components/ui/Panel";
+import { Avatar } from "components/ui/avatar";
+import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 export const ProfileHeader = ({ profile, showAbout, showPosts, showSneakers, showFriends }) => {
 
 
   return (
-    <div className="userheader contentbody">
+    <Panel className="userheader" frosted>
+
       <div className="left">
-        <div className="imgholder">
-          <img src={profile.user.avatar} alt="" />
-        </div>
+        <Avatar avatar={profile.user.avatar} />
       </div>
 
-      <div className="right">
+      <div className="middle">
+
         <h2 className="heading-2">{profile.user.name}</h2>
 
         <p>
@@ -27,17 +30,33 @@ export const ProfileHeader = ({ profile, showAbout, showPosts, showSneakers, sho
           </p>
         )}
 
-        <div className="socialLinks">
-          <p>
-            {isEmpty(profile.website) ? null : (
-              <a href={`https://` + profile.website} target="_blank">
-                <i className="fas fa-globe fa-2x" />
-              </a>
-            )}
+      </div>
 
+      <div className="right">
+
+        <ul className="socialLinks">
+            
             {isEmpty(profile.social && profile.social.twitter) ? null : (
               <a href={`https://` + profile.social.twitter} target="_blank">
-                <i className="fab fa-twitter fa-2x" />
+
+                <FaTwitter 
+                  className="icon icon-list" 
+                  style={{ fill: `url(#blue-gradient-${profile._id})` }}
+                />
+
+              <svg width="0" height="0">
+                <linearGradient id={`blue-gradient-${profile._id}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop stopColor="#9ED7FF" offset="0%" />
+                  <stop stopColor="#3592D4" offset="100%" />
+                </linearGradient>
+              </svg>
+
+                <span className="label">
+                  @ {
+                    profile.social.twitter.split('/')[1]
+                  }
+                </span>
+
               </a>
             )}
 
@@ -58,18 +77,18 @@ export const ProfileHeader = ({ profile, showAbout, showPosts, showSneakers, sho
                 <i className="fab fa-instagram fa-2x" />
               </a>
             )}
-          </p>
-        </div>
+        </ul>
 
       </div>
 
-      <div className="profilenav">
+      {/* <div className="profilenav">
           <li onClick={showAbout}>About</li>
           <li onClick={showPosts}>Posts</li>
           <li onClick={showSneakers}>Sneakers</li>
-          {/* <li onClick={showFriends}>Friends</li> */}
-        </div>
-    </div>
+          <li onClick={showFriends}>Friends</li>
+      </div> */}
+
+    </Panel>
   );
 
   

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import Spinner from "components/common/Spinner";
 import { getPost } from "actions/postActions";
@@ -9,6 +9,11 @@ import { getParams } from "utils/getParams";
 import CommentItem from "components/features/comments/CommentItem";
 import { deleteComment  } from "actions/postActions";
 import { addComment } from "actions/postActions";
+import { CommentButton } from "components/ui/buttons/CommentButton";
+import Modal from "components/ui/Modal";
+import { useModal } from "context/modalContext";
+import CommentPanel from "components/ui/Comments/CommentPanel";
+
 
 
 /*
@@ -26,14 +31,16 @@ export const Post = ({ getPost, deleteComment, addComment, getCurrentProfile, po
   const { user } = auth;
   let postContent;
 
+  const { isModalOpen, openModal, openOverlay, isOverlayOpen, closeModal } = useModal();
+
   getParams(match.params.id, getPost, getCurrentProfile);
 
-  /* renderCommentList() is a function that maps through the comments array and returns a CommentItem component for each comment. */
+  /**  renderCommentList() is a function that maps through the comments array and returns a CommentItem component for each comment. */
 
   const renderCommentList = () => {
     const { comments } = post;
 
-    if (comments.length > 0) {
+    if (comments && comments.length > 0) {
       return comments.map((comment) => {
         return (
         <CommentItem 
@@ -47,6 +54,45 @@ export const Post = ({ getPost, deleteComment, addComment, getCurrentProfile, po
     }
   };
 
+  /*
+    This will be used to determine what component called the modal
+    this will be passed as a prop to the modal component, and the 
+    modal context 
+  */
+    const compOrigin = "CommentButton";
+
+  /**
+ * Piece of state that will be used to determine, what component
+ * that wil be rendered in the modal
+ */
+  const [modalTarget, setModalTarget] = useState(null);
+
+  /**
+   * Check what is the target state, then determine
+   * what component should be rendered in the modal.
+   */
+
+  const checkTarget = () => {
+
+    if (modalTarget === "comments modal") {
+      return (
+      <CommentPanel 
+        comments={post.comments}
+        elementId={post._id} 
+        deleteComment={deleteComment}
+        post={post}
+        addComment={addComment}
+      />
+      );
+    } 
+  
+  };
+
+  const openCommentModal = () => { 
+    setModalTarget("comments modal");
+    openModal(compOrigin);
+   }
+
 
   /** Loading State */
   if (post === null || loading || Object.keys(post).length === 0) {
@@ -59,7 +105,7 @@ export const Post = ({ getPost, deleteComment, addComment, getCurrentProfile, po
       <React.Fragment>
         <View post={post} showActions={false} />
 
-        {post.comments.length > 0 ? <div className="commentsarea contentbody">{renderCommentList()}</div> : ""}
+        {/* {post.comments.length > 0 ? <div className="commentsarea contentbody">{renderCommentList()}</div> : ""} */}
       </React.Fragment>
     );
   } 
@@ -72,7 +118,7 @@ export const Post = ({ getPost, deleteComment, addComment, getCurrentProfile, po
         <React.Fragment>
           <View post={post} showActions={false} />
 
-          {post.comments.length > 0 ? <div className="commentsarea contentbody">{renderCommentList()}</div> : ""}
+          {/* {post.comments.length > 0 ? <div className="commentsarea contentbody">{renderCommentList()}</div> : ""} */}
         </React.Fragment>
       );
     } 
@@ -83,17 +129,42 @@ export const Post = ({ getPost, deleteComment, addComment, getCurrentProfile, po
         <React.Fragment>
           <View post={post} showActions={true} />
 
-          <div className="commentsarea postcommentsarea contentbody">
+           {/* <div className="commentsarea postcommentsarea contentbody">
             <CommentForm elementId={post._id} addComment={addComment} />
             {renderCommentList()}
 
-          </div>
+          </div>  */}
         </React.Fragment>
       );
     }
   }
 
-  return <div className="container">{postContent}</div>;
+  return <div className="container">
+
+    
+    <div className="post-detail">
+      {postContent}
+      <CommentButton
+        likes={post && post.likes && post.likes.length}
+        comments={post && post.comments && post.comments.length}
+        onClick={() => openCommentModal()}
+      />
+    </div>
+
+    
+    <Modal
+        selector={"#modal"}
+        overlayColor={`
+        ${modalTarget === "search_overlay" ? "rgba(255, 255, 255, 0.95)" : "rgba(0,0,0,0.7)"}`}
+        modalTarget={modalTarget}
+        modalOrigin={compOrigin}
+        delay={2000}
+        noCloseBtn={true}
+      >
+        {checkTarget()}
+      </Modal>
+
+  </div>;
 };
 
 const mapStateToProps = (state) => ({

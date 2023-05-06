@@ -1,160 +1,89 @@
 
-/*
-//////////////////////////////      PROFILE PAGE            /////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-*/
-
 .profile {
-  margin: 60px auto;
-  overflow: hidden;
-
-  .container {
-    margin: -25rem auto 0rem auto;
-    // padding: 6rem 4rem;
-    position: relative;
-
-    @include respond(bp-small) {
-      margin: -28rem auto 5rem auto;
-    }
-
-    .userheader {
-      display: flex;
-      height: auto;
-      padding: 6rem 1rem 11rem 1rem;
-      position: relative;
-
-      @include respond(bp-large) {
-        padding: 4rem 1rem 10rem 1rem;
-      }
-
-      @include respond(bp-small) {
-        padding: 4rem 1rem 6rem 1rem;
-      }
-
-
-      .left {
-
-        @include respond(bp-medium) {
-
-          .imgholder {
-            width: 16rem;
-            padding-bottom: 16rem;
-          }
-        }
-
-        @include respond(bp-tiny) {
-
-          .imgholder {
-            width: 13rem;
-            padding-bottom: 13rem;
-          }
-        }
-      }
-
-      .right {
-
-        .heading-2 {
-          margin-bottom: 2rem;
-          font-size: 5rem;
-
-          @include respond(bp-medium) {
-            font-size: 3.9rem;
-          }
-
-          @include respond(bp-tiny) {
-            font-size: 3.6rem;
-          }
-        }
-
-        p {
-          font-weight: bold;
-          font-size: 1.7rem;
-          color: $deepblue;
-
-          @include respond(bp-medium) {
-            font-size: 1.5rem;
-          }
-
-          @include respond(bp-small) {
-            font-size: 1.7rem;
-          }
-
-          @include respond(bp-tiny) {
-            font-size: 1.5rem;
-          }
-        }
-
-        .favsneaker, .location {
-          color: $alternateblue;
-        }
-
-        .socialLinks {
-          margin: 1rem auto;
-          width: 50%;
-
-          p {
-            font-size: 1.7rem;
-            width: 100%;
-            justify-content: space-evenly;
-            display: flex;
-
-            a {
-              color: $alternateblue;
-            }
-          }
-        }
-    
-      }
-
-      .profilenav {
-        display: flex;
-        position: absolute;
-        bottom: 0rem;
-        width: 100%;
-        left: 0;
-        justify-content: space-evenly;
-        background: linear-gradient(to bottom, #AADDFF 0%, #329ee6 100%);
-        padding: 1rem 0;
-        color: #fff;
-        font-weight: bold;
-        font-size: 2.6rem;
-        font-family: $font-heading;
-        letter-spacing: 1px;
-
-        @include respond(bp-large) {
-          font-size: 2.5rem;
-          padding: 0.7rem 0;
-        }
-
-        @include respond(bp-smallest) {
-          font-size: 2.2rem;
-        }
-
-        li {
-          list-style: none;
-          cursor: pointer;
-        }
-      }
-    }
-  }
+  display: grid;
+  @include gridTempColumn();
 
   .fullimageheader {
+    grid-column: full-start / full-end;
+    height: 58rem;
+  }
 
-    img {
-      height: 100%;
+  
+  .userheader {
+    grid-column: col-start 3 / col-end 10;
+    margin-top: -12rem;
+    padding: 3rem 6rem;
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: center;
+    gap: 8rem;
+    height: auto;
+
+    .left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-
-    @include respond(bp-large) {
-      height: 44rem;
+    .middle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
-    @include respond(bp-medium) {
-      height: 40rem;
+    .right {
+
+      .socialLinks {
+        margin: 1rem auto;
+        width: 50%;
+
+        p {
+          font-size: 1.7rem;
+          width: 100%;
+          justify-content: space-evenly;
+          display: flex;
+
+          a {
+            color: $alternateblue;
+          }
+        }
+      }
+  
+    }
+
+    .profilenav {
+      display: flex;
+      position: absolute;
+      bottom: 0rem;
+      width: 100%;
+      left: 0;
+      justify-content: space-evenly;
+      background: linear-gradient(to bottom, #AADDFF 0%, #329ee6 100%);
+      padding: 1rem 0;
+      color: #fff;
+      font-weight: bold;
+      font-size: 2.6rem;
+      font-family: $font-heading;
+      letter-spacing: 1px;
+
+      @include respond(bp-large) {
+        font-size: 2.5rem;
+        padding: 0.7rem 0;
+      }
+
+      @include respond(bp-smallest) {
+        font-size: 2.2rem;
+      }
+
+      li {
+        list-style: none;
+        cursor: pointer;
+      }
     }
   }
 
+  
 }
 
 

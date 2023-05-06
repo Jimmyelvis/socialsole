@@ -1,41 +1,35 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser, logoutUser, loadUser } from './actions/authActions';
-import { clearCurrentProfile, getCurrentProfile } from './actions/profileActions';
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser, logoutUser, loadUser } from "./actions/authActions";
+import { clearCurrentProfile, getCurrentProfile } from "./actions/profileActions";
 
-import { Provider } from 'react-redux';
-import store from './store';
-import ScrollToTop from './utils/ScrollToTop'
+import { Provider } from "react-redux";
+import store from "./store";
+import ScrollToTop from "./utils/ScrollToTop";
 
-import PrivateRoute from './components/common/PrivateRoute';
-import AuthorRoute from './components/common/AuthorRoute';
+import PrivateRoute from "./components/common/PrivateRoute";
+import AuthorRoute from "./components/common/AuthorRoute";
 
-
-import Navbar from './components/ui/Layout/NavBar';
-import Footer from './components/layout/Footer';
+import Navbar from "./components/ui/Layout/NavBar";
+import Footer from "./components/layout/Footer";
 import { Home } from "pages/Home";
-import { Dashboard_Home } from 'pages/Dashboard';
+import { Dashboard_Home } from "pages/Dashboard";
 import { Allposts, Create_Post, Post_Single, Edit_Post } from "pages/Posts";
 import { AllSneakers, Add_Sneaker, Edit_Sneaker, Sneaker_Detail } from "pages/Sneakers";
-// import { AllProfiles, Create_Profile, Edit_Profile, Profile_Detail } from "pages/Profiles";
+import { AllProfiles, Create_Profile, Edit_Profile, Profile_Detail } from "pages/Profiles";
 import { All_Articles, Article_Detail, Create_Article, Edit_Article } from "pages/Articles";
-import NotFound from './components/not-found/NotFound';
-import Alert from './components/layout/Alerts'
+import NotFound from "./components/not-found/NotFound";
+import Alert from "./components/layout/Alerts";
 
 import { LatestNews, LatestSneakers, Ui_Stuff } from "pages/Test";
 
-import { SaveOptionsProvider } from 'context/saveOptions';
-import { ModalProvider } from 'context/modalContext';
-import { WindowContextProvider } from 'context/windowContext';
+import { SaveOptionsProvider } from "context/saveOptions";
+import { ModalProvider } from "context/modalContext";
+import { WindowContextProvider } from "context/windowContext";
 
-
-
-import './Styles/sass/App.scss';
-
-
-
+import "./Styles/sass/App.scss";
 
 const App = () => {
 
@@ -43,19 +37,22 @@ const App = () => {
 
     // check for token in LS when app first runs
     if (localStorage.jwtToken) {
+
       // if there is a jwtToken set axios headers for all requests
       setAuthToken(localStorage.jwtToken);
+
     }
 
     // try to fetch a user, if no jwtToken or invalid jwtToken we
     // will get a 401 response from our API
     store.dispatch(loadUser());
-    store.dispatch(getCurrentProfile())
+    // store.dispatch(getCurrentProfile());
 
     // log user out from all tabs if they log out in one tab
-    window.addEventListener('storage', () => {
+    window.addEventListener("storage", () => {
       if (!localStorage.jwtToken) store.dispatch({ type: LOGOUT });
     });
+
   }, []);
 
   return (
@@ -71,14 +68,14 @@ const App = () => {
 
                   <Route exact path="/" component={Home} />
 
-                  {/* <Route exact path="/profiles" component={AllProfiles} />
+                  <Route exact path="/profiles" component={AllProfiles} />
                   <Route exact path="/profile/:handle" component={Profile_Detail} />
                   <Switch>
                     <PrivateRoute exact path="/create-profile" component={Create_Profile} />
                   </Switch>
                   <Switch>
                     <PrivateRoute exact path="/edit-profile" component={Edit_Profile} />
-                  </Switch> */}
+                  </Switch>
 
                   <Route exact path="/allposts" component={Allposts} />
                   <Route exact path="/post/:id" component={Post_Single} />
@@ -128,8 +125,6 @@ const App = () => {
       </ModalProvider>
     </WindowContextProvider>
   );
-
- 
-}
+};
 
 export default App;

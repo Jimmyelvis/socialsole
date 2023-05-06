@@ -6,7 +6,7 @@ import useFadeIn from "hooks/useFadin";
 
 export const Trending = ({ 
   post: { posts, loading },
-
+  profile
 }) => {
   let mostLiked;
   let mostCommented;
@@ -31,7 +31,7 @@ export const Trending = ({
             .map((post) => {
               return (
                 <CardPost
-                  key={post._id}
+                  id={post._id}
                   author={post.user}
                   date={post.date}
                   headline={post.headline}
@@ -39,6 +39,8 @@ export const Trending = ({
                   likesNumber={post.likes.length}
                   commentsNumber={post.comments.length}
                   postImage={post.headerimage}
+                  useSavesList={profile && profile.lists}
+                  contentId={post._id}
                 />
               );
             })}
@@ -53,7 +55,7 @@ export const Trending = ({
             .map((post) => {
               return (
                 <CardPost
-                  key={post._id}
+                  id={post._id}
                   author={post.user}
                   date={post.date}
                   headline={post.headline}
@@ -61,6 +63,8 @@ export const Trending = ({
                   likesNumber={post.likes.length}
                   commentsNumber={post.comments.length}
                   postImage={post.headerimage}
+                  useSavesList={profile && profile.lists}
+                  contentId={post._id}
                 />
               );
             })}

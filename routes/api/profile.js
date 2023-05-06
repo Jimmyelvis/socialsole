@@ -911,7 +911,10 @@ router.post('/addtolist', (req, res) => {
         // save the updated profile
         return profile.save()
           .then(() => {
-            res.json({ message: 'Item already exists in the list and has been updated.' });
+            res.json({ 
+              message: 'Item already exists in the list and has been updated.',
+              profile: profile 
+            });
           })
           .catch(err => {
             console.error(err);
@@ -930,7 +933,10 @@ router.post('/addtolist', (req, res) => {
       // save the updated profile
       return profile.save()
         .then(() => {
-          res.json({ message: 'Item added to the list.' });
+          res.json({ 
+            message: 'Item added to the list.',
+            profile: profile
+          });
         })
         .catch(err => {
           console.error(err);

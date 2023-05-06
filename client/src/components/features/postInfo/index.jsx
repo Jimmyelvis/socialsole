@@ -6,7 +6,7 @@ export const PostInfo = ({  element, showActions, addLike, removeLike, auth }) =
 
 
   const findUserLike = (likes) => {
-    if (likes.filter((like) => like.user === auth.user.id).length > 0) {
+    if (likes.filter((like) => like.user === auth.user._id).length > 0) {
       return true;
     } else {
       return false;
@@ -18,7 +18,13 @@ export const PostInfo = ({  element, showActions, addLike, removeLike, auth }) =
     return (
       <React.Fragment>
         <div className="likes" onClick={() => addLike(element._id)}>
-          {findUserLike(element.likes) ? <Icon color="#AADDFF" icon="thumbsup" className="thumbs" /> : <Icon color="#5D789F" icon="thumbsup" className="thumbs" />}
+
+          {
+            findUserLike(element.likes) ? 
+            <Icon icon="thumbsup" className="thumbs thumb-liked" /> : 
+            <Icon icon="thumbsup" className="thumbs thumb-not-liked" />
+          }
+
 
           <h3 className="heading-3">{element.likes.length}</h3>
         </div>
@@ -29,7 +35,7 @@ export const PostInfo = ({  element, showActions, addLike, removeLike, auth }) =
 
         <div className="commentsnumber">
           <div className="commenticon">
-            <Icon color="#AADDFF" icon="bubbles2" className="bubbles" />
+            <Icon  icon="bubbles2" className="bubbles" />
           </div>
 
           <h3 className="heading-3">{element.comments.length}</h3>
@@ -43,14 +49,14 @@ export const PostInfo = ({  element, showActions, addLike, removeLike, auth }) =
     return (
       <React.Fragment>
         <div className="likes">
-          <Icon color="#5D789F" icon="thumbsup" className="thumbs" />
+          <Icon  icon="thumbsup" className="thumbs" />
 
           <h3 className="heading-3">{element.likes.length}</h3>
         </div>
 
         <div className="commentsnumber">
           <div className="commenticon">
-            <Icon color="#AADDFF" icon="bubbles2" className="bubbles" />
+            <Icon  icon="bubbles2" className="bubbles" />
           </div>
 
           <h3 className="heading-3">{element.comments.length}</h3>

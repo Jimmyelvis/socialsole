@@ -20,9 +20,11 @@ const SaveOptionsProvider = ({ children }) => {
 
 
     setActiveItem(e);
+
     setpostOptionsMenuClasses("default-list-menu default-list-menu-open");
     setInnerMenu("default-menu");
   };
+
 
   return (
     <SaveOptionsContext.Provider

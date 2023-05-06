@@ -8,6 +8,10 @@ import moment from "moment";
 import Icon from "components/icons/Icon";
 import { PostInfo } from "components/features/postInfo";
 import { Tags } from "components/features/tags";
+import { Panel } from "components/ui/Panel";
+import { Avatar } from "components/ui/avatar";
+import parse from 'html-react-parser';
+
 
 
 
@@ -46,136 +50,125 @@ const SneakerItem = ({ sneaker, showActions, auth, deleteSneaker, addLike, remov
 
   return (
     <React.Fragment>
-      <div className="sneakerdetail">
-        <div className="fullimageheader">
-          <img src={sneaker.mainimage} alt="" />
-          <div className="overlay"></div>
 
-          <div className="heading">
-            <h1 className="heading-1">{sneaker.model}</h1>
-            <h2 className="heading-2">{sneaker.colorway}</h2>
-            <h3 className="heading-3">{sneaker.year}</h3>
+      <div className="fullimageheader">
+        <img src={sneaker.mainimage} alt="" />
+      </div>
 
-            <div className="btn btn-lightblue">Read More</div>
-          </div>
+      <Panel className="userheader" frosted>
+
+        <div className="left">
+            <Avatar avatar={sneaker.user.avatar} />
+          
         </div>
 
-        <div className="container">
-          <div className="sneakerinfo contentbody">
-            <div className="infoicon">
-              <Icon color="#AADDFF" icon="info" />
-            </div>
+        <div className="middle">
+          <h2 className="heading-2 sneaker-model">{sneaker.model}</h2>
+          <h3 className="heading-3 sneaker-colorway">{sneaker.colorway}</h3>
+          <h4 className="heading-4 sneaker-year">{sneaker.year}</h4>
+        </div>
 
-            <div id="theText" className="sneakertext" dangerouslySetInnerHTML={{ __html: sneaker.text }}></div>
+        <div className="right">
+          <h2 className="heading-2 created-by">Created By</h2>
+          <h3 className="heading-3 user-name">{sneaker.user.name}</h3>
+          <h4 className="heading-4 posted-date">Posted {moment(sneaker.date).fromNow()}</h4>
 
-            <div className="actions">
-              {/*
-                    If the showactions prop that is passed in equals true
-                    this will be rendered in view
-                  */}
+          <div className="sneakeredit">{isAuthenticated && user.id === sneaker.user._id ? editbtn : ""}</div>
+        </div>
+      </Panel>
 
-              <PostInfo 
-                element={sneaker}
-                showActions={showActions}
-                auth={auth}
-                addLike={addLike}
-                removeLike={removeLike}
-              />
-            </div>
-            
-            <Tags element={sneaker} />
+      <div className="pictures">
+        {sneaker.subimage_1 ? (
+          <div className="imgholder">
+            <a data-fancybox="gallery" href={sneaker.subimage_1}>
+              <img src={sneaker.subimage_1} alt="" />
+            </a>
           </div>
+        ) : (
+          ""
+        )}
 
-          <div className="pictures">
-            {sneaker.subimage_1 ? (
-              <div className="imgholder">
-                <a data-fancybox="gallery" href={sneaker.subimage_1}>
-                  <img src={sneaker.subimage_1} alt="" />
-                </a>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {sneaker.subimage_2 ? (
-              <div className="imgholder">
-                <a data-fancybox="gallery" href={sneaker.subimage_2}>
-                  <img src={sneaker.subimage_2} alt="" />
-                </a>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {sneaker.subimage_3 ? (
-              <div className="imgholder">
-                <a data-fancybox="gallery" href={sneaker.subimage_3}>
-                  <img src={sneaker.subimage_3} alt="" />
-                </a>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {sneaker.subimage_4 ? (
-              <div className="imgholder">
-                <a data-fancybox="gallery" href={sneaker.subimage_4}>
-                  <img src={sneaker.subimage_4} alt="" />
-                </a>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {sneaker.subimage_5 ? (
-              <div className="imgholder">
-                <a data-fancybox="gallery" href={sneaker.subimage_5}>
-                  <img src={sneaker.subimage_5} alt="" />
-                </a>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {sneaker.subimage_6 ? (
-              <div className="imgholder">
-                <a data-fancybox="gallery" href={sneaker.subimage_6}>
-                  <img src={sneaker.subimage_6} alt="" />
-                </a>
-              </div>
-            ) : (
-              ""
-            )}
+        {sneaker.subimage_2 ? (
+          <div className="imgholder">
+            <a data-fancybox="gallery" href={sneaker.subimage_2}>
+              <img src={sneaker.subimage_2} alt="" />
+            </a>
           </div>
+        ) : (
+          ""
+        )}
 
-          <div className="userheader contentbody">
-            <div className="left">
-              <div className="imgholder">
-                <img src={sneaker.user.avatar} alt="" />
-              </div>
-            </div>
-
-            <div className="right">
-              <h4 className="heading-4">Created By</h4>
-              <h3 className="heading-3">{sneaker.user.name}</h3>
-              <h5 className="heading-5">Posted {moment(sneaker.date).fromNow()}</h5>
-
-              <div className="sneakeredit">{isAuthenticated && user.id === sneaker.user._id ? editbtn : ""}</div>
-            </div>
+        {sneaker.subimage_3 ? (
+          <div className="imgholder">
+            <a data-fancybox="gallery" href={sneaker.subimage_3}>
+              <img src={sneaker.subimage_3} alt="" />
+            </a>
           </div>
+        ) : (
+          ""
+        )}
 
-          {/* 
+        {sneaker.subimage_4 ? (
+          <div className="imgholder">
+            <a data-fancybox="gallery" href={sneaker.subimage_4}>
+              <img src={sneaker.subimage_4} alt="" />
+            </a>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {sneaker.subimage_5 ? (
+          <div className="imgholder">
+            <a data-fancybox="gallery" href={sneaker.subimage_5}>
+              <img src={sneaker.subimage_5} alt="" />
+            </a>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {sneaker.subimage_6 ? (
+          <div className="imgholder">
+            <a data-fancybox="gallery" href={sneaker.subimage_6}>
+              <img src={sneaker.subimage_6} alt="" />
+            </a>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+
+
+      <Panel className="sneakerinfo">
+        <div className="infoicon">
+          <Icon color="#AADDFF" icon="info" />
+        </div>
+
+        <div id="theText" 
+          className="sneakertext" 
+        >
+          {parse(sneaker.text)}
+        </div>
+
+          <PostInfo element={sneaker} showActions={showActions} auth={auth} addLike={addLike} removeLike={removeLike} />
+       
+        <Tags element={sneaker} />
+      </Panel>
+
+
+
+      {/* 
             Sub component for displaying links to sneakers that are related to the
             currently loaded posts. The related posts are determined by the tags prop
             which is used to query the database for posts that has any of the matching
             tags.
           */}
 
-          <div className="related contentbody">
-            <Related tags={sneaker.tags} sneakerId={sneaker} />
-          </div>
-        </div>
-      </div>
+      <Panel className="related">
+        <Related tags={sneaker.tags} sneakerId={sneaker} />
+      </Panel>
+
     </React.Fragment>
   );
 };

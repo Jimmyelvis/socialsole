@@ -8,8 +8,10 @@ export const Tags = ({ element }) => {
 
   return (
     <div className="tags">
-      <Icon color="#AADDFF" icon="price-tags" className="tagicon" />
-      <ul> {tags} </ul>
+      <ul> 
+      <Icon icon="price-tags" className="tagicon" />
+        {tags} 
+      </ul>
     </div>
   );
 }

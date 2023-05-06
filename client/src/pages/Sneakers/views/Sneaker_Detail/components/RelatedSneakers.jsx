@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { getRelatedSneakers } from "actions/sneakerActions";
 import { Link } from "react-router-dom";
+import { CardPicOverlay } from 'components/ui/cards/CardPicOverlay';
 
 export const RelatedSneakers = ({ sneakerId, getRelatedSneakers, tags, sneaker: { sneakers } }) => {
 
@@ -24,23 +25,23 @@ return (
     
   <React.Fragment>
 
-    <h3 className="heading-3">Related Sneakers</h3>
+    <h3 className="heading-3">You May Also Like</h3>
 
     <ul>
       {related.map((sneaker) => {
         return (
-          <Link to={`/sneaker/${sneaker._id}`}>
-            <div className="card-ver-trad" key={sneaker._id}>
-              <div className="top">
-                <img src={sneaker.mainimage} alt="" />
-              </div>
+          <CardPicOverlay
+            key={sneaker._id}
+            imgBg={sneaker.mainimage}
+            contentId={sneaker._id}
+          >
+            <Link to={`/sneaker/${sneaker._id}`}>
 
-              <div className="bottom">
-                <h3 className="heading-3">{sneaker.model}</h3>
-                <h4 className="heading-4">{sneaker.colorway}</h4>
-              </div>
-            </div>
-          </Link>
+                  <h3 className="heading-3">{sneaker.model}</h3>
+                  <h4 className="heading-4">{sneaker.colorway}</h4>
+                
+            </Link>
+          </CardPicOverlay>
         );
       })}
     </ul>

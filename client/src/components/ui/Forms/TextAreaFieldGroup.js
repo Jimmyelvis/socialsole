@@ -13,6 +13,7 @@ const TextAreaFieldGroup = ({
   error,
   info,
   onChange,
+  rows
 }) => {
   return (
     <div className="form-group">
@@ -24,6 +25,7 @@ const TextAreaFieldGroup = ({
         name={name}
         value={value}
         onChange={onChange}
+        rows={rows}
       />
       {info && <small className="form-text text-muted">{info}</small>}
       {error && <div className="invalid-feedback">{error}</div>}
@@ -40,6 +42,11 @@ TextAreaFieldGroup.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
+// defualt props
+TextAreaFieldGroup.defaultProps = {
+  type: "text",
+  rows: "8"
+};
 
 
 export default TextAreaFieldGroup;

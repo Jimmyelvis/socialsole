@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import Spinner from "components/common/Spinner";
 import { getSneaker } from 'actions/sneakerActions';
@@ -8,6 +8,10 @@ import CommentForm from "components/features/comments/CommentForm";
 import { getParams } from "utils/getParams";
 import CommentItem from "components/features/comments/CommentItem";
 import { deleteComment, addComment } from "actions/sneakerActions";
+import { CommentButton } from 'components/ui/buttons/CommentButton';
+import Modal from "components/ui/Modal";
+import { useModal } from "context/modalContext";
+import CommentPanel from "components/ui/Comments/CommentPanel";
 
 
 export const Sneaker = ({ getSneaker, getCurrentProfile, deleteComment, addComment, sneaker: { sneaker, loading }, match, auth, profile: { profile } }) => {
@@ -16,6 +20,47 @@ export const Sneaker = ({ getSneaker, getCurrentProfile, deleteComment, addComme
   let sneakerContent;
 
   getParams(match.params.id, getSneaker, getCurrentProfile);
+
+  const { isModalOpen, openModal, openOverlay, isOverlayOpen, closeModal } = useModal();
+
+    /*
+    This will be used to determine what component called the modal
+    this will be passed as a prop to the modal component, and the 
+    modal context 
+  */
+    const compOrigin = "CommentButton";
+
+  /**
+ * Piece of state that will be used to determine, what component
+ * that wil be rendered in the modal
+ */
+  const [modalTarget, setModalTarget] = useState(null);
+
+  /**
+   * Check what is the target state, then determine
+   * what component should be rendered in the modal.
+   */
+
+  const checkTarget = () => {
+
+    if (modalTarget === "comments modal") {
+      return (
+      <CommentPanel 
+        comments={sneaker.comments}
+        elementId={sneaker._id} 
+        deleteComment={deleteComment}
+        addComment={addComment}
+      />
+      );
+    } 
+  
+  };
+
+  const openCommentModal = () => { 
+    setModalTarget("comments modal");
+    openModal(compOrigin);
+   }
+
 
   /* renderCommentList() is a function that maps through the comments array and returns a CommentItem component for each comment. */
 
@@ -37,13 +82,13 @@ export const Sneaker = ({ getSneaker, getCurrentProfile, deleteComment, addComme
   /** If the user is not logged in, then they can only view the post, but not comment on it. */
   else if (user === null || Object.keys(user).length === 0) {
     sneakerContent = (
-      <div>
+      <React.Fragment>
         <View sneaker={sneaker} showActions={false} />
-
+{/* 
           {sneaker.comments.length > 0 ? <div className="commentsarea contentbody">
-          {renderCommentList()}</div> : ""}
+          {renderCommentList()}</div> : ""} */}
        
-      </div>
+      </React.Fragment>
     );
   } 
   
@@ -55,8 +100,8 @@ export const Sneaker = ({ getSneaker, getCurrentProfile, deleteComment, addComme
         <React.Fragment>
           <View sneaker={sneaker} showActions={true} />
 
-        {sneaker.comments.length > 0 ? <div className="commentsarea contentbody">
-          {renderCommentList()}</div> : ""}
+        {/* {sneaker.comments.length > 0 ? <div className="commentsarea contentbody">
+          {renderCommentList()}</div> : ""} */}
       </React.Fragment>
       );
     } 
@@ -67,18 +112,43 @@ export const Sneaker = ({ getSneaker, getCurrentProfile, deleteComment, addComme
           <View sneaker={sneaker} showActions={true} />
 
           <div className="container">
-            <div className="commentsarea postView contentbody">
+
+            {/* <div className="commentsarea postView contentbody">
               <CommentForm elementId={sneaker._id} addComment={addComment} />
               {renderCommentList()}
 
-            </div>
+            </div> */}
+
           </div>
         </React.Fragment>
       );
     }
   }
 
-  return <React.Fragment>{sneakerContent}</React.Fragment>;
+  return(
+    <div className="sneakerdetail">
+      {sneakerContent}
+
+      <CommentButton
+        likes={sneaker && sneaker.likes && sneaker.likes.length}
+        comments={sneaker && sneaker.comments && sneaker.comments.length}
+        onClick={() => openCommentModal()}
+      />
+
+      <Modal
+        selector={"#modal"}
+        overlayColor={`
+        ${modalTarget === "search_overlay" ? "rgba(255, 255, 255, 0.95)" : "rgba(0,0,0,0.7)"}`}
+        modalTarget={modalTarget}
+        modalOrigin={compOrigin}
+        delay={2000}
+        noCloseBtn={true}
+      >
+        {checkTarget()}
+      </Modal>
+
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => ({

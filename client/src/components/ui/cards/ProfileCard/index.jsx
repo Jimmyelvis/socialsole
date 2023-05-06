@@ -3,8 +3,11 @@ import { Button } from "components/ui/buttons";
 import { Panel } from "components/ui/Panel";
 import isEmpty from "utils/is-empty";
 import { BsFacebook, BsInstagram, BsTwitter, BsYoutube } from "react-icons/bs";
+import { TiSocialYoutubeCircular } from "react-icons/ti";
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { AiFillInstagram } from "react-icons/ai";
+import parse from 'html-react-parser';
+import { Link } from "react-router-dom";
 
 
 export const ProfileCard = ({
@@ -15,6 +18,7 @@ export const ProfileCard = ({
   location,
   bio,
   socials,
+  handle
 }) => {
 
 
@@ -89,15 +93,19 @@ export const ProfileCard = ({
       <div className="right">
         <h2 className="heading-2 name">{name}</h2>
         <h3 className="heading-3 fav-sneaker">
-          Favorite Sneaker
+          Favorite Sneaker:
           <span className="sneaker">{favSneaker}</span>
         </h3>
         <h3 className="heading-3 location">{location}</h3>
-        <div className="bio">{bio}</div>
+        <div className="bio">
+          { bio && parse(bio)}
+        </div>
       </div>
 
+      <Link to={`/profile/${handle}`} className="view-profile">
+        <Button primary rounded>View Profile</Button>
+      </Link>
 
-      <Button primary rounded>View</Button>
     </Panel>
   );
 }

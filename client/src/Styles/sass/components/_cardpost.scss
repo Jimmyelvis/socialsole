@@ -69,9 +69,14 @@
       border-top: 2px solid rgb(255 255 255 / 59%);
       backdrop-filter: blur(6px);
 
+      @include respond(bp-largest) {
+        padding: 1.2rem;
+      }
+
       .heading-3 {
         font-size: 2.4rem;
         color: $white;
+        @include lineClamp(1);
 
         a {
           color: inherit;
@@ -96,6 +101,10 @@
     flex: 1;
     padding: 4rem;
     position: relative;
+
+    @include respond(bp-largest) {
+      padding: 2.5rem;
+    }
 
     .excerpt {
       @include lineClamp(3);

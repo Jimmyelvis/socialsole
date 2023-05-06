@@ -4,7 +4,7 @@
   right: 6rem;
   display: flex;
   width: 23rem;
-  justify-content: space-between;
+  gap: 1.2rem;
 
   .heading-3 {
     font-size: 3rem;
@@ -17,6 +17,18 @@
 
   .likes, .unlikes {
     cursor: pointer;
+  }
+
+  .bubbles {
+    fill: $alternateblue;
+  }
+
+  .thumb-liked {
+    fill: $alternateblue;
+  }
+
+  .thumb-not-liked {
+    fill: $slateblue;
   }
 
   .likes {
@@ -35,8 +47,9 @@
 
   .commentsnumber {
     display: flex;
+    flex: 0 0 30%;
     justify-content: space-around;
-    flex: 0 0 22%;
+    align-items: center;
 
     .commenticon {
       width: 40%;

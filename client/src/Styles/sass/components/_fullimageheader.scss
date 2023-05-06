@@ -1,9 +1,15 @@
 .fullimageheader {
-  height: 60rem;
+  height: 53rem;
   overflow: hidden;
+  display: flex;
+  position: relative;
 
   img {
     object-fit: cover;
     object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
   }
 }

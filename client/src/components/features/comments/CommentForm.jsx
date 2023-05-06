@@ -38,7 +38,7 @@ const CommentForm = ({ addComment, auth, profile: { profile }, elementId, setAle
     <React.Fragment>
       <div className="commentsheader">Submit a comment...</div>
       <form className="commentForm" onSubmit={onSubmit}>
-          <TextAreaFieldGroup placeholder="Reply to  post" name="text" value={text} onChange={onChange} />
+          <TextAreaFieldGroup placeholder="Reply to  post" name="text" value={text} onChange={onChange} rows="12" />
         <Button
           primary
         >
