@@ -3,7 +3,9 @@ import {
   GET_ARTICLES,
   ADD_ARTICLE,
   ARTICLE_LOADING,
-  ADD_COMMENT
+  ADD_COMMENT,
+  LIKE_ARTICLE,
+  UNLIKE_ARTICLE,
 } from "../actions/types";
 
 const initialState = {
@@ -43,6 +45,18 @@ export default function (state = initialState, action) {
         article: action.payload,
         loading: false,
     };
+    case LIKE_ARTICLE:
+      return {
+        ...state,
+        article: action.payload,
+        loading: false
+    }
+    case UNLIKE_ARTICLE:
+      return {
+        ...state,
+        article: action.payload,
+        loading: false
+    }
     default:
       return state;
   }

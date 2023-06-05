@@ -5,7 +5,7 @@ import isEmpty from "utils/is-empty";
 export const ProfileAbout = ({ profile }) => {
 
   // Get first name
-  const firstName = profile.user.name.trim().split(" ")[0];
+  const firstName = profile.user?.name.trim().split(" ")[0];
 
   return (
     <div className="profileAbout contentbody">

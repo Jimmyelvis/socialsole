@@ -8,6 +8,19 @@
     font-size: 5.4rem;
   }
 
+  .create-edit-form {
+    display: grid;
+    @include gridTempColumn;
+    width: 104rem;
+    margin: 0 auto;
+    padding: 6rem;
+
+    form {
+      grid-column: col-start 1 / col-end 12;
+    }
+    
+  }
+
   .heading-4 {
     text-align: center;
     margin-bottom: 4rem;

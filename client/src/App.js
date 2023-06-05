@@ -19,7 +19,7 @@ import { Dashboard_Home } from "pages/Dashboard";
 import { Allposts, Create_Post, Post_Single, Edit_Post } from "pages/Posts";
 import { AllSneakers, Add_Sneaker, Edit_Sneaker, Sneaker_Detail } from "pages/Sneakers";
 import { AllProfiles, Create_Profile, Edit_Profile, Profile_Detail } from "pages/Profiles";
-import { All_Articles, Article_Detail, Create_Article, Edit_Article } from "pages/Articles";
+import { All_Articles, Article_Detail, Create_Article, Edit_Article, ArticlesHome } from "pages/Articles";
 import NotFound from "./components/not-found/NotFound";
 import Alert from "./components/layout/Alerts";
 
@@ -46,7 +46,7 @@ const App = () => {
     // try to fetch a user, if no jwtToken or invalid jwtToken we
     // will get a 401 response from our API
     store.dispatch(loadUser());
-    // store.dispatch(getCurrentProfile());
+    store.dispatch(getCurrentProfile());
 
     // log user out from all tabs if they log out in one tab
     window.addEventListener("storage", () => {
@@ -54,6 +54,27 @@ const App = () => {
     });
 
   }, []);
+
+  // Check for token
+// if (localStorage.jwtToken) {
+//   // Set auth token header auth
+//   setAuthToken(localStorage.jwtToken);
+//   // Decode token and get user info and exp
+//   const decoded = jwt_decode(localStorage.jwtToken);
+//   // Set user and isAuthenticated
+//   store.dispatch(setCurrentUser(decoded));
+
+//   // Check for expired token
+//   const currentTime = Date.now() / 1000;
+//   if (decoded.exp < currentTime) {
+//     // Logout user
+//     store.dispatch(logoutUser());
+//     // Clear current Profile
+//     store.dispatch(clearCurrentProfile());
+//     // Redirect to home
+//     window.location.href = '/';
+//   }
+// }
 
   return (
     <WindowContextProvider>
@@ -85,6 +106,7 @@ const App = () => {
                   <Route exact path="/sneaker/:id" component={Sneaker_Detail} />
                   <Route exact path="/editsneaker/:id" component={Edit_Sneaker} />
 
+                  <Route exact path="/articles" component={ArticlesHome} />
                   <Route exact path="/allarticles/" component={All_Articles} />
                   <Route exact path="/article/:id" component={Article_Detail} />
 

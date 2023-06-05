@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getRelatedArticles } from "actions/articleActions";
 import { Link } from "react-router-dom";
+import { CardPicOverlay } from "components/ui/cards/CardPicOverlay";
 
 const RelatedArticles = ({ articleId, getRelatedArticles, tags, article: { articles } }) => {
 
@@ -23,22 +24,20 @@ const RelatedArticles = ({ articleId, getRelatedArticles, tags, article: { artic
 
   return (
     <React.Fragment>
-      <h3 className="heading-3">Related Articles</h3>
+      <h3 className="heading-3">You may also like</h3>
 
       <ul>
         {related.map((article) => {
           return (
-            <Link to={`/article/${article._id}`}>
-              <div className="card-ver-trad" key={article._id}>
-                <div className="top">
-                  <img src={article.fullheaderimage} alt="" />
-                </div>
+            <CardPicOverlay imgBg={article.fullheaderimage}>
 
-                <div className="bottom">
-                  <h3 className="heading-3">{article.headline}</h3>
+              <Link to={`/article/${article._id}`}>
+                <div className="related-card" key={article._id}>
+                    <h3 className="heading-3">{article.headline}</h3>
                 </div>
-              </div>
-            </Link>
+              </Link>
+
+            </CardPicOverlay>
           );
         })}
       </ul>

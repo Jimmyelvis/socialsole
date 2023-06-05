@@ -129,19 +129,23 @@ export const editPost = (id, postData, history) => dispatch => {
   using the user id 
 */
 export const getPostsByUser = (id) => dispatch => {
+
   axios
     .get(`/api/posts/user/${id}`)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: GET_POSTS,
         payload: res.data
       })
+    }
      )
-     .catch(err =>
+     .catch(err => {
       dispatch({
         type: GET_POSTS,
         payload: null
       })
+     }
+    
     );
 
 }

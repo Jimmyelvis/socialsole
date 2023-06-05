@@ -31,14 +31,157 @@ router.get("/", (req, res) => {
 // @route   GET api/articles/:id
 // @desc    Get article by id
 // @access  Public
+// router.get("/:id", (req, res) => {
+//   Article.findById(req.params.id)
+//     .populate('user', ['name', 'avatar', 'email'])
+//     .then(article => res.json(article))
+//     .catch(err =>
+//       res.status(404).json({ nopostsfound: "No article found with that ID" })
+//     );
+// });
+
+// @route   GET api/articles/:id
+// @desc    Get article by id
+// @access  Public
 router.get("/:id", (req, res) => {
   Article.findById(req.params.id)
     .populate('user', ['name', 'avatar', 'email'])
-    .then(article => res.json(article))
-    .catch(err =>
-      res.status(404).json({ nopostsfound: "No article found with that ID" })
-    );
+    .then(article => {
+      if (!article) {
+        return res.status(404).json({ nopostsfound: "No article found with that ID" });
+      }
+
+      Profile.findOne({ user: article.user._id })
+        .select('social bio location') 
+        .then(profile => {
+          if (!profile) {
+            // Profile not found
+            return res.status(404).json({ noprofilefound: "No profile found for the associated user" });
+          }
+
+          article = article.toObject(); // Convert the article to a plain JavaScript object
+          article.user.profile = profile; // Add the profile to the user object
+
+          res.json(article);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).json({ error: "Internal server error" });
+        });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: "Internal server error" });
+    });
 });
+
+// @route   POST api/posts/like/:id
+// @desc    Like post
+// @access  Private
+
+router.post(
+  "/like/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Article.findById(req.params.id)
+        .populate('user', ['name', 'avatar', "email"])
+        .then(article => {
+          if (
+            article.likes.filter(like => like.user.toString() === req.user.id)
+              .length > 0
+          ) {
+            return res
+              .status(400)
+              .json({ alreadyliked: "You already liked this article" });
+          }
+
+
+          // Add user id to likes array
+          article.likes.unshift({ 
+            user: req.user.id
+           });
+          article.save().then(article => {
+            Profile.findOne({ user: article.user._id })
+            .select('social bio location') 
+            .then(profile => {
+              if (!profile) {
+                // Profile not found
+                return res.status(404).json({ noprofilefound: "No profile found for the associated user" });
+              }
+    
+              article = article.toObject(); // Convert the article to a plain JavaScript object
+              article.user.profile = profile; // Add the profile to the user object
+    
+              res.json(article);
+            })
+            .catch(err => {
+              console.error(err);
+              res.status(500).json({ error: "Internal server error" });
+            });
+          });
+        })
+        .catch(err => res.status(404).json({ postnotfound: "No article found" }));
+    });
+  }
+);
+
+// @route   POST api/posts/unlike/:id
+// @desc    UNLike post
+// @access  Private
+
+router.post(
+  "/unlike/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Article.findById(req.params.id)
+        .populate('user', ['name', 'avatar', 'email'])
+        .then(article => {
+          if (
+            article.likes.filter(like => like.user.toString() === req.user.id)
+              .length === 0
+          ) {
+            return res
+              .status(400)
+              .json({ notliked: "You have not yet liked this article" });
+          }
+
+          // Get remove index
+          const removeIndex = article.likes
+            .map(item => item.user.toString())
+            .indexOf(req.user.id);
+
+          // Splice out of array
+          article.likes.splice(removeIndex, 1);
+
+          // Save
+          article.save().then(article => {
+            Profile.findOne({ user: article.user._id })
+            .select('social bio location') 
+            .then(profile => {
+              if (!profile) {
+                // Profile not found
+                return res.status(404).json({ noprofilefound: "No profile found for the associated user" });
+              }
+    
+              article = article.toObject(); // Convert the article to a plain JavaScript object
+              article.user.profile = profile; // Add the profile to the user object
+    
+              res.json(article);
+            })
+            .catch(err => {
+              console.error(err);
+              res.status(500).json({ error: "Internal server error" });
+            });
+          });
+        })
+        .catch(err => res.status(404).json({ postnotfound: "No article found" }));
+    });
+  }
+);
+
+
 
 // @route   GET api/posts/:id/:tags
 // @desc    Get related articles by id and tags
@@ -101,12 +244,71 @@ router.post(
       user: req.user.id,
       text: req.body.text,
       headline: req.body.headline,
+      subheadline: req.body.subheadline,
       fullheaderimage: req.body.fullheaderimage,
       articleheaderimage: req.body.articleheaderimage,
-      tags: tags
+      tags: tags,
+      newstype: req.body.newstype,
     });
 
     newArticle.save().then(article => res.json(article));
+
+
+  }
+);
+
+// @route   POST api/articles
+// @desc    Create new release article 
+// @access  Private
+router.post(
+  "/newrelease",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validatePostInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+      // If any errors, send 400 with errors object
+      return res.status(400).json(errors);
+    }
+
+    var tags;
+    var sizes;
+    var colorway
+
+    // Tags - Spilt into array
+    if (typeof req.body.tags !== "undefined") {
+      tags = req.body.tags.split(",");
+    }
+
+    // sizeRun - Spilt into array
+    if (typeof req.body.sizeRun !== "undefined") {
+      sizes = req.body.sizeRun.split(",");
+    }
+
+    // color - Spilt into array
+    if (typeof req.body.color !== "undefined") {
+      colorway = req.body.color.split(",");
+    }
+
+
+
+    const newArticle = new Article({
+      user: req.user.id,
+      text: req.body.text,
+      headline: req.body.headline,
+      fullheaderimage: req.body.fullheaderimage,
+      articleheaderimage: req.body.articleheaderimage,
+      price: req.body.price,
+      releaseDate: req.body.releaseDate,
+      color: colorway,
+      sizeRun: sizes,
+      tags: tags,
+      newstype: req.body.newstype,
+    });
+
+    newArticle.save().then(article => res.json(article));
+
 
   }
 );

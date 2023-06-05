@@ -8,3 +8,8 @@ export const getTimefromNow = (date) => {
   
   return newTime
 }
+
+export const getFormattedDate = (date) => {
+  const newDate = dayjs(date).format('MMMM D, YYYY')
+  return newDate
+}

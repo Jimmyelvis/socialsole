@@ -7,12 +7,8 @@ import { View } from "./components/view";
 import CommentForm from "components/features/comments/CommentForm";
 import { getParams } from "utils/getParams";
 import CommentItem from "components/features/comments/CommentItem";
-import { deleteComment  } from "actions/postActions";
-import { addComment } from "actions/postActions";
-import { CommentButton } from "components/ui/buttons/CommentButton";
-import Modal from "components/ui/Modal";
-import { useModal } from "context/modalContext";
-import CommentPanel from "components/ui/Comments/CommentPanel";
+
+
 
 
 
@@ -25,13 +21,13 @@ import CommentPanel from "components/ui/Comments/CommentPanel";
 
 */
 
-export const Post = ({ getPost, deleteComment, addComment, getCurrentProfile, post: { post, loading }, auth, profile: { profile }, match }) => {
+export const Post = ({ getPost,  getCurrentProfile, post: { post, loading }, auth, profile: { profile }, match }) => {
 
   /*Variables */
   const { user } = auth;
   let postContent;
 
-  const { isModalOpen, openModal, openOverlay, isOverlayOpen, closeModal } = useModal();
+  
 
   getParams(match.params.id, getPost, getCurrentProfile);
 
@@ -54,44 +50,9 @@ export const Post = ({ getPost, deleteComment, addComment, getCurrentProfile, po
     }
   };
 
-  /*
-    This will be used to determine what component called the modal
-    this will be passed as a prop to the modal component, and the 
-    modal context 
-  */
-    const compOrigin = "CommentButton";
+ 
 
-  /**
- * Piece of state that will be used to determine, what component
- * that wil be rendered in the modal
- */
-  const [modalTarget, setModalTarget] = useState(null);
 
-  /**
-   * Check what is the target state, then determine
-   * what component should be rendered in the modal.
-   */
-
-  const checkTarget = () => {
-
-    if (modalTarget === "comments modal") {
-      return (
-      <CommentPanel 
-        comments={post.comments}
-        elementId={post._id} 
-        deleteComment={deleteComment}
-        post={post}
-        addComment={addComment}
-      />
-      );
-    } 
-  
-  };
-
-  const openCommentModal = () => { 
-    setModalTarget("comments modal");
-    openModal(compOrigin);
-   }
 
 
   /** Loading State */
@@ -140,29 +101,11 @@ export const Post = ({ getPost, deleteComment, addComment, getCurrentProfile, po
   }
 
   return <div className="container">
-
     
     <div className="post-detail">
       {postContent}
-      <CommentButton
-        likes={post && post.likes && post.likes.length}
-        comments={post && post.comments && post.comments.length}
-        onClick={() => openCommentModal()}
-      />
+     
     </div>
-
-    
-    <Modal
-        selector={"#modal"}
-        overlayColor={`
-        ${modalTarget === "search_overlay" ? "rgba(255, 255, 255, 0.95)" : "rgba(0,0,0,0.7)"}`}
-        modalTarget={modalTarget}
-        modalOrigin={compOrigin}
-        delay={2000}
-        noCloseBtn={true}
-      >
-        {checkTarget()}
-      </Modal>
 
   </div>;
 };
@@ -173,4 +116,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export const Post_Single = connect(mapStateToProps, { getPost, getCurrentProfile, deleteComment, addComment })(Post);
+export const Post_Single = connect(mapStateToProps, { getPost, getCurrentProfile })(Post);

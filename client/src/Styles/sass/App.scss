@@ -11,6 +11,7 @@
 @import './components/_authorHeader.scss';
 @import './components/_alerts.scss';
 @import "./components/_avatar";
+@import "./components/_bookmark-modal-panel.scss";
 @import './components/_buttons.scss';
 @import './components/_cards.scss';
 @import './components/_card-label.scss';
@@ -56,6 +57,7 @@
 @import './layout/_menu.scss';
 @import './layout/_register.scss';
 
+@import './pages/_articles_home.scss';
 @import './pages/_allarticles.scss';
 @import './pages/_allprofiles.scss';
 @import './pages/_allposts.scss';

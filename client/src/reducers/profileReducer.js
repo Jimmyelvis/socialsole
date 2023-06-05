@@ -10,7 +10,8 @@ import {
   GET_FRIENDS,
   CREATE_LIST,
   DELETE_LIST,
-  SAVE_TO_LIST
+  SAVE_TO_LIST,
+  GET_DISPLAYED_PROFILE
 } from "../actions/types";
 
 const initialState = {
@@ -36,6 +37,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profile: action.payload,
+        loading: false
+      };
+    case GET_DISPLAYED_PROFILE:
+      return {
+        ...state,
+        displayedProfile: action.payload,
         loading: false
       };
     case GET_PROFILES:

@@ -1,1 +1,1 @@
-export { Article_Detail, Create_Article, Edit_Article, All_Articles} from './views';
+export { Article_Detail, ArticlesHome, Create_Article, Edit_Article, All_Articles} from './views';

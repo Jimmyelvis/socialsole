@@ -10,17 +10,69 @@ import { Panel } from "components/ui/Panel";
 import { Avatar } from "components/ui/avatar";
 import { getTimefromNow } from "utils/formatDate";
 import parse from "html-react-parser";
+import { CommentButton } from "components/ui/buttons/CommentButton";
+import { useModal } from "context/modalContext";
+import Modal from "components/ui/Modal";
+import CommentPanel from "components/ui/Comments/CommentPanel";
+import { deleteComment  } from "actions/postActions";
+import { addComment } from "actions/postActions";
 
-export const PostItem = ({ post, showActions, auth, deletePost, addLike, removeLike }) => {
+
+
+export const PostItem = ({ post, showActions, auth, deletePost, 
+  addLike, removeLike, deleteComment, addComment,
+  profile : { profile }
+}) => {
 
   /* Variables */
   const { isAuthenticated, user } = auth;
+
+  const { isModalOpen, openModal, openOverlay, isOverlayOpen, closeModal } = useModal();
 
   const editbtn = (
     <Link to={`/editpost/${post._id}`} className="editbtn">
       <Icon color="#AADDFF" icon="pencil1" />
     </Link>
   );
+
+   /*
+    This will be used to determine what component called the modal
+    this will be passed as a prop to the modal component, and the 
+    modal context 
+  */
+    const compOrigin = "CommentButton";
+
+  /**
+ * Piece of state that will be used to determine, what component
+ * that wil be rendered in the modal
+ */
+  const [modalTarget, setModalTarget] = useState(null);
+
+    /**
+   * Check what is the target state, then determine
+   * what component should be rendered in the modal.
+   */
+
+    const checkTarget = () => {
+
+      if (modalTarget === "comments modal") {
+        return (
+        <CommentPanel 
+          comments={post.comments}
+          elementId={post._id} 
+          deleteComment={deleteComment}
+          post={post}
+          addComment={addComment}
+        />
+        );
+      } 
+    
+    };
+  
+    const openCommentModal = () => { 
+      setModalTarget("comments modal");
+      openModal(compOrigin);
+     }
 
   return (
     <React.Fragment>
@@ -62,6 +114,8 @@ export const PostItem = ({ post, showActions, auth, deletePost, addLike, removeL
               auth={auth}
               addLike={addLike}
               removeLike={removeLike}
+              profile={profile}
+              type="post"
             />
           
             <div className="text">
@@ -82,6 +136,31 @@ export const PostItem = ({ post, showActions, auth, deletePost, addLike, removeL
         */}
         
         <Related tags={post.tags} postId={post} />
+
+        <CommentButton
+          elementId={post._id}
+          likes={post && post.likes && post.likes.length}
+          comments={post && post.comments && post.comments.length}
+          openComments={() => openCommentModal()}
+          likeElement={addLike}
+          unlikeElement={removeLike}
+          likesArray={post.likes}
+          user={user}
+          isAuthenticated={auth.isAuthenticated}
+
+        />
+
+      <Modal
+        selector={"#modal"}
+        overlayColor={`
+        ${modalTarget === "search_overlay" ? "rgba(255, 255, 255, 0.95)" : "rgba(0,0,0,0.7)"}`}
+        modalTarget={modalTarget}
+        modalOrigin={compOrigin}
+        delay={2000}
+        noCloseBtn={true}
+      >
+        {checkTarget()}
+      </Modal>
       
     </React.Fragment>
   );
@@ -96,4 +175,5 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export const View = connect(mapStateToProps, { deletePost, addLike, removeLike })(PostItem);
+export const View = connect(mapStateToProps, { deletePost, addLike, removeLike,
+  deleteComment, addComment })(PostItem);

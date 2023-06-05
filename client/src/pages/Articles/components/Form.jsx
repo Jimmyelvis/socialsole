@@ -8,15 +8,38 @@ import isEmpty from "utils/is-empty";
 
 
 
-export const Form = ({ fullheaderimage, articleheaderimage, address, headline, onSubmit, errors, editArticle, matchUrl,
-text, _id, tags, onChange, handleChange, fullArticleHeaderSubmit, articleHeaderSubmit }) => {
+export const Form = ({ 
+  fullheaderimage, 
+  articleheaderimage, 
+  address, 
+  headline, 
+  onSubmit, 
+  errors, 
+  editArticle, 
+  matchUrl,
+  text, 
+  _id, 
+  tags, 
+  onChange, 
+  handleChange, 
+  fullArticleHeaderSubmit, 
+  articleHeaderSubmit,
+  newstype,
+  price,
+  colors,
+  sizes,
+  new_Release,
+  setNew_Release,
+  releaseDate
+}) => {
   return (
     <form onSubmit={onSubmit}>
       <div className="form-group">
         <TextFieldGroup placeholder="Headline goes here" name="headline" value={headline} onChange={onChange} />
 
         <TextFieldGroup
-          placeholder="* Tags"
+          placeholder="* Tags Please use comma separated values (eg.
+            Nike, New Balance, Jordans"
           name="tags"
           value={tags}
           onChange={onChange}
@@ -24,6 +47,44 @@ text, _id, tags, onChange, handleChange, fullArticleHeaderSubmit, articleHeaderS
           info="Please use comma separated values (eg.
                     Nike, New Balance, Jordans)"
         />
+
+        <TextFieldGroup placeholder="News Article Type" name="newstype" value={newstype} onChange={onChange} />
+
+        <Button primary className="mx-4" onClick={(e) => {
+          e.preventDefault()
+          setNew_Release(!new_Release)
+          }}>
+            Show New Release Fields
+        </Button>
+
+
+        {
+          new_Release && (
+            <>
+              <TextFieldGroup placeholder="Price" name="price" value={price} onChange={onChange} />
+      
+              <TextFieldGroup
+                placeholder="* Colors"
+                name="colors"
+                value={colors}
+                onChange={onChange}
+                info="Please use comma separated values for colors (eg.
+                          Blue, Red Green, Sail)"
+              />
+      
+              <TextFieldGroup
+                placeholder="* Sizes"
+                name="sizes"
+                value={sizes}
+                onChange={onChange}
+                info="Please use comma separated values for sizes (eg.
+                          Mens, Women, Kids, Toddlers)"
+              />
+
+              <TextFieldGroup placeholder="Release Date (Use this format May 17 2023 )" name="releaseDate" value={releaseDate} onChange={onChange} />
+            </>
+          )
+        }
 
         <div className="uploadpreview">
           <h4 className="heading-4">Upload A Full Header Image</h4>

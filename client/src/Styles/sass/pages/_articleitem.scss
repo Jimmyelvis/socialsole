@@ -1,14 +1,68 @@
-.articleitem {
-  // margin-bottom: 30rem;
+.article-grid {
+  margin-bottom: 30rem;
+  display: grid;
+  @include gridTempColumn;
 
-  .fullimageheader {
+  .article-panel {
+    grid-column: col-start 3 / col-end 10;
+    margin-top: 15rem;
+    overflow: hidden;
+    padding-bottom: 10rem;
 
     @include respond(bp-medium) {
-      height: 45rem;
+      grid-column: col-start 2/col-end 11;
     }
 
-    @include respond(bp-small) {
-      height: 40rem;
+    @include respond(bp-smallest) {
+      grid-column: col-start 1/col-end 12;
+    }
+  }
+
+  .fullimageheader {
+    height: 33.5rem;
+    padding: 7rem;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    align-items: center;
+
+    @include overlay(rgba(0, 0, 0, 0.45));
+
+    .header-info {
+      position: relative;
+      z-index: 100;
+      grid-column: 2 / 8;
+
+      @include respond(bp-smallest) {
+        grid-column: 1/9;
+      }
+
+      .heading-2 {
+        font-size: 4.8rem;
+        color: $white;
+      }
+
+      .author-info {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 3rem;
+
+        .avatar {
+          width: 5rem;
+          height: 5rem;
+        }
+
+        .heading-3 {
+          font-size: 2.7rem;
+          color: $white;
+        }
+
+        .heading-4 {
+          font-size: 2.1rem;
+          color: $lt-orange;
+        }
+
+      }
     }
 
     img {
@@ -18,105 +72,332 @@
     }
   }
 
-  .container {
-    margin: -20rem auto;
-    padding: 6rem 4rem;
+  .content-body {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    padding: 0 3rem;
+    margin-top: 6rem;
     position: relative;
 
-    @include respond(bp-smallest) {
-      padding: 6rem 2rem;
+    .articleedit {
+      position: absolute;
+      top: -8.5rem;
+      right: 4rem;
+  
+      .editbtn {
+        width: 5.6rem;
+        display: flex;
+        box-shadow: 3px 3px 2px 0px rgb(63 140 223 / 14%);
+        border-radius: 50%;
+        padding: 1.4rem;
+        position: absolute;
+        z-index: 300;
+        right: 3rem;
+        background: rgb(223 240 255 / 47%);
+        border: 2px solid rgb(255 255 255 / 60%);
+        backdrop-filter: blur(5px) brightness(1.3);
+
+        .icon-edit-article {
+          fill: $midnightblue;
+        }
+      }
     }
-  }
+  
 
-  .authorheader {
-    height: 31rem;
-  }
-
-  .articleedit {
-    position: absolute;
-    bottom: 2rem;
-    right: 4%;
-
-    .editbtn {
-      width: 3.1rem;
+    .side-bar {
+      grid-column: 2 / 3;
       display: flex;
-      box-shadow: 3px 3px 2px 0px rgba(63,140,223,0.13);
-      border-radius: 50%;
-      padding: 1.4rem;
-    }
-  }
+      flex-direction: column;
+      gap: 1rem;
 
-  .articledetails {
-    margin-top: 8rem;
-    margin-bottom: 20rem;
-
-    .articleImg {
-      height: 37rem;
-      position: relative;
-      display: flex;
-
-      @include respond(bp-medium) {
-        height: 30rem;
+      @include respond(bp-large) {
+        grid-column: 1/3;
+        padding: 0 3rem;
       }
 
       @include respond(bp-small) {
-        height: 27rem;
+        grid-column: 2/12;
+        flex-direction: row;
+        justify-content: space-evenly;
       }
 
-      .heading-3 {
-        position: relative;
-        z-index: 20;
-        margin: auto;
-        color: #fff;
-        font-size: 5rem;
-        text-align: center;
+      @include respond(bp-smallest) {
+        grid-column: 1/13;
+      }
 
-        @include respond(bp-medium) {
-          font-size: 4.5rem;
+      .icon-sidebar {
+        width: 4.6rem;
+        cursor: pointer;
+      }
+
+    }
+
+    .article-content {
+      grid-column: 4 / 11;
+      margin-bottom: 8rem;
+
+      @include respond(bp-large) {
+        grid-column: 3/11;
+      }
+
+      @include respond(bp-small) {
+        grid-column: 2/12;
+      }
+
+      @include respond(bp-smallest) {
+        grid-column: 1/13;
+      }
+
+      .article-header-img {
+        height: 29.5rem;
+        overflow: hidden;
+        margin-bottom: 5rem;
+        border-radius: 8px;
+        position: relative;
+
+        img {
+          position: absolute;
+          object-fit: cover;
+          height: 100%;
         }
+
+      }
+
+      .text {
+
+      }
+
+    }
+
+    .release-details {
+      grid-column: 4/11;
+      margin-bottom: 8rem;
+      border-top: rgb(160 201 230 / 21%) solid 2px;
+      padding: 3rem 0;
+      border-bottom: rgb(160 201 230 / 21%) solid 2px;
+
+      @include respond(bp-large) {
+        grid-column: 3 / 11;
+      }
+
+      @include respond(bp-small) {
+        grid-column: 2/12;
+      }
+
+      @include respond(bp-smallest) {
+        grid-column: 1/13;
+      }
+
+      li {
+        display: grid;
+        align-items: center;
+        gap: 1.3rem;
+        margin-bottom: 1.5rem;
+        color: $alternateblue;
+        line-height: 1;
+        grid-template-columns: 6rem 10rem 1fr;
 
         @include respond(bp-small) {
-          font-size: 3.8rem;
+          grid-template-columns: 9rem 14rem 1fr;
         }
 
-        @include respond(bp-smallest) {
-          font-size: 3.4rem;
+        .icon {
+          width: 3.5rem;
+          height: 3.5rem;
+        }
+
+      }
+
+      li:last-of-type {
+        margin-bottom: 0;
+      }
+
+    }
+
+    .article-tags {
+      grid-column: 4 / 11;
+      display: flex;
+      gap: 2rem;
+      color: $white;
+      font-weight: bold;
+      margin-bottom: 8rem;
+      flex-wrap: wrap;
+
+      @include respond(bp-large) {
+        grid-column: 3 / 11;
+      }
+
+      @include respond(bp-small) {
+        grid-column: 2/12;
+      }
+
+      @include respond(bp-smallest) {
+        grid-column: 1/13;
+      }
+
+      .tag {
+        @include altBluegradient;
+        padding: 0.7rem 1.7rem;
+        border-radius: 9999px;
+        display: inline-flex;
+        align-items: center;
+        font-size: 1.3rem;
+      }
+    }
+
+    .author-details {
+      grid-column: 3/11;
+      display: flex;
+      gap: 5rem;
+      padding: 3rem 0;
+      border-top: 1px solid rgb(184 211 234 / 43%);
+      border-bottom: 1px solid rgb(184 211 234 / 43%);
+      align-items: center;
+      margin-bottom: 6rem;
+
+      @include respond(bp-small) {
+          grid-column: 2/12;
+          gap: 3rem;
+      }
+
+      @include respond(bp-smallest) {
+        grid-column: 1/13;
+      }
+
+      .left {
+
+        .avatar {
+          width: 11rem;
+          height: 11rem;
         }
       }
 
-     .overlay {
-        position: absolute;
-        background-color: rgba(36, 36, 94, 0.51);
-        width: 100%;
-        height: 100%;
-        top: 0px;
-        z-index: 10;
-      }
-      
-      img {
-        height: 100%;
-        object-fit: cover;
-        position: absolute;
-        z-index: 5;
+      .right {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .heading-3 {
+          font-size: 3rem;
+          color: $midnightblue;
+        }
+
+        .heading-4 {
+          font-size: 1.9rem;
+          color: $alternateblue;
+        }
+
+        .text {
+          margin-bottom: 1rem;
+          font-weight: bold;
+          color: $alternateblue;
+        }
+
+        .location {
+          color: $lt-orange;
+          font-weight: 300;
+        }
+
+        .bio {
+          @include lineClamp(3);
+          margin-bottom: 1rem;
+        }
+
+        .socials {
+          display: flex;
+          gap: 2rem;
+
+          .icon-list {
+            width: 2.3rem;
+            height: 2.2rem;
+          }
+
+        }
+
+
       }
     }
-      
+
+    .related {
+      grid-column: 1/13;
+      padding: 0 3rem;
+
+      @include respond(bp-medium) {
+        padding: 0 1rem;
+      }
+
+      & > h3 {
+        font-size: 3rem;
+        color: $midnightblue;
+        margin-bottom: 3rem;
+        @include customBorderBtm($alternateblue, 2px);
+      }
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 0.3rem;
+
+        .card-OverlayType {
+          position: relative;
+          height: 100%;
+          box-shadow: 0px 0px 18px 14px rgba(0, 0, 0, 0.1);
+          flex: 1;
+          padding-bottom: 30%;
+
+          @include respond(bp-small) {
+            flex-basis: 100%;
+            padding-bottom: 55%;
+          }
+
+          @include respond(bp-smallest) {
+            padding-bottom: 63%;
+          }
+
+          @include respond(bp-tiny) {
+            padding-bottom: 83%;
+          }
+
+          .card-info {
+            position: absolute;
+            z-index: 100;
+            height: 100%;
+            padding: 0 2rem;
+            padding-top: 21%;
+
+            @include respond(bp-medium) {
+              padding-top: 4%;
+            }
+
+            .related-card {
+
+              .heading-3 {
+                font-size: 2rem;
+                text-align: center;
+                margin: 2rem auto;
+                color: $white;
+
+                @include respond(bp-small) {
+                  font-size: 3rem;
+                  width: 75%;
+                }
+              }
+
+            }
+
+          }
+
+        }
+      }
+
+
+    }
+
+
+
   }
 
-  .articleText {
-    padding: 6rem 12rem;
 
-    @include respond(bp-large) {
-      padding: 6rem 9rem;
-    }
-
-    @include respond(bp-small) {
-      padding: 6rem 5rem;
-    }
-
-    @include respond(bp-tiny) {
-      padding: 6rem 4rem;
-    }
-  }
-
+  
 }

@@ -6,6 +6,7 @@ import postReducer from './postReducer';
 import sneakerReducer from './sneakerReducer';
 import articleReducer from './articleReducer';
 import alertReducer from './alertReducer';
+import searchReducer from './searchReducer';
 
 
 export default combineReducers({
@@ -15,5 +16,6 @@ export default combineReducers({
   post: postReducer,
   sneaker: sneakerReducer,
   article: articleReducer,
-  alert: alertReducer
+  alert: alertReducer,
+  search: searchReducer,
 });

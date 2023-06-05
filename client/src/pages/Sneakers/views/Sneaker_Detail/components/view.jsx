@@ -26,6 +26,7 @@ import parse from 'html-react-parser';
 */
 
 const SneakerItem = ({ sneaker, showActions, auth, deleteSneaker, addLike, removeLike }) => {
+
   const findUserLike = (likes) => {
     if (likes.filter((like) => like.user === auth.user.id).length > 0) {
       return true;
@@ -151,7 +152,14 @@ const SneakerItem = ({ sneaker, showActions, auth, deleteSneaker, addLike, remov
           {parse(sneaker.text)}
         </div>
 
-          <PostInfo element={sneaker} showActions={showActions} auth={auth} addLike={addLike} removeLike={removeLike} />
+          <PostInfo 
+            element={sneaker} 
+            showActions={showActions} 
+            auth={auth} 
+            addLike={addLike} 
+            removeLike={removeLike} 
+            type="sneaker"
+          />
        
         <Tags element={sneaker} />
       </Panel>

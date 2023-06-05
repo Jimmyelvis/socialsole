@@ -44,6 +44,29 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
   */
   const compOrigin = "navbar";
 
+  const getPathName = () => { 
+    console.log('====================================');
+    console.log('pathname', window.location.pathname);
+    console.log('====================================');
+   }
+
+   useEffect(() => {
+    getPathName(); // Call the function initially when the component mounts
+
+    // Create a listener to log the pathname when the route changes
+    const handleRouteChange = () => {
+      getPathName();
+    };
+
+    // Add the listener to the "popstate" event
+    window.addEventListener('popstate', handleRouteChange);
+
+    // Clean up the listener when the component unmounts
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, [window.location.pathname]);
+
 
 
   /**
@@ -191,7 +214,7 @@ true or false nav items will change accordingly
         <Link to="/">Home</Link>
       </li>
       <li className="nav-item">
-        <Link to="/allarticles">Articles</Link>
+        <Link to="/articles">Articles</Link>
       </li>
       <li className="nav-item parent">
         Community

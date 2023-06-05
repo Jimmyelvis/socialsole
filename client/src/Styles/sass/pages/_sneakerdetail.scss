@@ -294,14 +294,16 @@
 
     .actions {
       bottom: 3.3rem;
-      right: 4rem;
+      right: 9rem;
 
       @include respond(bp-large) {
-        right: 5%;
+        right: 10%;
+        bottom: 1.3rem;
       }
 
       @include respond(bp-small) {
-        bottom: 2.6rem;
+        bottom: 0rem;
+        right: 23%;
       }
     }
   
@@ -327,6 +329,12 @@
         bottom: 8rem;
         left: 3rem;
       }
+    }
+
+    .icon-bookmark {
+      min-width: 3.5rem;
+      min-inline-size: 3.5rem;
+      cursor: pointer;
     }
   }
 
@@ -362,6 +370,11 @@
       font-size: 3rem;
 
       @include headerBetweenDashes;
+
+      @include respond(bp-smallest) {
+        @include headerBetweenDashes($midnightblue, 
+        -7rem, 0.4rem, 6rem)
+      }
     }
 
     ul {
@@ -377,6 +390,19 @@
         flex: 1;
         padding-bottom: 24%;
 
+        @include respond(bp-large) {
+          padding-bottom: 37%;
+        }
+
+        @include respond(bp-medium) {
+          padding-bottom: 50%;
+          flex-basis: 100%;
+        }
+
+        @include respond(bp-smallest) {
+          padding-bottom: 70%;
+        }
+
         .card-info {
           display: flex;
           flex-direction: column;
@@ -385,10 +411,36 @@
           position: absolute;
           width: 100%;
 
-          .heading-3, .heading-4 {
-            text-align: center;
-            color: $white;
+          a{
+
+            @include respond(bp-medium) {
+              flex: 0 0 30%;
+            }
+
+            .heading-3, .heading-4 {
+              text-align: center;
+              color: $white;
+            }
+
+            .heading-3 {
+
+              @include respond(bp-tiny) {
+                font-size: 3.4rem;
+                margin: 2rem auto;
+              }
+            }
+
+            .heading-4 {
+              color: $lt-orange;
+
+              @include respond(bp-medium) {
+                font-size: 3rem;
+              }
+            }
           }
+
+
+
         }
       }
     }

@@ -1,17 +1,74 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import Icon from "components/icons/Icon";
+import { ReactComponent as Bookmark } from 'assets/img/bookmark.svg';
+import { useSaveOptions } from "context/saveOptions";
+import { Panel } from "components/ui/Panel";
+import { SaveOptions } from "components/ui/cards/components/SaveOptions";
+import Modal from "components/ui/Modal";
+import { useModal } from "context/modalContext";
 
 
-export const PostInfo = ({  element, showActions, addLike, removeLike, auth }) => {
 
+
+export const PostInfo = ({  
+  element, showActions, addLike, 
+  removeLike, auth, profile,
+  type 
+}) => {
+
+  const { isModalOpen, openModal, openOverlay, isOverlayOpen, closeModal } = useModal();
+  const { openMenu } = useSaveOptions();
 
   const findUserLike = (likes) => {
-    if (likes.filter((like) => like.user === auth.user._id).length > 0) {
+    if (likes.filter((like) => like.user === auth.user?._id || like.user === auth.user?.id).length > 0) {
       return true;
     } else {
       return false;
     }
   };
+
+    /**
+ * Piece of state that will be used to determine, what component
+ * that wil be rendered in the modal
+ */
+    const [modalTarget, setModalTarget] = useState(null);
+
+
+    /*
+      This will be used to determine what component called the modal
+      this will be passed as a prop to the modal component, and the 
+      modal context 
+    */
+    const [compOrigin, setCompOrigin] = useState(null);
+  
+    /**
+     * Check what is the target state, then determine
+     * what component should be rendered in the modal.
+     */
+  
+    const checkTarget = () => {
+  
+      if (modalTarget === "bookmark modal") {
+        return (
+          bookmarkPanel()
+        );
+      } 
+    
+    };
+
+  const bookmarkPanel = () => {
+    return (
+      <Panel className="article-bookmark-panel">
+        <SaveOptions
+          itemId={element._id}
+          type={type}
+          useSavesList={profile?.lists}
+        />
+      </Panel>
+    );
+  };
+
+
 
   /* For loggedin users with a profile */
   const authUsers = () => {
@@ -40,6 +97,21 @@ export const PostInfo = ({  element, showActions, addLike, removeLike, auth }) =
 
           <h3 className="heading-3">{element.comments.length}</h3>
         </div>
+
+        {
+            auth?.isAuthenticated && 
+            <Bookmark 
+              className="icon icon-bookmark"
+              onClick={() => {
+                const origin = "Bookmark";
+                setModalTarget("bookmark modal");
+                setCompOrigin(origin);
+                openModal(origin);
+                openMenu();
+              }}
+            /> 
+          }
+        
       </React.Fragment>
     );
   };
@@ -73,6 +145,18 @@ export const PostInfo = ({  element, showActions, addLike, removeLike, auth }) =
       */}
 
       {showActions ? authUsers() : nonAuthUsers()}
+
+      <Modal
+          selector={"#modal"}
+          overlayColor={`
+        ${modalTarget === "search_overlay" ? "rgba(255, 255, 255, 0.95)" : "rgba(0,0,0,0.7)"}`}
+          modalTarget={modalTarget}
+          modalOrigin={compOrigin}
+          delay={2000}
+          noCloseBtn={true}
+        >
+        {checkTarget()}
+      </Modal>
     </div>
   );
 }

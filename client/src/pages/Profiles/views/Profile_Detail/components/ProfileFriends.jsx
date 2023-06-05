@@ -1,24 +1,59 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
+import { FriendsCard } from 'components/ui/cards/FriendsCard';
+import { getProfileFriends } from 'actions/profileActions';
+import { connect } from 'react-redux';
+import Spinner from "components/common/Spinner";
 
-export class ProfileFriends extends Component {
+
+const ProfileFriends = ({ 
+  displayedProfile ,
+  getProfileFriends,
+  profile : { profile, friends, loading }
+}) => {
 
 
-  render() {
-    return (
-      <div className="profileAbout contentbody">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-              <h3>Friends</h3>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero unde esse soluta nemo, dolorum minima, accusamus ipsa exercitationem voluptate, rerum natus voluptatibus excepturi a.
-              </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    )
+  useEffect(() => {
+    if (displayedProfile) {
+      getProfileFriends(displayedProfile);
+    }
+  }, [displayedProfile]);
+
+  let friendsContent;
+
+  if (friends === null || loading) {
+    friendsContent = <Spinner />;
+  } else {
+    friendsContent = (
+      <React.Fragment>
+        {friends.map(friend => {
+          return (
+            <FriendsCard
+              name={friend.user?.name}
+              avatar={friend.user?.avatar}
+              profileHeader={friend.profilephoto}
+              city={friend.location}
+              socials={friend.social}
+              id={friend._id}
+            />
+          );
+        })}
+      </React.Fragment>
+    );
   }
+
+  return (
+    <div className="profile-friends">
+     
+        {friendsContent}
+      
+    </div>
+  )
+
+  
 }
 
-export default ProfileFriends
+const mapStateToProps = state => ({
+  profile: state.profile,
+});
+
+export default connect( mapStateToProps, { getProfileFriends}) (ProfileFriends)

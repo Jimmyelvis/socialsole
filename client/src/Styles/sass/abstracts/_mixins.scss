@@ -96,6 +96,7 @@
     width: $width;
     border-bottom: $height solid $rgb;
     padding-top: $padding-top;
+    margin: 0 auto;
   }
 }
 
@@ -425,4 +426,13 @@ $pos: -14rem, $height: 0.4rem, $width: 12rem ) {
 
 @mixin cardshadowlrgBlur {
   box-shadow: 0px 0px 18px 14px rgb(0 0 0 / 10%);
+}
+
+
+/*
+  Gradient Styles
+*/
+
+@mixin altBluegradient {
+  background: linear-gradient(0deg, darken($alternateblue, 25%), $alternateblue);
 }

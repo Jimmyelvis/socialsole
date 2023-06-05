@@ -16,13 +16,13 @@ import {
     GET_FRIENDS,
     CREATE_LIST,
     DELETE_LIST,
-    SAVE_TO_LIST
+    SAVE_TO_LIST,
+    GET_DISPLAYED_PROFILE
 } from './types';
 
 // Gets the current profile for logged in user
 export const getCurrentProfile = () => dispatch => {
 
-console.log("getCurrentProfile called");
   
   dispatch(setProfileLoading());
   axios
@@ -59,6 +59,25 @@ export const getFriends = () => dispatch => {
     );
 };
 
+export const getProfileFriends = ( profile_id ) => dispatch => {
+  // dispatch(setProfileLoading());
+
+  axios
+    .post("/api/profile/getProfilefriends", profile_id)
+    .then(res =>
+      dispatch({
+        type: GET_FRIENDS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_FRIENDS,
+        payload: {}
+      })
+    );
+};
+
 
 // Get profile by handle
 export const getProfileByHandle = (handle) => dispatch => {
@@ -67,13 +86,13 @@ export const getProfileByHandle = (handle) => dispatch => {
     .get(`/api/profile/handle/${handle}`)
     .then(res =>
       dispatch({
-        type: GET_PROFILE,
+        type: GET_DISPLAYED_PROFILE,
         payload: res.data
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_PROFILE,
+        type: GET_DISPLAYED_PROFILE,
         payload: null
       })
     );

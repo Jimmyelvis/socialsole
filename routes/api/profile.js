@@ -250,6 +250,8 @@ router.post("/timeline", (req, res) => {
   /* respond with the req.body */
   // res.json(req.body);
 
+  console.log("req", req.body);
+
   /**
    * loop through an array of objects and push the "user" key
    * to a new array called "users"
@@ -739,6 +741,35 @@ router.post(
     
     
   });
+
+  router.post(
+    "/getProfilefriends",
+    (req, res) => {
+      
+      console.log("id", req.body._id);
+
+      // res.json(req.body);
+  
+      Profile.findOne({
+        _id: req.body._id,
+      }).then((profile) => {
+
+  
+        let friends = profile.friends;
+  
+        Profile.find({
+          _id: friends,
+        })
+        .populate("user", ["name", "avatar"])
+        .select("-friendRequests -mycollection")
+        .then((friends) => {
+          res.json(friends);
+        })
+  
+      });
+      
+      
+    });
 
 
 router.post(

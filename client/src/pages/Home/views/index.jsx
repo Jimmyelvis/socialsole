@@ -132,7 +132,7 @@ export const Home = () => {
 
         <FeaturedArticles articles={featured} />
         <Latestnews articles={latest} />
-        <Newreleases releases={releases} />
+        {/* <Newreleases releases={releases} /> */}
       </div>
     </React.Fragment>
   );

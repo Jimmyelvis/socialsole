@@ -4,27 +4,30 @@ import SneakerFeed from "./profilesneakers/SneakerFeed";
 import { getSneakersByUser } from "actions/sneakerActions";
 import Spinner from "components/common/Spinner";
 import Card from "components/ui/cards/Card";
+import { SneakerCard } from "components/ui/cards/SneakerCard";
 
 
 
-export const ProfileSneakers = ({ profile: { profile }, sneaker: { sneakers, loading }, getSneakersByUser }) => {
+export const ProfileSneakers = ({ 
+  displayedProfile , 
+  profile: { profile }, 
+  sneaker: { sneakers, loading }, 
+  getSneakersByUser 
+}) => {
 
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    if (profile) {
-      getSneakersByUser(profile.user._id);
+    if (displayedProfile) {
+      getSneakersByUser(displayedProfile.user._id);
     }
-  }, [profile]);
+  }, [displayedProfile]);
   
 
    const updateSearch = (e) => {
     setSearch(e.target.value);
   };
 
-
-
-    const firstName = profile.user.name.trim().split(" ")[0];
 
     let sneakerContent;
 
@@ -42,7 +45,18 @@ export const ProfileSneakers = ({ profile: { profile }, sneaker: { sneakers, loa
       sneakerContent = (
         <React.Fragment>
           {filteredSneakers.map(sneaker => {
-              return <Card key={sneaker._id} sneaker={sneaker} cardtype={'sneaker'} />;
+              return (
+              <SneakerCard
+                author={sneaker.user}
+                model={sneaker.model}
+                colorway={sneaker.colorway}
+                imgBg={sneaker.mainimage}
+                contentId={sneaker._id}
+                year={sneaker.year}
+                useSavesList={profile?.lists}
+                profile={profile}
+              />
+            );
           })}
         </React.Fragment>
       )
@@ -50,11 +64,7 @@ export const ProfileSneakers = ({ profile: { profile }, sneaker: { sneakers, loa
 
     return (
       <div className="profileSneakers">
-        <div className="container">
            
-          <div className="pageheading">
-              <h2 className="heading-2">{firstName}'s Sneakers</h2>
-          </div>
 
           <div className="filteredSearch">
             <input
@@ -70,7 +80,7 @@ export const ProfileSneakers = ({ profile: { profile }, sneaker: { sneakers, loa
               {sneakerContent}
             </div>
             
-        </div>
+        
       </div>
     );
   

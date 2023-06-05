@@ -8,6 +8,7 @@ import ProfileFriends from "./components/ProfileFriends";
 
 import Spinner from "components/common/Spinner";
 import { getProfileByHandle } from "actions/profileActions";
+import { Tabs } from "components/ui/Layout/Tabs/Tabs";
 
 /*
   This component is for displaying the overall Profile detail page. This also
@@ -21,127 +22,63 @@ import { getProfileByHandle } from "actions/profileActions";
 
 const Profile = ({ profile: { profile, loading, displayedProfile }, auth, getProfileByHandle, match }) => {
 
-   const [values, setValues] = useState({
-     about: "show",
-     posts: "",
-     sneakers: "",
-     friends: "",
-   });
-
-   const { about, posts, sneakers, friends } = values;
-
 
     useEffect(() => {
       if (match.params.handle) {
 
-        console.log("match.params.handle: ", match.params.handle);
         getProfileByHandle(match.params.handle);
       }
     }, [ match.params.handle]);
 
     const { user } = auth;
 
+
     let profileContent;
     let profileHeader;
 
-    if (profile === null || loading) {
+    if (displayedProfile === loading) {
       profileContent = <Spinner />;
     } else {
       profileHeader = (
         <ProfileHeader
-          profile={profile}
-          showAbout={() =>
-            setValues({
-              ...values,
-              about: "show",
-              posts: "",
-              sneakers: "",
-              friends: "",
-            })
-          }
-          showPosts={() =>
-            setValues({
-              ...values,
-              about: "",
-              posts: "show",
-              sneakers: "",
-              friends: "",
-            })
-          }
-          showSneakers={() =>
-            setValues({
-              ...values,
-              about: "",
-              posts: "",
-              sneakers: "show",
-              friends: "",
-            })
-          }
-          showFriends={() =>
-            setValues({
-              ...values,
-              about: "",
-              posts: "",
-              sneakers: "",
-              friends: "show",
-            })
-          }
+          profile={displayedProfile}
         />
       );
 
-      if (about === "show") {
-        profileContent = (
-          <React.Fragment>
-            <div className="fullimageheader">
-              <img src={profile.profilephoto} alt="" />
+      profileContent = (
+        <React.Fragment>
+          <div className="fullimageheader">
+            <img src={displayedProfile.profilephoto} alt="" />
+          </div>
+
+          {profileHeader}
+
+          <Tabs>
+
+            <div label="About">
+              
+              <ProfileAbout profile={displayedProfile} />
             </div>
 
-            
-              {profileHeader}
-              {/* <ProfileAbout profile={profile} /> */}
-            
-          </React.Fragment>
-        );
-      } else if (posts === "show") {
-        profileContent = (
-          <React.Fragment>
-            <div className="fullimageheader">
-              <img src={profile.profilephoto} alt="" />
-            </div>
+            <div label="Posts">
 
-            
-              {profileHeader}
-              <ProfilePosts profile={profile} />
-            
-          </React.Fragment>
-        );
-      } else if (sneakers === "show") {
-        profileContent = (
-          <React.Fragment>
-            <div className="fullimageheader">
-              <img src={profile.profilephoto} alt="" />
+              <ProfilePosts displayedProfile={displayedProfile} />
             </div>
-
             
-              {profileHeader}
-              <ProfileSneakers profile={profile} />
-            
-          </React.Fragment>
-        );
-      } else if (friends === "show") {
-        profileContent = (
-          <React.Fragment>
-            <div className="fullimageheader">
-              <img src={profile.profilephoto} alt="" />
+            <div label="Sneakers">
+             
+              <ProfileSneakers displayedProfile={displayedProfile} />
             </div>
+            <div label="Friends">
 
-            
-              {profileHeader}
-              <ProfileFriends />
-            
-          </React.Fragment>
-        );
-      }
+              <ProfileFriends displayedProfile={displayedProfile} />
+            </div>
+          </Tabs>
+
+        </React.Fragment>
+      );
+
+   
     }
 
     return (

@@ -27,9 +27,6 @@ import { setAlert } from "./alert";
 // Load User
 export const loadUser = () => async (dispatch) => {
 
-  console.log('====================================');
-  console.log('loadUser called');
-  console.log('====================================');
 
   if (localStorage.jwtToken) {
     // if there is a jwtToken set axios headers for all requests

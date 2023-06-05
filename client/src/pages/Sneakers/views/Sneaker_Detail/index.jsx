@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import Spinner from "components/common/Spinner";
-import { getSneaker } from 'actions/sneakerActions';
 import { getCurrentProfile } from "actions/profileActions";
 import { View } from "./components/view";
 import CommentForm from "components/features/comments/CommentForm";
 import { getParams } from "utils/getParams";
 import CommentItem from "components/features/comments/CommentItem";
-import { deleteComment, addComment } from "actions/sneakerActions";
+import { deleteComment, addComment, addLike, removeLike, getSneaker } from "actions/sneakerActions";
 import { CommentButton } from 'components/ui/buttons/CommentButton';
 import Modal from "components/ui/Modal";
 import { useModal } from "context/modalContext";
 import CommentPanel from "components/ui/Comments/CommentPanel";
 
 
-export const Sneaker = ({ getSneaker, getCurrentProfile, deleteComment, addComment, sneaker: { sneaker, loading }, match, auth, profile: { profile } }) => {
+export const Sneaker = ({ 
+  getSneaker, getCurrentProfile, 
+  deleteComment, addComment, 
+  addLike, removeLike,
+  sneaker: { sneaker, loading }, match, 
+  auth, profile: { profile } 
+}) => {
+
   /*Variables */
   const { user } = auth;
   let sneakerContent;
@@ -132,7 +138,13 @@ export const Sneaker = ({ getSneaker, getCurrentProfile, deleteComment, addComme
       <CommentButton
         likes={sneaker && sneaker.likes && sneaker.likes.length}
         comments={sneaker && sneaker.comments && sneaker.comments.length}
-        onClick={() => openCommentModal()}
+        openComments={() => openCommentModal()}
+        likeElement={addLike}
+        unlikeElement={removeLike}
+        likesArray={sneaker.likes}
+        user={user}
+        isAuthenticated={auth.isAuthenticated}
+        elementId={sneaker._id}
       />
 
       <Modal
@@ -157,4 +169,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export const Sneaker_Detail = connect(mapStateToProps, { getSneaker, getCurrentProfile, deleteComment, addComment })(Sneaker);
+export const Sneaker_Detail = connect(mapStateToProps, { getSneaker, getCurrentProfile, deleteComment, addComment, addLike, removeLike })(Sneaker);

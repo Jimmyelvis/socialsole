@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Spinner from "components/common/Spinner";
-import { addArticle } from "actions/articleActions";
+import { addArticle, addNewRelease } from "actions/articleActions";
 import { getCurrentProfile } from "actions/profileActions";
 import TextFieldGroup from "components/ui/Forms/TextFieldGroup";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Widgetsetting } from "components/common/Cloudinary"
+import { Widgetsetting } from "components/common/Cloudinary";
 import { Form } from "../components/Form";
+import { Panel } from "components/ui/Panel";
+import { NewRelease } from '../../../components/ui/cards/NewRelease';
 
 /*
   Component for displaying and implementing the ability
@@ -17,7 +19,7 @@ import { Form } from "../components/Form";
   but also checks to see if that user has a role of "author"
 */
 
-const CreateArticle = ({ article: { article, loading }, profile, auth, addArticle, getCurrentProfile, history, errors }) => {
+const CreateArticle = ({ article: { article, loading }, profile, auth, addArticle, getCurrentProfile, addNewRelease, history, errors }) => {
   const [values, setValues] = useState({
     fullheaderimage: "",
     articleheaderimage: "",
@@ -26,26 +28,64 @@ const CreateArticle = ({ article: { article, loading }, profile, auth, addArticl
     text: "",
     _id: "",
     tags: "",
+    newstype: "news",
+    price: "",
+    colors: "",
+    sizes: "",
+    releaseDate: "",
   });
 
-  const { fullheaderimage, articleheaderimage, address, headline, text, _id, tags } = values;
+  const { fullheaderimage, articleheaderimage, address, headline, text, _id, tags, newstype, price, colors, sizes, releaseDate } = values;
+
+  const [newRelease, setNewRelease] = useState(false)
 
   const onSubmit = (e) => {
     e.preventDefault();
 
+    console.log('====================================');
+    console.log("called");
+    console.log('====================================');
+
     const { user } = auth;
+    
+    if (newRelease) {
 
-    const newArticle = {
-      fullheaderimage: fullheaderimage,
-      articleheaderimage: articleheaderimage,
-      headline: headline,
-      text: text,
-      author: user.name,
-      avatar: user.avatar,
-      tags: tags,
-    };
+      const newArticle = {
+        fullheaderimage: fullheaderimage,
+        articleheaderimage: articleheaderimage,
+        headline: headline,
+        text: text,
+        author: user.name,
+        avatar: user.avatar,
+        tags: tags,
+        price: price,
+        color: colors,
+        sizeRun: sizes,
+        newstype: newstype,
+        releaseDate: releaseDate,
+      };
+  
+  
+      addNewRelease(newArticle, history);
+      
+    } else {
 
-    addArticle(newArticle, history);
+      const newArticle = {
+        fullheaderimage: fullheaderimage,
+        articleheaderimage: articleheaderimage,
+        headline: headline,
+        text: text,
+        author: user.name,
+        avatar: user.avatar,
+        tags: tags,
+        newstype: newstype,
+      };
+  
+  
+      addArticle(newArticle, history);
+
+    }
+
 
     setValues({
       fullheaderimage: "",
@@ -55,6 +95,10 @@ const CreateArticle = ({ article: { article, loading }, profile, auth, addArticl
       text: "",
       _id: "",
       tags: "",
+      price: "",
+      colors: "",
+      sizes: "",
+      newstype: "news",
     });
   };
 
@@ -109,70 +153,30 @@ const CreateArticle = ({ article: { article, loading }, profile, auth, addArticl
 
   return (
     <React.Fragment>
+      <div className="create-edit-body">
+        <h2 className="heading-2">Create Article</h2>
 
-      <div className="container">
-        <div className="create-edit-body contentbody">
-          <h2 className="heading-2">Create Article</h2>
-
-          <Form 
-            onSubmit={onSubmit} 
-            onChange={onChange} 
+        <Panel className="create-edit-form">
+          <Form
+            onSubmit={onSubmit}
+            onChange={onChange}
             fullheaderimage={fullheaderimage}
             articleheaderimage={articleheaderimage}
             headline={headline}
             text={text}
             tags={tags}
-            handleChange={handleChange} 
-            fullArticleHeaderSubmit={fullArticleHeaderSubmit} 
-            articleHeaderSubmit={articleHeaderSubmit} 
+            price={price}
+            colors={colors}
+            sizes={sizes}
+            releaseDate={releaseDate}
+            newstype={newstype}
+            handleChange={handleChange}
+            fullArticleHeaderSubmit={fullArticleHeaderSubmit}
+            articleHeaderSubmit={articleHeaderSubmit}
+            new_Release={newRelease}
+            setNew_Release={setNewRelease}
           />
-
-          {/* <form onSubmit={onSubmit}>
-            <div className="form-group">
-              <TextFieldGroup placeholder="Headline goes here" name="headline" value={headline} onChange={onChange} error={errors.text} />
-
-              <TextFieldGroup
-                placeholder="* Tags"
-                name="tags"
-                value={tags}
-                onChange={onChange}
-                // error={errors.skills}
-                info="Please use comma separated values (eg.
-                    Nike, New Balance, Jordans)"
-              />
-
-              <div className="uploadpreview">
-                <h4 className="heading-4">Upload A Full Header Image</h4>
-
-                <div className="fullArticleHeaderPreview">{isEmpty(fullheaderimage) ? null : <img src={fullheaderimage} />}</div>
-
-                <div className="upload-btn">
-                  <button id="upload_widget" className="btn btn-lightblue" onClick={fullArticleHeaderSubmit}>
-                    Upload Photo
-                  </button>
-                </div>
-              </div>
-
-              <div className="uploadpreview">
-                <h4 className="heading-4">Upload A Article Header Image</h4>
-
-                <div className="articleHeaderPreview">{isEmpty(articleheaderimage) ? null : <img src={articleheaderimage} />}</div>
-
-                <div className="upload-btn">
-                  <button id="upload_widget" className="btn btn-lightblue" onClick={articleHeaderSubmit}>
-                    Upload Photo
-                  </button>
-                </div>
-              </div>
-
-              <ReactQuill value={text} onChange={handleChange} />
-            </div>
-
-            <button type="submit" className="btn btn-lightblue">
-              Submit
-            </button>
-          </form> */}
-        </div>
+        </Panel>
       </div>
     </React.Fragment>
   );
@@ -185,4 +189,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export const Create_Article = connect(mapStateToProps, { addArticle, getCurrentProfile })(withRouter(CreateArticle));
+export const Create_Article = connect(mapStateToProps, { addArticle, getCurrentProfile, addNewRelease })(withRouter(CreateArticle));

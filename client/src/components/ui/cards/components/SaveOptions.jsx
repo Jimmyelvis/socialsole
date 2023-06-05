@@ -305,6 +305,8 @@ export const Save_Options = ({
         return "hidden";
       }
 
+    } else {
+      return `${postOptionsMenuClasses} lists-panel`;
     }
 
   

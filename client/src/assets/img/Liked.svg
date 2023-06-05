@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" y2="-0.243" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6ec3ff"/>
+      <stop offset="1" stop-color="#adf"/>
+    </linearGradient>
+  </defs>
+  <g id="Liked" transform="translate(-295 -585)">
+    <g id="Base" transform="translate(295 585)" fill="none" stroke="#e4f0f8" stroke-width="2">
+      <rect width="60" height="60" rx="30" stroke="none"/>
+      <rect x="1" y="1" width="58" height="58" rx="29" fill="none"/>
+    </g>
+    <g id="ic_favorite" transform="translate(-4338 -3145)">
+      <rect id="Base-2" data-name="Base" width="30" height="30" transform="translate(4648 3745)" fill="none"/>
+      <path id="Icon_awesome-thumbs-up" data-name="Icon awesome-thumbs-up" d="M3.9,8.4H.9a.9.9,0,0,0-.9.9v9a.9.9,0,0,0,.9.9h3a.9.9,0,0,0,.9-.9v-9A.9.9,0,0,0,3.9,8.4ZM2.4,17.7a.9.9,0,1,1,.9-.9A.9.9,0,0,1,2.4,17.7Zm12-14.646c0,1.591-.974,2.483-1.248,3.546h3.815A2.241,2.241,0,0,1,19.2,8.779a2.715,2.715,0,0,1-.729,1.845l0,0a3.133,3.133,0,0,1-.349,2.98,2.965,2.965,0,0,1-.614,2.8,1.991,1.991,0,0,1-.231,1.674c-.765,1.1-2.662,1.115-4.266,1.115H12.9a10.765,10.765,0,0,1-4.484-1.19A5.9,5.9,0,0,0,6.442,17.4.45.45,0,0,1,6,16.954V8.937a.449.449,0,0,1,.133-.32C7.619,7.15,8.258,5.6,9.475,4.376a4.542,4.542,0,0,0,.952-2.209C10.594,1.473,10.943,0,11.7,0,12.6,0,14.4.3,14.4,3.054Z" transform="translate(4653 3750)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>

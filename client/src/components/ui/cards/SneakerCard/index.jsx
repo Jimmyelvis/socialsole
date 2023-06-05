@@ -4,10 +4,10 @@ import { AuthorHeader } from "components/ui/headers/authorHeader";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 import { useSaveOptions } from "context/saveOptions";
 import { SaveOptions } from 'components/ui/cards/components/SaveOptions';
-
+   
 export const SneakerCard = (
   { author, model, colorway, year,
-     imgBg, useSavesList, contentId, saveOptions }
+     imgBg, useSavesList, contentId, saveOptions, profile }
   ) => {
   const { openMenu } = useSaveOptions();
 
@@ -16,21 +16,25 @@ export const SneakerCard = (
    */
 
   return (
-    <CardPicOverlay imgBg={imgBg} className={"sneaker-card"}>
-      <div className="info" id={`${contentId} "parent"`}>
+    <CardPicOverlay imgBg={imgBg} 
+        className={"sneaker-card"} 
+        contentId={contentId}
+        profile={profile}
+      >
+        {
+          profile && (Object.keys(profile).length !== 0) && (
+          <>
+            <IoEllipsisHorizontalSharp className="icon icon-ellipsis open-menu" id={contentId} onClick={(e) => {
+              openMenu(e.currentTarget.parentElement.parentElement.id)
+            }} />
+          </>
+          )
+        }
+      <div className="info">
 
         {
           author && (
             <AuthorHeader author={author} />
-          )
-        }
-        {
-          saveOptions && (
-          <>
-            <SaveOptions useSavesList={useSavesList} />
-
-            <IoEllipsisHorizontalSharp className="icon icon-ellipsis open-menu" id={contentId} onClick={(e) => openMenu(e.currentTarget.parentElement.id)} />
-          </>
           )
         }
 

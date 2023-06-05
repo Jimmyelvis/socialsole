@@ -23,9 +23,6 @@ import { View } from "./components/view";
   for posting comments.
 */
 
-/**
- * Todo: render Comment  List
- */
 
 
 const Article = (
@@ -123,7 +120,7 @@ const Article = (
           <React.Fragment>
             <View article={article} />
 
-            {article.comments.length > 0 ? <div className="commentsarea contentbody">{renderCommentList()}</div> : ""}
+            {article.comments?.length > 0 ? <div className="commentsarea contentbody">{renderCommentList()}</div> : ""}
           </React.Fragment>
         );
       } else {
@@ -133,14 +130,14 @@ const Article = (
           <React.Fragment>
             <View article={article} />
 
-            <div className="container">
+            {/* <div className="container">
 
               <div className="commentsarea postcommentsarea contentbody">
                 <CommentForm elementId={article._id} addComment={addComment} />
                 {renderCommentList()}
               </div>
 
-            </div>
+            </div> */}
           </React.Fragment>
         );
       }

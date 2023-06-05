@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#2699fb"/>
+      <stop offset="1" stop-color="#177bcf"/>
+    </linearGradient>
+  </defs>
+  <g id="Twitter" transform="translate(-295 -660)">
+    <g id="Base" transform="translate(295 660)" fill="none" stroke="#c8d6df" stroke-width="2">
+      <rect width="60" height="60" rx="30" stroke="none"/>
+      <rect x="1" y="1" width="58" height="58" rx="29" fill="none"/>
+    </g>
+    <g id="ic_twitter" transform="translate(-340 136)">
+      <rect id="Base-2" data-name="Base" width="30" height="30" transform="translate(650 539)" fill="none"/>
+      <path id="Icon" d="M424-20.225a7.188,7.188,0,0,1-2.121.6,3.786,3.786,0,0,0,1.624-2.094,7.286,7.286,0,0,1-2.345.918,3.649,3.649,0,0,0-2.7-1.2,3.74,3.74,0,0,0-3.692,3.786,3.891,3.891,0,0,0,.1.863,10.4,10.4,0,0,1-7.612-3.957,3.849,3.849,0,0,0-.5,1.9,3.813,3.813,0,0,0,1.642,3.152,3.612,3.612,0,0,1-1.672-.474c0,.016,0,.032,0,.047a3.766,3.766,0,0,0,2.962,3.714,3.63,3.63,0,0,1-.973.133,3.618,3.618,0,0,1-.694-.068,3.711,3.711,0,0,0,3.449,2.63,7.292,7.292,0,0,1-4.586,1.622A7.28,7.28,0,0,1,406-8.7,10.273,10.273,0,0,0,411.661-7c6.792,0,10.507-5.77,10.507-10.774,0-.164,0-.328-.011-.49A7.6,7.6,0,0,0,424-20.225Z" transform="translate(250 569)" fill-rule="evenodd" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>

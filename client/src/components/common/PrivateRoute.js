@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import Spinner from "components/common/Spinner";
 
 /*
   Private route middleware for restricted access to 
@@ -14,10 +15,11 @@ const PrivateRoute = (
     ...rest 
   }
   ) => (
-  <Route {...rest}
-    render = { props =>
+    <Route
+    {...rest}
+    render={props =>
       !isAuthenticated && !loading ? (
-        <Redirect to="/" />
+        <Redirect to='/' />
       ) : (
         <Component {...props} />
       )

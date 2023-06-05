@@ -4,22 +4,27 @@ import PostFeed from "./profileposts/PostFeed";
 import { getPostsByUser } from "actions/postActions";
 import Spinner from "components/common/Spinner";
 import Card from "components/ui/cards/Card";
+import { CardPost } from "components/ui/cards/CardPost";
 
-export const ProfilePosts = ({ profile: { profile }, post: { posts, loading }, getPostsByUser }) => {
+export const ProfilePosts = ({ 
+    displayedProfile , 
+    profile: { profile },
+    post: { posts, loading }, 
+    getPostsByUser 
+  }) => {
  
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    if (profile) {
-      getPostsByUser(profile.user._id);
+    if (displayedProfile) {
+      getPostsByUser(displayedProfile.user?._id);
     }
-  }, [profile]);
+  }, [displayedProfile]);
 
   const updateSearch = (e) => {
     setSearch(e.target.value);
   };
 
-  const firstName = profile.user.name.trim().split(" ")[0];
 
   let postContent;
 
@@ -33,7 +38,20 @@ export const ProfilePosts = ({ profile: { profile }, post: { posts, loading }, g
     postContent = (
       <React.Fragment>
         {filteredPosts.map((post) => {
-          return <Card key={post._id} post={post} cardtype={"post"} />;
+          return (
+          <CardPost
+            id={post._id}
+            author={post.user}
+            date={post.date}
+            headline={post.headline}
+            excerpt={post.text}
+            postImage={post.headerimage}
+            contentId={post._id}
+            commentsNumber={post.comments.length}
+            likesNumber={post.likes.length}
+            useSavesList={profile?.lists}
+          />
+          )
         })}
       </React.Fragment>
     );
@@ -41,24 +59,19 @@ export const ProfilePosts = ({ profile: { profile }, post: { posts, loading }, g
 
   return (
     <div className="profilePosts">
-      <div className="container">
-        <div className="pageheading">
-          <h2 className="heading-2">{firstName}'s Posts</h2>
-        </div>
-
         <div className="filteredSearch">
           <input type="text" placeholder="Filter By Headline" value={search} onChange={updateSearch} className="form-control" />
         </div>
 
         <div className="posts">{postContent}</div>
-      </div>
+     
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.profile,
   post: state.post,
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, { getPostsByUser })(ProfilePosts);

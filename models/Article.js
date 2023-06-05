@@ -24,6 +24,9 @@ const ArticleSchema = new Schema({
   headline: {
     type: String
   },
+  subheadline: {
+    type: String
+  },
   avatar: {
     type: String
   },
@@ -105,6 +108,22 @@ const ArticleSchema = new Schema({
   },
   featured: {
     type: Number,
+  },
+  newstype: {
+    type: String,
+    default: 'news'
+  },
+  price: {
+    type: Number,
+  },
+  releaseDate: {
+    type: Date,
+  },
+  color: {
+    type: [String],
+  },
+  sizeRun: {
+    type: [String],
   },
 
 })

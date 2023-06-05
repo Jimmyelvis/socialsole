@@ -1,59 +1,61 @@
 .sneaker-card {
+  padding-bottom: 70%;
+  position: relative;
 
-  .info {
-    position: relative;
-    z-index: 10;
-    padding: 22rem 7rem 0 7rem;
-    height: 100%;
+  .card-info {
+    position: absolute;
+    top: 0;
     width: 100%;
 
-      @include respond(bp-large) {
-        padding: 22rem 3rem 0 3rem;
+    .info {
+      position: relative;
+      z-index: 10;
+      padding: 36% 7rem 0;
+      height: 100%;
+      width: 100%;
+
+
+      .open-menu {
+        position: absolute;
+        width: 2.4rem;
+        height: 2.4rem;
+        fill: $white;
+        cursor: pointer;
+        top: 3rem;
+        right: 3rem;
       }
-      
-    
-  
-    .open-menu {
-      position: absolute;
-      width: 2.4rem;
-      height: 2.4rem;
-      fill: $white;
-      cursor: pointer;
-      top: 3rem;
-      right: 3rem;
-    }
-  
-     .model {
-       font-size: 4.5rem;
-       color: $white;
-       margin-bottom: 0.5rem;
+
+      .model {
+        font-size: 4rem;
+        color: $white;
+        margin-bottom: 0.5rem;
 
         @include respond(bp-medium) {
-          font-size: 3.5rem;
-        }
-
-        @include respond(bp-small) {
-          font-size: 4.5rem;
-        }
-     }
-  
-     .colorway {
-       font-size: 4rem;
-       color: $lt-orange;
-       margin-bottom: 1rem;
-
-        @include respond(bp-medium) {
-          font-size: 3rem;
+          font-size: 3.1rem;
         }
 
         @include respond(bp-small) {
           font-size: 4rem;
         }
-     }
-  
-     .year {
-       color: $alternateblue;
-       font-size: 3rem;
+      }
+
+      .colorway {
+        font-size: 3.5rem;
+        color: $lt-orange;
+        margin-bottom: 1rem;
+
+        @include respond(bp-medium) {
+          font-size: 2.5rem;
+        }
+
+        @include respond(bp-small) {
+          font-size: 3.5rem;
+        }
+      }
+
+      .year {
+        color: $ltpowderblue;
+        font-size: 3rem;
 
         @include respond(bp-medium) {
           font-size: 2.2rem;
@@ -62,16 +64,19 @@
         @include respond(bp-small) {
           font-size: 3.2rem;
         }
-     }
-  
-     .author-header {
-       top: 4rem;
-       left: 4rem;
-     }
-  
-     .close-menu {
-      top: 3rem;
-      right: 3rem;
-     }
+      }
+
+      .author-header {
+        top: 4rem;
+        left: 4rem;
+      }
+
+      .close-menu {
+        top: 3rem;
+        right: 3rem;
+      }
+    }
+
   }
+
 }

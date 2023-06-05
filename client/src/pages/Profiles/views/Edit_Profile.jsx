@@ -58,10 +58,10 @@ const EditProfile = ({ getCurrentProfile, createProfile, history, profile: { pro
         profilephoto: !isEmpty(profile.profilephoto) ? profile.profilephoto : "",
         avatar: !isEmpty(profile.avatar) ? profile.avatar : "",
         bio: !isEmpty(profile.bio) ? profile.bio : "",
-        twitter: !isEmpty(profile.social.twitter) ? profile.social.twitter : "",
-        facebook: !isEmpty(profile.social.facebook) ? profile.social.facebook : "",
-        youtube: !isEmpty(profile.social.youtube) ? profile.social.youtube : "",
-        instagram: !isEmpty(profile.social.instagram) ? profile.social.instagram : "",
+        twitter: !isEmpty(profile.social?.twitter) ? profile.social.twitter : "",
+        facebook: !isEmpty(profile.social?.facebook) ? profile.social.facebook : "",
+        youtube: !isEmpty(profile.social?.youtube) ? profile.social.youtube : "",
+        instagram: !isEmpty(profile.social?.instagram) ? profile.social.instagram : "",
       });
     }
   }, [loading]);

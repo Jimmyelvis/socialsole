@@ -1,10 +1,19 @@
 import axios from "axios";
 
-import { ARTICLE_LOADING, GET_ARTICLE, GET_ARTICLES, ADD_ARTICLE, GET_ERRORS, CLEAR_ERRORS } from "./types";
+import {
+    ARTICLE_LOADING,
+    GET_ARTICLE,
+    GET_ARTICLES,
+    ADD_ARTICLE,
+    GET_ERRORS,
+    CLEAR_ERRORS,
+    UNLIKE_ARTICLE,
+    LIKE_ARTICLE,
+} from './types';
 
 import { setAlert } from "./alert";
 
-// Add Post
+// Add Article
 export const addArticle = (articleData, history) => (dispatch) => {
   dispatch(clearErrors());
   axios
@@ -16,6 +25,38 @@ export const addArticle = (articleData, history) => (dispatch) => {
           payload: res.data,
         },
         history.push(`/article/${res.data._id}`)
+      );
+    })
+    .catch((err) => {
+
+        const errors = err.response.data;
+
+        if (errors) {
+          errors.forEach((error, index) => {
+            dispatch(setAlert(error, "danger"));
+          });
+        }
+
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
+// Add Article
+export const addNewRelease = (articleData, history) => (dispatch) => {
+  dispatch(clearErrors());
+  axios
+    .post("/api/articles/newrelease", articleData)
+    .then((res) => {
+      dispatch(
+        {
+          type: ADD_ARTICLE,
+          payload: res.data,
+        },
+        // history.push(`/article/${res.data._id}`)
+        dispatch(setAlert("New Release Created", "success"))
       );
     })
     .catch((err) => {
@@ -139,6 +180,42 @@ export const getCurrentArticle = (id) => (dispatch) => {
       })
     );
 };
+
+// Like Version 
+export const addLike = id => dispatch => {
+  axios
+    .post(`/api/articles/like/${id}`)
+    .then(({ data }) => {
+      dispatch({
+        type: LIKE_ARTICLE,
+        payload: data //pass in updated post
+      });
+    })
+    .catch(({ response }) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: response.data
+      });
+    });
+};
+
+// Remove Like 
+export const removeLike = id => dispatch => {
+  axios
+    .post(`/api/articles/unlike/${id}`)
+    .then(({ data }) => {
+      dispatch({
+        type: UNLIKE_ARTICLE,
+        payload: data //pass in updated post
+      });
+    })
+    .catch(({ response }) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: response.data
+      });
+    });
+}
 
 /*
   Get articles that are related to currently loaded article
