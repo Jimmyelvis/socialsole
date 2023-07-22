@@ -246,6 +246,38 @@ export const deleteComment = (postId, commentId) => dispatch => {
     );
 };
 
+export const editFeatured = (
+  prevPostId, nextPostId, nextPostPosNumber, type
+  ) => dispatch => {
+
+  const data = {
+    prevPostId,
+    nextPostId,
+    nextPostPosNumber,
+    type
+  }
+
+  console.log("data", data);
+
+  axios
+    .post(`/api/admin/editfeatureditems`, data)
+    .then(res =>
+      // dispatch({
+      //   type: GET_POSTS,
+      //   payload: res.data
+      // })
+      dispatch(setAlert(res.data.msg, "success"))
+    )
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    });
+}
+
+
+
 // Set loading state
 export const setPostLoading = () => {
   return {

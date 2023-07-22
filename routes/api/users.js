@@ -186,6 +186,22 @@ router.get('/all', (req, res) => {
 
 });
 
+router.post('/changeuser', (req, res) => {
+
+  const userId = req.body._id;
+  const role = req.body.role;
+
+  User.findOneAndUpdate({_id: userId}, {role: role}, {new: true})
+  .select('-password')
+  .then(user => {
+    res.json({
+      user: user,
+      msg: 'User Role changed to ' + user.role
+    })
+  })
+  
+});
+
 
 
 // @route   GET api/users/current

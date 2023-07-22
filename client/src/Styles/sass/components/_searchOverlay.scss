@@ -2,8 +2,9 @@
   display: grid;
   @include gridTempColumn;
   grid-column: 1 / -1;
-  height: 100%;
+  // height: 100%;
   position: relative;
+  grid-auto-rows: max-content;
 
 
   form {
@@ -19,8 +20,8 @@
       width: 100%;
       font-size: 2.5rem;
       line-height: 1.5;
-      color: #8990b6;
-      background-color: rgb(150 171 201 / 16%);
+      color: $midnightblue;
+      background-color: rgb(218 223 232);
       background-clip: padding-box;
       border: 1px solid rgb(255 255 255);
       border-bottom: rgba(255, 255, 255, 0.57) 4px solid;
@@ -57,39 +58,276 @@
   }
 
 
-  .results-menuBar {
-    grid-column: col-start 5/col-end 8;
-    display: flex;
-    margin-top: 17rem;
-    gap: 5rem;
-    height: 9rem;
-    list-style: none;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgb(129 174 212 / 28%);
 
-    li {
+  .render-results {
+    grid-column: col-start 2/col-end 11;
+    margin-top: 22rem;
+    margin-bottom: 22rem;
+
+
+    .results-menuBar {
+      grid-column: col-start 5/col-end 8;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      width: 60rem;
+      margin: 0 auto;
+      margin-bottom: 6rem;
+      gap: 5rem;
+      height: 9rem;
+      list-style: none;
       align-items: center;
-      gap: 0.5rem;
-      height: 100%;
+      justify-content: center;
+      border: 2px solid rgb(129 174 212 / 28%);
 
-      .label {
-        font-size: 2.7rem;
+      @include respond(bp-small) {
+        width: 44rem;
       }
 
-      .count {
-        font-size: 2.4rem;
-        color: $lt-orange;
-        font-family: $font-display;
+      @include respond(bp-tiny) {
+        width: 36.5rem;
+        gap: 3rem;
+      }
+
+      li {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        height: 100%;
+        cursor: pointer;
+
+        .label {
+          font-size: 2.7rem;
+        }
+
+        .count {
+          font-size: 2.4rem;
+          color: $lt-orange;
+          font-family: $font-display;
+        }
       }
     }
+
+    .tab-content {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+
+      @include respond(bp-large) {
+       grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include respond(bp-small) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      .card-post {
+        height: 51rem;
+
+        @include respond(bp-large) {
+          width: 90%;
+          margin: 0 auto;
+        }
+
+        @include respond(bp-medium) {
+          width: 100%;
+          height: 46rem;
+        }
+
+        @include respond(bp-small) {
+          width: 46rem;
+          height: 57rem;
+        }
+
+        @include respond(bp-tiny) {
+          width: 38rem;
+          height: 48rem;
+        }
+      }
+
+      .sneaker-card {
+        padding-bottom: 91%;
+
+        @include respond(bp-small) {
+          padding-bottom: 70%;
+          width: 50rem;
+          justify-self: center;
+        }
+
+        @include respond(bp-smallest) {
+          padding-bottom: 78%;
+          width: 43rem;
+          justify-self: center;
+        }
+
+        @include respond(bp-tiny) {
+          padding-bottom: 90%;
+          width: 37rem;
+        }
+
+        .icon-ellipsis {
+          right: 3rem;
+          position: absolute;
+          top: 1.5rem;
+          cursor: pointer;
+          color: $white;
+          z-index: 200;
+          width: 2.2rem;
+          height: 2.2rem;
+        }
+
+        .info {
+
+          .author-header {
+
+            .avatar {
+              width: 5rem;
+              height: 5rem;
+            }
+
+            .author-name {
+              font-size: 2.6rem;
+            }
+          }
+
+
+
+        }
+        
+        @include respond(bp-largest) {
+         
+          .info {
+            padding: 36% 3rem 0;
+
+            .model {
+              font-size: 3.5rem;
+            }
+
+            .colorway {
+              font-size: 3rem;
+            }
+
+            .year {
+              font-size: 2.5rem;
+            }
+          }
+
+        }
+
+        @include respond(bp-large) {
+         
+          .info {
+
+            .model {
+              font-size: 4rem
+            }
+
+            .colorway {
+              font-size: 3.5rem;
+            }
+
+            .year {
+              font-size: 3rem;
+            }
+          }
+
+        }
+
+
+      }
+    }
+
+    .article-card {
+      padding: 4rem;
+      padding-bottom: 20%;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+
+      @include respond(bp-large) {
+        padding-bottom: 25%;
+      }
+
+      @include respond(bp-small) {
+        width: 48rem;
+        justify-self: center;
+      }
+
+      @include respond(bp-smallest) {
+        width: 40rem;
+        padding-bottom: 17%;
+      }
+
+      @include respond(bp-tiny) {
+        width: 36rem;
+        padding-bottom: 14%;
+      }
+
+        
+      .card-info {
+
+        .author-header--with-date {
+
+          .avatar {
+            width: 5rem;
+            height: 5rem;
+          }
+
+          .author-name {
+            font-size: 2.5rem;
+            color: $white;
+            margin-bottom: 0.3rem;
+          }
+
+          .post-date {
+            font-size: 1.6rem;
+            color: $lt-orange;
+            font-weight: bold;
+          }
+        }
+
+        .article-title {
+          font-size: 3rem;
+          color: #aaddff;
+          margin-top: 9rem;
+
+          a {
+            color: inherit;
+          }
+
+          @include respond(bp-large) {
+            margin-top: 12rem;
+          }
+        }
+
+        .article-excerpt {
+          @include lineClamp(3);
+          color: $white;
+          margin-top: 1rem;
+
+          @include respond(bp-large) {
+            margin-top: 3rem;
+          }
+
+        }
+      }
+
+      .overlay {
+        background: linear-gradient(to bottom, rgb(0 0 0 / 40%) 0%, rgba(0, 0, 0, 0.68) 70%);
+      }
+
+    }
+
   }
 
   .close-modal-btn {
     position: absolute;
     top: 2.5rem;
+  }
+
+  .scrolled-background {
+    background-color: rgb(255 244 244);
   }
 }

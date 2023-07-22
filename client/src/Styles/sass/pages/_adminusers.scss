@@ -1,0 +1,180 @@
+.userfilters {
+  grid-column: 3/13;
+  display: grid;
+  height: 7rem;
+  grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(12, [col-start] minmax(min-content, 13rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+  align-items: center;
+  margin-top: 5rem;
+
+  @include respond(bp-large) {
+    height: 13rem;
+    margin-top: 0;
+  }
+
+  .filter_text {
+    grid-column: 6/10;
+    height: 4.7rem;
+
+    @include respond(bp-large) {
+      align-self: end;
+      order: 1;
+      grid-column: 5/11;
+    }
+
+    @include respond(bp-medium) {
+      grid-column: 1/15;
+    }
+
+    .form-control {
+      height: 100%;
+      font-size: 1.8rem;
+    }
+  }
+
+  .filter_role {
+    grid-column: 12/ -1;
+
+    @include respond(bp-large) {
+      align-self: baseline;
+      grid-column: 6/10;
+      order: 0;
+    }
+
+    @include respond(bp-medium) {
+      grid-column: 2/14;
+    }
+
+    @include respond(bp-medium) {
+      grid-column: 1/15;
+    }
+  }
+}
+
+// .user_update_pg {
+//   grid-column: 6 / 10;
+// }
+
+
+.users-list {
+  grid-column: 3/13;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 10rem 0;
+  gap: 1rem;
+  min-height: 35rem;
+
+  @include respond(bp-largest) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond(bp-medium) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond(bp-smallest) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .user {
+    display: flex;
+    height: 35rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .edit_btn {
+      position: absolute;
+      width: 4.2rem;
+      height: 4.2rem;
+      z-index: 2000;
+      top: 2rem;
+      right: 2rem;
+      cursor: pointer;
+    }
+
+    @include createAvatar(12rem);
+
+    .avatar {
+      border: 5px solid #d1daf1;
+      margin-bottom: 2rem;
+    }
+
+
+    .admin_heading-3 {
+      font-size: 2.6rem;
+      font-family: $font-primary;
+      font-weight: bold;
+      margin-bottom: 2rem;
+    }
+
+    .admin_heading-4 {
+      font-size: 1.6rem;
+      color: $white;
+      font-weight: bold;
+      font-family: $font-primary;
+      font-family: interstate, sans-serif;
+      background-color: rgb(180 198 229);
+      padding: 0.7rem 2.3rem;
+      border-radius: 1.4rem;
+    }
+
+    .btn-primary-grad {
+      width: 8rem;
+      text-align: center;
+      padding: 0.6rem 1.6rem;
+    }
+  }
+
+}
+
+.userupdate {
+  display: grid;
+  grid-template-columns: 30rem 1fr;
+  width: 65%;
+  margin: 0 auto;
+  grid-column: 4 /12;
+  grid-template-rows: min-content;
+
+  .left {
+    display: flex;
+  }
+
+  .right {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, max-content);
+
+    .inputField {
+      position: relative;
+      margin: 0;
+      margin-bottom: 2rem;
+      grid-column: 1 / -1;
+
+      .inputCtrl {
+        padding: 0 6rem;
+      }
+    }
+
+    .selector {
+      position: relative;
+      height: 3rem;
+      grid-column: 1 / 3;
+
+      select {
+        grid-row: 4 /5;
+        grid-column: 1 / 3;
+      }
+
+    }
+
+
+    .btn {
+      grid-row: 5 / 6;
+      margin-top: 2rem;
+      justify-self: end;
+      grid-column: 1 / -1;
+    }
+
+  }
+}

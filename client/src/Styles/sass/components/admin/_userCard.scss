@@ -1,0 +1,50 @@
+.user-card {
+  display: flex;
+  height: 35rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .edit-user-btn {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    z-index: 200;
+    top: 2rem;
+    right: 2rem;
+    cursor: pointer;
+  }
+
+  @include createAvatar(12rem);
+
+  .avatar {
+    border: 5px solid #d1daf1;
+    margin-bottom: 2rem;
+  }
+
+
+  .users-name {
+    font-size: 2.6rem;
+    font-family: $font-primary;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+
+  .user-role {
+    font-size: 1.6rem;
+    color: $white;
+    font-weight: bold;
+    font-family: $font-primary;
+    font-family: interstate, sans-serif;
+    background-color: $alternateblue;
+    padding: 0.7rem 2.3rem;
+    border-radius: 1.4rem;
+  }
+
+  .btn-primary-grad {
+    width: 8rem;
+    text-align: center;
+    padding: 0.6rem 1.6rem;
+  }
+}

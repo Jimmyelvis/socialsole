@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48.133" height="48.132" viewBox="0 0 48.133 48.132">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.679" gradientTransform="translate(0 0.012) scale(1 0.976)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#adf"/>
+    </radialGradient>
+    <filter id="dashboard-close" x="0" y="0" width="48.133" height="48.132" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#dashboard-close)">
+    <path id="dashboard-close-2" data-name="dashboard-close" d="M18.441,3.375A15.066,15.066,0,1,0,33.507,18.441,15.064,15.064,0,0,0,18.441,3.375ZM22.259,23.9l-3.817-3.817L14.624,23.9a1.158,1.158,0,1,1-1.637-1.637L16.8,18.441l-3.817-3.817a1.158,1.158,0,0,1,1.637-1.637L18.441,16.8l3.817-3.817A1.158,1.158,0,0,1,23.9,14.624l-3.817,3.817L23.9,22.259a1.163,1.163,0,0,1,0,1.637A1.15,1.15,0,0,1,22.259,23.9Z" transform="translate(5.63 2.63)" fill="url(#radial-gradient)"/>
+  </g>
+</svg>

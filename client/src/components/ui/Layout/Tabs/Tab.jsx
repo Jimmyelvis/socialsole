@@ -5,6 +5,7 @@ export const Tab = ({ label, onClick, activeTab }) => {
     "tab-list-active": activeTab === label,
   });
 
+
   return (
     <li className={classes} onClick={() => onClick(label)}>
       {label}

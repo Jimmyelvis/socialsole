@@ -4,7 +4,8 @@ import {
   GET_SNEAKERS,
   DELETE_SNEAKER,
   SNEAKER_LOADING,
-  LIKE_SNEAKER
+  LIKE_SNEAKER,
+  GET_SNEAKERS_ADMIN
  } from "../actions/types";
 
  const initialState = {
@@ -22,6 +23,12 @@ export default function (state = initialState, action) {
         loading: true
       };
     case GET_SNEAKERS:
+      return {
+        ...state,
+        sneakers: action.payload,
+        loading: false
+      };
+    case GET_SNEAKERS_ADMIN:
       return {
         ...state,
         sneakers: action.payload,

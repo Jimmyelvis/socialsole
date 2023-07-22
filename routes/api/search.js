@@ -25,56 +25,119 @@ router.get('/query/:query', (req, res) => {
         // Search for the search term in the title, body, and tags
 
         // Find all blogs that match the search term
-        Post.find(
-          { $or: [
-              { headline: { $regex: search, $options: "i" } }, 
-              { tags: { $regex: search, $options: "i" } }
-            ] 
-          }, 
-            (err, posts) => {
-            if (err) {
-                console.log(err);
-            } else {
-                Sneaker.find(
-                  { $or: [
-                    { model: { $regex: search, $options: "i" } }, 
-                    { colorway: { $regex: search, $options: "i" } }, 
-                    { tags: { $regex: search, $options: "i" } }
-                    ] }, 
-                    (err, sneakers) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        Article.find({ 
-                          $or: [
-                            { headline: { $regex: search, $options: "i" } }, 
-                            { body: { $regex: search, $options: "i" } }, 
-                            { tags: { $regex: search, $options: "i" } }
-                          ] }, 
-                            (err, articles) => {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                res.json({ 
-                                  posts: {
-                                    posts,
-                                    count: posts.length
-                                  },
-                                  sneakers: {
-                                    sneakers,
-                                    count: sneakers.length
-                                  }, 
-                                  articles: {
-                                    articles,
-                                    count: articles.length
-                                  }
-                                });
-                            }
-                        })
-                    }
-                })
-            }
+
+        // Post.find(
+        //   { $or: [
+        //       { headline: { $regex: search, $options: "i" } }, 
+        //       { tags: { $regex: search, $options: "i" } }
+        //     ] 
+        //   }, 
+        //     (err, posts) => {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         Sneaker.find(
+        //           { $or: [
+        //             { model: { $regex: search, $options: "i" } }, 
+        //             { colorway: { $regex: search, $options: "i" } }, 
+        //             { tags: { $regex: search, $options: "i" } }
+        //             ] }, 
+        //             (err, sneakers) => {
+        //             if (err) {
+        //                 console.log(err);
+        //             } else {
+        //                 Article.find({ 
+        //                   $or: [
+        //                     { headline: { $regex: search, $options: "i" } }, 
+        //                     { body: { $regex: search, $options: "i" } }, 
+        //                     { tags: { $regex: search, $options: "i" } }
+        //                   ] }, 
+        //                     (err, articles) => {
+        //                     if (err) {
+        //                         console.log(err);
+        //                     } else {
+        //                         res.json({ 
+        //                           posts: {
+        //                             posts,
+        //                             count: posts.length
+        //                           },
+        //                           sneakers: {
+        //                             sneakers,
+        //                             count: sneakers.length
+        //                           }, 
+        //                           articles: {
+        //                             articles,
+        //                             count: articles.length
+        //                           }
+        //                         });
+        //                     }
+        //                 })
+        //             }
+        //         })
+        //     }
+        // })
+
+        Post.find({ 
+          $or: [
+            { headline: { $regex: search, $options: "i" } }, 
+            { tags: { $regex: search, $options: "i" } }
+          ] 
         })
+        .populate('user', ['name', 'avatar'])
+        .then((posts) => {
+
+          Sneaker.find({ 
+            $or: [
+              { model: { $regex: search, $options: "i" } },
+              { colorway: { $regex: search, $options: "i" } },
+              { tags: { $regex: search, $options: "i" } }
+            ]
+           })
+            .populate('user', ['name', 'avatar'])
+            .then((sneakers) => {
+
+              Article.find({ 
+                $or: [
+                  { headline: { $regex: search, $options: "i" } },
+                  { body: { $regex: search, $options: "i" } },
+                  { tags: { $regex: search, $options: "i" } }
+                ]
+              })
+                .populate('user', ['name', 'avatar'])
+                .then((articles) => {
+
+                  res.json({
+                    posts: {
+                      posts,
+                      count: posts.length
+                    },
+                    sneakers: {
+                      sneakers,
+                      count: sneakers.length
+                    },
+                    articles: {
+                      articles,
+                      count: articles.length
+                    }
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+                  return res.status(500).json({ error: 'An error occurred' });
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+              return res.status(500).json({ error: 'An error occurred' });
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({ error: 'An error occurred' });
+        });
+
+
+
     } else {
         res.json({ posts: [], sneakers: [], articles: [] });
 

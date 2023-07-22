@@ -6,6 +6,7 @@ import {
   ADD_COMMENT,
   LIKE_ARTICLE,
   UNLIKE_ARTICLE,
+  GET_ARTICLES_ADMIN
 } from "../actions/types";
 
 const initialState = {
@@ -29,6 +30,12 @@ export default function (state = initialState, action) {
         loading: false
       };
     case GET_ARTICLES:
+      return {
+        ...state,
+        articles: action.payload,
+        loading: false
+      };
+    case GET_ARTICLES_ADMIN:
       return {
         ...state,
         articles: action.payload,

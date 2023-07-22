@@ -10,7 +10,8 @@ import {
   GET_SNEAKER,
   DELETE_SNEAKER,
   SNEAKER_LOADING,
-  LIKE_SNEAKER
+  LIKE_SNEAKER,
+  GET_SNEAKERS_ADMIN
 } from './types';
 
 
@@ -50,6 +51,33 @@ export const getSneakers = (load = true) => (dispatch) => {
 		.catch((err) =>
 			dispatch({
 				type: GET_SNEAKERS,
+				payload: null
+			})
+		);
+};
+
+/* Get Sneakers - A slightly different version from
+  above, this one is used for the admin page, and disables
+  caching so that the admin page can see the latest changes
+  to the database
+*/
+export const getSneakersAdmin = (load = true) => (dispatch) => {
+	if (load) dispatch(setSneakerLoading);
+	axios
+    .get('/api/sneakers', {
+      headers: {
+        'Cache-Control': 'no-cache',
+      },
+    })
+		.then((res) =>
+			dispatch({
+				type: GET_SNEAKERS_ADMIN,
+				payload: res.data
+			})
+		)
+		.catch((err) =>
+			dispatch({
+				type: GET_SNEAKERS_ADMIN,
 				payload: null
 			})
 		);
@@ -259,6 +287,36 @@ export const deleteComment = (sneakerId, commentId) => dispatch => {
       })
     );
 };
+
+export const editFeatured = (
+  prevPostId, nextPostId, nextPostPosNumber, type
+  ) => dispatch => {
+
+  const data = {
+    prevPostId,
+    nextPostId,
+    nextPostPosNumber,
+    type
+  }
+
+  console.log("data", data);
+
+  axios
+    .post(`/api/admin/editfeatureditems`, data)
+    .then(res =>
+      // dispatch({
+      //   type: GET_POSTS,
+      //   payload: res.data
+      // })
+      dispatch(setAlert(res.data.msg, "success"))
+    )
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    });
+}
 
 // Set loading state
 export const setSneakerLoading = () => {

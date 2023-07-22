@@ -3,6 +3,7 @@ import className from 'classnames';
 export const Button = ({
   children,
   primary,
+  primaryDarker,
   secondary,
   success,
   warning,
@@ -15,6 +16,7 @@ export const Button = ({
     'btn',
     {
       'btn-lightblue': primary,
+      'btn-darkblue': primaryDarker,
       'border-red-500 bg-red-500 text-white': danger,
       'btn-rounded': rounded,
     },

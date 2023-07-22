@@ -8,7 +8,7 @@ import parse from 'html-react-parser';
  import { Link } from "react-router-dom";
 
 
-export const CardPost = ({ id, author, date, headline, excerpt, likesNumber, commentsNumber, postImage, useSavesList, contentId }) => {
+export const CardPost = ({ id, author, date, headline, excerpt, likesNumber, commentsNumber, postImage, useSavesList, contentId, closeAndClear }) => {
   const { openMenu } = useSaveOptions();
 
   const parentRef = useRef();
@@ -48,7 +48,7 @@ export const CardPost = ({ id, author, date, headline, excerpt, likesNumber, com
         </div>
 
         <div className="headline">
-          <h3 className="heading-3">
+          <h3 className="heading-3" onClick={closeAndClear}>
             <Link to={`/post/${id}`}>
               {headline}
             </Link>
@@ -62,7 +62,9 @@ export const CardPost = ({ id, author, date, headline, excerpt, likesNumber, com
 
       <div className="bottom">
         <div className="excerpt">
-          {parse(excerpt)}
+          {
+            excerpt && parse(excerpt)
+          }
         </div>
 
         <CardFooter likesNumber={likesNumber} commentsNumber={commentsNumber} />

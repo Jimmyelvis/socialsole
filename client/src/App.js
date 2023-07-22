@@ -20,6 +20,7 @@ import { Allposts, Create_Post, Post_Single, Edit_Post } from "pages/Posts";
 import { AllSneakers, Add_Sneaker, Edit_Sneaker, Sneaker_Detail } from "pages/Sneakers";
 import { AllProfiles, Create_Profile, Edit_Profile, Profile_Detail } from "pages/Profiles";
 import { All_Articles, Article_Detail, Create_Article, Edit_Article, ArticlesHome } from "pages/Articles";
+import { AdminDashboardHome, PostsOverview, SneakersOverview, ArticlesOverview, FeaturedPosts, FeaturedSneakers, FeaturedArticles, EditUsers } from "pages/AdminDashboard";
 import NotFound from "./components/not-found/NotFound";
 import Alert from "./components/layout/Alerts";
 
@@ -30,6 +31,7 @@ import { ModalProvider } from "context/modalContext";
 import { WindowContextProvider } from "context/windowContext";
 
 import "./Styles/sass/App.scss";
+
 
 const App = () => {
 
@@ -109,6 +111,16 @@ const App = () => {
                   <Route exact path="/articles" component={ArticlesHome} />
                   <Route exact path="/allarticles/" component={All_Articles} />
                   <Route exact path="/article/:id" component={Article_Detail} />
+                  <Route exact path="/admin" component={AdminDashboardHome} />
+                  <Route exact path="/admin/postsoverview" component={PostsOverview} />
+                  <Route exact path="/admin/sneakersoverview" component={SneakersOverview} />
+                  <Route exact path="/admin/articlesoverview" component={ArticlesOverview} />
+                  <Route exact path="/admin/featuredposts" component={FeaturedPosts} />
+                  <Route exact path="/admin/featuredsneakers" component={FeaturedSneakers} />
+                  <Route exact path="/admin/featuredarticles" component={FeaturedArticles} />
+                  <Route exact path="/admin/editusers" component={EditUsers} />
+
+
 
                   <Switch>
                     <PrivateRoute exact path="/dashboard" component={Dashboard_Home} />

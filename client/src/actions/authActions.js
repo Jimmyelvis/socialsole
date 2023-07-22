@@ -11,7 +11,8 @@ import { GET_ERRORS,
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  GET_ALL_USERS
 
 } from "./types";
 import { setAlert } from "./alert";
@@ -143,4 +144,43 @@ export const logoutUser = () => (dispatch) => {
   dispatch(clearCurrentProfile());
 };
 
+export const changeUserRole = (_id, role) => (dispatch) => {
 
+const userData = {
+  _id,
+  role
+}
+
+
+  axios
+    .post("/api/users/changeuser", userData)
+    .then((res) => {
+
+      dispatch(setAlert(res.data.msg, "success"));
+
+      dispatch(getAllUsers());
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(setAlert(err.response.data.msg, "danger"));
+    });
+};
+
+
+export const getAllUsers = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get('/api/users/all')
+    .then(res =>
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: null
+      })
+    );
+};

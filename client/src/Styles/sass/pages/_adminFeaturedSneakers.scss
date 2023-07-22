@@ -1,0 +1,162 @@
+.featured-sneakers {
+  margin-top: 8rem;
+  grid-column: col-start 2 / col-end 11;
+  grid-template-columns: repeat(auto-fill, minmax(31.3rem, 40.7rem));
+  justify-content: space-evenly;
+  display: grid;
+  gap: 2rem;
+  padding-bottom: 10rem;
+
+  .featured-entry {
+    display: flex;
+    flex-direction: column;
+
+    .featured-entry__label {
+      text-align: center;
+      margin: 3rem auto;
+  
+      .heading-4 {
+        font-size: 3.9rem;
+      }
+    }
+
+    .sneaker-card {
+      padding-bottom: 90%;
+      position: relative;
+  
+      .card-info {
+  
+        .avatar {
+          width: 5rem;
+          height: 5rem;
+        }
+  
+        .btn-select {
+          position: absolute;
+          bottom: 3.5rem;
+          right: 2.5rem;
+          z-index: 100;
+          color: $midnightblue;
+          font-weight: bold;
+          border: 3px solid rgb(255 255 255 / 91%);
+        }
+      }
+    }
+
+
+  }
+
+
+}
+
+.other-sneakers {
+  margin-top: 8rem;
+  grid-column: col-start 2 /col-end 11;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(31.3rem, 38rem));
+  grid-auto-rows: 40rem;
+  gap: 3rem;
+  justify-content: center;
+  padding: 8rem 0;
+
+  .sneaker-card {
+  
+    .card-info {
+
+      .avatar {
+        width: 5rem;
+        height: 5rem;
+      }
+
+      @include overlay;
+
+      .overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(0 0 0 / 75%);
+        flex-direction: column;
+        gap: 2rem;
+
+        .check-circle {
+          width: 7rem;
+        }
+
+        .heading-3 {
+          color: #fff;
+          width: 75%;
+          text-align: center;
+          margin: 0 auto;
+        }
+      }
+
+      .button-group {
+        position: absolute;
+        bottom: 2rem;
+        z-index: 200;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        width: 100%;
+
+        .btn {
+          padding: 0.7rem 2.4rem;
+          font-size: 1.7rem;
+        }
+
+        .btn-select {
+          position: absolute;
+          bottom: 3.5rem;
+          right: 2.5rem;
+          z-index: 100;
+          color: $midnightblue;
+          font-weight: bold;
+          border: 3px solid rgb(255 255 255 / 91%);
+        }
+
+      }
+
+    }
+  }
+
+
+
+  // .card-post {
+      
+  //   .top {
+  //     flex: 0 0 30rem;
+
+  //     @include overlay;
+  //     .overlay {
+  //       display: flex;
+  //       justify-content: center;
+  //       align-items: center;
+  //       background-color: rgb(0 0 0 / 75%);
+  //       flex-direction: column;
+  //       gap: 2rem;
+
+  //       .check-circle {
+  //         width: 7rem;
+  //       }
+
+  //       .heading-3 {
+  //         color: #fff;
+  //         width: 75%;
+  //         text-align: center;
+  //         margin: 0 auto;
+  //       }
+  //     }
+  //   }
+
+  //   .bottom {
+  //     padding-bottom: 20%;
+
+  //     .button-group {
+  //       display: flex;
+  //       justify-content: center;
+  //       gap: 2rem;
+  //     }
+  //   }
+
+  // }
+}

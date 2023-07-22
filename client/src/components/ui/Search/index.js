@@ -4,23 +4,26 @@ import { useModal } from "context/modalContext";
 import { getResults } from "actions/searchActions";
 import { connect } from "react-redux";
 import { ResultsMenu } from "./components/ResultsMenu";
+import { RenderResults } from "./components/RenderResults";
 
-const Search = ({ search, getResults }) => {
+const Search = ({ search, getResults, 
+  profile: { profile } 
+}) => {
+
   const refContainer = useRef(null);
   const timeoutRef = useRef(null);
 
   const [values, setValues] = useState({
-    search: "",
+    searchTerm: "",
     results: [],
     message: "",
   });
 
-  const { search: searchTerm, results, message } = values;
+  const { searchTerm, results, message } = values;
   const { closeModal } = useModal();
 
-  /**
-   * Need another useEfect to acomplish this refer to dashboard timeline example
-   */
+
+
   useEffect(() => {
     if (searchTerm) {
       clearTimeout(timeoutRef.current);
@@ -32,20 +35,26 @@ const Search = ({ search, getResults }) => {
   
   useEffect(() => {
     
+    if (search.results) {
+      
+      setValues({
+        ...values,
+        results: search.results,
+        message: "",
+      });
+    }
     
-    setValues({
-      ...values,
-      results: search.results,
-      message: "",
-    });
     
-  }, [])
-  
+  }, [search.results ])
+
+
+
+
 
   const handleChange = (e) => {
     setValues({
       ...values,
-      search: e.target.value,
+      searchTerm: e.target.value,
     });
   };
 
@@ -65,7 +74,7 @@ const Search = ({ search, getResults }) => {
   const closeAndClear = () => {
     closeModal();
     setValues({
-      search: "",
+      searchTerm: "",
       results: [],
       message: "",
     });
@@ -89,47 +98,32 @@ const Search = ({ search, getResults }) => {
     </form>
   );
 
-  const renderResults = () => {
-    if (search.loading) {
-      return <div>Loading...</div>;
-    }
 
-    if (search.results && search.results.length === 0) {
-      return <div>No results found.</div>;
-    }
 
-    if (search.results) {
-      return (
-        <ul>
-          {search.results.map((result) => (
-            <li key={result.id}>{result.title}</li>
-          ))}
-        </ul>
-      );
-    }
 
-    return null;
-  };
-
-  console.log('====================================');
-  console.log('search', search);
-  console.log('====================================');
 
   return (
-    <div className="search-overlay">
+    <div 
+      className="search-overlay"
+      
+    >
       {searchForm()}
 
-      <ResultsMenu
+      <RenderResults
         results={results}
+        searchTerm={searchTerm}
+        loading={search.loading}
+        profile={profile}
+        closeAndClear={closeAndClear}
       />
 
-      {/* {renderResults()} */}
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   search: state.search,
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, { getResults })(Search);

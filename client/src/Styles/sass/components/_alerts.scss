@@ -1,18 +1,22 @@
 .alert {
-  padding: 0.8rem;
+  padding: 1.7rem;
   opacity: 1;
   color: #fff;
   position: fixed;
   left: 5rem;
   z-index: 5000;
-  width: 50rem;
+  width: 80rem;
   top: 18%;
   text-align: center;
   font-size: 2rem;
   transition: opacity 300ms linear;
-  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 15%);
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 4px;
+
+  @include respond(bp-medium) {
+    width: 80%
+  }
 }
 
 .alert-danger {

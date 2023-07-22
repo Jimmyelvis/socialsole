@@ -29,6 +29,11 @@
         font-size: 4rem;
         color: $white;
         margin-bottom: 0.5rem;
+        cursor: pointer;
+
+        a {
+          color: inherit;
+        }
 
         @include respond(bp-medium) {
           font-size: 3.1rem;

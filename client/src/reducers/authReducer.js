@@ -5,7 +5,8 @@ import {
   AUTH_ERROR,
   LOGOUT,
   REGISTER_SUCCESS,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  GET_ALL_USERS
 
  } from "../actions/types";
 
@@ -14,6 +15,7 @@ const initialState = {
   token: localStorage.getItem('jwtToken'),
   user: null,
   loading: true,
+  users: []
 };
 
  /**
@@ -35,6 +37,12 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         loading: false,
         user: action.payload
+      };
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        users: action.payload,
+        loading: false
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:

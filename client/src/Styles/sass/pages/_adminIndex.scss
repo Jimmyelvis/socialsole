@@ -1,0 +1,233 @@
+.small-data-cards {
+  grid-column: col-start 2 / col-end 11;
+  display: flex;
+  gap: 5rem;
+  margin-top: 6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .small-data {
+    flex: 0 1 35rem;
+    height: 16.7rem;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: repeat(2, max-content);
+    padding: 3rem;
+    row-gap: 1rem;
+    align-content: center;
+    justify-content: center;
+    box-shadow: 3px 3px 5px 0px rgb(0 0 0 / 12%);
+    border-radius: 8px;
+
+    .elem-data {
+
+      .heading-3 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .data {
+        font-size: 2rem;
+        font-weight: bold;
+        color: $white;
+      }
+    }
+
+    .elem-icon {
+      display: grid;
+      justify-items: end;
+
+      .small-card-icon {
+        display: flex;
+        background: rgb(255 255 255 / 32%);
+        width: 5rem;
+        height: 5rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: 2px solid rgb(255 255 255 / 28%);
+        // box-shadow: 2px 2px 5px 0px rgb(0 0 0 / 17%);
+
+        .icon {
+          fill: white;
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+
+      }
+    }
+
+    .elem-link {
+      a {
+        color: $white;
+        font-weight: bold;
+      }
+    }
+  }
+
+}
+
+$border : 3px;
+
+.users-bg {
+  background: linear-gradient(to right, rgb(157 205 247) 0%, #126FAD 100%);
+  border: $border solid rgb(134 188 227);
+
+  .heading-3 {
+    color: $white;
+  }
+
+  .small-card-icon {
+    box-shadow: 2px 2px 11px 0px rgba(13, 95, 153, 0.32);
+  }
+}
+
+.posts-bg {
+  background: linear-gradient(to right, rgb(87 120 158) 0%, rgb(3 27 54) 100%);
+  border: $border solid rgb(59 105 160);
+
+  .heading-3 {
+    color: $white;
+  }
+
+  .small-card-icon {
+    box-shadow: 2px 2px 11px 0px rgba(13, 55, 153, 0.32);
+  }
+}
+
+.articles-bg {
+  background: linear-gradient(to right, rgb(251 189 115) 0%, rgb(218 130 12) 100%);
+  border: $border solid rgb(233 156 58);
+  
+  .small-card-icon {
+    box-shadow: 2px 2px 11px 0px rgb(153 93 13 / 32%);
+  }
+
+}
+
+.sneakers-bg {
+  background: linear-gradient(to right, rgb(229 241 249) 0%, rgb(142 196 233) 100%);
+  border: $border solid rgb(189 220 241);
+
+  .small-card-icon {
+    box-shadow: 2px 2px 11px 0px rgb(13 84 153 / 32%);
+  }
+}
+
+.newest-members {
+  grid-column: col-start 2/col-end 11;
+  margin-top: 8rem;
+  padding: 4rem;
+  display: grid;
+  grid-template-rows: 11.2rem max-content;
+  grid-template-columns: repeat(8, 1fr);
+  row-gap: 2rem;
+
+  @include respond(bp-smallest) {
+   padding: 2rem;
+  }
+
+  .newest-members-heading {
+    grid-row: 1/1;
+    grid-column: 1/-1;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-left: 4rem;
+
+    .icon-users {
+      fill:$alternateblue;
+      width: 6rem;
+      height: 6rem;
+    }
+
+    .heading-3 {
+      font-size: 4rem;
+    }
+}
+
+  .newest-members-list {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 2 / 8;
+
+    @media screen and (max-width: 150rem) {
+      gap: 1rem;
+    }
+
+    @include respond(bp-medium) {
+     grid-template-columns: 1fr;
+    }
+
+    @include respond(bp-smallest) {
+      grid-column: 1/-1;
+    }
+
+    .newest-members-card {
+      padding-bottom: 78%;
+
+      @media screen and (max-width: 150rem) {
+        padding-bottom: 93%;
+      }
+
+      @include respond(bp-medium) {
+        padding-bottom: 78%;
+      }
+
+      .card-info {
+        padding: 0 4rem;
+        padding-top: 8%;
+        position: absolute;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .user-name {
+          color: $ltpowderblue;
+          font-size: 4rem;
+
+          @include respond(bp-largest) {
+           font-size: 3rem;
+          }
+
+          @include respond(bp-medium) {
+            font-size: 4rem;
+          }
+        }
+
+        .favsneaker {
+          color: $lt-orange;
+          margin-top: 1rem;
+          font-size: 2.5rem;
+
+          @include respond(bp-largest) {
+            font-size: 2rem;
+          }
+
+          @include respond(bp-medium) {
+            font-size: 2.5rem;
+          }
+        }
+
+        span.sneaker {
+          font-family: $font-primary, sans-serif;
+          color: $white;
+          font-size: 2rem;
+          font-weight: 500;
+
+          @include respond(bp-largest) {
+            font-size: 1.5rem;
+          }
+
+          @include respond(bp-medium) {
+            font-size: 2rem;
+          }
+        }
+
+      }
+    }
+  }
+
+}

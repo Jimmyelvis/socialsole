@@ -12,6 +12,7 @@ const Profile = require("../../models/Profile");
 
 // Validation
 const validatePostInput = require("../../validation/post");
+const { log } = require("console");
 
 
 
@@ -22,7 +23,11 @@ router.get("/", (req, res) => {
   Post.find()
     .populate('user', ['name', 'avatar'])
     .sort({ date: -1 })
-    .then(posts => res.json(posts))
+    .then(posts => {
+
+      console.log("the posts", posts)
+      res.json(posts)
+    })
     .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
 });
 

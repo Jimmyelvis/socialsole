@@ -9,6 +9,7 @@ import {
     CLEAR_ERRORS,
     UNLIKE_ARTICLE,
     LIKE_ARTICLE,
+    GET_ARTICLES_ADMIN,
 } from './types';
 
 import { setAlert } from "./alert";
@@ -96,6 +97,61 @@ export const getArticles =
         })
       );
   };
+
+  export const getArticlesAdmin =
+  (load = true) =>
+  (dispatch) => {
+    if (load) dispatch(setArticleLoading);
+    axios
+      .get("/api/articles", {
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      })
+      .then((res) =>
+        dispatch({
+          type: GET_ARTICLES_ADMIN,
+          payload: res.data,
+        })
+      )
+      .catch((err) =>
+        dispatch({
+          type: GET_ARTICLES_ADMIN,
+          payload: null,
+        })
+      );
+  };
+
+  export const editFeatured = (
+    prevPostId, nextPostId, nextPostPosNumber, type
+    ) => dispatch => {
+  
+    const data = {
+      prevPostId,
+      nextPostId,
+      nextPostPosNumber,
+      type
+    }
+  
+    console.log("data", data);
+  
+    axios
+      .post(`/api/admin/editfeatureditems`, data)
+      .then(res =>
+        // dispatch({
+        //   type: GET_POSTS,
+        //   payload: res.data
+        // })
+        dispatch(setAlert(res.data.msg, "success"))
+      )
+      .catch(err => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      });
+  }
+
 
 // Edit Articles
 export const editArticle = (id, articleData, history) => (dispatch) => {

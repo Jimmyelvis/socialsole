@@ -1,0 +1,72 @@
+.user-more-info {
+  grid-column: col-start 2 / col-end 11;
+  min-height: 70rem;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  gap: 8rem;
+
+  .avatar.user-more-info__avatar {
+    grid-column: 3 / 6;
+    width: 24rem;
+    height: 24rem;
+  }
+
+  .user-more-info__content {
+    grid-column: 6 / 10;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, max-content);
+    gap: 2rem;
+
+    .user-more-info__content-name {
+      font-size: 4.3rem;
+    }
+
+   .user-more-info__content-role,.user-more-info__content-id
+   , .user-more-info__content-email
+    {
+      font-size: 3rem;
+      color: $alternateblue;
+    }
+
+    .user-role, .user-id, .user-email {
+      color: $lt-orange;
+      font-size: 2.5rem;
+      font-weight: 500;
+    }
+
+    .selector {
+      position: relative;
+      height: 3.5rem;
+      justify-self: start;
+      width: 30rem;
+      margin-bottom: 5rem;
+
+      .select-input {
+        border: 2px solid rgb(91 166 230 / 11%);
+        box-shadow: inset 0px 0px 5px 6px rgb(50 158 230 / 6%);
+        background: transparent;
+      }
+
+      .custom-arrow {
+        width: 3.6rem;
+        background: linear-gradient(to bottom, rgb(170, 221, 255) 0%, rgb(50, 158, 230) 100%);
+        border-left: 4px solid rgb(255 255 255 / 84%);
+
+        &::before, &::after {
+          --size: 0.8rem;
+        }
+
+        &::after {
+          border-top: var(--size) solid #ffffff;
+        }
+      }
+    }
+
+    .btn-submit {
+      justify-self: end;
+    }
+  }
+}

@@ -2,7 +2,8 @@ import React from 'react'
 import { Panel } from 'components/ui/Panel';
 
 export const ResultsMenu = ({
-  results
+  results,
+  searchTerm
 }) => {
 
 if (results) {
@@ -18,7 +19,9 @@ if (results) {
         </h3>
   
         <span className="count">
-          {posts?.count ? posts.count : 0}
+          {
+            searchTerm === "" ? 0 : posts?.count
+          }
         </span>
       </li>
   
@@ -28,7 +31,9 @@ if (results) {
         </h3>
   
         <span className="count">
-          {sneakers?.count}
+          {
+            searchTerm === "" ? 0 : sneakers?.count
+          }
         </span>
       </li>
   
@@ -38,7 +43,9 @@ if (results) {
         </h3>
   
         <span className="count">
-          {articles?.count}
+          {
+            searchTerm === "" ? 0 : articles?.count
+          }
         </span>
       </li>
   

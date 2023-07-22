@@ -1,0 +1,262 @@
+$sidebar_width: 21rem;
+
+
+.admin_container {
+  display: flex;
+  position: relative;
+  background-image: url("/assets/img/dash-bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  z-index: 3000;
+  padding: 4rem;
+
+  @include respond(bp-small) {
+    padding: 2rem;
+  }
+
+  @include respond(bp-tiny) {
+   padding: 1rem-;
+  }
+
+  .content-container {
+    display: grid;
+    grid-template-columns: 18.5rem repeat(12, 1fr);
+    grid-template-rows: 8.5rem max-content;
+    grid-auto-rows: max-content;
+    width: 100%;
+    border-radius: 12px;
+    padding-bottom: 7rem;
+    background: rgb(240 248 255 / 18%);
+    -webkit-backdrop-filter: blur(10px) brightness(1.2);
+    backdrop-filter: blur(10px) brightness(1.1);
+    border: 2px solid rgb(255 255 255 / 24%);
+    position: relative;
+
+    @include respond(bp-large) {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    
+    .admin-bg {
+      background-color: rgb(246, 252, 254);
+      width: 98%;
+      min-height: 100vh;
+      position: relative;
+      display: grid;
+      grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(12, [col-start] minmax(min-content, 13rem) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
+      grid-auto-rows: max-content;
+      grid-column: 2/14;
+      border-radius: 12px;
+      margin-left: 0;
+      transition: all 300ms linear;
+      padding-bottom: 10rem;
+      justify-self: self-start;
+
+      @include respond(bp-large) {
+        grid-column: 1/14;
+        width: 94%;
+        justify-self: center;
+      }
+  
+      .admin_section_heading {
+        grid-column: 2/ 14;
+        margin-top: 15.3rem;
+        text-align: center;
+        margin-bottom: 8rem;
+  
+        .subtitle {
+          width: 35%;
+  
+          @include respond(bp-medium) {
+            width: 55%;
+          }
+        }
+      }
+    }
+
+   
+
+    .admin_navbar {
+      z-index: 3000;
+      grid-column: 2/ 14;
+      display: grid;
+      position: relative;
+      height: 100%;
+      width: 98%;
+
+      @include respond(bp-large) {
+        grid-column: 1/14;
+        width: 100%;
+      }
+
+      .menu-icon {
+        position: absolute;
+        top: 2rem;
+        left: 2.4rem;
+        width: 3rem;
+        height: 3rem;
+        fill: #71aad1;
+        cursor: pointer;
+        z-index: 3000;
+        display: none;
+
+        @include respond(bp-large) {
+         display: block;
+        }
+      }
+
+      .userDisplay-info {
+        justify-self: end;
+        display: grid;
+        grid-template-columns: max-content 1fr max-content;
+        align-items: center;
+        gap: 2.4rem;
+        margin-right: 3rem;
+
+
+        .avatar {
+          width: 4.5rem;
+          height: 4.5rem;
+        }
+
+        .name-email {
+
+          h3 {
+            font-size: 1.6rem;
+            color: $white;
+          }
+
+          p {
+            font-size: 1.4rem;
+            color: $midnightblue;
+            font-weight: bold;
+          }
+
+        }
+
+        .arrow-down {
+          width: 2rem;
+          height: 2rem;
+          fill: $midnightblue;
+          cursor: pointer;
+        }
+
+
+      }
+    }
+  
+    .user-options-panel {
+      position: absolute;
+      z-index: 6000;
+      width: 32.7rem;
+      top: 7.5rem;
+      right: 3.4rem;
+      display: flex;
+      flex-direction: column;
+      padding: 3rem 6rem;
+      gap: 3rem;
+  
+      .entry {
+        display: grid;
+        grid-template-columns: 4rem 1fr;
+        align-items: center;
+        gap: 3rem;
+        cursor: pointer;
+  
+        .heading-3 {
+          font-size: 2.2rem;
+        }
+
+        .icon {
+          width: 8rem;
+        }
+  
+      }
+  
+  
+    }
+
+  }
+
+
+  .admin-sidebar {
+    grid-column: 1/2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    padding: 0 1.3rem;
+    padding-top: 3rem;
+
+    @include respond(bp-large) {
+      position: absolute;
+      z-index: 4000;
+      background: rgb(255 255 255 / 11%);
+      top: 0;
+      left: 0;
+      height: 100%;
+      backdrop-filter: blur(10px) brightness(1);
+      border: 3px solid rgb(238 245 255 / 16%);
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+      box-shadow: 4px 4px 5px 0px rgb(134 142 148 / 10%);
+      width: 0rem;
+      opacity: 0;
+      transition: all 300ms linear;
+    }
+
+    .sneaker-logo {
+      width: 8rem;
+      margin-bottom: 1rem;
+    }
+
+    .link {
+      list-style: none;
+      margin-bottom: 1.6rem;
+
+      a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 4.5rem;
+          height: 4.5rem;
+          display: block;
+          margin-bottom: 1.3rem;
+        }
+
+        .link-text {
+          text-align: center;
+          font-size: 1.4rem;
+          color: $midnightblue;
+        }
+
+        .sneaker {
+          width: 6.5rem !important;
+          height: 6.5rem !important;
+        }
+
+      }
+    }
+  }
+
+  .admin-sidebar-visible {
+    width: 40rem;
+    opacity: 1;
+    padding-top: 5rem;
+    transition: all 300ms linear;
+
+    .close-icon {
+      position: absolute;
+      right: 3rem;
+      width: 3rem;
+      height: 3rem;
+      top: 2rem;
+      fill: #71aad1;
+    }
+  }
+  
+}

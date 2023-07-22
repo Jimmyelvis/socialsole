@@ -45,9 +45,9 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
   const compOrigin = "navbar";
 
   const getPathName = () => { 
-    console.log('====================================');
-    console.log('pathname', window.location.pathname);
-    console.log('====================================');
+    // console.log('====================================');
+    // console.log('pathname', window.location.pathname);
+    // console.log('====================================');
    }
 
    useEffect(() => {
@@ -245,6 +245,9 @@ true or false nav items will change accordingly
     <React.Fragment>
       <li className="nav-item home">
         <Link to="/">Home</Link>
+      </li>
+      <li className="nav-item">
+        <Link to="/articles">Articles</Link>
       </li>
       <li className="nav-item parent">
         Community

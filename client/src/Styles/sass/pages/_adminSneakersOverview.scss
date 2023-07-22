@@ -1,0 +1,98 @@
+.sneakers-info-cards {
+  grid-column: col-start 1/col-end 12;
+  margin-top: 6rem;
+  display: grid;
+  column-gap: 2rem;
+  row-gap: 8rem;
+  align-items: start;
+  grid-template-columns: repeat( auto-fill, minmax(37.3rem, 40.4rem) );
+  justify-content: center;
+
+  @include respond(bp-largest) {
+    grid-template-columns: repeat(auto-fill, minmax(38.2rem, 1fr));
+  }
+
+  @include respond(bp-smallest) {
+    grid-template-columns:1fr;
+   
+  }
+
+  .tagged-sneakers {
+
+    .info-card__content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      .info-card__content-entry {
+        display: flex;
+        justify-content: space-between;
+        gap: 6rem;
+
+        .content-entry-title {
+          font-size: 2.7rem;
+          color: $alternateblue;
+        }
+    
+        .info-card__content-entry-data {
+          font-size: 2.5rem;
+          color: $slateblue;
+        }
+      }
+
+    }
+  
+  }
+
+  .commented-sneakers,.latest-sneakers,.liked-sneakers {
+
+    .info-card__content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+
+      .sneaker-entry {
+        display: grid;
+        grid-template-columns: 12.4rem 1fr;
+        grid-auto-rows: 9.9rem;
+        column-gap: 2rem;
+        align-items: center;
+
+        .sneaker-img {
+          height: 100%;
+          position: relative;
+
+          img {
+            position: absolute;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .sneaker-entry-info {
+
+          .content-entry-title {
+            font-size: 2rem;
+            color: $midnightblue;
+            @include lineClamp(2);
+          }
+
+          .sneaker-author {
+            font-size: 1.7rem;
+            color: $alternateblue;
+          }
+
+          .info-card__content-entry-data {
+            color: $lt-orange;
+            font-size: 1.3rem;
+            font-weight: bold;
+          }
+        }
+      }
+
+    }
+
+  }
+
+  
+}
