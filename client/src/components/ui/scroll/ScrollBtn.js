@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BiArrowFromBottom } from "react-icons/bi";
 
 
-const ScrollToTop = () => {
+export const ScrollBtn = () => {
   const [isVisible, setIsVisible] = useState(false);
 
    const toggleVisibility = () => {
@@ -31,7 +31,7 @@ const ScrollToTop = () => {
 
    return (
      <>
-       <button
+       <div
          type="button"
          onClick={scrollUp}
          className={`${
@@ -39,9 +39,8 @@ const ScrollToTop = () => {
          }`}
        >
          <BiArrowFromBottom aria-hidden="true" />
-       </button>
+       </div>
      </>
    );
 }
 
-export default ScrollToTop;

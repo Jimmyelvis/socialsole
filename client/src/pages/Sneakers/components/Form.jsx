@@ -4,6 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import TextFieldGroup from "components/ui/Forms/TextFieldGroup";
 import { Button } from 'components/ui/buttons';
 import { Link } from "react-router-dom";
+import{ Panel } from "components/ui/Panel";
 
 
 
@@ -12,7 +13,7 @@ export const Form = (
   ) => {
   return (
     <div className="container">
-      <div className="create-edit-body contentbody">
+      <Panel className="create-edit-body">
         <h2 className="heading-2">{title}</h2>
 
         <div className="card-body">
@@ -93,7 +94,7 @@ export const Form = (
             )}
           </form>
         </div>
-      </div>
+      </Panel>
     </div>
   );
 }

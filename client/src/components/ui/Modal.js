@@ -3,7 +3,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { useModal } from "context/modalContext";
 import { createPortal } from "react-dom";
 
-const Modal = ({ children, selector, overlayColor, modalTarget, modalOrigin, delay}) => {
+const Modal = ({ children, selector, overlayColor, modalTarget, modalOrigin, delay, classes}) => {
   const { isModalOpen, closeModal, origin } = useModal();
 
   /** A piece of state to determine when we add the .hide css class
@@ -51,7 +51,7 @@ const Modal = ({ children, selector, overlayColor, modalTarget, modalOrigin, del
         return `modal-overlay  show-modal hide-modal`;
       }
 
-      return `modal-overlay  show-modal`;
+      return `modal-overlay  show-modal ${classes ? classes : ""}`;
     } else {
       return null;
     }

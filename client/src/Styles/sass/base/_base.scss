@@ -28,7 +28,8 @@ body {
   font-size: $default-font-size;
   color: $slateblue;
   line-height: 1.4;
-  background-image: url(/assets/img/landing-bg.jpg);
+  background: linear-gradient(to bottom, rgb(245 245 245) 0%, rgb(217 222 240 / 61%) 100%);
+  // background-image: url(/assets/img/landing-bg.jpg);
   background-attachment: fixed;
   background-size: cover;
 

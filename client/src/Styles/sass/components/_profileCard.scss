@@ -58,6 +58,10 @@
       font-weight: bold;
       font-size: 2.2rem;
       color: $alternateblue;
+
+      @include respond(bp-medium) {
+        margin-left: 1rem;
+       }
     }
 
     .location {
@@ -66,9 +70,20 @@
       margin-bottom: 2rem;
     }
 
+    .name, .fav-sneaker, .location {
+      @include respond(bp-medium) {
+        text-align: center;
+        display: block
+      }
+    }
+
     .bio {
       @include lineClamp(3);
       width: 80%;
+
+      @include respond(bp-medium) {
+        margin: 4rem auto;
+      }
     }
   }
 

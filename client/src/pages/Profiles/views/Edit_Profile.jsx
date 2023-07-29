@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createProfile, getCurrentProfile } from "actions/profileActions";
 import InputGroup from "components/ui/Forms/InputGroup";
 import "react-quill/dist/quill.snow.css";
@@ -8,7 +8,8 @@ import { Widgetsetting } from "components/common/Cloudinary";
 import { Form } from "../components/Form";
 import isEmpty from "validation/is-empty";
 
-const EditProfile = ({ getCurrentProfile, createProfile, history, profile: { profile, loading } }) => {
+const EditProfile = ({ getCurrentProfile, createProfile, profile: { profile, loading } }) => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     handle: "",
     location: "",
@@ -22,7 +23,7 @@ const EditProfile = ({ getCurrentProfile, createProfile, history, profile: { pro
     instagram: "",
   });
 
-  const [displaySocialInputs, setdisplaySocialInputs] = useState(false);
+  const [displaySocialInputs, setDisplaySocialInputs] = useState(false);
 
   const { handle, location, favsneaker, profilephoto, avatar, bio, twitter, facebook, youtube, instagram } = values;
 
@@ -42,7 +43,7 @@ const EditProfile = ({ getCurrentProfile, createProfile, history, profile: { pro
       instagram: instagram,
     };
 
-    createProfile(profileData, history, true);
+    createProfile(profileData, navigate, true);
   };
 
   useEffect(() => {
@@ -89,13 +90,37 @@ const EditProfile = ({ getCurrentProfile, createProfile, history, profile: { pro
   if (displaySocialInputs) {
     socialInputs = (
       <div>
-        <InputGroup placeholder="Twitter Profile URL" name="twitter" icon="fab fa-twitter" value={twitter} onChange={onChange} />
+        <InputGroup
+          placeholder="Twitter Profile URL"
+          name="twitter"
+          icon="fab fa-twitter"
+          value={twitter}
+          onChange={onChange}
+        />
 
-        <InputGroup placeholder="Facebook Page URL" name="facebook" icon="fab fa-facebook" value={facebook} onChange={onChange} />
+        <InputGroup
+          placeholder="Facebook Page URL"
+          name="facebook"
+          icon="fab fa-facebook"
+          value={facebook}
+          onChange={onChange}
+        />
 
-        <InputGroup placeholder="YouTube Channel URL" name="youtube" icon="fab fa-youtube" value={youtube} onChange={onChange} />
+        <InputGroup
+          placeholder="YouTube Channel URL"
+          name="youtube"
+          icon="fab fa-youtube"
+          value={youtube}
+          onChange={onChange}
+        />
 
-        <InputGroup placeholder="Instagram Page URL" name="instagram" icon="fab fa-instagram" value={instagram} onChange={onChange} />
+        <InputGroup
+          placeholder="Instagram Page URL"
+          name="instagram"
+          icon="fab fa-instagram"
+          value={instagram}
+          onChange={onChange}
+        />
       </div>
     );
   }
@@ -117,7 +142,7 @@ const EditProfile = ({ getCurrentProfile, createProfile, history, profile: { pro
         profilephoto={profilephoto}
         bio={bio}
         displaySocialInputs={displaySocialInputs}
-        setdisplaySocialInputs={setdisplaySocialInputs}
+        setDisplaySocialInputs={setDisplaySocialInputs}
         socialInputs={socialInputs}
         twitter={twitter}
         facebook={facebook}
@@ -134,4 +159,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export const Edit_Profile = connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile));
+export const Edit_Profile = connect(mapStateToProps, { createProfile, getCurrentProfile })(EditProfile);

@@ -1,13 +1,8 @@
-/*
-  Navbar for the front section of the site Home, Articles, etc
-  This contains a different set of links than the Community Navbar
-*/
-
 import React, { useEffect, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser, logoutUser, registerUser } from "actions/authActions";
-import {  getCurrentProfile } from "actions/profileActions";
+import { getCurrentProfile } from "actions/profileActions";
 import TextFieldGroup from "components/ui/Forms/TextFieldGroup";
 import Icon from "components/icons/Icon";
 import { setAlert } from "actions/alert";
@@ -36,6 +31,9 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
 
   const { checked, showlogin, showregister, name, email, avatar, password, password2 } = values;
   const { isModalOpen, openModal, openOverlay, isOverlayOpen, closeModal } = useModal();
+  const location = useLocation();
+  
+  const [scrolled, setScrolled] = useState(false);
 
   /*
     This will be used to determine what component called the modal
@@ -43,29 +41,6 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
     modal context 
   */
   const compOrigin = "navbar";
-
-  const getPathName = () => { 
-    // console.log('====================================');
-    // console.log('pathname', window.location.pathname);
-    // console.log('====================================');
-   }
-
-   useEffect(() => {
-    getPathName(); // Call the function initially when the component mounts
-
-    // Create a listener to log the pathname when the route changes
-    const handleRouteChange = () => {
-      getPathName();
-    };
-
-    // Add the listener to the "popstate" event
-    window.addEventListener('popstate', handleRouteChange);
-
-    // Clean up the listener when the component unmounts
-    return () => {
-      window.removeEventListener('popstate', handleRouteChange);
-    };
-  }, [window.location.pathname]);
 
 
 
@@ -77,13 +52,10 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
    */
   useEffect(() => {
     if (auth.isAuthenticated) {
-
       if (isModalOpen) {
         closeModal();
       }
-
-    } 
-
+    }
   }, [auth.isAuthenticated])
 
   /**
@@ -107,6 +79,31 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
       );
     }
   };
+
+  const changeBg = () => { 
+    
+    if(window.scrollY >= 80){
+      setScrolled(true);
+    }else{
+      setScrolled(false);
+    }
+
+   }
+
+  window.addEventListener('scroll', changeBg);
+
+  const setNavBarClass = () => { 
+
+    // location.pathname === "/" ? "navbar" : "navbar nav-wht-bg"
+
+    if ( location.pathname === "/" ) {
+      return scrolled ? "navbar active" : "navbar"
+    } else {
+      return scrolled ? "navbar navbar-wht-bg  active" : "navbar navbar-wht-bg"
+    }
+
+    
+  }
 
   const onLogoutClick = (e) => {
     e.preventDefault();
@@ -136,7 +133,6 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
   };
 
   const onChange = (e) => {
-
     setvalues({
       ...values,
       [e.target.name]: e.target.value,
@@ -149,10 +145,6 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
       text: value,
     });
   };
-
-  // useEffect(() => {
-  //   getCurrentProfile();
-  // }, []);
 
   useEffect(() => {
     if (auth.isAuthenticated) {
@@ -175,8 +167,6 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
     });
 
     loginUser(userData);
-
-   
   };
 
   const onRegisterSubmit = (e) => {
@@ -196,37 +186,67 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
     });
 
     registerUser(newUser);
-
-
-
   };
 
   /*
-Use destructuring to pull out the isAuthenticated, user props 
-from the auth state. Depending on whether isAuthenticated is
-true or false nav items will change accordingly
-*/
+    Use destructuring to pull out the isAuthenticated, user props
+    from the auth state. Depending on whether isAuthenticated is
+    true or false nav items will change accordingly
+  */
   const { isAuthenticated } = auth;
 
   const authLinks = (
     <React.Fragment>
-      <li className="nav-item home">
+      <li className="nav-item home"
+        onClick={() => {
+          checked && setvalues({ ...values, checked: false });
+        }} 
+      >
         <Link to="/">Home</Link>
       </li>
-      <li className="nav-item">
-        <Link to="/articles">Articles</Link>
+      <li className="nav-item" >
+        <Link 
+          to="/articles">Articles</Link>
       </li>
       <li className="nav-item parent">
         Community
         <ul className="submenu">
-          <Link to="/allposts">Posts</Link>
-          <Link to="/allsneakers">Sneakers</Link>
-          <Link to="/profiles">Profiles</Link>
+          <div
+             onClick={() => {
+              checked && setvalues({ ...values, checked: false });
+            }} 
+          >
+            <Link to="/allposts">Posts</Link>
+          </div>
+
+          <div
+              onClick={() => {
+                checked && setvalues({ ...values, checked: false });
+              }}
+          >
+            <Link to="/allsneakers">Sneakers</Link>
+          </div>
+
+          <div
+              onClick={() => {
+                checked && setvalues({ ...values, checked: false });
+              }}
+          >
+            <Link to="/profiles">Profiles</Link>
+          </div>
         </ul>
       </li>
       <li className="nav-item">
         <Link to="/dashboard">Dashboard</Link>
       </li>
+      {
+        auth.user?.role === "admin" ? (
+          <li className="nav-item">
+            <Link to="/admin">Admin</Link>
+          </li>
+        ) : null
+          
+      }
       <li>
         <FaSearch
           className="icon icon-search"
@@ -243,18 +263,46 @@ true or false nav items will change accordingly
 
   const guestLinks = (
     <React.Fragment>
-      <li className="nav-item home">
+      <li className="nav-item home"
+        onClick={() => {
+          checked && setvalues({ ...values, checked: false });
+        }} 
+      >
         <Link to="/">Home</Link>
       </li>
-      <li className="nav-item">
+      <li className="nav-item"
+        onClick={() => {
+          checked && setvalues({ ...values, checked: false });
+        }} 
+      >
         <Link to="/articles">Articles</Link>
       </li>
       <li className="nav-item parent">
         Community
         <ul className="submenu">
-          <Link to="/allposts">Posts</Link>
-          <Link to="/allsneakers">Sneakers</Link>
-          <Link to="/profiles">Profiles</Link>
+          <div
+             onClick={() => {
+              checked && setvalues({ ...values, checked: false });
+            }} 
+          >
+            <Link to="/allposts">Posts</Link>
+          </div>
+
+          <div
+              onClick={() => {
+                checked && setvalues({ ...values, checked: false });
+              }}
+          >
+            <Link to="/allsneakers">Sneakers</Link>
+          </div>
+
+          <div
+              onClick={() => {
+                checked && setvalues({ ...values, checked: false });
+              }}
+          >
+            <Link to="/profiles">Profiles</Link>
+          </div>
         </ul>
       </li>
       <li
@@ -285,8 +333,7 @@ true or false nav items will change accordingly
   );
 
   return (
-    <div className={location.pathname == "/" ? "navbar" : "navbar nav-wht-bg"}>
-
+    <div className={ setNavBarClass()}>
       <MobileMenu
         authLinks={authLinks}
         guestLinks={guestLinks}
@@ -299,17 +346,18 @@ true or false nav items will change accordingly
       />
 
       {/*
-      If isAuthenticated === true, the authLinks items will display
-      else the guestlinks items will be displayed
-    */}
+        If isAuthenticated === true, the authLinks items will display
+        else the guestlinks items will be displayed
+      */}
       <ul className="authGuestlinks">{isAuthenticated ? authLinks : guestLinks}</ul>
 
       <Modal
         selector={"#modal"}
         overlayColor={`
-        ${modalTarget === "search_overlay" ? "rgba(255, 255, 255, 0.95)" : "rgba(0,0,0,0.7)"}`}
+          ${modalTarget === "search_overlay" ? "rgba(255, 255, 255, 0.95)" : "rgba(0,0,0,0.7)"}`}
         modalTarget={modalTarget}
         modalOrigin={compOrigin}
+        classes={'reset-grid-props'}
       >
         {checkTarget()}
       </Modal>
@@ -323,4 +371,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { logoutUser,  loginUser, registerUser, setAlert, getCurrentProfile })(withRouter(Navbar));
+export default connect(mapStateToProps, { logoutUser, loginUser, registerUser, setAlert, getCurrentProfile })(Navbar);

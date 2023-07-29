@@ -6,10 +6,12 @@
 
   img {
     object-fit: cover;
-    object-position: center;
+    object-position: top;
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
   }
+
+  @include overlay
 }

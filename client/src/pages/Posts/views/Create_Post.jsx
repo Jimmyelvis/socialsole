@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import TextAreaFieldGroup from "components/ui/Forms/TextAreaFieldGroup";
 import TextFieldGroup from "components/ui/Forms/TextFieldGroup";
 import { addPost } from "actions/postActions";
 import { getCurrentProfile } from "actions/profileActions";
-import Navbar from "components/layout/CommNavbar";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Widgetsetting } from "components/common/Cloudinary";
@@ -17,24 +16,21 @@ import { Form } from "../components/Form";
   route which checks to see if an user is logged in
 */
 
-const CreatePost = (
-    { getCurrentProfile, 
-    addPost, 
-    history,
-    auth,
-    errors,
-    post,
-    profile : { profile},
-  }
-) => {
-  const [values, setValues] = useState({
+const CreatePost = ({
+  getCurrentProfile,
+  addPost,
+  auth,
+  errors,
+  post,
+  profile: { profile },
+}) => {
+  const navigate = useNavigate();
+  const { headerimage, headline, text, tags } = useState({
     headerimage: "",
     headline: "",
     text: "",
     tags: "",
   });
-
-  const { headerimage, headline, text, tags } = values;
 
   useEffect(() => {
     getCurrentProfile();
@@ -54,7 +50,7 @@ const CreatePost = (
       tags: tags,
     };
 
-    addPost(newPost, history);
+    addPost(newPost, navigate);
   };
 
   /*
@@ -71,8 +67,8 @@ const CreatePost = (
 
     window.cloudinary.openUploadWidget(Widgetsetting(), (error, result) => {
       if (result && result.event === "success") {
-        setValues({
-          ...values,
+        setState({
+          ...state,
           headerimage: result.info.url,
         });
       }
@@ -80,15 +76,15 @@ const CreatePost = (
   };
 
   const onChange = (e) => {
-    setValues({
-      ...values,
+    setState({
+      ...state,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleChange = (value) => {
-    setValues({
-      ...values,
+    setState({
+      ...state,
       text: value,
     });
   };
@@ -101,8 +97,6 @@ const CreatePost = (
 
   return (
     <React.Fragment>
-      <Navbar />
-
       <Form
         onSubmit={onSubmit}
         onChange={onChange}
@@ -114,7 +108,6 @@ const CreatePost = (
         tags={tags}
         title="Create a Post"
       />
-
     </React.Fragment>
   );
 };
@@ -126,4 +119,7 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export const Create_Post = connect(mapStateToProps, { addPost, getCurrentProfile })(withRouter(CreatePost));
+export const Create_Post = connect(mapStateToProps, {
+  addPost,
+  getCurrentProfile,
+})(CreatePost);

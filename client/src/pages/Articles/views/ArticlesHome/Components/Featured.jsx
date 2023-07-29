@@ -15,7 +15,7 @@ export const Featured = ({
       return a.featured - b.featured;
     }).filter((article) => {
       return article.featured > 0;
-    });
+    }).slice(0, 3);
 
   } 
  

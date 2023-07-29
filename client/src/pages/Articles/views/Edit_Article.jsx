@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { editArticle, getCurrentArticle } from "actions/articleActions";
 import { getCurrentProfile } from "actions/profileActions";
 import TextFieldGroup from "components/ui/Forms/TextFieldGroup";
@@ -11,16 +11,18 @@ import { setAlert } from "actions/alert";
 import { Widgetsetting } from "components/common/Cloudinary";
 import { Form } from "../components/Form";
 
-
-
-/*
-  Similar to the component CreateArticle only this edits an existing
-  article. This component is protected by a private
-  route which not only checks to see if an user is logged in
-  but also checks to see if that user has a role of "author"
-*/
-
-const ArticleEdit = ({ article: { article, loading }, profile, auth, editArticle, getCurrentArticle, getCurrentProfile, history, match, setAlert, errors }) => {
+const ArticleEdit = ({
+  article: { article, loading },
+  profile,
+  auth,
+  editArticle,
+  getCurrentArticle,
+  getCurrentProfile,
+  setAlert,
+  errors,
+  match,
+}) => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     fullheaderimage: "",
     articleheaderimage: "",
@@ -31,15 +33,26 @@ const ArticleEdit = ({ article: { article, loading }, profile, auth, editArticle
     tags: "",
   });
 
-  const { fullheaderimage, articleheaderimage, address, headline, text, _id, tags } = values;
+  const {
+    fullheaderimage,
+    articleheaderimage,
+    address,
+    headline,
+    text,
+    _id,
+    tags,
+  } = values;
 
   useEffect(() => {
     getCurrentArticle(match.params.id);
 
     setValues({
-      ...values,
-      fullheaderimage: !isEmpty(article.fullheaderimage) ? article.fullheaderimage : "",
-      articleheaderimage: !isEmpty(article.articleheaderimage) ? article.articleheaderimage : "",
+      fullheaderimage: !isEmpty(article.fullheaderimage)
+        ? article.fullheaderimage
+        : "",
+      articleheaderimage: !isEmpty(article.articleheaderimage)
+        ? article.articleheaderimage
+        : "",
       address: !isEmpty(article.address) ? article.address : "",
       headline: !isEmpty(article.headline) ? article.headline : "",
       text: !isEmpty(article.text) ? article.text : "",
@@ -67,7 +80,7 @@ const ArticleEdit = ({ article: { article, loading }, profile, auth, editArticle
       errors: {},
     };
 
-    editArticle(_id, newArticle, history);
+    editArticle(_id, newArticle, navigate);
   };
 
   const onChange = (e) => {
@@ -84,128 +97,30 @@ const ArticleEdit = ({ article: { article, loading }, profile, auth, editArticle
     });
   };
 
-  /*
-    These functions (fullArticleHeaderSubmit), and 
-    (articleHeaderSubmit) uses the cloudinary widget to 
-    upload an image to the cloudinary server, if the upload
-    is successful it returns a results object. In that object
-    we pull out the url to the uploaded image. And set that url 
-    in the state. Once all the fields are complete it is then sent
-    to the back end with all the other data entered
-  */
-
   const fullArticleHeaderSubmit = (e) => {
     e.preventDefault();
 
-    let avatar;
-
-    const cloudname = "dwgjvssdt";
-    const uploadpresent = "ndilj3e8";
-
-    window.cloudinary.openUploadWidget(
-      {
-        cloudName: cloudname,
-        uploadPreset: uploadpresent,
-        sources: ["local"],
-        googleApiKey: "<image_search_google_api_key>",
-        showAdvancedOptions: true,
-        cropping: true,
-        multiple: false,
-        defaultSource: "local",
-        styles: {
-          palette: {
-            window: "#359DFF",
-            sourceBg: "#FFFFFF",
-            windowBorder: "#9572CC",
-            tabIcon: "#034398",
-            inactiveTabIcon: "#B2BED6",
-            menuIcons: "#034398",
-            link: "#8261B5",
-            action: "#5333FF",
-            inProgress: "#8261B5",
-            complete: "#048A53",
-            error: "#cc3333",
-            textDark: "#034398",
-            textLight: "#ffffff",
-          },
-          fonts: {
-            default: null,
-            "'Poppins', sans-serif": {
-              url: "https://fonts.googleapis.com/css?family=Poppins",
-              active: true,
-            },
-          },
-        },
-      },
-      (error, result) => {
-        if (result && result.event === "success") {
-          avatar = result.info.url;
-          console.log(avatar);
-
-          setValues({
-            ...values,
-            fullheaderimage: result.info.url,
-          });
-        }
+    window.cloudinary.openUploadWidget(Widgetsetting(), (error, result) => {
+      if (result && result.event === "success") {
+        setValues({
+          ...values,
+          fullheaderimage: result.info.url,
+        });
       }
-    );
+    });
   };
 
   const articleHeaderSubmit = (e) => {
     e.preventDefault();
 
-    let avatar;
-
-    const cloudname = "dwgjvssdt";
-    const uploadpresent = "ndilj3e8";
-
-    window.cloudinary.openUploadWidget(
-      {
-        cloudName: cloudname,
-        uploadPreset: uploadpresent,
-        sources: ["local"],
-        googleApiKey: "<image_search_google_api_key>",
-        showAdvancedOptions: true,
-        cropping: true,
-        multiple: false,
-        defaultSource: "local",
-        styles: {
-          palette: {
-            window: "#359DFF",
-            sourceBg: "#FFFFFF",
-            windowBorder: "#9572CC",
-            tabIcon: "#034398",
-            inactiveTabIcon: "#B2BED6",
-            menuIcons: "#034398",
-            link: "#8261B5",
-            action: "#5333FF",
-            inProgress: "#8261B5",
-            complete: "#048A53",
-            error: "#cc3333",
-            textDark: "#034398",
-            textLight: "#ffffff",
-          },
-          fonts: {
-            default: null,
-            "'Poppins', sans-serif": {
-              url: "https://fonts.googleapis.com/css?family=Poppins",
-              active: true,
-            },
-          },
-        },
-      },
-      (error, result) => {
-        if (result && result.event === "success") {
-          avatar = result.info.url;
-          console.log(avatar);
-
-          setValues({
-            ...values,
-            articleheaderimage: result.info.url,
-          });
-        }
+    window.cloudinary.openUploadWidget(Widgetsetting(), (error, result) => {
+      if (result && result.event === "success") {
+        setValues({
+          ...values,
+          articleheaderimage: result.info.url,
+        });
       }
-    );
+    });
   };
 
   return (
@@ -241,4 +156,9 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export const Edit_Article = connect(mapStateToProps, { getCurrentArticle, editArticle, getCurrentProfile, setAlert })(withRouter(ArticleEdit));
+export const Edit_Article = connect(mapStateToProps, {
+  getCurrentArticle,
+  editArticle,
+  getCurrentProfile,
+  setAlert,
+})(ArticleEdit);

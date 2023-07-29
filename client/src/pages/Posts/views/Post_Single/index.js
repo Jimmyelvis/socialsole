@@ -7,7 +7,7 @@ import { View } from "./components/view";
 import CommentForm from "components/features/comments/CommentForm";
 import { getParams } from "utils/getParams";
 import CommentItem from "components/features/comments/CommentItem";
-
+import { useParams } from "react-router-dom";
 
 
 
@@ -27,9 +27,9 @@ export const Post = ({ getPost,  getCurrentProfile, post: { post, loading }, aut
   const { user } = auth;
   let postContent;
 
-  
+  const { id } = useParams();
 
-  getParams(match.params.id, getPost, getCurrentProfile);
+  getParams(id, getPost, getCurrentProfile);
 
   /**  renderCommentList() is a function that maps through the comments array and returns a CommentItem component for each comment. */
 

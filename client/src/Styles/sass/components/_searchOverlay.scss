@@ -331,3 +331,11 @@
     background-color: rgb(255 244 244);
   }
 }
+
+
+/** 
+ *  Used to unset grid properties on the grid container, if needed
+ */
+.reset-grid-props {
+  align-items: unset;
+}

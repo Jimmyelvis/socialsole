@@ -29,16 +29,16 @@ export const Register = ({ onChange, onRegisterSubmit, email, password, password
     });
   };
 
-  useEffect(() => {
-    setvalues({
-      ...values,
-      avatar: faker.image.avatar(),
-      name: faker.name.fullName(),
-      email: faker.internet.email(),
-      password: "panther",
-      password2: "panther",  
-    });
-  }, [])
+  // useEffect(() => {
+  //   setvalues({
+  //     ...values,
+  //     avatar: faker.image.avatar(),
+  //     name: faker.name.fullName(),
+  //     email: faker.internet.email(),
+  //     password: "panther",
+  //     password2: "panther",  
+  //   });
+  // }, [])
   
 
   return (

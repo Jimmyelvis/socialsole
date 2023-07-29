@@ -5,6 +5,7 @@ import { CardPicOverlay } from 'components/ui/cards/CardPicOverlay'
 import { SneakerCard } from 'components/ui/cards/SneakerCard'
 import { ArticleCard } from 'components/ui/cards/ArticleCard'
 import parse from 'html-react-parser';
+import { Link } from 'react-router-dom'
 
 export const TimelineCard = ({ 
   _id, type, headerimage, mainimage, text, model,
@@ -26,7 +27,9 @@ export const TimelineCard = ({
           (
             <div className="post">
               <div className="header-image">
-                <img src={headerimage} alt="" />
+                <Link to={`/post/${_id}`}>
+                  <img src={headerimage} alt="" />
+                </Link>
               </div>
 
               <div className='text'>
@@ -43,6 +46,7 @@ export const TimelineCard = ({
               colorway={colorway}
               model={model}
               author={false}
+              contentId={_id}
             />
           ) : (
             <ArticleCard

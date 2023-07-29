@@ -1,0 +1,44 @@
+.not-found {
+  height: 100vh;
+
+  .not-found-panel {
+    grid-column: col-start 2 / col-end 11;
+    align-self: center;
+    height: auto;
+    padding: 8rem;
+
+    .heading-2 {
+      font-size: 4rem;
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+      margin: 6rem auto;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .not-found-panel__btns {
+      display: flex;
+      gap: 2rem;
+      margin-top: 15rem;
+
+      .not-found-entry {
+        display: flex;
+        flex-direction: column;
+
+        .heading-3 {
+          font-size: 4rem;
+          text-align: center;
+          margin-bottom: 2rem;
+          color: $alternateblue;
+        }
+      }
+
+    }
+
+
+  }
+}
+

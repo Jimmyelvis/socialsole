@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TextFieldGroup from "components/ui/Forms/TextFieldGroup";
 import TextAreaFieldGroup from "components/ui/Forms/TextAreaFieldGroup";
 import InputGroup from "components/ui/Forms/InputGroup";
@@ -10,8 +10,8 @@ import "react-quill/dist/quill.snow.css";
 import { Widgetsetting } from "components/common/Cloudinary";
 import { Form } from "../components/Form";
 
-
-const CreateProfile = ({ createProfile, history, profile: { profile } }) => {
+const CreateProfile = ({ createProfile, profile: { profile } }) => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     handle: "",
     location: "",
@@ -25,9 +25,20 @@ const CreateProfile = ({ createProfile, history, profile: { profile } }) => {
     instagram: "",
   });
 
-  const [displaySocialInputs, setdisplaySocialInputs] = useState(false);
+  const [displaySocialInputs, setDisplaySocialInputs] = useState(false);
 
-  const { handle, location, favsneaker, profilephoto, avatar, bio, twitter, facebook, youtube, instagram } = values;
+  const {
+    handle,
+    location,
+    favsneaker,
+    profilephoto,
+    avatar,
+    bio,
+    twitter,
+    facebook,
+    youtube,
+    instagram,
+  } = values;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +56,7 @@ const CreateProfile = ({ createProfile, history, profile: { profile } }) => {
       instagram: instagram,
     };
 
-    createProfile(profileData, history);
+    createProfile(profileData, navigate);
   };
 
   const onChange = (e) => {
@@ -71,13 +82,37 @@ const CreateProfile = ({ createProfile, history, profile: { profile } }) => {
   if (displaySocialInputs) {
     socialInputs = (
       <div>
-        <InputGroup placeholder="Twitter Profile URL" name="twitter" icon="fab fa-twitter" value={twitter} onChange={onChange} />
+        <InputGroup
+          placeholder="Twitter Profile URL"
+          name="twitter"
+          icon="fab fa-twitter"
+          value={twitter}
+          onChange={onChange}
+        />
 
-        <InputGroup placeholder="Facebook Page URL" name="facebook" icon="fab fa-facebook" value={facebook} onChange={onChange} />
+        <InputGroup
+          placeholder="Facebook Page URL"
+          name="facebook"
+          icon="fab fa-facebook"
+          value={facebook}
+          onChange={onChange}
+        />
 
-        <InputGroup placeholder="YouTube Channel URL" name="youtube" icon="fab fa-youtube" value={youtube} onChange={onChange} />
+        <InputGroup
+          placeholder="YouTube Channel URL"
+          name="youtube"
+          icon="fab fa-youtube"
+          value={youtube}
+          onChange={onChange}
+        />
 
-        <InputGroup placeholder="Instagram Page URL" name="instagram" icon="fab fa-instagram" value={instagram} onChange={onChange} />
+        <InputGroup
+          placeholder="Instagram Page URL"
+          name="instagram"
+          icon="fab fa-instagram"
+          value={instagram}
+          onChange={onChange}
+        />
       </div>
     );
   } else {
@@ -86,7 +121,6 @@ const CreateProfile = ({ createProfile, history, profile: { profile } }) => {
 
   return (
     <React.Fragment>
-
       <Form
         onSubmit={onSubmit}
         onChange={onChange}
@@ -98,7 +132,7 @@ const CreateProfile = ({ createProfile, history, profile: { profile } }) => {
         profilephoto={profilephoto}
         bio={bio}
         displaySocialInputs={displaySocialInputs}
-        setdisplaySocialInputs={setdisplaySocialInputs}
+        setDisplaySocialInputs={setDisplaySocialInputs}
         socialInputs={socialInputs}
         twitter={twitter}
         facebook={facebook}
@@ -106,8 +140,6 @@ const CreateProfile = ({ createProfile, history, profile: { profile } }) => {
         instagram={instagram}
         title="Create Profile"
       />
-
-   
     </React.Fragment>
   );
 };
@@ -117,4 +149,6 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export const Create_Profile = connect(mapStateToProps, { createProfile })(withRouter(CreateProfile));
+export const Create_Profile = connect(mapStateToProps, { createProfile })(
+  CreateProfile
+);

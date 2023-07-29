@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import Navbar from "../../layout/Navbar";
 
 
 export const releases = () => {
 
   return (
     <div className="newRelease">
-      <Navbar />
 
       <div className="articleitem">
         <div className="fullimageheader">

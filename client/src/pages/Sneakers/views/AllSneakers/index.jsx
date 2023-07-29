@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { FullImageHeader } from "components/ui/headers/fullImageHeader";
-import sneakerbanner from "assets/img/header.jpg";
+import sneakerbanner from "assets/img/purple-store.jpg";
 import { getSneakers } from "actions/sneakerActions";
 import { CardPicOverlay } from "components/ui/cards/CardPicOverlay";
 import { Label } from "components/ui/cards/components/Label";
@@ -19,7 +19,9 @@ const Sneakers = ({ sneaker, getSneakers, profile: { profile, loading } }) => {
   }, [getSneakers]);
 
   const getFeatured = () => {
-    let featured = sneaker.sneakers.filter((sneaker) => sneaker.featured > 0);
+    let featured = sneaker.sneakers.filter((sneaker) => sneaker.featured > 0).sort((a, b) => {
+      return a.featured - b.featured;
+      }).slice(0, 3);
 
     return featured.map((sneaker) => (
       <CardPicOverlay

@@ -3,6 +3,7 @@ import className from "classnames";
 export const FullImageHeader = ({ 
   image, 
   children,
+  overlay,
   ...rest
 }) => {
 
@@ -14,6 +15,7 @@ export const FullImageHeader = ({
   return (
     <div className={classees}>
       {children}
+      <div className="overlay"></div>
       <img src={image} alt="" />
     </div>
   );

@@ -38,6 +38,10 @@ export const Dashboardtabs = ({ setCurrentView }) => {
       link: "/addsneaker",
     },
     {
+      name: "Create Article",
+      link: "/createarticle",
+    },
+    {
       name: "Your Comments",
       onClick: () => {
         setCurrentView("your-comments");

@@ -1,19 +1,25 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import TextAreaFieldGroup from "components/ui/Forms/TextAreaFieldGroup";
 import TextFieldGroup from "components/ui/Forms/TextFieldGroup";
 import { editPost, getPost } from "actions/postActions";
 import { getCurrentProfile } from "actions/profileActions";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import Navbar from "components/layout/CommNavbar";
 import isEmpty from "validation/is-empty";
 import { Widgetsetting } from "components/common/Cloudinary";
 import { Form } from "../components/Form";
 
-const EditPost = ({ getCurrentProfile, editPost, getPost, match, history, auth, errors, post: { post, loading } }) => {
-  const [values, setValues] = useState({
+const EditPost = ({
+  getCurrentProfile,
+  editPost,
+  getPost,
+  auth,
+  post: { post, loading },
+}) => {
+  const navigate = useNavigate();
+  const { headerimage, headline, text, _id, tags } = useState({
     _id: "",
     headerimage: "",
     headline: "",
@@ -21,10 +27,10 @@ const EditPost = ({ getCurrentProfile, editPost, getPost, match, history, auth, 
     tags: "",
   });
 
-  const { headerimage, headline, text, _id, tags } = values;
+  const { id } = useParams();
 
   useEffect(() => {
-    getPost(match.params.id);
+    getPost(id);
 
     setValues({
       ...values,
@@ -49,7 +55,7 @@ const EditPost = ({ getCurrentProfile, editPost, getPost, match, history, auth, 
       tags: tags,
     };
 
-    editPost(_id, newPost, history);
+    editPost(_id, newPost, navigate);
   };
 
   /*
@@ -90,8 +96,6 @@ const EditPost = ({ getCurrentProfile, editPost, getPost, match, history, auth, 
 
   return (
     <React.Fragment>
-      <Navbar />
-
       <Form
         onSubmit={onSubmit}
         onChange={onChange}
@@ -115,4 +119,8 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export const Edit_Post = connect(mapStateToProps, { editPost, getPost, getCurrentProfile })(EditPost);
+export const Edit_Post = connect(mapStateToProps, {
+  editPost,
+  getPost,
+  getCurrentProfile,
+})(EditPost);

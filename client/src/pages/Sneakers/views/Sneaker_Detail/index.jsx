@@ -11,6 +11,8 @@ import { CommentButton } from 'components/ui/buttons/CommentButton';
 import Modal from "components/ui/Modal";
 import { useModal } from "context/modalContext";
 import CommentPanel from "components/ui/Comments/CommentPanel";
+import { useParams } from "react-router-dom";
+
 
 
 export const Sneaker = ({ 
@@ -25,7 +27,9 @@ export const Sneaker = ({
   const { user } = auth;
   let sneakerContent;
 
-  getParams(match.params.id, getSneaker, getCurrentProfile);
+  const { id } = useParams();
+
+  getParams(id, getSneaker, getCurrentProfile);
 
   const { isModalOpen, openModal, openOverlay, isOverlayOpen, closeModal } = useModal();
 

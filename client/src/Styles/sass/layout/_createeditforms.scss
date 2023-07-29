@@ -1,6 +1,8 @@
 .create-edit-body {
-  margin: 5rem auto;
   padding: 6rem 6rem 8rem 6rem;
+  margin-top: 15rem;
+  grid-column: col-start 3/col-end 10;
+  margin-bottom: 6rem;
 
   .heading-2 {
     text-align: center;
@@ -26,6 +28,10 @@
     margin-bottom: 4rem;
     color: $alternateblue;
     margin-top: -4rem;
+  }
+
+  .new-release-fields {
+    margin-top: 10rem;
   }
 
   .uploadpreview {
@@ -116,6 +122,10 @@
 
   }
 
+  .article-upload-preview {
+    margin-top: 14rem;
+  }
+
   .btn-lightblue {
     padding: 0.7rem 1.8rem;
     font-size: 1.6rem;
@@ -145,6 +155,7 @@
 
   .quill {
     margin-top: 10rem;
+    margin-bottom: 1.5rem;
   }
 
 }

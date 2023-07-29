@@ -6,6 +6,7 @@ import Spinner from "components/common/Spinner";
 import CommentForm from "components/features/comments/CommentForm";
 import CommentItem from "components/features/comments/CommentItem";
 import { View } from "./components/view";
+import { useParams } from "react-router-dom";
 
 
 
@@ -43,18 +44,20 @@ const Article = (
     let articleContent; // intialize the articleContent variable
     const { user } = auth; // Get the user from the auth state
 
+    const { id } = useParams();
+
     /**
      * State for storing the match.params.id of the current article
      */
     const [currentArticle, setcurrentArticle] = useState(null);
 
     useEffect(() => {
-      if (match.params.id) {
-        getCurrentArticle(match.params.id);
+      if (id) {
+        getCurrentArticle(id);
       }
 
       getCurrentProfile();
-      setcurrentArticle(match.params.id);
+      setcurrentArticle(id);
     }, []);
 
     /**
@@ -65,11 +68,11 @@ const Article = (
      * the paremeter and render the new article
      */
     useEffect(() => {
-      if (match.params.id !== currentArticle) {
-        getCurrentArticle(match.params.id);
-        setcurrentArticle(match.params.id);
+      if (id !== currentArticle) {
+        getCurrentArticle(id);
+        setcurrentArticle(id);
       }
-    }, [match.params.id]);
+    }, [id]);
 
     /** *
      renderCommentList() is a function that maps through the comments array and returns a CommentItem component for each comment.

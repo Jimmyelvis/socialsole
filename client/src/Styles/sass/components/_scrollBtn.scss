@@ -1,0 +1,37 @@
+.scroll-btn {
+  position: fixed;
+  right: 5.8rem;
+  bottom: 4.5rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+  color: #ffffff;
+  padding: 0.95rem;
+  border-radius: 50%;
+  border: 7px solid #fff;
+  align-items: center;
+  cursor: pointer;
+  font-size: 3.5rem;
+  display: inline-flex;
+  z-index: 6000;
+  background: linear-gradient(40deg, #144885 0%, rgb(83 186 255) 100%);
+  background: radial-gradient(ellipse at center, rgb(124 200 243) 0%, rgb(54 124 177) 100%);
+
+  &:focus {
+    outline: solid 3px rgba(214, 214, 231, 0.50);
+    outline-offset: 5px;
+    color: #949db6;
+  }
+
+  &:hover {
+    outline: solid 3px rgb(255 255 255);
+    outline-offset: 5px;
+    color: #cfdbe4;
+  }
+
+  @include respond(bp-medium) {
+    right: 2rem;
+    bottom: 2rem;
+   
+  }
+}

@@ -3,7 +3,6 @@ import Sidebar from "./Sidebar";
 import SidebarMobile from "./SidebarMobile";
 import Navbar from "./Navbar";
 import { useAdminContext } from "context/AdminContextProvider";
-import ScrollToTop from "components/ui/scroll/ScrollToTop";
 import { connect } from "react-redux";
 import { UserOptionsPanel } from './UserOptionsPanel';
 

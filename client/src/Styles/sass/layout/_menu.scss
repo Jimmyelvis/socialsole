@@ -113,28 +113,11 @@
 
 }
 
-.navbar.nav-wht-bg {
-  background: rgb(255 255 255 / 65%);
-  backdrop-filter: blur(4px) brightness(1.3);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.68);
-
-  .authGuestlinks {
-    li {
-      color: $midnightblue !important;
-
-      & > a{
-        color: $midnightblue !important;
-      }
-    }
-  }
-}
-
-
 /**
    This is applied to the nav bar, after the user scrolls down the page
  */
- .top-nav-collapse {
-  background-color: rgb(255 255 255 / 56%);
+ .navbar.active {
+  background-color: rgb(255 255 255 / 71%);
   backdrop-filter: blur(7.5px) brightness(1.1);
   border-bottom: 2px solid rgb(255 255 255 / 35%);
 
@@ -149,6 +132,55 @@
     }
   }
 }
+
+.navbar-wht-bg {
+  background: rgb(255 255 255 / 65%);
+  backdrop-filter: blur(4px) brightness(1.3);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.68);
+
+  @include respond(bp-medium) {
+   backdrop-filter: unset;
+   background: rgb(255 255 255 / 85%);
+  }
+
+  .authGuestlinks {
+    li {
+      color: $midnightblue !important;
+
+      & > a{
+        color: $midnightblue !important;
+      }
+    }
+  }
+}
+
+/**
+   This is applied to the nav bar, after the user scrolls down the page
+ */
+ .navbar-wht-bg.active {
+  background-color: rgb(255 255 255 / 71%);
+  backdrop-filter: blur(7.5px) brightness(1.1);
+  border-bottom: 2px solid rgb(255 255 255 / 35%);
+
+  @include respond(bp-medium) {
+    backdrop-filter: unset;
+    background: rgb(255 255 255 / 85%);
+   }
+ 
+
+  .authGuestlinks {
+
+    li {
+      color: $midnightblue !important;
+
+      & > a{
+        color: $midnightblue !important;
+      }
+    }
+  }
+}
+
+
 
 
 
@@ -244,9 +276,9 @@ $hammenu-size: 5.5rem;
 }
 
 /* Rotate On Hover When Checked */
-.mobile-menu-contain .toggler:checked:hover + .hamburger > div {
-  transform: rotate(225deg);
-}
+// .mobile-menu-contain .toggler:checked:hover + .hamburger > div {
+//   transform: rotate(225deg);
+// }
 
 .mobile-menu {
   position: fixed;
@@ -441,4 +473,9 @@ $hammenu-size: 5.5rem;
     font-size: 3rem;
     font-weight: bold;
   }
+}
+
+.exta-classes {
+  height: 100vh;
+    box-sizing: unset;
 }

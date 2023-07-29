@@ -19,7 +19,16 @@ export const MobileMenu = ({ isAuthenticated, checked, changechecked, authLinks,
 
   return (
     <div className="mobile-menu-contain">
-      <input type="checkbox" className="toggler" autocomplete="off" onClick={() => changechecked()} />
+      <input 
+        type="checkbox" 
+        className="toggler" 
+        autocomplete="off" 
+        checked={checked}
+        onClick={(e) => {
+          changechecked()
+        }
+      } 
+      />
 
       <div className="hamburger">
         <div> </div>

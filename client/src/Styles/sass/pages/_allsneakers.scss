@@ -5,10 +5,18 @@
   .fullimageheader {
     height: 53rem;
     overflow: hidden;
-    /* margin-top: 8rem; */
+    // margin-top: 8rem;
     display: flex;
     position: relative;
     grid-column: full-start / full-end;
+
+    @include respond(big-desktop) {
+      height: 62rem;
+    }
+
+    @include respond(bp-medium) {
+      height: 40rem;
+    }
 
     .header-info {
       position: relative;
@@ -31,11 +39,18 @@
     height: auto;
     margin-top: -10rem;
     gap: 0;
+    position: relative;
+    z-index: 20;
+
+    @include respond(big-desktop) {
+      margin-top: -15rem;
+    }
 
     @include respond(bp-medium) {
       flex-direction: column;
       width: 56rem;
-      margin: -10rem auto 20rem auto;
+      margin: 0 auto;
+      margin-top: 39rem;
     }
 
     @include respond(bp-smallest) {
@@ -122,7 +137,7 @@
 
     @include respond(bp-medium) {
       gap: 4rem;
-      margin-top: 55rem;
+      margin-top: 37rem;
     }
 
     @include respond(bp-small) {
