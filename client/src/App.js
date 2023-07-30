@@ -14,7 +14,7 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import AuthorRoute from "./components/common/AuthorRoute";
 
 import Navbar from "./components/ui/Layout/NavBar";
-import Footer from "./components/layout/Footer";
+import Footer from "./components/ui/Footer";
 import { Home } from "pages/Home";
 import { Dashboard_Home } from "pages/Dashboard";
 import { Allposts, Create_Post, Post_Single, Edit_Post } from "pages/Posts";
@@ -23,7 +23,7 @@ import { AllProfiles, Create_Profile, Edit_Profile, Profile_Detail } from "pages
 import { All_Articles, Article_Detail, Create_Article, Edit_Article, ArticlesHome } from "pages/Articles";
 import { AdminDashboardHome, PostsOverview, SneakersOverview, ArticlesOverview, FeaturedPosts, FeaturedSneakers, FeaturedArticles, EditUsers } from "pages/AdminDashboard";
 import { NotFound } from "pages/NotFound";
-import Alert from "./components/layout/Alerts";
+import Alert from "./components/ui/Alerts";
 
 import { LatestNews, LatestSneakers, Ui_Stuff } from "pages/Test";
 
