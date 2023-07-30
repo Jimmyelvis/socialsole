@@ -6,7 +6,8 @@ import Spinner from "components/common/Spinner";
 import CommentForm from "components/features/comments/CommentForm";
 import CommentItem from "components/features/comments/CommentItem";
 import { View } from "./components/view";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
+import { NotFound } from "pages/NotFound";
 
 
 
@@ -94,11 +95,15 @@ const Article = (
         }
     };
 
+    if (article === null) {
+      return <Navigate to="/Notfound" replace={true} />;
+    }
+
     /** If the is no article or it is loading show the spinner */
-    if (article === null || loading || Object.keys(article).length === 0) {
+    else if (loading || Object.keys(article).length === 0) {
       articleContent = <Spinner />;
     } 
-    
+
     else if (user === null || Object.keys(user).length === 0) {
 
       /** If there is an article then display the article, however if there

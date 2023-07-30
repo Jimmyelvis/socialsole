@@ -3,11 +3,7 @@ import { Label } from "components/ui/cards/components/Label";
 import { Sectionheading } from "components/ui/headers/Sectionheading";
 
 export const Latestnews = ({ articles }) => {
-  /*
-    To get these articles to display properly you will need to edit
-    the details below, such as the link address headings and text, and image
-     to match the articles you created.
-  */
+
 
      const getLabelSize = (index) => { 
 
@@ -17,6 +13,8 @@ export const Latestnews = ({ articles }) => {
 
       }
 
+
+
   return (
     <div className="latest-news">
       <>
@@ -24,7 +22,12 @@ export const Latestnews = ({ articles }) => {
         <Sectionheading heading="Latest News" />
 
         <div className="latest-news-grid">
-          {articles.map((article, index) => {
+          {articles
+          .filter((article) => {
+            return article.newstype  === "news";
+          })
+          .slice(0, 5)
+          .map((article, index) => {
             return (
               <div className={`card-ver-overlay-notrans news-item news-item-${index}`} key={index}>
                 <Label 
@@ -32,13 +35,12 @@ export const Latestnews = ({ articles }) => {
                   small={getLabelSize(index)}           
                 />
                 
-                <Link to={`/article/${article.id}`}>
-                  <img className="cardbg" src={article.image} alt="..." />
+                <Link to={`/article/${article._id}`}>
+                  <img className="cardbg" src={article.fullheaderimage} alt="..." />
                   <div className="overlay"></div>
 
                   <div className="card-content">
-                    <h3 className="heading-3">{article.title}</h3>
-                    <h4 className="heading-4">{article.subheadline}</h4>
+                    <h3 className="heading-3">{article.headline}</h3>
                   </div>
                 </Link>
 

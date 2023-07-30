@@ -32,7 +32,7 @@ const Profile = ({ profile: { profile, loading, displayedProfile }, auth, getPro
     profileContent = (
       <React.Fragment>
         <div className="fullimageheader">
-          <img src={displayedProfile.profilephoto} alt="" />
+          <img src={displayedProfile?.profilephoto} alt="" />
         </div>
 
         {profileHeader}

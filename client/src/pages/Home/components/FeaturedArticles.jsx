@@ -5,11 +5,21 @@ import { Sectionheading } from 'components/ui/headers/Sectionheading';
 
 export const FeaturedArticles = ({ articles }) => {
 
-  /*
-    To get these articles to display properly you will need to edit
-    the details below, such as the link address headings and text, and image
-     to match the articles you created.
-  */
+
+    let featuredArticles;
+
+    if (articles) {
+      
+      featuredArticles = articles
+      .sort((a, b) => {
+        return a.featured - b.featured;
+      }).filter((article) => {
+        return article.featured > 0;
+      }).slice(0, 3);
+  
+    } 
+
+
 
  return (
    <React.Fragment>
@@ -18,20 +28,19 @@ export const FeaturedArticles = ({ articles }) => {
       <Sectionheading heading="Featured Articles" />
 
       {
-        articles.map((article, index) => {
+        featuredArticles.map((article, index) => {
           return (
             <div className="card-ver-overlay-notrans featured-article" key={index}>
-              <Link to={`/article/${article.id}`}>
+              <Link to={`/article/${article._id}`}>
                 <img
                   className="cardbg"
-                  src={article.image}
+                  src={article.articleheaderimage}
                   alt="..."
                 />
                 <div className="overlay"></div>
               </Link>
               <div className="card-content">
-                <h3 className="heading-3">{article.title}</h3>
-                <p>{article.text}</p>
+                <h3 className="heading-3">{article.headline}</h3>
               </div>
             </div>
           )

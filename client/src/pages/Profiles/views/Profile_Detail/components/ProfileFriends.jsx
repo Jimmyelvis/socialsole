@@ -34,6 +34,7 @@ const ProfileFriends = ({
               city={friend.location}
               socials={friend.social}
               id={friend._id}
+              handle={friend.handle}
             />
           );
         })}
