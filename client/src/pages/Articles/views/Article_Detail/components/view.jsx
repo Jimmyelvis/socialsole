@@ -146,7 +146,6 @@ const ArticleItem = ({
 
             <div className="h4 heading-4">type: {article.newstype}</div>
 
-            <div className="overlay"></div>
           </FullImageHeader>
 
           <div className="content-body">

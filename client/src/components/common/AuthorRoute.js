@@ -9,20 +9,7 @@ import Spinner from "components/common/Spinner";
   creation to those who are logged in and have the role of "author"
 */
 
-// const AuthorRoute = ({ component: Component, auth: { isAuthenticated, loading, user }, ...rest }) => (
-//   <Route
-//     {...rest}
-//     element={
-//       loading ? (
-//         <Spinner />
-//       ) : isAuthenticated && user.role === "author" ? (
-//         <Component />
-//       ) : (
-//         <Navigate to="/" replace />
-//       )
-//     }
-//   />
-// );
+
 
 const AuthorRoute = ({
   component: Component,

@@ -99,7 +99,7 @@ const App = () => {
                     <Route path="*" element={<NotFound />} />
                   </Routes>
 
-                  {/* <Footer /> */}
+                  <Footer />
                 </React.Fragment>
                 <ScrollBtn />
               </ScrollToTop>

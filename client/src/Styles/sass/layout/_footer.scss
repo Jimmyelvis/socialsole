@@ -1,11 +1,13 @@
 .footer {
   height: auto;
   text-align: center;
-  background: linear-gradient(to bottom, rgba(2,100,186,1) 0%, rgba(20,73,133,1) 100%);
-  padding: 2rem 0;
+  background: linear-gradient(to bottom, rgb(229, 232, 243) 0%, rgb(255, 255, 255) 100%);
+  padding: 4rem 0;
+  border-top: 2px solid hsl(228 33% 97% / 1);
+  box-shadow: inset 0px 10px 11px 3px rgba(227,228,230,1);
 
   .heading-3 {
-    color: $white;
+    color: $midnightblue;
     font-size: 2rem;
   }
 }
