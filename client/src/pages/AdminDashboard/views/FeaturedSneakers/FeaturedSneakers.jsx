@@ -6,6 +6,8 @@ import { Panel } from "components/ui/Panel";
 import { AdminLayout } from "../../components/layout/AdminLayout";
 import { getFeaturedSneakers } from "./GetFeaturedSneakers";
 import { useModal } from "context/modalContext";
+import sneakerLogo from 'assets/img/Sneaker-logo.png';
+
 
 
 
@@ -29,9 +31,16 @@ const Featured_Sneakers = ({ profile: { profile, profiles, loading }, sneaker: {
   return (
     <AdminContextProvider>
       <AdminLayout>
-        <div className="featured-sneakers">{getFeaturedSneakers(renderedSneakers)}</div>
-      </AdminLayout>
+        <div className="featured-section">
+          <div className="featured-heading">
+            <img src={sneakerLogo} alt="sneaker" className="icon icon-sneaker" />
 
+            <h2 className="heading-2">Edit Featured Sneakers</h2>
+          </div>
+
+          <div className="featured-sneakers">{getFeaturedSneakers(renderedSneakers)}</div>
+        </div>
+      </AdminLayout>
     </AdminContextProvider>
   );
 };

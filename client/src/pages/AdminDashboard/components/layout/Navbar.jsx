@@ -31,10 +31,10 @@ const Navbar = ({
           <p>{user?.email}</p>
         </div>
 
-        <AiFillCaretDown 
+        {/* <AiFillCaretDown 
           className="arrow-down"
           onClick={() => handleClick("UserOptionsPanel")}
-        />
+        /> */}
       </div>
     )
   }

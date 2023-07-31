@@ -1,19 +1,16 @@
 .featured-posts {
-  margin-top: 8rem;
-  grid-column: col-start 2 / col-end 11;
+  grid-column: 1 /12;
   grid-template-columns: repeat(auto-fill, minmax(31.3rem, 40.7rem));
   justify-content: space-evenly;
   display: grid;
   gap: 2rem;
-  padding-bottom: 10rem;
-
 
   .featured-entry {
 
     .featured-entry__label {
       text-align: center;
       margin: 3rem auto;
-  
+
       .heading-4 {
         font-size: 3.9rem;
       }
@@ -21,7 +18,7 @@
 
     .card-post {
       height: auto;
-      
+
       .top {
         flex: 0 0 30rem;
       }
@@ -42,7 +39,6 @@
 
 
   }
-
 
 }
 

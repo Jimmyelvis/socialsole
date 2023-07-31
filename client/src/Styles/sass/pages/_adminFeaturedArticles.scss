@@ -1,11 +1,9 @@
 .featured-articles-admin {
-  margin-top: 8rem;
-  grid-column: col-start 2 / col-end 11;
+  grid-column: 1 / 12;
   grid-template-columns: repeat(auto-fill, minmax(31.3rem, 40.7rem));
   justify-content: space-evenly;
   display: grid;
   gap: 2rem;
-  padding-bottom: 10rem;
 
   .featured-entry {
     display: flex;

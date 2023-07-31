@@ -1,23 +1,39 @@
-![Markdown Logo](/githubphotos/landing-heading.jpg)
+![Markdown Logo](/githubphotos/2023-update/HD/Home-pg-header.jpg)
 
 <!-- Tables -->
 |      |         |
 | -------- | -------------- |
-| ![Markdown Logo](/githubphotos/featured-articles.jpg)| ![Markdown Logo](/githubphotos/latest-news.jpg)|
-| ![Markdown Logo](/githubphotos/mostliked.jpg)| ![Markdown Logo](/githubphotos/sneaker-detail-yeezy.jpg)|
-| [![](/githubphotos/login.jpg)](https://www.youtube.com/watch?v=Yop42FM6XA8)| ![Markdown Logo](/githubphotos/articles.jpg)|
+| ![Markdown Logo](/githubphotos/2023-update/HD/Front-latest-news.jpg)| ![Markdown Logo](/githubphotos/2023-update/HD/Article-section.jpg)|
+| ![Markdown Logo](/githubphotos/2023-update/HD/Sneaker-pg.jpg)| ![Markdown Logo](/githubphotos/2023-update/HD/Sneaker-detail.jpg)|
+| ![Markdown Logo](/githubphotos/2023-update/HD/Dashboard-pg-saved-content.jpg)| ![Markdown Logo](/githubphotos/2023-update/HD/Posts-detail.jpg)|
+| ![Markdown Logo](/githubphotos/2023-update/HD/Article-detail.jpg)| ![Markdown Logo](/githubphotos/2023-update/HD/Search-results.jpg)|
 
 
 
-# SocialSole
+# SocialSole - A Sneaker Enthusiast Social Media Site
 
-This is a very simple fictional social media site, built with the MERN stack based around the love of sneakers. It has a mock news section with articles, about this topic. And users can register post, and share their sneaker collection, in the community section of this site. 
+SocialSole is a fictional social media site built with the MERN stack, centered around the passion for sneakers. The site features a mock news section with articles related to sneakers, and users can register, post, and share their sneaker collections in the community section.
 
-## Recent Updates
+## I've implemented some significant updates to SocialSole. Here's what's new:
 
-There has been a slew of recent updates to this project. I added a filtering component that a user can use to filter through a list of items that is displayed on a page whether they're posts, articles, sneakers, profiles. Changed the look of some of the site, to it an overall cleaner look. Added a reuseable modal component that is used for logging in, or creating a new account. And could also be use in other areas of the site if necessary.
+1. Complete Site Redesign: SocialSole now sports a modern and sleek design, enhancing the overall user experience.
 
-When a user clicks on an article, post, or sneaker listing, there will be section that displays links to items that are related to the currently loaded item. This is accomplished by using tags thats the currently loaded item has, and matching them to any item that may have any matching tag.
+2. Revamped Navbar Component: The Navbar has been redesigned for improved navigation and ease of use.
+
+3. Realtime Search Overlay: Users can now perform searches in real-time through a dynamic overlay, providing quick and relevant results.
+
+4. Redesigned Articles Section: The Articles section has been refined with a cleaner and more polished interface.
+
+5. Enhanced User Dashboard: The user dashboard has received some significant additions:
+
+  * Timeline: Users can now view not only their content but also posts from users they follow, keeping them up-to-date with their network's activities.
+
+  * Centralized Comment View: All user comments are conveniently accessible in one place.
+
+  * Liked Content Collection: Users can access all content they have liked, making it simple to revisit their favorites.
+
+  * Custom Lists: Users can now create and manage custom lists, allowing them to save articles, posts, and sneakers for future reference.
+
 
 ## Getting Started
 
@@ -30,7 +46,7 @@ below.
 
 After you obtain both you then want to look for the .env-sample file in the client folder. Paste both the cloudname, and upload present, then rename .env-sample to .env, then you are all set to use the Cloudinary Upload Widget.
 
-## BUILT WITH
+## SocialSole was built using the following technologies:
 * Node.js
 * React.js
 * Express

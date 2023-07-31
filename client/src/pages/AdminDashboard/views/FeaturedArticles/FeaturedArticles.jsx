@@ -6,6 +6,8 @@ import { Panel } from "components/ui/Panel";
 import { AdminLayout } from "../../components/layout/AdminLayout";
 import { getFeaturedArticles } from "./GetFeaturedArticles";
 import { useModal } from "context/modalContext";
+import notepad  from 'assets/img/notepad.png';
+
 
 
 
@@ -33,9 +35,18 @@ const Featured_Articles = ({
   return (
     <AdminContextProvider>
       <AdminLayout>
-        <div className="featured-articles-admin">{getFeaturedArticles(renderedSneakers)}</div>
-      </AdminLayout>
+        <div className="featured-section">
+          <div className="featured-heading">
+            <img src={notepad} alt="notepad" className="icon icon-notepad" />
 
+            <h2 className="heading-2">Edit Featured Articles</h2>
+          </div>
+
+          <div className="featured-articles-admin">
+            {getFeaturedArticles(renderedSneakers)}
+          </div>
+        </div>
+      </AdminLayout>
     </AdminContextProvider>
   );
 };

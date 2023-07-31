@@ -9,6 +9,7 @@ import { useModal } from "context/modalContext";
 import { OtherPosts } from "./OtherPosts";
 import { Button } from "components/ui/buttons";
 
+
 export const getFeaturedPosts = (posts) => {
   /*
     This will be used to determine what component called the modal

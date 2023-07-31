@@ -15,6 +15,7 @@ import Search from "components/ui/Search";
 import { Login } from "components/ui/Login";
 import { Register } from "components/ui/Register";
 import { MobileMenu } from './components/MobileMenu';
+import Logo from 'assets/img/Sneaker-logo.png';
 
 const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurrentProfile, setAlert, profile: { profile, loading }, getCurrentProfile }) => {
   const [values, setvalues] = useState({
@@ -334,6 +335,9 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
 
   return (
     <div className={ setNavBarClass()}>
+
+      <img src={Logo} alt="" className="logo" />
+
       <MobileMenu
         authLinks={authLinks}
         guestLinks={guestLinks}
@@ -345,10 +349,7 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
         profile={profile}
       />
 
-      {/*
-        If isAuthenticated === true, the authLinks items will display
-        else the guestlinks items will be displayed
-      */}
+  
       <ul className="authGuestlinks">{isAuthenticated ? authLinks : guestLinks}</ul>
 
       <Modal

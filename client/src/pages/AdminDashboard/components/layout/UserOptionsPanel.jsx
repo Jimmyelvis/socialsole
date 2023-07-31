@@ -34,14 +34,14 @@ export const UserOptionsPanel = () => {
    * Check what is the target state, then determine
    * what component should be rendered in the modal.
    */
-  // const checkTarget = () => {
-  //   return (
-  //     <Panel className="lock-screen">
-  //       Lock Screen
-  //     </Panel>
-  //   )
+  const checkTarget = () => {
+    return (
+      <Panel className="lock-screen">
+        Lock Screen
+      </Panel>
+    )
     
-  // }
+  }
 
   useEffect(() => {
     setIsVisible(true);

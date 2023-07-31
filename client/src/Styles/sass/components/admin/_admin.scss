@@ -258,5 +258,32 @@ $sidebar_width: 21rem;
       fill: #71aad1;
     }
   }
+
+  .featured-section {
+    margin-top: 8rem;
+    grid-column: col-start 1/col-end 12;
+    grid-template-columns: repeat(12, 1fr);
+    display: grid;
+    padding-bottom: 10rem;
+  
+    .featured-heading {
+      display: flex;
+      grid-column: 1/12;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 6rem;
+  
+      .icon {
+        width: 5rem;
+      }
+  
+      .heading-2 {
+        font-size: 5rem;
+        color: $alternateblue;
+      }
+    }
+   
+  }
   
 }
