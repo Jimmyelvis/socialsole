@@ -70,6 +70,7 @@ To clear all the data in your database run:
 
 ```
 npm run data:destroy
+```
 
 ## SocialSole was built using the following technologies:
 * Node.js
