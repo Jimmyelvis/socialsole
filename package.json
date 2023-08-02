@@ -13,14 +13,18 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "data:import": "node utils/seeder",
+    "data:destroy": "node utils/seeder -d"
   },
   "author": "Marcus Mckinstry",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "colors": "^1.4.0",
     "concurrently": "^4.0.1",
+    "dotenv": "^8.1.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.23.0",
