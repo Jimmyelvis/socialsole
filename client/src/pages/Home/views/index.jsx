@@ -3,10 +3,6 @@ import { FeaturedArticles } from "../components/FeaturedArticles";
 import { Latestnews } from "../components/Latestnews";
 import { connect } from "react-redux";
 import { getArticles } from "actions/articleActions";
-import { LatestReleases } from "../components/LatestReleases";
-import { Newreleases } from "../components/Newreleases";
-import Mostliked from "../components/MostLikedSneakers";
-import { releases } from '../../../components/homepage/releases/firedenim';
 
 const Home_page = ({
   getArticles,

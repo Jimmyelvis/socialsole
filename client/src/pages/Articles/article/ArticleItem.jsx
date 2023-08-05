@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 // import Related from "./RelatedArticles"
-import isEmpty from "../../../validation/is-empty";
 import Icon from "../../icons/Icon"
-import iconSet from "../../icons/selection.json";
 
 /*
   Component for displaying the article detail view 

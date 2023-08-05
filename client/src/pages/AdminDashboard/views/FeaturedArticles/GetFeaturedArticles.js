@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getTimefromNow } from "utils/formatDate";
 import { AuthorHeader } from "components/ui/headers/authorHeader";
-import { CardFooter } from "components/ui/cards/components/CardFooter";
-import parse from "html-react-parser";
 import { Link } from "react-router-dom";
 import Modal from "components/ui/Modal";
 import { useModal } from "context/modalContext";

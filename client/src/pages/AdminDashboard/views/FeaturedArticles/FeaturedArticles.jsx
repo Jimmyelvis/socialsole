@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { AdminContextProvider } from "context/AdminContextProvider";
 import { getArticlesAdmin } from "actions/articleActions";
-import { Panel } from "components/ui/Panel";
 import { AdminLayout } from "../../components/layout/AdminLayout";
 import { getFeaturedArticles } from "./GetFeaturedArticles";
 import { useModal } from "context/modalContext";

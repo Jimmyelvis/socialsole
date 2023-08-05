@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import Card from "components/ui/cards/Card";
-import Spinner from "components/common/Spinner";
 import { getArticles } from "actions/articleActions";
 import { Featured } from "./Components/Featured";
 import { NewReleases } from "./Components/NewReleases";

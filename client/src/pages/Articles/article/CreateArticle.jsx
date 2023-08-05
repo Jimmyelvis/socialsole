@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import Spinner from "../../common/Spinner";
 import { addArticle } from "../../../actions/articleActions";
 import { getCurrentProfile } from "../../../actions/profileActions";
 import Navbar from "../../../components/layout/CommNavbar";

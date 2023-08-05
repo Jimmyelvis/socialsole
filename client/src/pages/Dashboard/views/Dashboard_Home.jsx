@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount, getFriends } from "actions/profileActions";
 import { Dashboardtabs } from "../components/Tabs2";
 import { DashboardHeader } from "../components/DashboardHeader";
-import { Panel } from "components/ui/Panel";
-import { faker } from "@faker-js/faker";
 import { DashboardView } from "../components/DashBoardView";
 import Spinner from "components/common/Spinner";
 

@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { editArticle, getCurrentArticle } from "actions/articleActions";
 import { getCurrentProfile } from "actions/profileActions";
-import TextFieldGroup from "components/ui/Forms/TextFieldGroup";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import isEmpty from "utils/is-empty";
 import { setAlert } from "actions/alert";

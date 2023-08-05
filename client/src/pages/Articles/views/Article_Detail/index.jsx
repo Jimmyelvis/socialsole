@@ -3,11 +3,9 @@ import { connect } from "react-redux";
 import { getCurrentArticle, addComment, deleteComment } from "actions/articleActions";
 import { getCurrentProfile } from "actions/profileActions";
 import Spinner from "components/common/Spinner";
-import CommentForm from "components/features/comments/CommentForm";
 import CommentItem from "components/features/comments/CommentItem";
 import { View } from "./components/view";
 import { useParams, Navigate } from "react-router-dom";
-import { NotFound } from "pages/NotFound";
 
 
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getRelatedArticles } from "./../../../actions/articleActions";
 import { Link } from "react-router-dom";
-import Card from "../../cards/Card";
 
 const RelatedArticles = ({ articleId, getRelatedArticles, tags, article: { articles } }) => {
 

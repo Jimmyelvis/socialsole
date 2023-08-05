@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { getArticlesAdmin, editFeatured } from "actions/articleActions";
 import { AuthorHeader } from "components/ui/headers/authorHeader";
-import { CardFooter } from "components/ui/cards/components/CardFooter";
-import parse from "html-react-parser";
 import { Link } from "react-router-dom";
 import { Button } from "components/ui/buttons";
 import { ReactComponent as CheckCircle } from 'assets/img/check-circle-v2.svg';

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { iconList } from "icomoon-react";
 import Icon from "../../../components/icons/Icon"
-import iconSet from "../../../components/icons/selection.json";
 import { getLikedSneakers } from "../../../actions/sneakerActions"
 import Spinner from 'components/common/Spinner';
 
