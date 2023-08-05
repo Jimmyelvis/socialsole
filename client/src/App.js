@@ -25,7 +25,6 @@ import { AdminDashboardHome, PostsOverview, SneakersOverview, ArticlesOverview, 
 import { NotFound } from "pages/NotFound";
 import Alert from "./components/ui/Alerts";
 
-import { LatestNews, LatestSneakers, Ui_Stuff } from "pages/Test";
 
 import { SaveOptionsProvider } from "context/saveOptions";
 import { ModalProvider } from "context/modalContext";
