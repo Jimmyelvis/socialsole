@@ -29,7 +29,10 @@ export const Saved_Content = ({
    */
   useEffect(() => {
     if (profile && profile.lists) {
-      setTheList(profile.lists[0]._id);
+
+      if (profile.lists.length !== 0) {
+        setTheList(profile.lists[0]._id);
+      }
     }
   }, [profile]);
 
