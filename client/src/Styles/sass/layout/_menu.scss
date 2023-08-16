@@ -5,6 +5,11 @@
   top: 0.3rem;
   left: 5rem;
   z-index: 3000;
+
+  @include respond(bp-medium) {
+    left: unset;
+   right: 5rem
+  }
 }
 
 

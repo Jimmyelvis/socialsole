@@ -88,7 +88,7 @@ const Article = (
         <div className="container">
           {article.comments.length > 0 ? (
             <div className="commentsarea contentbody">
-              <CommentFeed articleId={article._id} comments={article.comments} />
+              {/* <CommentFeed articleId={article._id} comments={article.comments} /> */}
             </div>
           ) : (
             <div className="marginspace"></div>
@@ -110,7 +110,7 @@ const Article = (
           <div className="container">
             {article.comments.length > 0 ? (
               <div className="commentsarea contentbody">
-                <CommentFeed articleId={article._id} comments={article.comments} />
+                {/* <CommentFeed articleId={article._id} comments={article.comments} /> */}
               </div>
             ) : (
               <div className="marginspace"></div>

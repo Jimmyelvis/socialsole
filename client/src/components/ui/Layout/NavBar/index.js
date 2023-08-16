@@ -113,6 +113,8 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
 
   /* useState check previous state toggle checked */
   const changechecked = () => {
+
+    console.log("come on man work");
     setvalues((prevState) => ({
       ...values,
       checked: !prevState.checked,
@@ -253,6 +255,7 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
           className="icon icon-search"
           onClick={() => {
             openModal(compOrigin), setModalTarget("search_overlay");
+            changechecked();
           }}
         />
       </li>
@@ -327,6 +330,7 @@ const Navbar = ({ auth, errors, loginUser, logoutUser, registerUser, clearCurren
           className="icon icon-search"
           onClick={() => {
             openModal(compOrigin), setModalTarget("search_overlay");
+            changechecked();
           }}
         />
       </li>

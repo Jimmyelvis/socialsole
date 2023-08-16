@@ -66,7 +66,7 @@ const ArticleItem  = (
                   ></div>
 
                 <div className="related">
-                  {/* <Related tags={article.tags} articleId={article}/> */}
+                  <Related tags={article.tags} articleId={article}/>
                 </div>
               
             </div>

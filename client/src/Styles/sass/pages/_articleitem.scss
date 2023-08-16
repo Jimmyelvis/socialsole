@@ -1,5 +1,5 @@
 .article-grid {
-  margin-bottom: 30rem;
+  margin-bottom: 15rem;
   display: grid;
   @include gridTempColumn;
 
@@ -9,7 +9,7 @@
     overflow: hidden;
     padding-bottom: 10rem;
 
-    @include respond(bp-medium) {
+    @include respond(bp-large) {
       grid-column: col-start 2/col-end 11;
     }
 
@@ -25,6 +25,10 @@
     grid-template-columns: repeat(8, 1fr);
     align-items: center;
 
+    @include respond(bp-small) {
+     height: auto;
+    }
+
     @include overlay(rgba(0, 0, 0, 0.45));
 
     .header-info {
@@ -32,7 +36,7 @@
       z-index: 100;
       grid-column: 2 / 8;
 
-      @include respond(bp-smallest) {
+      @include respond(bp-small) {
         grid-column: 1/9;
       }
 
@@ -115,7 +119,11 @@
         padding: 0 3rem;
       }
 
-      @include respond(bp-small) {
+      // @include respond(bp-medium) {
+      //  grid-column: 1 / 2;
+      // }
+
+      @include respond(bp-medium) {
         grid-column: 2/12;
         flex-direction: row;
         justify-content: space-evenly;
@@ -140,7 +148,7 @@
         grid-column: 3/11;
       }
 
-      @include respond(bp-small) {
+      @include respond(bp-medium) {
         grid-column: 2/12;
       }
 
