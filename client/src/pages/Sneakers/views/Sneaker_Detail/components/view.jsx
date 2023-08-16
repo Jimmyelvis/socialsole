@@ -173,9 +173,8 @@ const SneakerItem = ({ sneaker, showActions, auth, deleteSneaker, addLike, remov
             tags.
           */}
 
-      <Panel className="related">
         <Related tags={sneaker.tags} sneakerId={sneaker} />
-      </Panel>
+     
 
     </React.Fragment>
   );

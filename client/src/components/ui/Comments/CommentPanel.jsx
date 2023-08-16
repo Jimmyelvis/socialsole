@@ -8,7 +8,9 @@ import CommentForm from "components/features/comments/CommentForm";
 
 
 
-const CommentPanel = ({ comments,  deleteComment, auth, elementId, addComment}) => {
+const CommentPanel = ({ comments,  deleteComment, auth: {
+  isAuthenticated, user
+}, elementId, addComment}) => {
 
   const [panelClass, setPanelClass] = useState(null)
   const [commentListClass, setCommentListClass] = useState(null)
@@ -69,7 +71,11 @@ const CommentPanel = ({ comments,  deleteComment, auth, elementId, addComment}) 
       
       <Panel className={`comment-panel ${panelClass}`}>
 
-        <CommentForm elementId={elementId} addComment={addComment} />
+        {
+          isAuthenticated && <CommentForm elementId={elementId} addComment={addComment} />
+        }
+
+        
         
         <div className={`comment-list ${commentListClass}`}>
           {
